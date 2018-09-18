@@ -18,9 +18,8 @@ public class LeperGnome extends ServantObject{
     private static final int ATTACK_TIME = 1;
 
     @Override
-    public void doDeathVoice(Gamer self){
+    public void doDeathRattle(Gamer self){
         //如果是敌人的随从，我方掉血，反之对方掉血
-
         self.getEnemy().beHurt(2);
 
     }

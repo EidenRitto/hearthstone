@@ -34,9 +34,15 @@ public class Gamer extends GameObject{
     /**职业*/
     private Profession myProfession;
     /**生命值上限*/
-    private int defaultHealth = 30;
+    private long defaultHealth = 30L;
     /**当前生命值*/
-    private int health;
+    private long health;
+    /**攻击力*/
+    private long attackValue;
+    /**是否可以攻击*/
+    private boolean isAttack;
+    /**本回合攻击次数*/
+    private int attackTime;
     /**手牌*/
     private List<AbstractCard> handsCards;
     /**牌堆*/
@@ -49,6 +55,10 @@ public class Gamer extends GameObject{
     private int magicCrystal;
     /**当前可用法力水晶*/
     private int magicCrystalNow;
+    /**疲劳计数器*/
+    private int fatigueCounter;
+    /**法术强度*/
+    private int spellDamage;
 
     /**敌方英雄*/
     private Gamer enemy;
@@ -74,7 +84,7 @@ public class Gamer extends GameObject{
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/14
-     * @description : 开始一句新游戏
+     * @description : 开始一局新游戏
      * */
     public boolean newGameStart(){
         //分配先后手
@@ -256,7 +266,7 @@ public class Gamer extends GameObject{
     public void deathServant(int index){
         System.out.println(servants.get(index).getServantName()+"死亡");
         //执行亡语
-        servants.get(index).doDeathVoice(this);
+        servants.get(index).doDeathRattle(this);
         //随从进入墓地
         tomb.add(servants.get(index));
         //移除随从
@@ -277,18 +287,31 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 受伤害
      * */
-    public void beHurt(int number){
+    public void beHurt(long number){
         health -= number;
+        if (health<=0){
+            gameOver();
+        }
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/18 16:15
+     * @method : gameOver
+     * @Description : 游戏结束
+     */
+    private void gameOver() {
+
     }
 
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
-     * @description : 恢复
+     * @description : 恢复生命值
      * */
-    public void recovery(int number){
+    public void recovery(long number){
         //防止上限溢出
-        int newHealth = health + number >= defaultHealth?defaultHealth:health+number;
+        long newHealth = health + number >= defaultHealth?defaultHealth:health+number;
         health = newHealth;
     }
     /**
@@ -337,6 +360,11 @@ public class Gamer extends GameObject{
         this.servants = new ArrayList<>(7);
         this.enemy = null;
         this.randomSeed = new Random();
+        this.fatigueCounter = 0;
+        this.attackTime=1;
+        this.attackValue=0;
+        this.isAttack=false;
+        this.spellDamage=0;
     }
 
     /**
@@ -408,7 +436,7 @@ public class Gamer extends GameObject{
         this.myProfession = myProfession;
     }
 
-    public int getHealth() {
+    public long getHealth() {
         return health;
     }
 
@@ -448,7 +476,7 @@ public class Gamer extends GameObject{
         this.magicCrystal = magicCrystal;
     }
 
-    public int getDefaultHealth() {
+    public long getDefaultHealth() {
         return defaultHealth;
     }
 
@@ -478,5 +506,29 @@ public class Gamer extends GameObject{
 
     public void setEnemy(Gamer enemy) {
         this.enemy = enemy;
+    }
+
+    public Long getAttackValue() {
+        return attackValue;
+    }
+
+    public void setAttackValue(Long attackValue) {
+        this.attackValue = attackValue;
+    }
+
+    public boolean isAttack() {
+        return isAttack;
+    }
+
+    public void setAttack(boolean attack) {
+        isAttack = attack;
+    }
+
+    public int getAttackTime() {
+        return attackTime;
+    }
+
+    public void setAttackTime(int attackTime) {
+        this.attackTime = attackTime;
     }
 }

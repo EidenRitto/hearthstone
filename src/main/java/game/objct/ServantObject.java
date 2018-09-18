@@ -41,7 +41,7 @@ public class ServantObject extends GameObject {
      * @date : 2018/9/13
      * @description : 亡语
      * */
-    public void doDeathVoice(Gamer self){
+    public void doDeathRattle(Gamer self){
 
     }
 
@@ -53,12 +53,36 @@ public class ServantObject extends GameObject {
      * @Return : void
      * @Description : 随从攻击行为
      */
-    public ServantObject attack(ServantObject beAttackServant){
+    public void attack(ServantObject beAttackServant){
         /**敌人掉血*/
         beAttackServant.setHealth(beAttackServant.getHealth()-this.attackValue);
         /**自己掉血*/
         this.setHealth(this.getHealth()-beAttackServant.getAttackValue());
-        return beAttackServant;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/18 16:09
+     * @method : attack
+     * @params : [beAttackGamer]
+     * @return : void
+     * @Description : 重载打脸
+     */
+    public void attack(Gamer beAttackGamer){
+        /**敌人掉血*/
+        beAttackGamer.beHurt(this.attackValue);
+        /**自己掉血*/
+        this.beHurt(beAttackGamer.getAttackValue());
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/18 15:22
+     * @method : beHurt
+     * @Description : 受伤害
+     */
+    public void beHurt(long number){
+        health -= number;
     }
 
     public void getState(){
@@ -140,7 +164,7 @@ public class ServantObject extends GameObject {
         return isDeathVoice;
     }
 
-    public void setDeathVoice(boolean deathVoice) {
-        isDeathVoice = deathVoice;
+    public void setDeathVoice(boolean deathRattle) {
+        isDeathVoice = deathRattle;
     }
 }
