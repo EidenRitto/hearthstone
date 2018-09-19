@@ -326,6 +326,7 @@ public class Gamer extends GameObject{
     public void recovery(long number){
         //防止上限溢出
         long newHealth = health + number >= defaultHealth?defaultHealth:health+number;
+        System.out.println("英雄恢复"+number+"点生命值");
         health = newHealth;
     }
 
