@@ -59,6 +59,8 @@ public class Gamer extends GameObject{
     private int fatigueCounter;
     /**法术强度*/
     private int spellDamage;
+    /**护甲*/
+    private int armor;
 
     /**敌方英雄*/
     private Gamer enemy;
@@ -254,7 +256,7 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 移除一个随从
      * */
-    public void addServant(int index){
+    public void removeServant(int index){
         servants.remove(index);
     }
 
@@ -288,10 +290,22 @@ public class Gamer extends GameObject{
      * @description : 受伤害
      * */
     public void beHurt(long number){
+        System.out.println("英雄受到"+number+"点伤害");
         health -= number;
         if (health<=0){
             gameOver();
         }
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/19 15:59
+     * @method : addArmor
+     * @params : [armorNumber]
+     * @Description : 叠甲
+     */
+    public void addArmor(int armorNumber){
+        armor += armorNumber;
     }
 
     /**
@@ -314,6 +328,7 @@ public class Gamer extends GameObject{
         long newHealth = health + number >= defaultHealth?defaultHealth:health+number;
         health = newHealth;
     }
+
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
@@ -322,6 +337,22 @@ public class Gamer extends GameObject{
     public List<AbstractCard> initRandomCards(List<AbstractCard> oldCards){
         Collections.shuffle(oldCards);
         return oldCards;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/19 9:39
+     * @method : getGamerSpellDamage
+     * @return : int
+     * @Description : 计算总法强
+     */
+    public int getGamerSpellDamage(){
+
+        int gamerSpellDamage = spellDamage;
+        for (ServantObject servant:servants) {
+            gamerSpellDamage += servant.getSpellDamage();
+        }
+        return gamerSpellDamage;
     }
 
     /**
@@ -365,6 +396,7 @@ public class Gamer extends GameObject{
         this.attackValue=0;
         this.isAttack=false;
         this.spellDamage=0;
+        this.armor=0;
     }
 
     /**
@@ -412,8 +444,9 @@ public class Gamer extends GameObject{
             }
         }
         Collections.reverse(deadIds);
-        deadIds.forEach(integer -> deathServant(integer));
+        deadIds.forEach(this::deathServant);
     }
+
 
     /**
      * @author : Eiden J.P Zhou
@@ -530,5 +563,29 @@ public class Gamer extends GameObject{
 
     public void setAttackTime(int attackTime) {
         this.attackTime = attackTime;
+    }
+
+    public int getFatigueCounter() {
+        return fatigueCounter;
+    }
+
+    public void setFatigueCounter(int fatigueCounter) {
+        this.fatigueCounter = fatigueCounter;
+    }
+
+    public int getSpellDamage() {
+        return spellDamage;
+    }
+
+    public void setSpellDamage(int spellDamage) {
+        this.spellDamage = spellDamage;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
     }
 }

@@ -26,6 +26,8 @@ public class ServantObject extends GameObject {
     protected boolean isBattle = false;
     /**是否具有亡语*/
     protected boolean isDeathVoice = false;
+    /**法术强度*/
+    protected int spellDamage;
 
     /**
      * @author : Eiden J.P Zhou
@@ -54,9 +56,9 @@ public class ServantObject extends GameObject {
      * @Description : 随从攻击行为
      */
     public void attack(ServantObject beAttackServant){
-        /**敌人掉血*/
+        //敌人掉血
         beAttackServant.setHealth(beAttackServant.getHealth()-this.attackValue);
-        /**自己掉血*/
+        //自己掉血
         this.setHealth(this.getHealth()-beAttackServant.getAttackValue());
     }
 
@@ -69,9 +71,9 @@ public class ServantObject extends GameObject {
      * @Description : 重载打脸
      */
     public void attack(Gamer beAttackGamer){
-        /**敌人掉血*/
+        //敌人掉血
         beAttackGamer.beHurt(this.attackValue);
-        /**自己掉血*/
+        //自己掉血
         this.beHurt(beAttackGamer.getAttackValue());
     }
 
@@ -82,6 +84,7 @@ public class ServantObject extends GameObject {
      * @Description : 受伤害
      */
     public void beHurt(long number){
+        System.out.println(servantName+"受到"+number+"点伤害");
         health -= number;
     }
 
@@ -101,6 +104,7 @@ public class ServantObject extends GameObject {
         this.attackValue = attackValue;
         this.isAttack = isAttack;
         this.attackTime = attackTime;
+        this.setSpellDamage(0);
     }
 
     public Long getHealthLimit() {
@@ -166,5 +170,13 @@ public class ServantObject extends GameObject {
 
     public void setDeathVoice(boolean deathRattle) {
         isDeathVoice = deathRattle;
+    }
+
+    public int getSpellDamage() {
+        return spellDamage;
+    }
+
+    public void setSpellDamage(int spellDamage) {
+        this.spellDamage = spellDamage;
     }
 }

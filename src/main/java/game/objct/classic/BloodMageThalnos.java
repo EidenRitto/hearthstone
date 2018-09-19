@@ -16,10 +16,14 @@ public class BloodMageThalnos extends ServantObject {
     private static final boolean ATTACK_STATE = false;
     private static final int ATTACK_TIME = 1;
 
+    /**抽卡数量*/
     private static final int DRAW_CARD_NUMBER = 1;
+    /**法术强度*/
+    private static final int SPELL_DAMAGE = 1;
 
     public BloodMageThalnos() {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
+        spellDamage = SPELL_DAMAGE;
     }
 
     @Override
