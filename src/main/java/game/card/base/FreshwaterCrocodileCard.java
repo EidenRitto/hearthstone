@@ -1,7 +1,7 @@
 package game.card.base;
 
-import game.card.ServantCard;
-import game.objct.ServantObject;
+import game.card.MinionCard;
+import game.objct.MinionObject;
 import game.objct.base.FreshwaterCrocodile;
 
 /**
@@ -10,7 +10,7 @@ import game.objct.base.FreshwaterCrocodile;
  * @version : 1.0
  * @description : 淡水鳄卡牌
  * */
-public class FreshwaterCrocodileCard extends ServantCard{
+public class FreshwaterCrocodileCard extends MinionCard{
     private static final int COST = 2;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "淡水鳄";

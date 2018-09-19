@@ -2,7 +2,7 @@ package controller;
 
 
 import game.Gamer;
-import game.card.ServantCard;
+import game.card.MinionCard;
 
 import java.util.Scanner;
 
@@ -41,21 +41,21 @@ public class GameController {
                 switch (order){
                     case "攻击":
                         System.out.println("请输入需要攻击的随从编号");
-                        int servantId = scan.nextInt();
+                        int minionId = scan.nextInt();
                         System.out.println("请选择目标");
-                        int beAttackServantId = scan.nextInt();
+                        int beAttackMinionId = scan.nextInt();
 
-                        nowGamer.getServant(servantId).attack(nowGamer.getEnemy().getServant(beAttackServantId));
+                        nowGamer.getMinion(minionId).attack(nowGamer.getEnemy().getMinion(beAttackMinionId));
 
-                        gamer.checkServant();
-                        enemy.checkServant();
+                        gamer.checkMinion();
+                        enemy.checkMinion();
                         break;
                     case "打出":
                         System.out.println("请输入需要打出的手牌编号");
                         int cardId = scan.nextInt();
                         if (nowGamer.checkUse(cardId)){
-                            if (nowGamer.getHandsCards().get(cardId) instanceof ServantCard){
-                                nowGamer.useThisServantCard(cardId,null);
+                            if (nowGamer.getHandsCards().get(cardId) instanceof MinionCard){
+                                nowGamer.useThisMinionCard(cardId,null);
                             }else {
                                 nowGamer.useThisMagicCard(cardId,null);
                             }

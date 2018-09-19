@@ -2,7 +2,7 @@ package game.objct.base;
 
 import game.Gamer;
 import game.objct.GameObject;
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -10,7 +10,7 @@ import game.objct.ServantObject;
  * @version : 1.0
  * @description : 麻风侏儒 111
  * */
-public class LeperGnome extends ServantObject{
+public class LeperGnome extends MinionObject{
     private static final String SERVANT_NAME = "麻风侏儒";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;

@@ -7,6 +7,7 @@ import game.hero.Priests;
 import game.hero.Warlock;
 import game.objct.base.FreshwaterCrocodile;
 import game.objct.base.LeperGnome;
+import game.objct.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,21 +35,24 @@ public class CardTest {
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 
-        enemy.addServant(new FreshwaterCrocodile());
-        enemy.addServant(new FreshwaterCrocodile());
-        enemy.addServant(new LeperGnome());
-        enemy.addServant(new LeperGnome());
+        //添加血法
+        gamer.addMinion(new BloodMageThalnos());
+
+        enemy.addMinion(new FreshwaterCrocodile());
+        enemy.addMinion(new FreshwaterCrocodile());
+        enemy.addMinion(new LeperGnome());
+        enemy.addMinion(new LeperGnome());
 
         enemy.getState();
 
-        System.out.println("测试横扫，目标淡水鳄");
-        new SwipeCard().magicEffect(gamer,enemy.getServant(1));
+        System.out.println("===测试【血法】横扫，目标2号淡水鳄===");
+        new SwipeCard().magicEffect(gamer,enemy.getMinion(1));
 
         enemy.getState();
-        enemy.checkServant();
+        enemy.checkMinion();
         enemy.getState();
-        Assert.assertEquals((long)enemy.getServant(0).getHealth(),2);
-        Assert.assertEquals(enemy.getHealth(),29);
+        Assert.assertEquals((long)enemy.getMinion(0).getHealth(),1);
+        Assert.assertEquals(enemy.getHealth(),28);
         Assert.assertEquals(gamer.getHealth(),26);
     }
 

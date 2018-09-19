@@ -1,7 +1,7 @@
 package game.card;
 
 
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,29 +9,29 @@ import game.objct.ServantObject;
  * @version : 1.0
  * @description : 随从卡
  * */
-public class ServantCard extends AbstractCard {
+public class MinionCard extends AbstractCard {
     /**生命值上限*/
     private Long healthLimit;
     /**攻击力*/
     private Long attackValue;
     /**卡牌对应的随从*/
-    private ServantObject servant;
+    private MinionObject minion;
 
     @Override
     public void useCard() {
 
     }
 
-    public ServantCard(Long healthLimit, Long attackValue) {
+    public MinionCard(Long healthLimit, Long attackValue) {
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
     }
 
-    public ServantCard(int cost, String description, String cardName, Long healthLimit, Long attackValue,ServantObject servant) {
+    public MinionCard(int cost, String description, String cardName, Long healthLimit, Long attackValue,MinionObject minion) {
         super(cost, description,cardName);
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
-        this.servant = servant;
+        this.minion = minion;
     }
 
     public Long getHealthLimit() {
@@ -50,11 +50,11 @@ public class ServantCard extends AbstractCard {
         this.attackValue = attackValue;
     }
 
-    public ServantObject getServant() {
-        return servant;
+    public MinionObject getMinion() {
+        return minion;
     }
 
-    public void setServant(ServantObject servant) {
-        this.servant = servant;
+    public void setMinion(MinionObject minion) {
+        this.minion = minion;
     }
 }

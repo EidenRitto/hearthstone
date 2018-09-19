@@ -3,11 +3,11 @@ package game;
 
 import game.card.AbstractCard;
 import game.card.MagicCard;
-import game.card.ServantCard;
+import game.card.MinionCard;
 import game.card.base.CoinCard;
 import game.hero.Profession;
 import game.objct.GameObject;
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,9 +48,9 @@ public class Gamer extends GameObject{
     /**牌堆*/
     private List<AbstractCard> cards;
     /**场面上的随从*/
-    private List<ServantObject> servants;
+    private List<MinionObject> minions;
     /**墓地*/
-    private List<ServantObject> tomb;
+    private List<MinionObject> tomb;
     /**空的法力水晶*/
     private int magicCrystal;
     /**当前可用法力水晶*/
@@ -212,17 +212,17 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 从手牌中打出随从
      * */
-    public void useThisServantCard(int number,GameObject target){
+    public void useThisMinionCard(int number,GameObject target){
         //获得随从卡
-        ServantCard servantCard = (ServantCard)handsCards.get(number);
+        MinionCard minionCard = (MinionCard)handsCards.get(number);
         //消耗对应的法力值
-        useMagicCrystalNow(servantCard.getCost());
+        useMagicCrystalNow(minionCard.getCost());
         //获得一张手牌指向的随从
-        ServantObject servantObject = servantCard.getServant();
+        MinionObject minionObject = minionCard.getMinion();
         //战吼
-        servantObject.doBattle(target);
+        minionObject.doBattle(target);
         //随从进入战场
-        addServant(servantObject);
+        addMinion(minionObject);
         //从手牌中移除随从卡牌
         lossHandsCard(number);
     }
@@ -247,8 +247,8 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 添加一个随从
      * */
-    public void addServant(ServantObject servant){
-        servants.add(servant);
+    public void addMinion(MinionObject minion){
+        minions.add(minion);
     }
 
     /**
@@ -256,8 +256,8 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 移除一个随从
      * */
-    public void removeServant(int index){
-        servants.remove(index);
+    public void removeMinion(int index){
+        minions.remove(index);
     }
 
     /**
@@ -265,14 +265,14 @@ public class Gamer extends GameObject{
      * @date : 2018/9/14
      * @description : 随从死亡
      * */
-    public void deathServant(int index){
-        System.out.println(servants.get(index).getServantName()+"死亡");
+    public void deathMinion(int index){
+        System.out.println(minions.get(index).getMinionName()+"死亡");
         //执行亡语
-        servants.get(index).doDeathRattle(this);
+        minions.get(index).doDeathRattle(this);
         //随从进入墓地
-        tomb.add(servants.get(index));
+        tomb.add(minions.get(index));
         //移除随从
-        servants.remove(index);
+        minions.remove(index);
     }
 
     /**
@@ -280,8 +280,8 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 获取一个随从
      * */
-    public ServantObject getServant(int index){
-        return servants.get(index);
+    public MinionObject getMinion(int index){
+        return minions.get(index);
     }
 
     /**
@@ -350,8 +350,8 @@ public class Gamer extends GameObject{
     public int getGamerSpellDamage(){
 
         int gamerSpellDamage = spellDamage;
-        for (ServantObject servant:servants) {
-            gamerSpellDamage += servant.getSpellDamage();
+        for (MinionObject minion:minions) {
+            gamerSpellDamage += minion.getSpellDamage();
         }
         return gamerSpellDamage;
     }
@@ -370,9 +370,9 @@ public class Gamer extends GameObject{
         System.out.println("当前生命值："+health+"/"+defaultHealth);
         System.out.println("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
         System.out.println("场上随从:");
-        servants.forEach(servantObject -> {
-            System.out.print(servantObject.getServantName()+" "+servantObject.getAttackValue().toString()+"/"
-                    +servantObject.getHealth().toString()+"  ");
+        minions.forEach(minionObject -> {
+            System.out.print(minionObject.getMinionName()+" "+minionObject.getAttackValue().toString()+"/"
+                    +minionObject.getHealth().toString()+"  ");
         });
         System.out.println();
     }
@@ -389,7 +389,7 @@ public class Gamer extends GameObject{
         this.cards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
         this.magicCrystal = 0;
-        this.servants = new ArrayList<>(7);
+        this.minions = new ArrayList<>(7);
         this.enemy = null;
         this.randomSeed = new Random();
         this.fatigueCounter = 0;
@@ -437,15 +437,15 @@ public class Gamer extends GameObject{
      * @date : 2018/9/14
      * @description : 检查随从血量，小于1则死亡
      * */
-    public void checkServant(){
+    public void checkMinion(){
         List<Integer> deadIds = new ArrayList<>(14);
-        for (int i=0;i<servants.size();i++){
-            if (servants.get(i).getHealth()<=0){
+        for (int i=0;i<minions.size();i++){
+            if (minions.get(i).getHealth()<=0){
                 deadIds.add(i);
             }
         }
         Collections.reverse(deadIds);
-        deadIds.forEach(this::deathServant);
+        deadIds.forEach(this::deathMinion);
     }
 
 
@@ -494,11 +494,11 @@ public class Gamer extends GameObject{
         this.cards = cards;
     }
 
-    public List<ServantObject> getTomb() {
+    public List<MinionObject> getTomb() {
         return tomb;
     }
 
-    public void setTomb(List<ServantObject> tomb) {
+    public void setTomb(List<MinionObject> tomb) {
         this.tomb = tomb;
     }
 
@@ -526,12 +526,12 @@ public class Gamer extends GameObject{
         this.magicCrystalNow = magicCrystalNow;
     }
 
-    public List<ServantObject> getServants() {
-        return servants;
+    public List<MinionObject> getMinions() {
+        return minions;
     }
 
-    public void setServants(List<ServantObject> servants) {
-        this.servants = servants;
+    public void setMinions(List<MinionObject> minions) {
+        this.minions = minions;
     }
 
     public Gamer getEnemy() {

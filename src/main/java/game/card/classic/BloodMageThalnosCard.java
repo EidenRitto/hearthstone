@@ -1,6 +1,6 @@
 package game.card.classic;
 
-import game.card.ServantCard;
+import game.card.MinionCard;
 import game.objct.classic.BloodMageThalnos;
 
 
@@ -10,7 +10,7 @@ import game.objct.classic.BloodMageThalnos;
  * @Description:
  * @Modified By: 血法
  */
-public class BloodMageThalnosCard extends ServantCard{
+public class BloodMageThalnosCard extends MinionCard{
     private static final int COST = 2;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "血法师萨尔诺斯";

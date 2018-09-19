@@ -1,7 +1,7 @@
 package game.objct.base;
 
 
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 
 /**
@@ -10,7 +10,7 @@ import game.objct.ServantObject;
  * @version : 1.0
  * @description : 小精灵 011
  * */
-public class SmallElf extends ServantObject{
+public class SmallElf extends MinionObject{
     private static final String SERVANT_NAME = "小精灵";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;

@@ -3,7 +3,7 @@ package game.card.base.druid;
 import game.Gamer;
 import game.card.MagicCard;
 import game.objct.GameObject;
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author: Eiden J.P Zhou
@@ -28,8 +28,8 @@ public class MoonFireCard extends MagicCard {
         if (target instanceof Gamer){
             ((Gamer)target).beHurt(damage);
         }
-        if (target instanceof ServantObject){
-            ((ServantObject)target).beHurt(damage);
+        if (target instanceof MinionObject){
+            ((MinionObject)target).beHurt(damage);
         }
     }
 }

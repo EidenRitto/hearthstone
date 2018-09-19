@@ -1,7 +1,7 @@
 package game.card.base;
 
-import game.card.ServantCard;
-import game.objct.ServantObject;
+import game.card.MinionCard;
+import game.objct.MinionObject;
 import game.objct.base.SmallElf;
 
 /**
@@ -10,7 +10,7 @@ import game.objct.base.SmallElf;
  * @version : 1.0
  * @description : 小精灵卡牌
  * */
-public class SmallElfCard extends ServantCard {
+public class SmallElfCard extends MinionCard {
     private static final int COST = 0;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "小精灵";

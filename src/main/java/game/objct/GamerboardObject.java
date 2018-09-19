@@ -13,8 +13,8 @@ import java.util.List;
  * @description :
  * */
 public class GamerboardObject {
-    List<ServantObject> ourServantPlace;
-    List<ServantObject> yourServantPlace;
+    List<MinionObject> ourMinionPlace;
+    List<MinionObject> yourMinionPlace;
 
     List<AbstractCard> ourHandsCard;
     List<AbstractCard> yourHandsCard;
@@ -23,7 +23,7 @@ public class GamerboardObject {
     List<AbstractCard> yourCards;
 
     public GamerboardObject() {
-        ourServantPlace = new ArrayList<>(6);
-        yourServantPlace = new ArrayList<>(6);
+        ourMinionPlace = new ArrayList<>(6);
+        yourMinionPlace = new ArrayList<>(6);
     }
 }

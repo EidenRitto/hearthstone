@@ -9,9 +9,9 @@ import game.Gamer;
  * @version : 1.0
  * @description :
  * */
-public class ServantObject extends GameObject {
+public class MinionObject extends GameObject {
     /**随从名称*/
-    private String servantName;
+    private String minionName;
     /**生命值上限*/
     private Long healthLimit;
     /**当前生命值*/
@@ -51,15 +51,15 @@ public class ServantObject extends GameObject {
      * @author : Eiden J.P Zhou
      * @Date : 2018/9/12 10:04
      * @Method : attack
-     * @Params : [ServantCard]
+     * @Params : [MinionCard]
      * @Return : void
      * @Description : 随从攻击行为
      */
-    public void attack(ServantObject beAttackServant){
+    public void attack(MinionObject beAttackMinion){
         //敌人掉血
-        beAttackServant.setHealth(beAttackServant.getHealth()-this.attackValue);
+        beAttackMinion.setHealth(beAttackMinion.getHealth()-this.attackValue);
         //自己掉血
-        this.setHealth(this.getHealth()-beAttackServant.getAttackValue());
+        this.setHealth(this.getHealth()-beAttackMinion.getAttackValue());
     }
 
     /**
@@ -84,21 +84,21 @@ public class ServantObject extends GameObject {
      * @Description : 受伤害
      */
     public void beHurt(long number){
-        System.out.println(servantName+"受到"+number+"点伤害");
+        System.out.println(minionName+"受到"+number+"点伤害");
         health -= number;
     }
 
     public void getState(){
-        System.out.println(servantName+" 状态：");
+        System.out.println(minionName+" 状态：");
         System.out.println("血量："+health.toString());
         System.out.println("攻击力："+attackValue.toString());
     }
 
-    public ServantObject() {
+    public MinionObject() {
     }
 
-    public ServantObject(String servantName, Long healthLimit, Long health, Long attackValue, boolean isAttack, int attackTime) {
-        this.servantName = servantName;
+    public MinionObject(String minionName, Long healthLimit, Long health, Long attackValue, boolean isAttack, int attackTime) {
+        this.minionName = minionName;
         this.healthLimit = healthLimit;
         this.health = health;
         this.attackValue = attackValue;
@@ -147,13 +147,13 @@ public class ServantObject extends GameObject {
         this.attackTime = attackTime;
     }
 
-    public String getServantName() {
+    public String getMinionName() {
 
-        return servantName;
+        return minionName;
     }
 
-    public void setServantName(String servantName) {
-        this.servantName = servantName;
+    public void setMinionName(String minionName) {
+        this.minionName = minionName;
     }
 
     public boolean isBattle() {

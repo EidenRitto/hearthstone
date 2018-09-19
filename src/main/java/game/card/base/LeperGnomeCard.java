@@ -1,7 +1,7 @@
 package game.card.base;
 
-import game.card.ServantCard;
-import game.objct.ServantObject;
+import game.card.MinionCard;
+import game.objct.MinionObject;
 import game.objct.base.LeperGnome;
 
 /**
@@ -10,7 +10,7 @@ import game.objct.base.LeperGnome;
  * @version : 1.0
  * @description : 麻风侏儒卡牌
  * */
-public class LeperGnomeCard extends ServantCard {
+public class LeperGnomeCard extends MinionCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "亡语：对敌方英雄造成2点伤害";
     private static final String CARD_NAME = "麻风侏儒";

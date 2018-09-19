@@ -3,7 +3,7 @@ package game.card.base.druid;
 import game.Gamer;
 import game.card.MagicCard;
 import game.objct.GameObject;
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author: Eiden J.P Zhou
@@ -31,15 +31,15 @@ public class SwipeCard extends MagicCard{
         int damageOther = MAGIC_DAMAGE_OTHER + gamerSpellDamage;
         if (target instanceof Gamer){
             ((Gamer)target).beHurt(damageMain);
-            ((Gamer)target).getServants().forEach(servantObject -> servantObject.beHurt(damageOther));
+            ((Gamer)target).getMinions().forEach(minionObject -> minionObject.beHurt(damageOther));
         }
-        if (target instanceof ServantObject){
+        if (target instanceof MinionObject){
             gamer.getEnemy().beHurt(damageOther);
-            gamer.getEnemy().getServants().forEach(servantObject -> {
-                if (servantObject == target){
-                    servantObject.beHurt(damageMain);
+            gamer.getEnemy().getMinions().forEach(minionObject -> {
+                if (minionObject == target){
+                    minionObject.beHurt(damageMain);
                 }else {
-                    servantObject.beHurt(damageOther);
+                    minionObject.beHurt(damageOther);
                 }
             });
         }

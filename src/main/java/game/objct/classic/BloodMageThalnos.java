@@ -1,7 +1,7 @@
 package game.objct.classic;
 
 import game.Gamer;
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author: Eiden J.P Zhou
@@ -9,7 +9,7 @@ import game.objct.ServantObject;
  * @Description:
  * @Modified By:
  */
-public class BloodMageThalnos extends ServantObject {
+public class BloodMageThalnos extends MinionObject {
     private static final String SERVANT_NAME = "血法师萨尔诺斯";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;

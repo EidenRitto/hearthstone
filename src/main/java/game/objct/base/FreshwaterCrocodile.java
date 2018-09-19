@@ -1,6 +1,6 @@
 package game.objct.base;
 
-import game.objct.ServantObject;
+import game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -8,7 +8,7 @@ import game.objct.ServantObject;
  * @version : 1.0
  * @description : 淡水鳄 223
  * */
-public class FreshwaterCrocodile extends ServantObject {
+public class FreshwaterCrocodile extends MinionObject {
     private static final String SERVANT_NAME = "淡水鳄";
     private static final Long ATTACK = 2L;
     private static final Long HEALTH = 3L;
