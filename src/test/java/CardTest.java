@@ -2,7 +2,7 @@ import game.Gamer;
 import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
-import game.card.base.SwipeCard;
+import game.card.base.druid.SwipeCard;
 import game.hero.Priests;
 import game.hero.Warlock;
 import game.objct.base.FreshwaterCrocodile;
