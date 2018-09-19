@@ -88,11 +88,6 @@ public class MinionObject extends GameObject {
         health -= number;
     }
 
-    public void getState(){
-        System.out.println(minionName+" 状态：");
-        System.out.println("血量："+health.toString());
-        System.out.println("攻击力："+attackValue.toString());
-    }
 
     public MinionObject() {
     }

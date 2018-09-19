@@ -10,13 +10,13 @@ import game.objct.GameObject;
  * @Description:
  * @Modified By: 生命之触
  */
-public class HealingTouch extends MagicCard {
+public class HealingTouchCard extends MagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "恢复8点生命值。";
     private static final String CARD_NAME = "生命之触";
     private static final long HEALTH_NUMBER = 8;
 
-    public HealingTouch() {
+    public HealingTouchCard() {
         super(COST, DESCRIPTION, CARD_NAME);
     }
 
