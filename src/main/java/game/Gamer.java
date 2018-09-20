@@ -67,6 +67,8 @@ public class Gamer extends GameObject{
 
     /**随机种子*/
     private Random randomSeed;
+    /**抉择选项*/
+    private int chooseOne;
 
     /**
      * @author : Eiden J.P Zhou
@@ -371,8 +373,8 @@ public class Gamer extends GameObject{
         System.out.println("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
         System.out.println("场上随从:");
         minions.forEach(minionObject -> {
-            System.out.print(minionObject.getMinionName()+" "+minionObject.getAttackValue().toString()+"/"
-                    +minionObject.getHealth().toString()+"  ");
+            System.out.print(minionObject.getMinionName()+" "+minionObject.getAttackValue()+"/"
+                    +minionObject.getHealth()+"  ");
         });
         System.out.println();
     }
@@ -398,6 +400,7 @@ public class Gamer extends GameObject{
         this.isAttack=false;
         this.spellDamage=0;
         this.armor=0;
+        this.chooseOne=-1;
     }
 
     /**
@@ -448,6 +451,37 @@ public class Gamer extends GameObject{
         deadIds.forEach(this::deathMinion);
     }
 
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/19 18:11
+     * @method : addMinionsAttack
+     * @Description : 友方全部随从增加攻击力
+     */
+    public void addMinionsAttack(long addAttack){
+        minions.forEach(minionObject -> minionObject.addAttack(addAttack));
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 9:00
+     * @method : addMinionsHealth
+     * @Description : 友方全部随从增加生命值
+     */
+    public void addMinionsHealth(long addHealth){
+        minions.forEach(minionObject -> minionObject.addHealthLimit(addHealth));
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 9:03
+     * @method : buffYourAllMinions
+     * @params : [addAttack, addHealth]
+     * @Description : 友方随从获得 +[addAttack]/+[addHealth]
+     */
+    public void buffYourAllMinions(long addAttack,long addHealth){
+        addMinionsAttack(addAttack);
+        addMinionsHealth(addHealth);
+    }
 
     /**
      * @author : Eiden J.P Zhou
@@ -588,5 +622,13 @@ public class Gamer extends GameObject{
 
     public void setArmor(int armor) {
         this.armor = armor;
+    }
+
+    public int getChooseOne() {
+        return chooseOne;
+    }
+
+    public void setChooseOne(int chooseOne) {
+        this.chooseOne = chooseOne;
     }
 }

@@ -13,11 +13,11 @@ public class MinionObject extends GameObject {
     /**随从名称*/
     private String minionName;
     /**生命值上限*/
-    private Long healthLimit;
+    private long healthLimit;
     /**当前生命值*/
-    private Long health;
+    private long health;
     /**攻击力*/
-    private Long attackValue;
+    private long attackValue;
     /**是否可以攻击*/
     private boolean isAttack;
     /**本回合攻击次数*/
@@ -88,6 +88,65 @@ public class MinionObject extends GameObject {
         health -= number;
     }
 
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/19 18:16
+     * @method : addAttack
+     * @params : [addAttack]
+     * @Description : 增加攻击力
+     */
+    public void addAttack(long addAttack){
+        System.out.println(minionName+"增加"+addAttack+"点攻击");
+        attackValue += addAttack;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 8:49
+     * @method : reduceAttack
+     * @Description : 减少攻击力，攻击力可以为负数，但显示为0
+     */
+    public void reduceAttack(long reduceAttack){
+        System.out.println(minionName+"减少"+reduceAttack+"点攻击");
+        attackValue -= reduceAttack;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 8:51
+     * @method : reduceAttack
+     * @Description : 减少生命值上限
+     */
+    public void reduceHealthLimit(long reduceHealthLimit){
+        System.out.println(minionName+"减少"+reduceHealthLimit+"点生命上限");
+        healthLimit -= reduceHealthLimit;
+        //如果当前生命值大于生命值上限，一并减少
+
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 8:55
+     * @method : checkHealth
+     * @Description : 生命值不得大于上限
+     */
+    public void checkHealth(){
+        if (health>healthLimit){
+            health = healthLimit;
+        }
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/20 8:57
+     * @method : addHealthLimit
+     * @Description : 增加生命值上限
+     */
+    public void addHealthLimit(long addHealthLimit){
+        System.out.println(minionName+"增加"+addHealthLimit+"点生命值");
+        healthLimit += addHealthLimit;
+        health += addHealthLimit;
+    }
 
     public MinionObject() {
     }
@@ -102,23 +161,23 @@ public class MinionObject extends GameObject {
         this.setSpellDamage(0);
     }
 
-    public Long getHealthLimit() {
+    public long getHealthLimit() {
         return healthLimit;
     }
 
-    public void setHealthLimit(Long healthLimit) {
+    public void setHealthLimit(long healthLimit) {
         this.healthLimit = healthLimit;
     }
 
-    public Long getHealth() {
+    public long getHealth() {
         return health;
     }
 
-    public void setHealth(Long health) {
+    public void setHealth(long health) {
         this.health = health;
     }
 
-    public Long getAttackValue() {
+    public long getAttackValue() {
         return attackValue;
     }
 

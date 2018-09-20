@@ -4,6 +4,7 @@ import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
+import game.card.classic.druid.PowerOfTheWildCard;
 import game.hero.Priests;
 import game.hero.Warlock;
 import game.objct.base.FreshwaterCrocodile;
@@ -63,6 +64,27 @@ public class CardTest {
         enemy.checkMinion();
         enemy.getState();
         Assert.assertEquals(enemy.getHandsCards().size(),2);
+    }
+
+    @Test
+    public void PowerOfTheWildTest(){
+        //野性之力卡牌测试
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+        if (gamer.getChooseOne()==-1){
+            gamer.setChooseOne(1);
+        }
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.setChooseOne(1);
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.setChooseOne(1);
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.setChooseOne(0);
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.getState();
+        Assert.assertEquals(gamer.getMinions().size(),3);
+        Assert.assertEquals(gamer.getMinion(0).getHealthLimit(),3L);
+        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),4L);
     }
 
 

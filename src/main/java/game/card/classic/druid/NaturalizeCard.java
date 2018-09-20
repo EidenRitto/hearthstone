@@ -12,7 +12,7 @@ import game.objct.MinionObject;
  * @Modified By: 自然平衡
  */
 public class NaturalizeCard extends MagicCard {
-    private static final int COST = 0;
+    private static final int COST = 1;
     private static final String DESCRIPTION = "消灭一个随从，你的对手抽两张牌。";
     private static final String CARD_NAME = "自然平衡";
     private static final int DRAW_CARDS = 2;
