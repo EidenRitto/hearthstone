@@ -58,6 +58,8 @@ public class MinionObject extends GameObject {
      * @Description : 随从攻击行为
      */
     public void attack(MinionObject beAttackMinion){
+        //攻击次数减少1
+        attackTime--;
         //敌人掉血
         beAttackMinion.setHealth(beAttackMinion.getHealth()-this.attackValue);
         //自己掉血
@@ -73,6 +75,7 @@ public class MinionObject extends GameObject {
      * @Description : 重载打脸
      */
     public void attack(Gamer beAttackGamer){
+        attackTime--;
         //敌人掉血
         beAttackGamer.beHurt(this.attackValue);
         //自己掉血

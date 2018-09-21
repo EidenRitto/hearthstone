@@ -222,7 +222,9 @@ public class Gamer extends GameObject{
         //获得一张手牌指向的随从
         MinionObject minionObject = minionCard.getMinion();
         //战吼
-        minionObject.doBattle(target);
+        if (minionObject.isBattle()){
+            minionObject.doBattle(target);
+        }
         //随从进入战场
         addMinion(minionObject);
         //从手牌中移除随从卡牌
@@ -481,6 +483,47 @@ public class Gamer extends GameObject{
     public void buffYourAllMinions(long addAttack,long addHealth){
         addMinionsAttack(addAttack);
         addMinionsHealth(addHealth);
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/21 16:29
+     * @method : findAllCanAttackMinionsId
+     * @return : java.util.List<java.lang.Integer>
+     * @Description : 查找全部能够攻击的随从
+     */
+    public List<Integer> findAllCanAttackMinionsId(){
+        List<Integer> resultList = new ArrayList<>();
+        for (Integer i = 0;i<minions.size();i++) {
+            if (minions.get(i).getAttackTime()>0){
+                resultList.add(i);
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/21 17:12
+     * @method : findAllCanBeAttackMinionsId
+     * @return : java.util.List<java.lang.Integer>
+     * @Description : 查找全部能够被攻击的随从(敌方的)
+     */
+    public List<Integer> findAllCanBeAttackMinionsId(){
+        List<Integer> resultList = new ArrayList<>();
+        //判断敌方是否拥有嘲讽随从，有则添加嘲讽随从，
+        for (Integer i = 0;i<enemy.getMinions().size();i++){
+            if (enemy.getMinion(i).isTaunt()){
+                resultList.add(i);
+            }
+        }
+        //无则添加全部
+        if (resultList.size()==0){
+            for (Integer i = 0;i<enemy.getMinions().size();i++){
+                resultList.add(i);
+            }
+        }
+        return resultList;
     }
 
     /**
