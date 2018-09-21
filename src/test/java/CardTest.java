@@ -12,6 +12,7 @@ import game.objct.base.LeperGnome;
 import game.objct.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
+import sun.awt.util.IdentityLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,8 @@ public class CardTest {
     }
 
     @Test
-    public void PowerOfTheWildTest(){
+    public void PowerOfTheWildTest() throws ClassNotFoundException {
+        Class clazz = Class.forName("game.Gamer");
         //野性之力卡牌测试
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();

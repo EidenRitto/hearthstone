@@ -26,6 +26,8 @@ public class MinionObject extends GameObject {
     protected boolean isBattle = false;
     /**是否具有亡语*/
     protected boolean isDeathVoice = false;
+    /**是否具有嘲讽*/
+    protected boolean isTaunt = false;
     /**法术强度*/
     protected int spellDamage;
 
@@ -158,7 +160,7 @@ public class MinionObject extends GameObject {
         this.attackValue = attackValue;
         this.isAttack = isAttack;
         this.attackTime = attackTime;
-        this.setSpellDamage(0);
+        this.spellDamage = 0;
     }
 
     public long getHealthLimit() {
@@ -232,5 +234,13 @@ public class MinionObject extends GameObject {
 
     public void setSpellDamage(int spellDamage) {
         this.spellDamage = spellDamage;
+    }
+
+    public boolean isTaunt() {
+        return isTaunt;
+    }
+
+    public void setTaunt(boolean taunt) {
+        isTaunt = taunt;
     }
 }
