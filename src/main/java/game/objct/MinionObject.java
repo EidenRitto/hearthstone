@@ -30,7 +30,7 @@ public class MinionObject extends GameObject {
     protected boolean isTaunt = false;
     /**法术强度*/
     protected int spellDamage;
-    /**法术强度*/
+    /**种族*/
     protected Ethnicity ethnicity;
 
     /**本回合增加的攻击力*/
