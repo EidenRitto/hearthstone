@@ -24,6 +24,24 @@ public class Tracking extends MagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target){
-
+        System.out.println("追踪术:");
+        for (int i=0;i<CHECK_NUMBER;i++){
+            System.out.println(gamer.getLastCards().getCardName());
+        }
+        if (gamer.getChooseOne()!=-1){
+            if (gamer.getChooseOne()==0){
+                gamer.drawCard(1);
+                gamer.lossLastCards();
+                gamer.lossLastCards();
+            }else if (gamer.getChooseOne()==1){
+                gamer.lossLastCards();
+                gamer.drawCard(1);
+                gamer.lossLastCards();
+            }else {
+                gamer.lossLastCards();
+                gamer.lossLastCards();
+                gamer.drawCard(1);
+            }
+        }
     }
 }
