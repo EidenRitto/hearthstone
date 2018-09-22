@@ -2,6 +2,7 @@ import game.Gamer;
 import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
+import game.card.base.druid.MarkOfNatureCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
 import game.card.classic.druid.PowerOfTheWildCard;
@@ -37,9 +38,10 @@ public class CardTest {
         enemy.addMinion(new LeperGnome());
         enemy.addMinion(new LeperGnome());
 
+        System.out.println("===测试【血法】[横扫]，目标2号淡水鳄===");
         enemy.getState();
 
-        System.out.println("===测试【血法】横扫，目标2号淡水鳄===");
+
         new SwipeCard().magicEffect(gamer,enemy.getMinion(1));
 
         enemy.getState();
@@ -87,6 +89,30 @@ public class CardTest {
         Assert.assertEquals(gamer.getMinions().size(),3);
         Assert.assertEquals(gamer.getMinion(0).getHealthLimit(),3L);
         Assert.assertEquals(gamer.getMinion(0).getAttackValue(),4L);
+    }
+
+    @Test
+    public void MarkofNatureTest(){
+        //测试自然印记
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+
+        //召唤猎豹 * 2
+        gamer.setChooseOne(1);
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.setChooseOne(1);
+        new PowerOfTheWildCard().magicEffect(gamer,null);
+        gamer.getState();
+        gamer.setChooseOne(0);
+        new MarkOfNatureCard().magicEffect(gamer,gamer.getMinion(0));
+        gamer.setChooseOne(1);
+        new MarkOfNatureCard().magicEffect(gamer,gamer.getMinion(1));
+        gamer.getState();
+
+
+        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),7);
+        Assert.assertEquals(gamer.getMinion(1).getHealthLimit(),6);
+        Assert.assertTrue(gamer.getMinion(1).isTaunt());
     }
 
 

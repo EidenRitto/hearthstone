@@ -15,8 +15,8 @@ public class PowerOfTheWildCard extends MagicCard{
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择:你的随从获得+1/+1;或者召唤一个3/2猎豹。";
     private static final String CARD_NAME = "野性之力";
-    private static final int ADD_HEALTH = 1;
-    private static final int ADD_ATTACK = 1;
+    private static final long ADD_HEALTH = 1;
+    private static final long ADD_ATTACK = 1;
 
     public PowerOfTheWildCard() {
         super(COST, DESCRIPTION, CARD_NAME);
