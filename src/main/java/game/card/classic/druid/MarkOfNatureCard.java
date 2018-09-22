@@ -1,4 +1,4 @@
-package game.card.base.druid;
+package game.card.classic.druid;
 
 import game.Gamer;
 import game.card.MagicCard;

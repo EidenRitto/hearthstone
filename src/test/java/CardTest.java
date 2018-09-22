@@ -2,7 +2,7 @@ import game.Gamer;
 import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
-import game.card.base.druid.MarkOfNatureCard;
+import game.card.classic.druid.MarkOfNatureCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
 import game.card.classic.druid.PowerOfTheWildCard;
@@ -13,7 +13,6 @@ import game.objct.base.LeperGnome;
 import game.objct.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
-import sun.awt.util.IdentityLinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
