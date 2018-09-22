@@ -30,8 +30,10 @@ public class MinionObject extends GameObject {
     protected boolean isTaunt = false;
     /**法术强度*/
     protected int spellDamage;
+    /**法术强度*/
+    protected Ethnicity ethnicity;
 
-    /**攻击力*/
+    /**本回合增加的攻击力*/
     private long attackValueThisTurn = 0;
 
     /**
@@ -272,5 +274,13 @@ public class MinionObject extends GameObject {
 
     public void setTaunt(boolean taunt) {
         isTaunt = taunt;
+    }
+
+    public Ethnicity getEthnicity() {
+        return ethnicity;
+    }
+
+    public void setEthnicity(Ethnicity ethnicity) {
+        this.ethnicity = ethnicity;
     }
 }

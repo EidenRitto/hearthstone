@@ -1,5 +1,6 @@
 package game.objct.base.derivative;
 
+import game.objct.Ethnicity;
 import game.objct.MinionObject;
 
 /**
@@ -18,5 +19,6 @@ public class AnimalCompanionMisa extends MinionObject{
     public AnimalCompanionMisa() {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
         isTaunt = true;
+        ethnicity = Ethnicity.Beast;
     }
 }
