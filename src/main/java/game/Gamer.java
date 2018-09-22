@@ -687,4 +687,12 @@ public class Gamer extends GameObject{
     public void setChooseOne(int chooseOne) {
         this.chooseOne = chooseOne;
     }
+
+    public Random getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Random randomSeed) {
+        this.randomSeed = randomSeed;
+    }
 }

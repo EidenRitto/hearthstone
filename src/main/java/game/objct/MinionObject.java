@@ -142,7 +142,7 @@ public class MinionObject extends GameObject {
         System.out.println(minionName+"减少"+reduceHealthLimit+"点生命上限");
         healthLimit -= reduceHealthLimit;
         //如果当前生命值大于生命值上限，一并减少
-
+        checkHealth();
     }
 
     /**
@@ -155,6 +155,17 @@ public class MinionObject extends GameObject {
         if (health>healthLimit){
             health = healthLimit;
         }
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/22 14:57
+     * @method : changeHealth
+     * @Description : 改变生命值
+     */
+    public void changeHealth(long hp){
+        healthLimit = hp;
+        health = hp;
     }
 
     /**

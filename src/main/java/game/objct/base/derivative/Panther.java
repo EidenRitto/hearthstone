@@ -1,4 +1,4 @@
-package game.objct.derivative;
+package game.objct.base.derivative;
 
 import game.objct.MinionObject;
 
