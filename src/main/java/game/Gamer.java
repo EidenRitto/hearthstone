@@ -60,7 +60,7 @@ public class Gamer extends GameObject{
     /**法术强度*/
     private int spellDamage;
     /**护甲*/
-    private int armor;
+    private long armor;
 
     /**敌方英雄*/
     private Gamer enemy;
@@ -308,8 +308,21 @@ public class Gamer extends GameObject{
      * @params : [armorNumber]
      * @Description : 叠甲
      */
-    public void addArmor(int armorNumber){
+    public void addArmor(long armorNumber){
+        System.out.println(this.getMyProfession().getProfessionName()+"获得"+armorNumber+"点护甲.");
         armor += armorNumber;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/22 11:34
+     * @method : addAttackThisTurn
+     * @params : [attackNumber]
+     * @Description : 获得攻击力
+     */
+    public void addAttackThisTurn(long attackNumber){
+        System.out.println(this.getMyProfession().getProfessionName()+"获得"+attackNumber+"点攻击.");
+        attackValue += attackNumber;
     }
 
     /**
@@ -659,11 +672,11 @@ public class Gamer extends GameObject{
         this.spellDamage = spellDamage;
     }
 
-    public int getArmor() {
+    public long getArmor() {
         return armor;
     }
 
-    public void setArmor(int armor) {
+    public void setArmor(long armor) {
         this.armor = armor;
     }
 

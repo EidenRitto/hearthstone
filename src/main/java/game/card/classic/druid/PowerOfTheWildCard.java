@@ -8,8 +8,8 @@ import game.objct.derivative.Panther;
 /**
  * @author: Eiden J.P Zhou
  * @Date: 2018/9/19
- * @Description:
- * @Modified By: 野性之力
+ * @Description: 野性之力
+ * @Modified By:
  */
 public class PowerOfTheWildCard extends MagicCard{
     private static final int COST = 2;

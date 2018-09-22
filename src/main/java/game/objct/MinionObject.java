@@ -31,6 +31,9 @@ public class MinionObject extends GameObject {
     /**法术强度*/
     protected int spellDamage;
 
+    /**攻击力*/
+    private long attackValueThisTurn = 0;
+
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
@@ -103,6 +106,19 @@ public class MinionObject extends GameObject {
     public void addAttack(long addAttack){
         System.out.println(minionName+"增加"+addAttack+"点攻击");
         attackValue += addAttack;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/22 11:54
+     * @method : addAttack
+     * @params : [addAttack]
+     * @Description : 本回合增加攻击力
+     */
+    public void addAttackThisTurn(long addAttack){
+        System.out.println(minionName+"本回合增加"+addAttack+"点攻击");
+        attackValue += addAttack;
+        attackValueThisTurn += addAttack;
     }
 
     /**

@@ -8,8 +8,8 @@ import game.objct.MinionObject;
 /**
  * @author: Eiden J.P Zhou
  * @Date: 2018/9/22
- * @Description:
- * @Modified By: 愤怒
+ * @Description: 愤怒
+ * @Modified By:
  */
 public class WarthCard extends MagicCard {
     private static final int COST = 2;

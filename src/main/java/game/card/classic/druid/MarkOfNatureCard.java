@@ -8,8 +8,8 @@ import game.objct.MinionObject;
 /**
  * @author: Eiden J.P Zhou
  * @Date: 2018/9/22
- * @Description:
- * @Modified By: 自然印记
+ * @Description: 自然印记
+ * @Modified By:
  */
 public class MarkOfNatureCard extends MagicCard{
     private static final int COST = 3;

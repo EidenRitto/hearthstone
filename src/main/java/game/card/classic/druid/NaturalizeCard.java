@@ -8,8 +8,8 @@ import game.objct.MinionObject;
 /**
  * @author: Eiden J.P Zhou
  * @Date: 2018/9/19
- * @Description:
- * @Modified By: 自然平衡
+ * @Description: 自然平衡
+ * @Modified By:
  */
 public class NaturalizeCard extends MagicCard {
     private static final int COST = 1;
