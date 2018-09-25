@@ -222,9 +222,9 @@ public class Gamer extends GameObject{
         //获得一张手牌指向的随从
         MinionObject minionObject = minionCard.getMinion();
         //战吼
-        if (minionObject.isBattle()){
-            minionObject.doBattle(target);
-        }
+
+        minionObject.doBattle(target);
+
         //随从进入战场
         addMinion(minionObject);
         //从手牌中移除随从卡牌

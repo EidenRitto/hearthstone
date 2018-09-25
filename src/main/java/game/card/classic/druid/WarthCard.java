@@ -13,7 +13,7 @@ import game.objct.MinionObject;
  */
 public class WarthCard extends MagicCard {
     private static final int COST = 2;
-    private static final String DESCRIPTION = "抉择：对一个对从造成3点伤害;或者1点伤害并抽一张牌。";
+    private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";
     private static final String CARD_NAME = "愤怒";
     /**初始伤害*/
     private static final int MAGIC_DAMAGE = 3;
@@ -33,14 +33,13 @@ public class WarthCard extends MagicCard {
             MinionObject targetMinion = (MinionObject)target;
             if (gamer.getChooseOne()==0){
                 targetMinion.beHurt(damage);
-                System.out.println("by愤怒.");
+                System.out.println("愤怒选择伤害.");
             }else if (gamer.getChooseOne()==1){
                 targetMinion.beHurt(damageDrawCard);
                 gamer.drawCard(DRAW_CARD_NUMBER);
-                System.out.println("抽一张牌by愤怒.");
+                System.out.println("愤怒选择抽牌.");
             }
             gamer.setChooseOne(-1);
         }
-
     }
 }

@@ -32,6 +32,8 @@ public class MinionObject extends GameObject {
     protected int spellDamage;
     /**种族*/
     protected Ethnicity ethnicity;
+    /**光环*/
+    protected BuffHole buffHole =null;
 
     /**本回合增加的攻击力*/
     private long attackValueThisTurn = 0;
@@ -66,7 +68,7 @@ public class MinionObject extends GameObject {
         //攻击次数减少1
         attackTime--;
         //敌人掉血
-        beAttackMinion.setHealth(beAttackMinion.getHealth()-this.attackValue);
+        beAttackMinion.setHealth(beAttackMinion.getHealth()-this.getAttackValue());
         //自己掉血
         this.setHealth(this.getHealth()-beAttackMinion.getAttackValue());
     }

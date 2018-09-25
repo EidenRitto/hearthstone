@@ -1,6 +1,8 @@
 package game.objct.base.Hunter;
 
+import game.Gamer;
 import game.objct.Ethnicity;
+import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
@@ -20,4 +22,6 @@ public class TimberWolf extends MinionObject {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
         ethnicity = Ethnicity.Beast;
     }
+
+
 }
