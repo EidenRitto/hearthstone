@@ -1,4 +1,4 @@
-package game.objct.weapon;
+package game.objct;
 
 import game.objct.GameObject;
 
@@ -13,7 +13,9 @@ public class WeaponObject extends GameObject{
     private long weaponAttack;
     private long weaponDurable;
 
-    public WeaponObject() {
+
+    public void whileAttackDo(){
+
     }
 
     public WeaponObject(String weaponName, long weaponAttack, long weaponDurable) {
