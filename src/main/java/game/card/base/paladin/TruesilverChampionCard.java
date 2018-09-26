@@ -11,7 +11,7 @@ import game.objct.weapon.base.paladin.TruesilverChampion;
  */
 public class TruesilverChampionCard extends WeaponCard {
     private static final int COST = 4;
-    private static final String DESCRIPTION = "";
+    private static final String DESCRIPTION = "英雄攻击时恢复2点生命值";
     private static final String CARD_NAME = "真银圣剑";
     private static final Long ATTACK_VALUE = 4L;
     private static final Long DURABLE = 2L;
