@@ -3,7 +3,7 @@ package game.objct.base.druid;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 埃隆巴克保护者
  * @Modified By:

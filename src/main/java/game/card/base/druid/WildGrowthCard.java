@@ -5,7 +5,7 @@ import game.card.MagicCard;
 import game.objct.GameObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description:
  * @Modified By: 野性成长

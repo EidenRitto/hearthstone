@@ -4,8 +4,8 @@ import game.card.AbstractCard;
 import game.card.base.FreshwaterCrocodileCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
-import game.hero.Priests;
-import game.hero.Warlock;
+import game.hero.HeroObject;
+import game.hero.Profession;
 
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ public class GameTest {
             cards.add(new FreshwaterCrocodileCard());
         }
 
-        Gamer gamer = new Gamer(new Priests(),cards);
-        Gamer enemy = new Gamer(new Warlock(),cards);
+        Gamer gamer = new Gamer(new HeroObject(Profession.Mega),cards);
+        Gamer enemy = new Gamer(new HeroObject(Profession.Druid),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 

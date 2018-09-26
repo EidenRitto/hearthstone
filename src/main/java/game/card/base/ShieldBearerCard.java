@@ -4,7 +4,7 @@ import game.card.MinionCard;
 import game.objct.base.ShieldBearer;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/21
  * @Description:
  * @Modified By: 持盾卫士卡牌

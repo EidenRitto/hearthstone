@@ -4,7 +4,7 @@ import game.card.MinionCard;
 import game.objct.base.derivative.Panther;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/20
  * @Description:
  * @Modified By: 黑豹

@@ -6,7 +6,7 @@ import game.objct.GameObject;
 import game.objct.base.derivative.Panther;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description: 野性之力
  * @Modified By:

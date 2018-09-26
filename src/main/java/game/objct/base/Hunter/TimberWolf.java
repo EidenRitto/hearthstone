@@ -6,7 +6,7 @@ import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 森林狼
  * @Modified By:

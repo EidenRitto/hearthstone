@@ -6,7 +6,7 @@ import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/18
  * @Description:
  * @Modified By: 月火术
@@ -25,9 +25,6 @@ public class MoonFireCard extends MagicCard {
     @Override
     public void magicEffect(Gamer gamer, GameObject target){
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
-        if (target instanceof Gamer){
-            ((Gamer)target).beHurt(damage);
-        }
         if (target instanceof MinionObject){
             ((MinionObject)target).beHurt(damage);
         }

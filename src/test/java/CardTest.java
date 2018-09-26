@@ -6,12 +6,11 @@ import game.card.classic.druid.MarkOfNatureCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
 import game.card.classic.druid.PowerOfTheWildCard;
-import game.hero.Priests;
-import game.hero.Warlock;
+import game.hero.HeroObject;
+import game.hero.Profession;
 import game.objct.base.FreshwaterCrocodile;
 import game.objct.base.LeperGnome;
 import game.objct.base.derivative.AnimalCompanionMisa;
-import game.objct.base.derivative.Panther;
 import game.objct.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description:
  * @Modified By: 卡牌测试
@@ -49,8 +48,8 @@ public class CardTest {
         enemy.checkMinion();
         enemy.getState();
         Assert.assertEquals((long)enemy.getMinion(0).getHealth(),2);
-        Assert.assertEquals(enemy.getHealth(),28);
-        Assert.assertEquals(gamer.getHealth(),26);
+        Assert.assertEquals(enemy.getHero().getHealth(),28);
+        Assert.assertEquals(gamer.getHero().getHealth(),26);
     }
 
     @Test
@@ -125,8 +124,8 @@ public class CardTest {
             cards.add(new SwipeCard());
         }
 
-        Gamer gamer = new Gamer(new Priests(),cards);
-        Gamer enemy = new Gamer(new Warlock(),cards);
+        Gamer gamer = new Gamer(new HeroObject(Profession.Priest),cards);
+        Gamer enemy = new Gamer(new HeroObject(Profession.Warlock),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
         return gamer;

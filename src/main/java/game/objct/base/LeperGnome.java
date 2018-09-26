@@ -21,7 +21,7 @@ public class LeperGnome extends MinionObject{
     public void doDeathRattle(Gamer self){
         //如果是敌人的随从，我方掉血，反之对方掉血
         System.out.println(this.getMinionName()+"触发亡语");
-        self.getEnemy().beHurt(2);
+        self.getEnemy().getHero().beHurt(2);
 
     }
 

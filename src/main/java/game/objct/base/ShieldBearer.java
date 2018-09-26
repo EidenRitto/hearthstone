@@ -3,7 +3,7 @@ package game.objct.base;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/21
  * @Description:
  * @Modified By: 持盾卫士

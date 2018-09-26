@@ -6,7 +6,7 @@ import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 爪击
  * @Modified By:
@@ -27,7 +27,7 @@ public class ClawCard extends MagicCard {
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
         System.out.println("使用法术：爪击.");
-        gamer.addArmor(ADD_ARMOR);
-        gamer.addAttackThisTurn(ADD_ATTACK);
+        gamer.getHero().addArmor(ADD_ARMOR);
+        gamer.getHero().addAttackThisTurn(ADD_ATTACK);
     }
 }

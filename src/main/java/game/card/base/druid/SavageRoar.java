@@ -5,7 +5,7 @@ import game.card.MagicCard;
 import game.objct.GameObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 野蛮咆哮
  * @Modified By:
@@ -24,7 +24,7 @@ public class SavageRoar extends MagicCard {
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
         System.out.println("使用法术：野蛮咆哮.");
-        gamer.addAttackThisTurn(ADD_ATTACK);
+        gamer.getHero().addAttackThisTurn(ADD_ATTACK);
         gamer.getMinions().forEach(minionObject -> minionObject.addAttackThisTurn(ADD_ATTACK));
     }
 }

@@ -5,6 +5,7 @@ import game.card.AbstractCard;
 import game.card.MagicCard;
 import game.card.MinionCard;
 import game.card.base.CoinCard;
+import game.hero.HeroObject;
 import game.hero.Profession;
 import game.objct.GameObject;
 import game.objct.MinionObject;
@@ -31,18 +32,9 @@ public class Gamer extends GameObject{
     private static final int LAST_HANDS_INIT = 4;
 
 
-    /**职业*/
-    private Profession myProfession;
-    /**生命值上限*/
-    private long defaultHealth = 30L;
-    /**当前生命值*/
-    private long health;
-    /**攻击力*/
-    private long attackValue;
-    /**是否可以攻击*/
-    private boolean isAttack;
-    /**本回合攻击次数*/
-    private int attackTime;
+    /**英雄*/
+    private HeroObject hero;
+
     /**手牌*/
     private List<AbstractCard> handsCards;
     /**牌堆*/
@@ -57,10 +49,6 @@ public class Gamer extends GameObject{
     private int magicCrystalNow;
     /**疲劳计数器*/
     private int fatigueCounter;
-    /**法术强度*/
-    private int spellDamage;
-    /**护甲*/
-    private long armor;
 
     /**敌方英雄*/
     private Gamer enemy;
@@ -288,42 +276,6 @@ public class Gamer extends GameObject{
         return minions.get(index);
     }
 
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     * @description : 受伤害
-     * */
-    public void beHurt(long number){
-        System.out.println("英雄受到"+number+"点伤害");
-        health -= number;
-        if (health<=0){
-            gameOver();
-        }
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/19 15:59
-     * @method : addArmor
-     * @params : [armorNumber]
-     * @Description : 叠甲
-     */
-    public void addArmor(long armorNumber){
-        System.out.println(this.getMyProfession().getProfessionName()+"获得"+armorNumber+"点护甲.");
-        armor += armorNumber;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/22 11:34
-     * @method : addAttackThisTurn
-     * @params : [attackNumber]
-     * @Description : 获得攻击力
-     */
-    public void addAttackThisTurn(long attackNumber){
-        System.out.println(this.getMyProfession().getProfessionName()+"获得"+attackNumber+"点攻击.");
-        attackValue += attackNumber;
-    }
 
     /**
      * @author : Eiden J.P Zhou
@@ -335,17 +287,7 @@ public class Gamer extends GameObject{
 
     }
 
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     * @description : 恢复生命值
-     * */
-    public void recovery(long number){
-        //防止上限溢出
-        long newHealth = health + number >= defaultHealth?defaultHealth:health+number;
-        System.out.println("英雄恢复"+number+"点生命值");
-        health = newHealth;
-    }
+
 
     /**
      * @author : Eiden J.P Zhou
@@ -365,8 +307,7 @@ public class Gamer extends GameObject{
      * @Description : 计算总法强
      */
     public int getGamerSpellDamage(){
-
-        int gamerSpellDamage = spellDamage;
+        int gamerSpellDamage = hero.getSpellDamage();
         for (MinionObject minion:minions) {
             gamerSpellDamage += minion.getSpellDamage();
         }
@@ -384,7 +325,7 @@ public class Gamer extends GameObject{
             System.out.print(card.getCardName()+" ");
         });
         System.out.println();
-        System.out.println("当前生命值："+health+"/"+defaultHealth);
+        System.out.println("当前生命值："+hero.getHealth()+"/"+hero.getHealthLimit());
         System.out.println("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
         System.out.println("场上随从:");
         minions.forEach(minionObject -> {
@@ -399,9 +340,8 @@ public class Gamer extends GameObject{
      * @date : 2018/9/13
      * @description : 初始化游戏
      * */
-    public void init(Profession myProfession, List<AbstractCard> cards){
-        this.myProfession = myProfession;
-        this.health = defaultHealth;
+    public void init(HeroObject heroObject, List<AbstractCard> cards){
+        this.hero = heroObject;
         this.handsCards = new ArrayList<>(10);
         this.cards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
@@ -410,11 +350,6 @@ public class Gamer extends GameObject{
         this.enemy = null;
         this.randomSeed = new Random();
         this.fatigueCounter = 0;
-        this.attackTime=1;
-        this.attackValue=0;
-        this.isAttack=false;
-        this.spellDamage=0;
-        this.armor=0;
         this.chooseOne=-1;
     }
 
@@ -464,6 +399,17 @@ public class Gamer extends GameObject{
         }
         Collections.reverse(deadIds);
         deadIds.forEach(this::deathMinion);
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/14
+     * @description : 检查英雄血量，小于1则游戏结束
+     * */
+    public void checkHero(){
+        if (hero.getHealth()<=0){
+            gameOver();
+        }
     }
 
     /**
@@ -548,24 +494,8 @@ public class Gamer extends GameObject{
         return handsCards.get(cardId).getCost() <= magicCrystalNow;
     }
 
-    public Gamer(Profession myProfession, List<AbstractCard> cards) {
-        init(myProfession, cards);
-    }
-
-    public Profession getMyProfession() {
-        return myProfession;
-    }
-
-    public void setMyProfession(Profession myProfession) {
-        this.myProfession = myProfession;
-    }
-
-    public long getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
+    public Gamer(HeroObject heroObject, List<AbstractCard> cards) {
+        init(heroObject, cards);
     }
 
     public List<AbstractCard> getHandsCards() {
@@ -600,14 +530,6 @@ public class Gamer extends GameObject{
         this.magicCrystal = magicCrystal;
     }
 
-    public long getDefaultHealth() {
-        return defaultHealth;
-    }
-
-    public void setDefaultHealth(int defaultHealth) {
-        this.defaultHealth = defaultHealth;
-    }
-
     public int getMagicCrystalNow() {
         return magicCrystalNow;
     }
@@ -632,52 +554,12 @@ public class Gamer extends GameObject{
         this.enemy = enemy;
     }
 
-    public Long getAttackValue() {
-        return attackValue;
-    }
-
-    public void setAttackValue(Long attackValue) {
-        this.attackValue = attackValue;
-    }
-
-    public boolean isAttack() {
-        return isAttack;
-    }
-
-    public void setAttack(boolean attack) {
-        isAttack = attack;
-    }
-
-    public int getAttackTime() {
-        return attackTime;
-    }
-
-    public void setAttackTime(int attackTime) {
-        this.attackTime = attackTime;
-    }
-
     public int getFatigueCounter() {
         return fatigueCounter;
     }
 
     public void setFatigueCounter(int fatigueCounter) {
         this.fatigueCounter = fatigueCounter;
-    }
-
-    public int getSpellDamage() {
-        return spellDamage;
-    }
-
-    public void setSpellDamage(int spellDamage) {
-        this.spellDamage = spellDamage;
-    }
-
-    public long getArmor() {
-        return armor;
-    }
-
-    public void setArmor(long armor) {
-        this.armor = armor;
     }
 
     public int getChooseOne() {
@@ -694,5 +576,13 @@ public class Gamer extends GameObject{
 
     public void setRandomSeed(Random randomSeed) {
         this.randomSeed = randomSeed;
+    }
+
+    public HeroObject getHero() {
+        return hero;
+    }
+
+    public void setHero(HeroObject hero) {
+        this.hero = hero;
     }
 }

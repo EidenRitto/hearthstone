@@ -2,11 +2,12 @@ package game.card.base.druid;
 
 import game.Gamer;
 import game.card.MagicCard;
+import game.hero.HeroObject;
 import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description:
  * @Modified By: 星火术
@@ -25,9 +26,6 @@ public class StarFireCard extends MagicCard {
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
-        if (target instanceof Gamer){
-            ((Gamer)target).beHurt(damage);
-        }
         if (target instanceof MinionObject){
             ((MinionObject)target).beHurt(damage);
         }

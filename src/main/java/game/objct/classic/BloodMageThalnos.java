@@ -4,7 +4,7 @@ import game.Gamer;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/18
  * @Description:
  * @Modified By:

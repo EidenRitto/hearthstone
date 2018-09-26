@@ -5,7 +5,7 @@ import game.card.MagicCard;
 import game.objct.GameObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description:
  * @Modified By: 生命之触
@@ -22,6 +22,6 @@ public class HealingTouchCard extends MagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        gamer.recovery(HEALTH_NUMBER);
+        gamer.getHero().recovery(HEALTH_NUMBER);
     }
 }

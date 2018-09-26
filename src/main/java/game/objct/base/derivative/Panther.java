@@ -4,7 +4,7 @@ import game.objct.Ethnicity;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/20
  * @Description:
  * @Modified By: 野性之力衍生物 黑豹

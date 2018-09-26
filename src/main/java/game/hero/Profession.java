@@ -1,27 +1,35 @@
 package game.hero;
 
-public class Profession {
-    private String professionName;
-    private int professionId;
+/**
+ * @author : Eiden J.P Zhou
+ * @date : 2018/9/26
+ * @Description: 职业
+ * @Modified By:
+ */
+public enum Profession {
+    /**法师*/
+    Mega("法师",0),
+    /**术士*/
+    Warlock("术士",1),
+    /**牧师*/
+    Priest("牧师",2),
+    /**圣骑士*/
+    Paladin("圣骑士",3),
+    /**猎人*/
+    Hunter("猎人",4),
+    /**战士*/
+    Warrior("战士",5),
+    /**德鲁伊*/
+    Druid("德鲁伊",6),
+    /**潜行者*/
+    Rogue("潜行者",7),
+    /**萨满*/
+    Shaman("萨满",8);
 
-    public String getProfessionName() {
-        return professionName;
+    Profession(String name, int id) {
+        _name = name;
+        _id = id;
     }
-
-    public void setProfessionName(String professionName) {
-        this.professionName = professionName;
-    }
-
-    public int getProfessionId() {
-        return professionId;
-    }
-
-    public void setProfessionId(int professionId) {
-        this.professionId = professionId;
-    }
-
-    public Profession(String professionName, int professionId) {
-        this.professionName = professionName;
-        this.professionId = professionId;
-    }
+    private String _name;
+    private int _id;
 }

@@ -2,11 +2,12 @@ package game.card.base.druid;
 
 import game.Gamer;
 import game.card.MagicCard;
+import game.hero.HeroObject;
 import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/19
  * @Description:
  * @Modified By: 德鲁伊法术-横扫
@@ -29,12 +30,11 @@ public class SwipeCard extends MagicCard{
         int gamerSpellDamage = gamer.getGamerSpellDamage();
         int damageMain = MAGIC_DAMAGE_MAIN + gamerSpellDamage;
         int damageOther = MAGIC_DAMAGE_OTHER + gamerSpellDamage;
-        if (target instanceof Gamer){
-            ((Gamer)target).beHurt(damageMain);
-            ((Gamer)target).getMinions().forEach(minionObject -> minionObject.beHurt(damageOther));
-        }
-        if (target instanceof MinionObject){
-            gamer.getEnemy().beHurt(damageOther);
+        if (target instanceof HeroObject){
+            ((HeroObject)target).beHurt(damageMain);
+            gamer.getEnemy().getMinions().forEach(minionObject -> minionObject.beHurt(damageOther));
+        }else if (target instanceof MinionObject){
+            gamer.getEnemy().getHero().beHurt(damageOther);
             gamer.getEnemy().getMinions().forEach(minionObject -> {
                 if (minionObject == target){
                     minionObject.beHurt(damageMain);

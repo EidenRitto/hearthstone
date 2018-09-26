@@ -6,7 +6,7 @@ import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 奥术射击
  * @Modified By:
@@ -25,9 +25,6 @@ public class ArcaneShotCard extends MagicCard{
     @Override
     public void magicEffect(Gamer gamer, GameObject target){
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
-        if (target instanceof Gamer){
-            ((Gamer)target).beHurt(damage);
-        }
         if (target instanceof MinionObject){
             ((MinionObject)target).beHurt(damage);
         }

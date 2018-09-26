@@ -19,9 +19,9 @@ public class MinionObject extends GameObject {
     /**攻击力*/
     private long attackValue;
     /**是否可以攻击*/
-    private boolean isAttack;
+    private boolean isAttack = false;
     /**本回合攻击次数*/
-    private int attackTime;
+    private int attackTime = 1;
     /**是否具有战吼*/
     protected boolean isBattle = false;
     /**是否具有亡语*/
@@ -29,7 +29,7 @@ public class MinionObject extends GameObject {
     /**是否具有嘲讽*/
     protected boolean isTaunt = false;
     /**法术强度*/
-    protected int spellDamage;
+    protected int spellDamage = 0;
     /**种族*/
     protected Ethnicity ethnicity;
     /**光环*/
@@ -71,22 +71,6 @@ public class MinionObject extends GameObject {
         beAttackMinion.setHealth(beAttackMinion.getHealth()-this.getAttackValue());
         //自己掉血
         this.setHealth(this.getHealth()-beAttackMinion.getAttackValue());
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/18 16:09
-     * @method : attack
-     * @params : [beAttackGamer]
-     * @return : void
-     * @Description : 重载打脸
-     */
-    public void attack(Gamer beAttackGamer){
-        attackTime--;
-        //敌人掉血
-        beAttackGamer.beHurt(this.attackValue);
-        //自己掉血
-        this.beHurt(beAttackGamer.getAttackValue());
     }
 
     /**
@@ -182,6 +166,18 @@ public class MinionObject extends GameObject {
         System.out.println(minionName+"增加"+addHealthLimit+"点生命值");
         healthLimit += addHealthLimit;
         health += addHealthLimit;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/9/13
+     * @description : 恢复生命值
+     * */
+    public void recovery(long number){
+        //防止上限溢出
+        long newHealth = health + number >= healthLimit?healthLimit:health+number;
+        System.out.println(minionName+"恢复"+number+"点生命值");
+        health = newHealth;
     }
 
     public MinionObject() {

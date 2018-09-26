@@ -5,7 +5,7 @@ import game.objct.classic.BloodMageThalnos;
 
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/18
  * @Description:
  * @Modified By: 血法

@@ -4,7 +4,7 @@ import game.card.MinionCard;
 import game.objct.base.druid.IronbarkProtector;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 埃隆巴克保护者
  * @Modified By:

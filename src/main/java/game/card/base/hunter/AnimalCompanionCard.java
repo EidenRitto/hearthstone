@@ -9,7 +9,7 @@ import game.objct.base.derivative.AnimalCompanionMisa;
 import game.objct.base.derivative.AnimalCompanionReoque;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 动物伙伴
  * @Modified By:

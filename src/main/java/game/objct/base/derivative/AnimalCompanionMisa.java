@@ -4,7 +4,7 @@ import game.objct.Ethnicity;
 import game.objct.MinionObject;
 
 /**
- * @author: Eiden J.P Zhou
+ * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
  * @Description: 米莎
  * @Modified By:
