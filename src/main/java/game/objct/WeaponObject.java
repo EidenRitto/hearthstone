@@ -1,5 +1,7 @@
 package game.objct;
 
+import game.hero.HeroObject;
+
 /**
  * @author : Eiden J.P Zhou
  * @Date: 2018/9/26
@@ -11,7 +13,7 @@ public class WeaponObject extends GameObject{
     private long weaponAttack;
     private long weaponDurable;
 
-    public void whenAttackDo(){
+    public void whenAttackDo(HeroObject hero){
 
     }
 
