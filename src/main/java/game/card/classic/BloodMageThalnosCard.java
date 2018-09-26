@@ -1,7 +1,7 @@
 package game.card.classic;
 
 import game.card.MinionCard;
-import game.objct.classic.BloodMageThalnos;
+import game.objct.minion.classic.BloodMageThalnos;
 
 
 /**

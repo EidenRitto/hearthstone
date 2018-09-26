@@ -1,8 +1,7 @@
 package game.card.base;
 
 import game.card.MinionCard;
-import game.objct.MinionObject;
-import game.objct.base.SmallElf;
+import game.objct.minion.base.SmallElf;
 
 /**
  * @author : Eiden J.P Zhou

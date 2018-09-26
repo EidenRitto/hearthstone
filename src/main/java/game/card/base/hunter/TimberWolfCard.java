@@ -1,7 +1,7 @@
 package game.card.base.hunter;
 
 import game.card.MinionCard;
-import game.objct.base.Hunter.TimberWolf;
+import game.objct.minion.base.Hunter.TimberWolf;
 
 /**
  * @author : Eiden J.P Zhou

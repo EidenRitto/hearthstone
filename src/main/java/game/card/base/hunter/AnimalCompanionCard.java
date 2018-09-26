@@ -3,10 +3,9 @@ package game.card.base.hunter;
 import game.Gamer;
 import game.card.MagicCard;
 import game.objct.GameObject;
-import game.objct.MinionObject;
-import game.objct.base.derivative.AnimalCompanionHoff;
-import game.objct.base.derivative.AnimalCompanionMisa;
-import game.objct.base.derivative.AnimalCompanionReoque;
+import game.objct.minion.base.derivative.AnimalCompanionHoff;
+import game.objct.minion.base.derivative.AnimalCompanionMisa;
+import game.objct.minion.base.derivative.AnimalCompanionReoque;
 
 /**
  * @author : Eiden J.P Zhou

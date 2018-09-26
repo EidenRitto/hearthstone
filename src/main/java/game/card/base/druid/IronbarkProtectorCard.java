@@ -1,7 +1,7 @@
 package game.card.base.druid;
 
 import game.card.MinionCard;
-import game.objct.base.druid.IronbarkProtector;
+import game.objct.minion.base.druid.IronbarkProtector;
 
 /**
  * @author : Eiden J.P Zhou

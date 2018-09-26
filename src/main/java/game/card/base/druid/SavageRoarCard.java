@@ -10,14 +10,14 @@ import game.objct.GameObject;
  * @Description: 野蛮咆哮
  * @Modified By:
  */
-public class SavageRoar extends MagicCard {
+public class SavageRoarCard extends MagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "在本回合你的所有角色获得2点攻击。";
     private static final String CARD_NAME = "野蛮咆哮";
     /**增加的攻击力*/
     private static final long ADD_ATTACK = 2;
 
-    public SavageRoar() {
+    public SavageRoarCard() {
         super(COST, DESCRIPTION, CARD_NAME);
     }
 

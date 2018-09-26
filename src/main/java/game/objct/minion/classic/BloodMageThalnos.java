@@ -1,4 +1,4 @@
-package game.objct.classic;
+package game.objct.minion.classic;
 
 import game.Gamer;
 import game.objct.MinionObject;

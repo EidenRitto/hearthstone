@@ -1,4 +1,4 @@
-package game.objct.base.druid;
+package game.objct.minion.base.druid;
 
 import game.objct.MinionObject;
 

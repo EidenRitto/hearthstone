@@ -1,7 +1,7 @@
 package game.card.base.derivative;
 
 import game.card.MinionCard;
-import game.objct.base.derivative.AnimalCompanionMisa;
+import game.objct.minion.base.derivative.AnimalCompanionMisa;
 
 /**
  * @author : Eiden J.P Zhou

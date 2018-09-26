@@ -1,8 +1,7 @@
 package game.card.base;
 
 import game.card.MinionCard;
-import game.objct.MinionObject;
-import game.objct.base.LeperGnome;
+import game.objct.minion.base.LeperGnome;
 
 /**
  * @author : Eiden J.P Zhou

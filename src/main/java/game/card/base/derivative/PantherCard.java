@@ -1,7 +1,7 @@
 package game.card.base.derivative;
 
 import game.card.MinionCard;
-import game.objct.base.derivative.Panther;
+import game.objct.minion.base.derivative.Panther;
 
 /**
  * @author : Eiden J.P Zhou

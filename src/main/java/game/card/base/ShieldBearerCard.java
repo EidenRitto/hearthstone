@@ -1,7 +1,7 @@
 package game.card.base;
 
 import game.card.MinionCard;
-import game.objct.base.ShieldBearer;
+import game.objct.minion.base.ShieldBearer;
 
 /**
  * @author : Eiden J.P Zhou

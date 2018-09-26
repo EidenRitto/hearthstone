@@ -1,4 +1,4 @@
-package game.objct.base;
+package game.objct.minion.base;
 
 import game.objct.MinionObject;
 

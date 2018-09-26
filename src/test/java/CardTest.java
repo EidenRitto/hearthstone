@@ -8,10 +8,10 @@ import game.card.classic.druid.NaturalizeCard;
 import game.card.classic.druid.PowerOfTheWildCard;
 import game.hero.HeroObject;
 import game.hero.Profession;
-import game.objct.base.FreshwaterCrocodile;
-import game.objct.base.LeperGnome;
-import game.objct.base.derivative.AnimalCompanionMisa;
-import game.objct.classic.BloodMageThalnos;
+import game.objct.minion.base.FreshwaterCrocodile;
+import game.objct.minion.base.LeperGnome;
+import game.objct.minion.base.derivative.AnimalCompanionMisa;
+import game.objct.minion.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
 

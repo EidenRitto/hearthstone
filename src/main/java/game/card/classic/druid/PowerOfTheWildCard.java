@@ -3,7 +3,7 @@ package game.card.classic.druid;
 import game.Gamer;
 import game.card.MagicCard;
 import game.objct.GameObject;
-import game.objct.base.derivative.Panther;
+import game.objct.minion.base.derivative.Panther;
 
 /**
  * @author : Eiden J.P Zhou
