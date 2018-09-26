@@ -1,4 +1,4 @@
-package game.objct.weapon;
+package game.objct.weapon.base;
 
 import game.objct.WeaponObject;
 
