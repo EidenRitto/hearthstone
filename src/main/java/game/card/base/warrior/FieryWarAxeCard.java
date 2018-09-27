@@ -1,7 +1,7 @@
 package game.card.base.warrior;
 
 import game.card.WeaponCard;
-import game.objct.weapon.base.FieryWarAxe;
+import game.objct.weapon.base.warrior.FieryWarAxe;
 
 /**
  * @author : Eiden J.P Zhou

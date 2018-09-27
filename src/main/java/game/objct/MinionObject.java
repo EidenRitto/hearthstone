@@ -210,7 +210,7 @@ public class MinionObject extends GameObject {
     }
 
     public long getAttackValue() {
-        return attackValue;
+        return attackValue>=0?attackValue:0;
     }
 
     public void setAttackValue(Long attackValue) {
@@ -280,5 +280,13 @@ public class MinionObject extends GameObject {
 
     public void setEthnicity(Ethnicity ethnicity) {
         this.ethnicity = ethnicity;
+    }
+
+    public BuffHole getBuffHole() {
+        return buffHole;
+    }
+
+    public void setBuffHole(BuffHole buffHole) {
+        this.buffHole = buffHole;
     }
 }

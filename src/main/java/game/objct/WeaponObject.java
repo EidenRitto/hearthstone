@@ -1,5 +1,6 @@
 package game.objct;
 
+import game.Gamer;
 import game.hero.HeroObject;
 
 /**
@@ -13,7 +14,7 @@ public class WeaponObject extends GameObject{
     private long weaponAttack;
     private long weaponDurable;
 
-    public void whenAttackDo(HeroObject hero){
+    public void whenAttackDo(Gamer gamer){
 
     }
 

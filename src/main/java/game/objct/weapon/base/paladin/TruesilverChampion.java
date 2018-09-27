@@ -1,6 +1,6 @@
 package game.objct.weapon.base.paladin;
 
-import game.hero.HeroObject;
+import game.Gamer;
 import game.objct.WeaponObject;
 
 /**
@@ -17,9 +17,9 @@ public class TruesilverChampion extends WeaponObject {
     private static final Long RECOVERY_HEALTH = 2L;
 
     @Override
-    public void whenAttackDo(HeroObject hero){
+    public void whenAttackDo(Gamer gamer){
         System.out.println("真银圣剑发动特效:");
-        hero.recovery(RECOVERY_HEALTH);
+        gamer.getHero().recovery(RECOVERY_HEALTH);
     }
 
     public TruesilverChampion() {
