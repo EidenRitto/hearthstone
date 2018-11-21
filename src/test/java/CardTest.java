@@ -2,6 +2,7 @@ import game.Gamer;
 import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
+import game.card.base.hunter.KillCommandCard;
 import game.card.classic.druid.MarkOfNatureCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
@@ -12,6 +13,7 @@ import game.objct.minion.base.FreshwaterCrocodile;
 import game.objct.minion.base.LeperGnome;
 import game.objct.minion.base.derivative.AnimalCompanionMisa;
 import game.objct.minion.base.derivative.AnimalCompanionReoque;
+import game.objct.minion.base.druid.IronbarkProtector;
 import game.objct.minion.base.hunter.TimberWolf;
 import game.objct.minion.classic.BloodMageThalnos;
 import org.junit.Assert;
@@ -29,13 +31,26 @@ import java.util.List;
 public class CardTest {
 
     @Test
+    public void testKillCommandCard(){
+        System.out.println("卡牌杀戮命令测试");
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+        enemy.addMinion(new IronbarkProtector());
+        enemy.addMinion(new IronbarkProtector());
+        new KillCommandCard().magicEffect(gamer,enemy.getMinion(0));
+        Assert.assertEquals(enemy.getMinion(0).getHealth(),5L);
+        gamer.addMinion(new FreshwaterCrocodile());
+        new KillCommandCard().magicEffect(gamer,enemy.getMinion(1));
+        Assert.assertEquals(enemy.getMinion(1).getHealth(),3L);
+    }
+
+    @Test
     public void testBuffHole(){
         System.out.println("光环效果测试");
         //初始化测试环境
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
-
-        //添加森林狼
+        //添加随从
         gamer.addMinion(new TimberWolf());
         gamer.addMinion(new TimberWolf());
         gamer.addMinion(new LeperGnome());

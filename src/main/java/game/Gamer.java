@@ -8,6 +8,7 @@ import game.card.base.CoinCard;
 import game.hero.HeroObject;
 import game.hero.Profession;
 import game.objct.BuffHole;
+import game.objct.Ethnicity;
 import game.objct.GameObject;
 import game.objct.MinionObject;
 
@@ -374,6 +375,20 @@ public class Gamer extends GameObject{
      * */
     public boolean isEnemy(){
         return this.getEnemy()==null;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/11/21 16:30
+     * @Description : 检查场上是否拥有指定种族的随从
+     */
+    public boolean checkHaveEthnicity(Ethnicity ethnicity){
+        for (MinionObject minion : minions) {
+            if (minion.getEthnicity() == ethnicity) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
