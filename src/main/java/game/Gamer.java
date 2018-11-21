@@ -7,6 +7,7 @@ import game.card.MinionCard;
 import game.card.base.CoinCard;
 import game.hero.HeroObject;
 import game.hero.Profession;
+import game.objct.BuffHole;
 import game.objct.GameObject;
 import game.objct.MinionObject;
 
@@ -188,9 +189,9 @@ public class Gamer extends GameObject{
      * */
     public void drawCard(int number){
         for (int i = 0; i < number; i++) {
-            //获取排队顶那一张牌
+            //获取牌堆顶那一张牌
             AbstractCard lastCard = getLastCards();
-            //移除排队顶的牌
+            //移除牌堆顶的牌
             lossLastCards();
             //添加到手牌中
             addHandsCard(lastCard);
@@ -399,6 +400,38 @@ public class Gamer extends GameObject{
         }
         Collections.reverse(deadIds);
         deadIds.forEach(this::deathMinion);
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/11/21 15:02
+     * @method : checkMinionBuffHole
+     * @Description : 刷新随从光环所添加的属性【默认为对自身无效】
+     */
+    public void checkMinionBuffHole(){
+        BuffHole buffHole;
+        //清空属性
+        minions.forEach(MinionObject::cleanBuffHoleAttribute);
+        for (int i = 0;i < minions.size();i++){
+            buffHole = minions.get(i).getBuffHole();
+            if (buffHole != null){
+                if (buffHole.getPrerequisite() != null){
+                    for (int j = 0; j < minions.size(); j++){
+                        if (i != j && minions.get(j).getEthnicity() == buffHole.getPrerequisite()){
+                            minions.get(j).addBuffHoleAttack(buffHole.getAddAttack());
+                            minions.get(j).addBuffHoleHealth(buffHole.getAddHealth());
+                        }
+                    }
+                }else {
+                    for (int j=0; j < minions.size(); j++){
+                        if (i != j){
+                            minions.get(j).addBuffHoleAttack(buffHole.getAddAttack());
+                            minions.get(j).addBuffHoleHealth(buffHole.getAddHealth());
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

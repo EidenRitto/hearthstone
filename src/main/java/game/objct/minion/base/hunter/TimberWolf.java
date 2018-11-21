@@ -1,8 +1,7 @@
-package game.objct.minion.base.Hunter;
+package game.objct.minion.base.hunter;
 
-import game.Gamer;
+import game.objct.BuffHole;
 import game.objct.Ethnicity;
-import game.objct.GameObject;
 import game.objct.MinionObject;
 
 /**
@@ -18,9 +17,14 @@ public class TimberWolf extends MinionObject {
     private static final boolean ATTACK_STATE = false;
     private static final int ATTACK_TIME = 1;
 
+    private static final long BUFF_ATTACK = 1;
+    private static final long BUFF_HEALTH = 0;
+    private static final Ethnicity BUFF_PREREQUISITE = Ethnicity.Beast;
+
     public TimberWolf() {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
         ethnicity = Ethnicity.Beast;
+        buffHole = new BuffHole(BUFF_ATTACK,BUFF_HEALTH,BUFF_PREREQUISITE);
     }
 
 

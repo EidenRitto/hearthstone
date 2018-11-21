@@ -2,12 +2,13 @@ package game.objct;
 
 
 import game.Gamer;
+import game.hero.Profession;
 
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/12
  * @version : 1.0
- * @description :
+ * @description : 随从 抽象
  * */
 public class MinionObject extends GameObject {
     /**随从名称*/
@@ -33,10 +34,14 @@ public class MinionObject extends GameObject {
     /**种族*/
     protected Ethnicity ethnicity;
     /**光环*/
-    protected BuffHole buffHole =null;
+    protected BuffHole buffHole = null;
 
     /**本回合增加的攻击力*/
     private long attackValueThisTurn = 0;
+    /**光环所增加的攻击力*/
+    private long buffHoleAttack = 0;
+    /**光环所增加的生命值*/
+    private long buffHoleHealth = 0;
 
     /**
      * @author : Eiden J.P Zhou
@@ -180,6 +185,31 @@ public class MinionObject extends GameObject {
         health = newHealth;
     }
 
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/11/21 14:53
+     * @method : addBuffHoleAttack
+     * @Description : 增加光环所增加的攻击力
+     */
+    public void addBuffHoleAttack(long number){
+        buffHoleAttack += number;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
+     * @date : 2018/11/21 14:53
+     * @method : addBuffHoleHealth
+     * @Description : 增加光环所增加的生命值
+     */
+    public void addBuffHoleHealth(long number){
+        buffHoleHealth += number;
+    }
+
+    public void cleanBuffHoleAttribute(){
+        buffHoleAttack = 0;
+        buffHoleHealth = 0;
+    }
+
     public MinionObject() {
     }
 
@@ -202,7 +232,7 @@ public class MinionObject extends GameObject {
     }
 
     public long getHealth() {
-        return health;
+        return health + buffHoleHealth;
     }
 
     public void setHealth(long health) {
@@ -210,7 +240,7 @@ public class MinionObject extends GameObject {
     }
 
     public long getAttackValue() {
-        return attackValue>=0?attackValue:0;
+        return attackValue + buffHoleAttack >= 0 ?attackValue+buffHoleAttack:0;
     }
 
     public void setAttackValue(Long attackValue) {
@@ -288,5 +318,21 @@ public class MinionObject extends GameObject {
 
     public void setBuffHole(BuffHole buffHole) {
         this.buffHole = buffHole;
+    }
+
+    public long getBuffHoleAttack() {
+        return buffHoleAttack;
+    }
+
+    public void setBuffHoleAttack(long buffHoleAttack) {
+        this.buffHoleAttack = buffHoleAttack;
+    }
+
+    public long getBuffHoleHealth() {
+        return buffHoleHealth;
+    }
+
+    public void setBuffHoleHealth(long buffHoleHealth) {
+        this.buffHoleHealth = buffHoleHealth;
     }
 }

@@ -7,4 +7,7 @@ package game.objct.weapon;
  * @Modified By:
  */
 public class xxx {
+    public static void main(String[] args) {
+        System.out.println(1366d/1920d);
+    }
 }

@@ -1,5 +1,6 @@
 package game.objct;
 
+
 /**
  * @author : Eiden J.P Zhou
  * @Date: 2018/9/22
@@ -9,8 +10,28 @@ package game.objct;
 public class BuffHole extends GameObject{
     private long addHealth;
     private long addAttack;
+    /**触发条件 prerequisite 可能存在 种族因素*/
+    private Ethnicity prerequisite;
     private long fixedHealth;
     private long fixedAttack;
+
+    public BuffHole() {
+
+    }
+
+    public BuffHole(long addHealth, long addAttack, Ethnicity prerequisite) {
+        this.addHealth = addHealth;
+        this.addAttack = addAttack;
+        this.prerequisite = prerequisite;
+    }
+
+    public BuffHole(long addHealth, long addAttack, Ethnicity prerequisite, long fixedHealth, long fixedAttack) {
+        this.addHealth = addHealth;
+        this.addAttack = addAttack;
+        this.prerequisite = prerequisite;
+        this.fixedHealth = fixedHealth;
+        this.fixedAttack = fixedAttack;
+    }
 
     public long getAddHealth() {
         return addHealth;
@@ -42,5 +63,13 @@ public class BuffHole extends GameObject{
 
     public void setFixedAttack(long fixedAttack) {
         this.fixedAttack = fixedAttack;
+    }
+
+    public Ethnicity getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(Ethnicity prerequisite) {
+        this.prerequisite = prerequisite;
     }
 }

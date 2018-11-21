@@ -5,8 +5,7 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
-        for (int i=0;i<10;i++){
-            System.out.println(new Random().nextInt(3));
-        }
+        System.out.println(!true == true ||true &&true);
+        System.out.println(0x12fd2+45678);
     }
 }
