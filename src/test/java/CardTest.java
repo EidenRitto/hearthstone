@@ -3,6 +3,7 @@ import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
 import game.card.base.hunter.KillCommandCard;
+import game.card.base.hunter.MultiShotCard;
 import game.card.classic.druid.MarkOfNatureCard;
 import game.card.base.druid.SwipeCard;
 import game.card.classic.druid.NaturalizeCard;
@@ -29,6 +30,19 @@ import java.util.List;
  * @Modified By: 卡牌测试
  */
 public class CardTest {
+
+    @Test
+    public void testMultiShotCard(){
+        System.out.println("卡牌多重射击测试");
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+        enemy.addMinion(new IronbarkProtector());
+        enemy.addMinion(new IronbarkProtector());
+        enemy.addMinion(new IronbarkProtector());
+        enemy.addMinion(new IronbarkProtector());
+        new MultiShotCard().magicEffect(gamer,null);
+        enemy.getState();
+    }
 
     @Test
     public void testKillCommandCard(){

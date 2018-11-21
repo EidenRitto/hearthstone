@@ -37,6 +37,6 @@ public class KillCommandCard extends MagicCard {
         if (target instanceof MinionObject){
             ((MinionObject)target).beHurt(damage);
         }
-        System.out.println("使用"+CARD_NAME+"对"+((MinionObject)target).getMinionName()+"造成"+damage+"点伤害");
+//        System.out.println("使用"+CARD_NAME+"对"+((MinionObject)target).getMinionName()+"造成"+damage+"点伤害");
     }
 }
