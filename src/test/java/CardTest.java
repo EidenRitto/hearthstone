@@ -11,6 +11,7 @@ import game.hero.Profession;
 import game.objct.minion.base.FreshwaterCrocodile;
 import game.objct.minion.base.LeperGnome;
 import game.objct.minion.base.derivative.AnimalCompanionMisa;
+import game.objct.minion.base.derivative.AnimalCompanionReoque;
 import game.objct.minion.base.hunter.TimberWolf;
 import game.objct.minion.classic.BloodMageThalnos;
 import org.junit.Assert;
@@ -39,10 +40,12 @@ public class CardTest {
         gamer.addMinion(new TimberWolf());
         gamer.addMinion(new LeperGnome());
         gamer.addMinion(new FreshwaterCrocodile());
+        gamer.addMinion(new AnimalCompanionReoque());
         gamer.getState();
 
-        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),2L);
-        Assert.assertEquals(gamer.getMinion(3).getAttackValue(),4L);
+        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),3L);
+        Assert.assertEquals(gamer.getMinion(2).getAttackValue(),2L);
+        Assert.assertEquals(gamer.getMinion(3).getAttackValue(),5L);
         System.out.println("测试通过");
     }
 
