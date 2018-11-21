@@ -11,6 +11,7 @@ import game.hero.Profession;
 import game.objct.minion.base.FreshwaterCrocodile;
 import game.objct.minion.base.LeperGnome;
 import game.objct.minion.base.derivative.AnimalCompanionMisa;
+import game.objct.minion.base.hunter.TimberWolf;
 import game.objct.minion.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,6 +26,26 @@ import java.util.List;
  * @Modified By: 卡牌测试
  */
 public class CardTest {
+
+    @Test
+    public void testBuffHole(){
+        System.out.println("光环效果测试");
+        //初始化测试环境
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+
+        //添加森林狼
+        gamer.addMinion(new TimberWolf());
+        gamer.addMinion(new TimberWolf());
+        gamer.addMinion(new LeperGnome());
+        gamer.addMinion(new FreshwaterCrocodile());
+        gamer.getState();
+
+        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),2L);
+        Assert.assertEquals(gamer.getMinion(3).getAttackValue(),4L);
+        System.out.println("测试通过");
+    }
+
     @Test
     public void testSwipeCard(){
         Gamer gamer = initTest();

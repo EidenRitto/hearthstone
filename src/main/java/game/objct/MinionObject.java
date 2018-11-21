@@ -2,7 +2,6 @@ package game.objct;
 
 
 import game.Gamer;
-import game.hero.Profession;
 
 /**
  * @author : Eiden J.P Zhou

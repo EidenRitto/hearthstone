@@ -19,7 +19,7 @@ public class BuffHole extends GameObject{
 
     }
 
-    public BuffHole(long addHealth, long addAttack, Ethnicity prerequisite) {
+    public BuffHole(long addAttack, long addHealth, Ethnicity prerequisite) {
         this.addHealth = addHealth;
         this.addAttack = addAttack;
         this.prerequisite = prerequisite;

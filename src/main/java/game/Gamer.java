@@ -242,6 +242,8 @@ public class Gamer extends GameObject{
      * */
     public void addMinion(MinionObject minion){
         minions.add(minion);
+        //刷新光环
+        checkMinionBuffHole();
     }
 
     /**
@@ -266,6 +268,8 @@ public class Gamer extends GameObject{
         tomb.add(minions.get(index));
         //移除随从
         minions.remove(index);
+        //刷新光环
+        checkMinionBuffHole();
     }
 
     /**

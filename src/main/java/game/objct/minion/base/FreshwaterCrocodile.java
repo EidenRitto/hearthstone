@@ -1,5 +1,6 @@
 package game.objct.minion.base;
 
+import game.objct.Ethnicity;
 import game.objct.MinionObject;
 
 /**
@@ -17,5 +18,6 @@ public class FreshwaterCrocodile extends MinionObject {
 
     public FreshwaterCrocodile() {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
+        ethnicity = Ethnicity.Beast;
     }
 }
