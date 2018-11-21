@@ -174,6 +174,16 @@ public class MinionObject extends GameObject {
 
     /**
      * @author : Eiden J.P Zhou
+     * @date : 2018/11/21 17:24
+     * @Description : 获得嘲讽
+     */
+    public void addTaunt(){
+        System.out.println(minionName+"获得嘲讽");
+        isTaunt = true;
+    }
+
+    /**
+     * @author : Eiden J.P Zhou
      * @date : 2018/9/13
      * @description : 恢复生命值
      * */

@@ -2,6 +2,7 @@ import game.Gamer;
 import game.card.AbstractCard;
 import game.card.base.LeperGnomeCard;
 import game.card.base.SmallElfCard;
+import game.card.base.hunter.HoundMasterCard;
 import game.card.base.hunter.KillCommandCard;
 import game.card.base.hunter.MultiShotCard;
 import game.card.classic.druid.MarkOfNatureCard;
@@ -30,6 +31,20 @@ import java.util.List;
  * @Modified By: 卡牌测试
  */
 public class CardTest {
+
+    @Test
+    public void testHoundMaster(){
+        System.out.println("随从驯兽师测试");
+        Gamer gamer = initTest();
+        Gamer enemy = gamer.getEnemy();
+        gamer.addMinion(new FreshwaterCrocodile());
+        gamer.getState();
+        gamer.addHandsCard(new HoundMasterCard());
+        gamer.useThisMinionCard(0,gamer.getMinion(0));
+        gamer.getState();
+        Assert.assertEquals(gamer.getMinion(0).getAttackValue(),4L);
+        Assert.assertEquals(gamer.getMinion(0).getHealth(),5L);
+    }
 
     @Test
     public void testMultiShotCard(){
