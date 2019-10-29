@@ -32,8 +32,18 @@ public class EventManager {
 
     public EventManager(Gamer owner) {
         this.owner = owner;
-        Reflections reflections = new Reflections("game.event.events");
+        Reflections reflections = new Reflections("cn.eiden.hsm");
         eventClasses = reflections.getSubTypesOf(AbstractEvent.class);
+
+        Set<Class<? extends HearthListener>> listeners = reflections.getSubTypesOf(HearthListener.class);
+        for (Class<? extends HearthListener> listener : listeners) {
+            try {
+                HearthListener hearthListener = listener.newInstance();
+                registerListener(hearthListener);
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
