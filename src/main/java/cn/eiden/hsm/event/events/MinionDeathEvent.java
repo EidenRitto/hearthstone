@@ -1,0 +1,17 @@
+package cn.eiden.hsm.event.events;
+
+import cn.eiden.hsm.event.AbstractEvent;
+import cn.eiden.hsm.game.objct.GameObject;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+/**
+ * 从手牌中打出随从卡牌事件
+ * @author Eiden J.P Zhou
+ * @date 2019/10/29 14:26
+ */
+@Data
+@AllArgsConstructor
+public class MinionDeathEvent extends AbstractEvent {
+    private GameObject target;
+}

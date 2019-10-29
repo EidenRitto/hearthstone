@@ -1,23 +1,23 @@
-import game.Gamer;
-import game.card.AbstractCard;
-import game.card.base.LeperGnomeCard;
-import game.card.base.SmallElfCard;
-import game.card.base.hunter.HoundMasterCard;
-import game.card.base.hunter.KillCommandCard;
-import game.card.base.hunter.MultiShotCard;
-import game.card.classic.druid.MarkOfNatureCard;
-import game.card.base.druid.SwipeCard;
-import game.card.classic.druid.NaturalizeCard;
-import game.card.classic.druid.PowerOfTheWildCard;
-import game.hero.HeroObject;
-import game.hero.Profession;
-import game.objct.minion.base.FreshwaterCrocodile;
-import game.objct.minion.base.LeperGnome;
-import game.objct.minion.base.derivative.AnimalCompanionMisa;
-import game.objct.minion.base.derivative.AnimalCompanionReoque;
-import game.objct.minion.base.druid.IronbarkProtector;
-import game.objct.minion.base.hunter.TimberWolf;
-import game.objct.minion.classic.BloodMageThalnos;
+import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.AbstractCard;
+import cn.eiden.hsm.game.card.base.LeperGnomeCard;
+import cn.eiden.hsm.game.card.base.SmallElfCard;
+import cn.eiden.hsm.game.card.base.hunter.HoundMasterCard;
+import cn.eiden.hsm.game.card.base.hunter.KillCommandCard;
+import cn.eiden.hsm.game.card.base.hunter.MultiShotCard;
+import cn.eiden.hsm.game.card.classic.druid.MarkOfNatureCard;
+import cn.eiden.hsm.game.card.base.druid.SwipeCard;
+import cn.eiden.hsm.game.card.classic.druid.NaturalizeCard;
+import cn.eiden.hsm.game.card.classic.druid.PowerOfTheWildCard;
+import cn.eiden.hsm.game.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
+import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
+import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
+import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionReoque;
+import cn.eiden.hsm.game.objct.minion.base.druid.IronbarkProtector;
+import cn.eiden.hsm.game.objct.minion.base.hunter.TimberWolf;
+import cn.eiden.hsm.game.objct.minion.classic.BloodMageThalnos;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * @author : Eiden J.P Zhou
- * @Date: 2018/9/19
+ * @date 2018/9/19
  * @Description:
  * @Modified By: 卡牌测试
  */
@@ -139,7 +139,7 @@ public class CardTest {
 
     @Test
     public void PowerOfTheWildTest() throws ClassNotFoundException {
-        Class clazz = Class.forName("game.Gamer");
+        Class clazz = Class.forName("cn.eiden.hsm.game.Gamer");
         //野性之力卡牌测试
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
@@ -192,8 +192,8 @@ public class CardTest {
             cards.add(new SwipeCard());
         }
 
-        Gamer gamer = new Gamer(new HeroObject(Profession.Priest),cards);
-        Gamer enemy = new Gamer(new HeroObject(Profession.Warlock),cards);
+        Gamer gamer = new Gamer(new HeroObjectAbstract(Profession.Priest),cards);
+        Gamer enemy = new Gamer(new HeroObjectAbstract(Profession.Warlock),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
         return gamer;
