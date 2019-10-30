@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/20
- * @Description:
- * @Modified By: 野性之力衍生物 黑豹
+ *  野性之力衍生物 黑豹
+ *
  */
 public class Panther extends AbstractMinionObject {
     private static final String SERVANT_NAME = "黑豹";

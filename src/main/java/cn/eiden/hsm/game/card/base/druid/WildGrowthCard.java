@@ -7,8 +7,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description:
- * @Modified By: 野性成长
+ *  野性成长
+ *
  */
 public class WildGrowthCard extends MagicCard{
     private static final int COST = 2;

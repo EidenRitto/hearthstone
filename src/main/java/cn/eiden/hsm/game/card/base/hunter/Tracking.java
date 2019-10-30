@@ -3,13 +3,15 @@ package cn.eiden.hsm.game.card.base.hunter;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.MagicCard;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 追踪术
- * @Modified By:
+ *  追踪术
+ *
  */
+@Slf4j
 public class Tracking extends MagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "从排队顶部检索3张卡牌，选择一张抽取，丢弃其他2张。";
@@ -23,9 +25,9 @@ public class Tracking extends MagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target){
-        System.out.println("追踪术:");
+        log.info("追踪术:");
         for (int i=0;i<CHECK_NUMBER;i++){
-            System.out.println(gamer.getLastCards().getCardName());
+            log.info(gamer.getLastCards().getCardName());
         }
         if (gamer.getChooseOne()!=-1){
             if (gamer.getChooseOne()==0){

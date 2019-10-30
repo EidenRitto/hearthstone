@@ -1,13 +1,15 @@
 package cn.eiden.hsm.game.hero;
 
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/26
- * @Description:
- * @Modified By:
+ *
+ *
  */
+@Slf4j
 public class HeroObjectAbstract extends AbstractMinionObject {
     /**生命值上限*/
     private static final Long HEALTH = 30L;
@@ -30,7 +32,7 @@ public class HeroObjectAbstract extends AbstractMinionObject {
      *  叠甲
      */
     public void addArmor(long armorNumber){
-        System.out.println(getMinionName()+"获得"+armorNumber+"点护甲.");
+        log.info(getMinionName()+"获得"+armorNumber+"点护甲.");
         armor += armorNumber;
     }
 

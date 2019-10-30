@@ -7,8 +7,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description:
- * @Modified By:
+ *
+ *
  */
 public class AnimalCompanionReoque extends AbstractMinionObject {
     private static final String SERVANT_NAME = "雷欧克";

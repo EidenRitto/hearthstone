@@ -5,8 +5,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 埃隆巴克保护者
- * @Modified By:
+ *  埃隆巴克保护者
+ *
  */
 public class IronbarkProtector extends AbstractMinionObject {
     private static final String SERVANT_NAME = "埃隆巴克保护者";

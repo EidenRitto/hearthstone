@@ -8,8 +8,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description: 自然平衡
- * @Modified By:
+ *  自然平衡
+ *
  */
 public class NaturalizeCard extends MagicCard {
     private static final int COST = 1;

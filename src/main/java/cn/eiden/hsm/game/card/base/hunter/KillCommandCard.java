@@ -9,8 +9,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/11/21
- * @Description: 杀戮命令
- * @Modified By:
+ *  杀戮命令
+ *
  */
 public class KillCommandCard extends MagicCard {
     private static final int COST = 3;
@@ -37,6 +37,6 @@ public class KillCommandCard extends MagicCard {
         if (target instanceof AbstractMinionObject){
             ((AbstractMinionObject)target).beHurt(damage);
         }
-//        System.out.println("使用"+CARD_NAME+"对"+((AbstractMinionObject)target).getMinionName()+"造成"+damage+"点伤害");
+//        log.info("使用"+CARD_NAME+"对"+((AbstractMinionObject)target).getMinionName()+"造成"+damage+"点伤害");
     }
 }

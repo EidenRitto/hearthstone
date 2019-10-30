@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 场地光环
- * @Modified By:
+ *  场地光环
+ *
  */
 @Data
 public class BuffHole extends GameObject{

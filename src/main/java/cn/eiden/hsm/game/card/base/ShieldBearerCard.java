@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.MinionCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/21
- * @Description:
- * @Modified By: 持盾卫士卡牌
+ *  持盾卫士卡牌
+ *
  */
 public class ShieldBearerCard extends MinionCard {
     private static final int COST = 1;

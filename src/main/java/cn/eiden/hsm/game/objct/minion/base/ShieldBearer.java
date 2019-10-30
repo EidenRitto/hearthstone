@@ -5,8 +5,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/21
- * @Description:
- * @Modified By: 持盾卫士
+ *  持盾卫士
+ *
  */
 public class ShieldBearer extends AbstractMinionObject {
     private static final String SERVANT_NAME = "持盾卫士";

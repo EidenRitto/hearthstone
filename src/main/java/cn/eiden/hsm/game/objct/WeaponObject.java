@@ -5,8 +5,8 @@ import cn.eiden.hsm.game.Gamer;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/26
- * @Description: 武器对象
- * @Modified By:
+ *  武器对象
+ *
  */
 public class WeaponObject extends GameObject{
     private String weaponName;

@@ -3,13 +3,14 @@ package cn.eiden.hsm.game.card.base.druid;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.MagicCard;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 爪击
- * @Modified By:
+ *  爪击
  */
+@Slf4j
 public class ClawCard extends MagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "在本回合你的英雄获得2点攻击;获得2点护甲。";
@@ -25,7 +26,7 @@ public class ClawCard extends MagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        System.out.println("使用法术：爪击.");
+        log.info("使用法术：爪击.");
         gamer.getHero().addArmor(ADD_ARMOR);
         gamer.getHero().addAttackThisTurn(ADD_ATTACK);
     }

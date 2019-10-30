@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.objct.WeaponObject;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description:
- * @Modified By:
+ *
+ *
  */
 public class WeaponCard extends AbstractCard {
     /**武器攻击力*/

@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.MinionCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/20
- * @Description:
- * @Modified By: 黑豹
+ *  黑豹
+ *
  */
 public class PantherCard extends MinionCard {
     private static final int COST = 2;

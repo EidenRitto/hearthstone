@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.objct;
 
 import cn.eiden.hsm.game.Gamer;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 随从 抽象
@@ -11,6 +12,7 @@ import lombok.Data;
  * @version : 1.0
  * */
 @Data
+@Slf4j
 public abstract class AbstractMinionObject extends GameObject {
     /**随从名称*/
     private String minionName;
@@ -65,7 +67,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  受伤害
      */
     public void beHurt(long number){
-        System.out.println(minionName+"受到"+number+"点伤害");
+        log.info(minionName+"受到"+number+"点伤害");
         health -= number;
     }
 
@@ -77,7 +79,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  增加攻击力
      */
     public void addAttack(long addAttack){
-        System.out.println(minionName+"增加"+addAttack+"点攻击");
+        log.info(minionName+"增加"+addAttack+"点攻击");
         attackValue += addAttack;
     }
 
@@ -89,7 +91,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  本回合增加攻击力
      */
     public void addAttackThisTurn(long addAttack){
-        System.out.println(minionName+"本回合增加"+addAttack+"点攻击");
+        log.info(minionName+"本回合增加"+addAttack+"点攻击");
         attackValue += addAttack;
         attackValueThisTurn += addAttack;
     }
@@ -101,7 +103,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  减少攻击力，攻击力可以为负数，但显示为0
      */
     public void reduceAttack(long reduceAttack){
-        System.out.println(minionName+"减少"+reduceAttack+"点攻击");
+        log.info(minionName+"减少"+reduceAttack+"点攻击");
         attackValue -= reduceAttack;
     }
 
@@ -112,7 +114,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  减少生命值上限
      */
     public void reduceHealthLimit(long reduceHealthLimit){
-        System.out.println(minionName+"减少"+reduceHealthLimit+"点生命上限");
+        log.info(minionName+"减少"+reduceHealthLimit+"点生命上限");
         healthLimit -= reduceHealthLimit;
         //如果当前生命值大于生命值上限，一并减少
         checkHealth();
@@ -148,7 +150,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  增加生命值上限
      */
     public void addHealthLimit(long addHealthLimit){
-        System.out.println(minionName+"增加"+addHealthLimit+"点生命值");
+        log.info(minionName+"增加"+addHealthLimit+"点生命值");
         healthLimit += addHealthLimit;
         health += addHealthLimit;
     }
@@ -159,7 +161,7 @@ public abstract class AbstractMinionObject extends GameObject {
      *  获得嘲讽
      */
     public void addTaunt(){
-        System.out.println(minionName+"获得嘲讽");
+        log.info(minionName+"获得嘲讽");
         isTaunt = true;
     }
 
@@ -171,7 +173,7 @@ public abstract class AbstractMinionObject extends GameObject {
     public void recovery(long number){
         //防止上限溢出
         long newHealth = health + number >= healthLimit?healthLimit:health+number;
-        System.out.println(minionName+"恢复"+number+"点生命值");
+        log.info(minionName+"恢复"+number+"点生命值");
         health = newHealth;
     }
 

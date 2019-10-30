@@ -8,8 +8,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description:
- * @Modified By: 星火术
+ *  星火术
+ *
  */
 public class StarFireCard extends MagicCard {
     private static final int COST = 6;

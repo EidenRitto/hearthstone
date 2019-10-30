@@ -7,8 +7,8 @@ import cn.eiden.hsm.game.card.MinionCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/18
- * @Description:
- * @Modified By: 血法
+ *  血法
+ *
  */
 public class BloodMageThalnosCard extends MinionCard{
     private static final int COST = 2;

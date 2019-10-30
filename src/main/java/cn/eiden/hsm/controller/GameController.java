@@ -3,6 +3,7 @@ package cn.eiden.hsm.controller;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.MinionCard;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
  * @date : 2018/9/13
  * @version : 1.0
  * */
+@Slf4j
 public class GameController {
     private static boolean endTurn = false;
     private static boolean endGame = false;
@@ -20,13 +22,13 @@ public class GameController {
         isYours = gamer.newGameStart();
         while (!endGame){
             if(isYours){
-                System.out.println("=========你的回合=========");
+                log.info("=========你的回合=========");
                 //开始一个新回合
                 gamer.newTurnStart();
                 gamer.getState();
                 nowGamer=gamer;
             }else {
-                System.out.println("=========对手回合=========");
+                log.info("=========对手回合=========");
                 enemy.newTurnStart();
                 enemy.getState();
                 nowGamer=enemy;
@@ -34,14 +36,14 @@ public class GameController {
             endTurn = false;
             while (!endTurn){
                 //输入指令
-                System.out.println("请输入指令：");
+                log.info("请输入指令：");
                 Scanner scan = new Scanner(System.in);
                 String order = scan.nextLine();
                 switch (order){
                     case "攻击":
-                        System.out.println("请输入需要攻击的随从编号");
+                        log.info("请输入需要攻击的随从编号");
                         int minionId = scan.nextInt();
-                        System.out.println("请选择目标");
+                        log.info("请选择目标");
                         int beAttackMinionId = scan.nextInt();
 
                         nowGamer.getMinion(minionId).attack(nowGamer.getEnemy().getMinion(beAttackMinionId));
@@ -50,7 +52,7 @@ public class GameController {
                         enemy.checkMinion();
                         break;
                     case "打出":
-                        System.out.println("请输入需要打出的手牌编号");
+                        log.info("请输入需要打出的手牌编号");
                         int cardId = scan.nextInt();
                         if (nowGamer.checkUse(cardId)){
                             if (nowGamer.getHandsCards().get(cardId) instanceof MinionCard){

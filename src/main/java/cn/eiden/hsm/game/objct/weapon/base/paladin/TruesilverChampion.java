@@ -2,13 +2,15 @@ package cn.eiden.hsm.game.objct.weapon.base.paladin;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.objct.WeaponObject;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description:
- * @Modified By:
+ *
+ *
  */
+@Slf4j
 public class TruesilverChampion extends WeaponObject {
     private static final String WEAPON_NAME = "真银圣剑";
     private static final Long ATTACK = 4L;
@@ -18,7 +20,7 @@ public class TruesilverChampion extends WeaponObject {
 
     @Override
     public void whenAttackDo(Gamer gamer){
-        System.out.println("真银圣剑发动特效:");
+        log.info("真银圣剑发动特效:");
         gamer.getHero().recovery(RECOVERY_HEALTH);
     }
 

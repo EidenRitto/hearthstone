@@ -9,8 +9,8 @@ import java.util.Random;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/11/21
- * @Description: 多重射击
- * @Modified By:
+ *  多重射击
+ *
  */
 public class MultiShotCard extends MagicCard {
     private static final int COST = 4;

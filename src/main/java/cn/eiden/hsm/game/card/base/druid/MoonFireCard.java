@@ -8,8 +8,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/18
- * @Description:
- * @Modified By: 月火术
+ *  月火术
+ *
  */
 public class MoonFireCard extends MagicCard {
     private static final int COST = 0;

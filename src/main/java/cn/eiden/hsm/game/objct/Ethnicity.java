@@ -3,8 +3,8 @@ package cn.eiden.hsm.game.objct;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 种族
- * @Modified By:
+ *  种族
+ *
  */
 public enum Ethnicity {
     /**野兽*/

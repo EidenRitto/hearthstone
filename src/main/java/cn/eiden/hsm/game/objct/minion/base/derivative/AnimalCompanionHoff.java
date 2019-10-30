@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.objct.Ethnicity;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 霍夫4/2 冲锋
- * @Modified By:
+ *  霍夫4/2 冲锋
+ *
  */
 public class AnimalCompanionHoff extends AbstractMinionObject {
     private static final String SERVANT_NAME = "霍夫";

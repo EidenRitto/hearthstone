@@ -16,6 +16,7 @@ import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.GameObject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +30,7 @@ import java.util.Random;
  * */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Slf4j
 public class Gamer extends GameObject {
     /**手牌上限*/
     private static final int HANDS_LIMIT = 10;
@@ -76,7 +78,7 @@ public class Gamer extends GameObject {
     public void newTurnStart(){
         //抽一张牌
         drawCard(1);
-        System.out.println("--你抽到了"+handsCards.get(handsCards.size()-1).getCardName());
+        log.info("--你抽到了"+handsCards.get(handsCards.size()-1).getCardName());
         //最大法力水晶加一
         addMagicCrystal(1);
         //恢复已使用的法力水晶
@@ -92,9 +94,9 @@ public class Gamer extends GameObject {
         //分配先后手
         boolean isFirstTurn = randomSeed.nextBoolean();
         if (isFirstTurn){
-            System.out.println("你随机分配到了先手");
+            log.info("你随机分配到了先手");
         }else {
-            System.out.println("你随机分配到了后手，你可以多一张手牌并获得幸运币");
+            log.info("你随机分配到了后手，你可以多一张手牌并获得幸运币");
         }
         //抽初始手牌阶段
         if (isFirstTurn){
@@ -271,7 +273,7 @@ public class Gamer extends GameObject {
      * */
     public void deathMinion(int index){
         AbstractMinionObject abstractMinionObject = minions.get(index);
-        System.out.println(abstractMinionObject.getMinionName()+"死亡");
+        log.info(abstractMinionObject.getMinionName()+"死亡");
         //执行亡语
         AbstractEvent minionDeathEvent = new MinionDeathEvent(this,abstractMinionObject);
         eventManager.call(minionDeathEvent);
@@ -336,19 +338,15 @@ public class Gamer extends GameObject {
      *  获取当前状态
      * */
     public void getState(){
-        System.out.println("玩家当前手牌：");
-        handsCards.forEach(card->{
-            System.out.print(card.getCardName()+" ");
-        });
-        System.out.println();
-        System.out.println("当前生命值："+hero.getHealth()+"/"+hero.getHealthLimit());
-        System.out.println("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
-        System.out.println("场上随从:");
+        log.info("玩家当前手牌：");
+        handsCards.forEach(card-> System.out.print(card.getCardName()+" "));
+        log.info("当前生命值："+hero.getHealth()+"/"+hero.getHealthLimit());
+        log.info("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
+        log.info("场上随从:");
         minions.forEach(minionObject -> {
             System.out.print(minionObject.getMinionName()+" "+minionObject.getAttackValue()+"/"
                     +minionObject.getHealth()+"  ");
         });
-        System.out.println();
     }
 
     /**
@@ -409,7 +407,7 @@ public class Gamer extends GameObject {
     public boolean checkUse(int cardId){
         boolean result = true;
         if (!checkCardMagic(cardId)){
-            System.out.println("你没有足够的法力值!");
+            log.info("你没有足够的法力值!");
             result = false;
         }
         return result;

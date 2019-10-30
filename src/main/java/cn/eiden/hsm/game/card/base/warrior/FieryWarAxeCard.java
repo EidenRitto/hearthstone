@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.WeaponCard;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description: 炙炎战斧
- * @Modified By:
+ *  炙炎战斧
+ *
  */
 public class FieryWarAxeCard extends WeaponCard{
     private static final int COST = 3;

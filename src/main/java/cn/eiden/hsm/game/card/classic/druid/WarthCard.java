@@ -4,13 +4,15 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.MagicCard;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 愤怒
- * @Modified By:
+ *  愤怒
+ *
  */
+@Slf4j
 public class WarthCard extends MagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";
@@ -33,11 +35,11 @@ public class WarthCard extends MagicCard {
             AbstractMinionObject targetMinion = (AbstractMinionObject)target;
             if (gamer.getChooseOne()==0){
                 targetMinion.beHurt(damage);
-                System.out.println("愤怒选择伤害.");
+                log.info("愤怒选择伤害.");
             }else if (gamer.getChooseOne()==1){
                 targetMinion.beHurt(damageDrawCard);
                 gamer.drawCard(DRAW_CARD_NUMBER);
-                System.out.println("愤怒选择抽牌.");
+                log.info("愤怒选择抽牌.");
             }
             gamer.setChooseOne(-1);
         }

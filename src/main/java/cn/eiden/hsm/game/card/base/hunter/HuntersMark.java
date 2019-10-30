@@ -8,8 +8,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 猎人标记
- * @Modified By:
+ *  猎人标记
+ *
  */
 public class HuntersMark extends MagicCard {
     private static final int COST = 1;

@@ -4,13 +4,15 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.MagicCard;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 野性印记
- * @Modified By:
+ *  野性印记
+ *
  */
+@Slf4j
 public class MarkOfTheWildCard extends MagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "让一个随从获得+2/+2并具有嘲讽。";
@@ -30,8 +32,8 @@ public class MarkOfTheWildCard extends MagicCard {
             targetMinion.addAttack(ADD_ATTACK);
             targetMinion.addHealthLimit(ADD_HEALTH);
             targetMinion.setTaunt(true);
-            System.out.println(targetMinion.getMinionName()+"获得嘲讽.");
-            System.out.println("by野性印记.");
+            log.info(targetMinion.getMinionName()+"获得嘲讽.");
+            log.info("by野性印记.");
         }
 
     }

@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.MinionCard;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/11/21
- * @Description:
- * @Modified By:
+ *
+ *
  */
 public class HoundMasterCard extends MinionCard {
     private static final int COST = 4;

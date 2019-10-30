@@ -3,8 +3,8 @@ package cn.eiden.hsm.game.hero;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description: 职业
- * @Modified By:
+ *  职业
+ *
  */
 public enum Profession {
     /**法师*/

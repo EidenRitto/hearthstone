@@ -4,13 +4,15 @@ import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.GameObject;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/11/21
- * @Description: 驯兽师
- * @Modified By:
+ *  驯兽师
+ *
  */
+@Slf4j
 public class HoundMaster extends AbstractMinionObject implements Battle {
     private static final String SERVANT_NAME = "驯兽师";
     private static final Long ATTACK = 4L;
@@ -34,6 +36,6 @@ public class HoundMaster extends AbstractMinionObject implements Battle {
         minion.addAttack(ADD_ATTACK);
         minion.addHealthLimit(ADD_HEALTH);
         minion.addTaunt();
-        System.out.println("打出卡牌"+SERVANT_NAME+",目标"+minion.getMinionName()+"+2/+2和嘲讽");
+        log.info("打出卡牌"+SERVANT_NAME+",目标"+minion.getMinionName()+"+2/+2和嘲讽");
     }
 }

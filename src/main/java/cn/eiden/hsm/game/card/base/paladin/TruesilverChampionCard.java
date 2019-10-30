@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.WeaponCard;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description:
- * @Modified By:
+ *
+ *
  */
 public class TruesilverChampionCard extends WeaponCard {
     private static final int COST = 4;

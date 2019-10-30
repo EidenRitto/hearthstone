@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.card.MinionCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 埃隆巴克保护者
- * @Modified By:
+ *  埃隆巴克保护者
+ *
  */
 public class IronbarkProtectorCard extends MinionCard {
     private static final int COST = 8;

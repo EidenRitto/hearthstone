@@ -7,8 +7,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description:
- * @Modified By: 生命之触
+ *  生命之触
+ *
  */
 public class HealingTouchCard extends MagicCard {
     private static final int COST = 3;

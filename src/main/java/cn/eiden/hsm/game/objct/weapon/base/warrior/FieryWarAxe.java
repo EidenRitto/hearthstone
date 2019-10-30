@@ -5,8 +5,8 @@ import cn.eiden.hsm.game.objct.WeaponObject;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/26
- * @Description:
- * @Modified By:
+ *
+ *
  */
 public class FieryWarAxe extends WeaponObject {
     private static final String WEAPON_NAME = "炙炎战斧";

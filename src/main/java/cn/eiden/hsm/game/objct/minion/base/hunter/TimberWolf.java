@@ -7,8 +7,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 森林狼
- * @Modified By:
+ *  森林狼
+ *
  */
 public class TimberWolf extends AbstractMinionObject {
     private static final String SERVANT_NAME = "森林狼";

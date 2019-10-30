@@ -6,8 +6,8 @@ import cn.eiden.hsm.game.objct.Ethnicity;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 米莎
- * @Modified By:
+ *  米莎
+ *
  */
 public class AnimalCompanionMisa extends AbstractMinionObject {
     private static final String SERVANT_NAME = "米莎";

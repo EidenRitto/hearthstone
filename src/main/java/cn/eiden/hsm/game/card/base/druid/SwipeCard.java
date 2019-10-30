@@ -9,8 +9,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description:
- * @Modified By: 德鲁伊法术-横扫
+ *  德鲁伊法术-横扫
+ *
  */
 public class SwipeCard extends MagicCard{
     private static final int COST = 4;

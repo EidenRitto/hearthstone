@@ -8,8 +8,8 @@ import cn.eiden.hsm.game.card.MagicCard;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- * @Description: 奥术射击
- * @Modified By:
+ *  奥术射击
+ *
  */
 public class ArcaneShotCard extends MagicCard{
     private static final int COST = 1;
