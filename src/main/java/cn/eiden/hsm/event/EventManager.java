@@ -1,7 +1,6 @@
 package cn.eiden.hsm.event;
 
 import cn.eiden.hsm.annotation.EventHandler;
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.listener.HearthListener;
 import lombok.Getter;
 import org.reflections.Reflections;
@@ -18,23 +17,26 @@ import java.util.Set;
  * @date 2019/10/29 14:31
  */
 public class EventManager {
+    private static EventManager eventManager = new EventManager();
+    public static EventManager getInstance() {
+        return eventManager;
+    }
 
+    /**监听列表*/
     @Getter
     private ArrayList<HearthListener> registeredListeners = new ArrayList<>();
+    /**事件字典，通过事件能找到它的全部监听*/
     @Getter
     private HashMap<String, ArrayList<RegisteredListenerMethod>> registeredListenerMethods = new HashMap<>();
-
+    /**事件集合*/
     private Set<Class<? extends AbstractEvent>> eventClasses;
 
-    /**所有者*/
-    @Getter
-    private final Gamer owner;
 
-    public EventManager(Gamer owner) {
-        this.owner = owner;
+    private EventManager() {
         Reflections reflections = new Reflections("cn.eiden.hsm");
+        //反射获取全部事件
         eventClasses = reflections.getSubTypesOf(AbstractEvent.class);
-
+        //反射获取并注册监听
         Set<Class<? extends HearthListener>> listeners = reflections.getSubTypesOf(HearthListener.class);
         for (Class<? extends HearthListener> listener : listeners) {
             try {
@@ -47,7 +49,8 @@ public class EventManager {
     }
 
     /**
-     * 注册一个事件监听器
+     * 注册一个事件监听器<br/>
+     * 并绑定监听和事件
      * @param listener 监听器
      */
     public void registerListener(HearthListener listener) {

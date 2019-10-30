@@ -27,7 +27,6 @@ import java.util.List;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/19
- * @Description:
  * @Modified By: 卡牌测试
  */
 public class CardTest {

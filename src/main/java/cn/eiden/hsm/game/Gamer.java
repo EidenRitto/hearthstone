@@ -66,7 +66,7 @@ public class Gamer extends GameObject {
     /**抉择选项*/
     private int chooseOne;
 
-    private final EventManager eventManager = new EventManager(this);
+    private final EventManager eventManager = EventManager.getInstance();
 
     /**
      * @author : Eiden J.P Zhou
@@ -220,7 +220,7 @@ public class Gamer extends GameObject {
         //获得一张手牌指向的随从
         AbstractMinionObject abstractMinionObject = minionCard.getMinion();
         //发布事件[从手牌中打出随从卡牌事件]
-        AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(abstractMinionObject,target);
+        AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this,abstractMinionObject,target);
         eventManager.call(abstractEvent);
 
         //随从进入战场
@@ -273,7 +273,7 @@ public class Gamer extends GameObject {
         AbstractMinionObject abstractMinionObject = minions.get(index);
         System.out.println(abstractMinionObject.getMinionName()+"死亡");
         //执行亡语
-        AbstractEvent minionDeathEvent = new MinionDeathEvent(abstractMinionObject);
+        AbstractEvent minionDeathEvent = new MinionDeathEvent(this,abstractMinionObject);
         eventManager.call(minionDeathEvent);
         //随从进入墓地
         tomb.add(abstractMinionObject);
