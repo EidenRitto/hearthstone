@@ -3,6 +3,7 @@ package cn.eiden.hsm.game;
 
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.event.EventManager;
+import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.AbstractCard;
@@ -251,6 +252,8 @@ public class Gamer extends GameObject {
      *  添加一个随从
      * */
     public void addMinion(AbstractMinionObject minion){
+        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+        eventManager.call(battlefieldChangeEvent);
         minions.add(minion);
     }
 
@@ -260,6 +263,8 @@ public class Gamer extends GameObject {
      *  移除一个随从
      * */
     public void removeMinion(int index){
+        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+        eventManager.call(battlefieldChangeEvent);
         minions.remove(index);
     }
 
@@ -277,7 +282,7 @@ public class Gamer extends GameObject {
         //随从进入墓地
         tomb.add(abstractMinionObject);
         //移除随从
-        minions.remove(index);
+        this.removeMinion(index);
     }
 
     /**

@@ -28,10 +28,10 @@ public class AnimalCompanionReoque extends AbstractMinionObject implements BuffH
     }
 
     @Override
-    public void doBuffHole(AbstractMinionObject selfMinion) {
-        List<AbstractMinionObject> minions = selfMinion.getOwner().getMinions();
+    public void doBuffHole() {
+        List<AbstractMinionObject> minions = this.getOwner().getMinions();
         for (AbstractMinionObject minion : minions) {
-            if (!minion.equals(selfMinion) ){
+            if (!minion.equals(this) ){
                 minion.addAttack(BUFF_ATTACK);
             }
         }

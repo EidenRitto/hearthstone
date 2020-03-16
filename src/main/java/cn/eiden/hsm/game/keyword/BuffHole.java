@@ -12,7 +12,6 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 public interface BuffHole {
     /**
      * 效果
-     * @param selfMinion 自身随从
      */
-    void doBuffHole(AbstractMinionObject selfMinion);
+    void doBuffHole();
 }

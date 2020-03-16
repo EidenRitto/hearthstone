@@ -31,10 +31,10 @@ public class TimberWolf extends AbstractMinionObject implements BuffHole {
 
 
     @Override
-    public void doBuffHole(AbstractMinionObject selfMinion) {
-        List<AbstractMinionObject> minions = selfMinion.getOwner().getMinions();
+    public void doBuffHole() {
+        List<AbstractMinionObject> minions = this.getOwner().getMinions();
         for (AbstractMinionObject minion : minions) {
-            if (minion.getEthnicity() == BUFF_PREREQUISITE && !minion.equals(selfMinion) ){
+            if (minion.getEthnicity() == BUFF_PREREQUISITE && !minion.equals(this) ){
                 minion.addAttack(BUFF_ATTACK);
             }
         }
