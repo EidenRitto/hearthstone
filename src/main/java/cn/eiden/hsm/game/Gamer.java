@@ -11,7 +11,6 @@ import cn.eiden.hsm.game.card.MinionCard;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
-import cn.eiden.hsm.game.objct.BuffHole;
 import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.GameObject;
 import lombok.Data;
@@ -253,8 +252,6 @@ public class Gamer extends GameObject {
      * */
     public void addMinion(AbstractMinionObject minion){
         minions.add(minion);
-        //刷新光环
-        checkMinionBuffHole();
     }
 
     /**
@@ -281,8 +278,6 @@ public class Gamer extends GameObject {
         tomb.add(abstractMinionObject);
         //移除随从
         minions.remove(index);
-        //刷新光环
-        checkMinionBuffHole();
     }
 
     /**
@@ -427,38 +422,6 @@ public class Gamer extends GameObject {
         }
         Collections.reverse(deadIds);
         deadIds.forEach(this::deathMinion);
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/11/21 15:02
-     * @method : checkMinionBuffHole
-     *  刷新随从光环所添加的属性【默认为对自身无效】
-     */
-    public void checkMinionBuffHole(){
-        BuffHole buffHole;
-        //清空属性
-        minions.forEach(AbstractMinionObject::cleanBuffHoleAttribute);
-        for (int i = 0;i < minions.size();i++){
-            buffHole = minions.get(i).getBuffHole();
-            if (buffHole != null){
-                if (buffHole.getPrerequisite() != null){
-                    for (int j = 0; j < minions.size(); j++){
-                        if (i != j && minions.get(j).getEthnicity() == buffHole.getPrerequisite()){
-                            minions.get(j).addBuffHoleAttack(buffHole.getAddAttack());
-                            minions.get(j).addBuffHoleHealth(buffHole.getAddHealth());
-                        }
-                    }
-                }else {
-                    for (int j=0; j < minions.size(); j++){
-                        if (i != j){
-                            minions.get(j).addBuffHoleAttack(buffHole.getAddAttack());
-                            minions.get(j).addBuffHoleHealth(buffHole.getAddHealth());
-                        }
-                    }
-                }
-            }
-        }
     }
 
     /**

@@ -10,6 +10,7 @@ import lombok.Data;
  *
  */
 @Data
+@Deprecated
 public class BuffHole extends GameObject{
     private long addHealth;
     private long addAttack;

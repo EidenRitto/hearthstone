@@ -7,10 +7,9 @@ import cn.eiden.hsm.game.objct.GameObject;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 驯兽师
  * @author : Eiden J.P Zhou
  * @date : 2018/11/21
- *  驯兽师
- *
  */
 @Slf4j
 public class HoundMaster extends AbstractMinionObject implements Battle {

@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.objct;
 
 import cn.eiden.hsm.game.Gamer;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * @date : 2018/9/12
  * @version : 1.0
  * */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Slf4j
 public abstract class AbstractMinionObject extends GameObject {
@@ -36,8 +38,7 @@ public abstract class AbstractMinionObject extends GameObject {
     protected int spellDamage = 0;
     /**种族*/
     protected Ethnicity ethnicity;
-    /**光环*/
-    protected BuffHole buffHole = null;
+
     protected Gamer owner;
 
     /**本回合增加的攻击力*/

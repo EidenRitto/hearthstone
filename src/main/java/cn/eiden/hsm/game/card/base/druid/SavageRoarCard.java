@@ -6,10 +6,9 @@ import cn.eiden.hsm.game.card.MagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 野蛮咆哮
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- *  野蛮咆哮
- *
  */
 @Slf4j
 public class SavageRoarCard extends MagicCard {

@@ -3,8 +3,9 @@ package cn.eiden.hsm.event.events;
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.objct.GameObject;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 从手牌中打出随从卡牌事件
@@ -12,7 +13,8 @@ import lombok.EqualsAndHashCode;
  * @date 2019/10/29 14:26
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
 public class MinionDeathEvent extends AbstractEvent {
     private GameObject target;
 

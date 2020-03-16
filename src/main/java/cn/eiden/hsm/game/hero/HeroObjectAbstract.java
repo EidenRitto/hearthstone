@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/26
- *
- *
  */
 @Slf4j
 public class HeroObjectAbstract extends AbstractMinionObject {

@@ -1,16 +1,19 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
-import cn.eiden.hsm.game.objct.BuffHole;
+import cn.eiden.hsm.game.keyword.BuffHole;
 import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 
+import java.util.List;
+
 /**
+ * 森林狼
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
- *  森林狼
+ *
  *
  */
-public class TimberWolf extends AbstractMinionObject {
+public class TimberWolf extends AbstractMinionObject implements BuffHole {
     private static final String SERVANT_NAME = "森林狼";
     private static final Long ATTACK = 1L;
     private static final Long HEALTH = 1L;
@@ -24,8 +27,16 @@ public class TimberWolf extends AbstractMinionObject {
     public TimberWolf() {
         super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
         ethnicity = Ethnicity.Beast;
-        buffHole = new BuffHole(BUFF_ATTACK,BUFF_HEALTH,BUFF_PREREQUISITE);
     }
 
 
+    @Override
+    public void doBuffHole(AbstractMinionObject selfMinion) {
+        List<AbstractMinionObject> minions = selfMinion.getOwner().getMinions();
+        for (AbstractMinionObject minion : minions) {
+            if (minion.getEthnicity() == BUFF_PREREQUISITE && !minion.equals(selfMinion) ){
+                minion.addAttack(BUFF_ATTACK);
+            }
+        }
+    }
 }
