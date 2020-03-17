@@ -127,13 +127,15 @@ public class CardTest {
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
         //敌方添加淡水鳄，马云
+        LeperGnome leperGnome = new LeperGnome();
+        leperGnome.setOwner(enemy);
         enemy.addMinion(new FreshwaterCrocodile());
-        enemy.addMinion(new LeperGnome());
+        enemy.addMinion(leperGnome);
         enemy.getState();
         log.info("===测试自然平衡，目标淡水鳄===");
-        new NaturalizeCard().magicEffect(gamer,enemy.getMinion(0));
+        new NaturalizeCard().magicEffect(gamer,enemy.getMinion(1));
         enemy.checkMinion();
-        enemy.getState();
+        gamer.getState();
         Assert.assertEquals(enemy.getHandsCards().size(),2);
     }
 

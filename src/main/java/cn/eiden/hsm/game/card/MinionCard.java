@@ -2,6 +2,8 @@ package cn.eiden.hsm.game.card;
 
 
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,6 +11,8 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
  * @version : 1.0
  *  随从卡
  * */
+@Setter
+@Getter
 public class MinionCard extends AbstractCard {
     /**生命值上限*/
     private Long healthLimit;
@@ -31,30 +35,6 @@ public class MinionCard extends AbstractCard {
         super(cost, description,cardName);
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
-        this.minion = minion;
-    }
-
-    public Long getHealthLimit() {
-        return healthLimit;
-    }
-
-    public void setHealthLimit(Long healthLimit) {
-        this.healthLimit = healthLimit;
-    }
-
-    public Long getAttackValue() {
-        return attackValue;
-    }
-
-    public void setAttackValue(Long attackValue) {
-        this.attackValue = attackValue;
-    }
-
-    public AbstractMinionObject getMinion() {
-        return minion;
-    }
-
-    public void setMinion(AbstractMinionObject minion) {
         this.minion = minion;
     }
 }

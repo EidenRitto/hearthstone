@@ -59,6 +59,7 @@ public class EventManager {
         //遍历当前监听中全部的方法
         for (Method method : listener.getClass().getMethods())
         {
+            //该方法只能有一个参数
             if (method.getParameterCount() != 1) {continue;}
 
             Class<?> event = method.getParameterTypes()[0];

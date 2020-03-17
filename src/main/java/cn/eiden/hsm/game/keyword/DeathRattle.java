@@ -6,5 +6,8 @@ package cn.eiden.hsm.game.keyword;
  * @date 2019/10/29 10:30
  */
 public interface DeathRattle {
+    /**
+     * 执行亡语
+     */
     void doDeathRattle();
 }

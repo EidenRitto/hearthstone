@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 刷新光环效果监听
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/3/16 17:50
  */
 public class BuffHoleListener implements HearthListener {

@@ -221,6 +221,7 @@ public class Gamer extends GameObject {
         useMagicCrystalNow(minionCard.getCost());
         //获得一张手牌指向的随从
         AbstractMinionObject abstractMinionObject = minionCard.getMinion();
+        abstractMinionObject.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
         AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this,abstractMinionObject,target);
         eventManager.call(abstractEvent);
