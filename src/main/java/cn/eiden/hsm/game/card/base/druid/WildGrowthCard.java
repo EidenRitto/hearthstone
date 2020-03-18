@@ -22,6 +22,6 @@ public class WildGrowthCard extends MagicCard{
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        gamer.addMagicCrystal(MAGIC_CRYSTAL);
+        gamer.getManaCrystal().addEmpty(MAGIC_CRYSTAL);
     }
 }

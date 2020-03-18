@@ -14,6 +14,7 @@ import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.GameObject;
+import cn.eiden.hsm.game.objct.ManaCrystal;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,7 @@ import java.util.Random;
 public class Gamer extends GameObject {
     /**手牌上限*/
     private static final int HANDS_LIMIT = 10;
-    /**法力水晶上限*/
-    private static final int MAGIC_LIMIT = 10;
+
     /**先手初始手牌数量*/
     private static final int FIRST_HANDS_INIT = 3;
     /**后手初始手牌数量*/
@@ -53,10 +53,9 @@ public class Gamer extends GameObject {
     private List<AbstractMinionObject> minions;
     /**墓地*/
     private List<AbstractMinionObject> tomb;
-    /**空的法力水晶*/
-    private int magicCrystal;
-    /**当前可用法力水晶*/
-    private int magicCrystalNow;
+    /**法力水晶*/
+    private ManaCrystal manaCrystal;
+
     /**疲劳计数器*/
     private int fatigueCounter;
 
@@ -80,9 +79,9 @@ public class Gamer extends GameObject {
         drawCard(1);
         log.info("--你抽到了"+handsCards.get(handsCards.size()-1).getCardName());
         //最大法力水晶加一
-        addMagicCrystal(1);
+        getManaCrystal().addEmpty(1);
         //恢复已使用的法力水晶
-        reMagicCrystalNow();
+        getManaCrystal().recover();
     }
 
     /**
@@ -117,43 +116,6 @@ public class Gamer extends GameObject {
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
-     *  获得空的法力水晶
-     * */
-    public void addMagicCrystal(int number){
-        //超过上限无效
-        magicCrystal = magicCrystal + number >= MAGIC_LIMIT?MAGIC_LIMIT:magicCrystal + number;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     *  获得临时的法力水晶
-     * */
-    public void addMagicCrystalNow(int number){
-        magicCrystalNow += number;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     *  恢复已使用的法力水晶
-     * */
-    public void reMagicCrystalNow(){
-        magicCrystalNow = magicCrystal;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     *  使用法力水晶
-     * */
-    public void useMagicCrystalNow(int number){
-        magicCrystalNow -= number;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
      *  得到一张手牌
      * */
     public void addHandsCard(AbstractCard card){
@@ -162,6 +124,7 @@ public class Gamer extends GameObject {
             handsCards.add(card);
         }else {
             //手排满了，爆牌
+            log.info(card.getCardName()+"因手牌满消失");
         }
     }
 
@@ -218,7 +181,7 @@ public class Gamer extends GameObject {
         //获得随从卡
         MinionCard minionCard = (MinionCard)handsCards.get(number);
         //消耗对应的法力值
-        useMagicCrystalNow(minionCard.getCost());
+        getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
         AbstractMinionObject abstractMinionObject = minionCard.getMinion();
         abstractMinionObject.setOwner(this);
@@ -241,7 +204,7 @@ public class Gamer extends GameObject {
         //获得法术卡
         MagicCard magicCard = (MagicCard)handsCards.get(number);
         //消耗对应的法力值
-        useMagicCrystalNow(magicCard.getCost());
+        getManaCrystal().applyAvailable(magicCard.getCost());
         //魔法效果
         magicCard.magicEffect(this,target);
         //从手牌中移除随从卡牌
@@ -342,7 +305,7 @@ public class Gamer extends GameObject {
         log.info("玩家当前手牌：");
         handsCards.forEach(card-> System.out.print(card.getCardName()+" "));
         log.info("当前生命值："+hero.getHealth()+"/"+hero.getHealthLimit());
-        log.info("当前法力水晶："+magicCrystalNow+"/"+magicCrystal);
+        log.info("当前法力水晶："+getManaCrystal().getAvailable()+"/"+ getManaCrystal().getManaCrystal());
         log.info("场上随从:");
         minions.forEach(minionObject -> {
             System.out.print(minionObject.getMinionName()+" "+minionObject.getAttackValue()+"/"
@@ -360,7 +323,7 @@ public class Gamer extends GameObject {
         this.handsCards = new ArrayList<>(10);
         this.cards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
-        this.magicCrystal = 0;
+        this.manaCrystal = new ManaCrystal();
         this.minions = new ArrayList<>(7);
         this.enemy = null;
         this.randomSeed = new Random();
@@ -520,7 +483,7 @@ public class Gamer extends GameObject {
      *  检查手牌费用是否足够打出
      * */
     public boolean checkCardMagic(int cardId){
-        return handsCards.get(cardId).getCost() <= magicCrystalNow;
+        return handsCards.get(cardId).getCost() <= getManaCrystal().getAvailable();
     }
 
     public Gamer(HeroObjectAbstract heroObject, List<AbstractCard> cards) {

@@ -22,6 +22,6 @@ public class InnervateCard extends MagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        gamer.addMagicCrystalNow(MAGIC_CRYSTAL);
+        gamer.getManaCrystal().addAvailable(MAGIC_CRYSTAL);
     }
 }
