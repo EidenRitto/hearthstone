@@ -109,6 +109,7 @@ public class Gamer extends GameObject {
         drawCard(1);
         log.info("--你抽到了" + handsCards.get(handsCards.size() - 1).getCardName());
         getManaCrystal().newTurnStart();
+        getMinions().forEach(Minion::newTurnStart);
     }
 
     /**
@@ -323,10 +324,8 @@ public class Gamer extends GameObject {
         log.info("当前生命值：" + hero.getHealth() + "/" + hero.getHealthLimit());
         log.info("当前法力水晶：" + getManaCrystal().getAvailable() + "/" + getManaCrystal().getManaCrystal() + "[" + getManaCrystal().getLocked() + "]");
         log.info("场上随从:");
-        minions.forEach(minionObject -> {
-            System.out.print(minionObject.getMinionName() + " " + minionObject.getAttackValue() + "/"
-                    + minionObject.getHealth() + "  ");
-        });
+        minions.forEach(minionObject -> System.out.print(minionObject.getMinionName() + " " + minionObject.getAttackValue() + "/"
+                + minionObject.getHealth() + "  "));
     }
 
     /**

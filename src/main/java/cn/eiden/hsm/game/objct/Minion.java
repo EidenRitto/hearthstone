@@ -81,6 +81,11 @@ public interface Minion {
     void addTaunt();
 
     /**
+     * 获得冲锋
+     */
+    void addCharge();
+
+    /**
      * 恢复生命值
      *
      * @param number 数量

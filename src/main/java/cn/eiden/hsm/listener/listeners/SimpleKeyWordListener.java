@@ -27,7 +27,7 @@ public class SimpleKeyWordListener implements HearthListener {
     {
         Minion minion = event.getMinionObject();
         if (minion instanceof Charge){
-
+            minion.addCharge();
         }
     }
 

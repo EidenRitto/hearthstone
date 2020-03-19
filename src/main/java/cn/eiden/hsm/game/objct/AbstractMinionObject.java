@@ -143,6 +143,11 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
     }
 
     @Override
+    public void addCharge() {
+        ready = true;
+    }
+
+    @Override
     public void recoveryHp(long number) {
         //防止上限溢出
         long newHealth = Math.min(health + number, healthLimit);
