@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import lombok.Setter;
  * */
 @Setter
 @Getter
-public class MinionCard extends AbstractCard {
+public abstract class AbstractMinionCard extends AbstractCard {
     /**生命值上限*/
     private Long healthLimit;
     /**攻击力*/
@@ -21,18 +22,13 @@ public class MinionCard extends AbstractCard {
     /**卡牌对应的随从*/
     private AbstractMinionObject minion;
 
-    @Override
-    public void usingCard() {
-
-    }
-
-    public MinionCard(Long healthLimit, Long attackValue) {
+    public AbstractMinionCard(Long healthLimit, Long attackValue) {
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
     }
 
-    public MinionCard(int cost, String description, String cardName, Long healthLimit, Long attackValue, AbstractMinionObject minion) {
-        super(cost, description,cardName);
+    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long healthLimit, Long attackValue, AbstractMinionObject minion) {
+        super(cost, description, cardName, profession);
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
         this.minion = minion;

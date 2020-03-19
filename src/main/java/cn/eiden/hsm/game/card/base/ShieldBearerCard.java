@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.ShieldBearer;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  *  持盾卫士卡牌
  *
  */
-public class ShieldBearerCard extends MinionCard {
+public class ShieldBearerCard extends AbstractMinionCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "嘲讽。";
     private static final String CARD_NAME = "持盾卫士";
@@ -18,6 +19,6 @@ public class ShieldBearerCard extends MinionCard {
 
 
     public ShieldBearerCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new ShieldBearer());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new ShieldBearer());
     }
 }

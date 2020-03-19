@@ -1,5 +1,7 @@
 package cn.eiden.hsm.game.card;
 
+import cn.eiden.hsm.game.hero.Profession;
+
 /**
  * 卡牌
  * @author 周晋平
@@ -25,7 +27,8 @@ public interface Card {
     String getDescription();
 
     /**
-     * 使用卡牌
+     * 获取职业
+     * @return 职业
      */
-    void usingCard();
+    Profession getProfession();
 }

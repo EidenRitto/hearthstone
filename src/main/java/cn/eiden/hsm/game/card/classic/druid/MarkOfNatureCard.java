@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  * 自然印记
  */
 @Slf4j
-public class MarkOfNatureCard extends MagicCard{
+public class MarkOfNatureCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "抉择：让一个随从获得+4攻击力;或者获得+4生命值并具有嘲讽。";
     private static final String CARD_NAME = "自然印记";
@@ -22,7 +23,7 @@ public class MarkOfNatureCard extends MagicCard{
     private static final long ADD_ATTACK = 4;
 
     public MarkOfNatureCard() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
     }
 
     @Override

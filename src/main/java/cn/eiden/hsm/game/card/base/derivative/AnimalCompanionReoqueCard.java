@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionReoque;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  *
  *
  */
-public class AnimalCompanionReoqueCard extends MinionCard {
+public class AnimalCompanionReoqueCard extends AbstractMinionCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "其他随从获得+1攻击力";
     private static final String CARD_NAME = "雷欧克";
@@ -18,6 +19,6 @@ public class AnimalCompanionReoqueCard extends MinionCard {
 
 
     public AnimalCompanionReoqueCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new AnimalCompanionReoque());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE,new AnimalCompanionReoque());
     }
 }

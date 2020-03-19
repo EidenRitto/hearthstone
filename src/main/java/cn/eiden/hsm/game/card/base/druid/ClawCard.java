@@ -1,8 +1,9 @@
 package cn.eiden.hsm.game.card.base.druid;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -11,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  *  爪击
  */
 @Slf4j
-public class ClawCard extends MagicCard {
+public class ClawCard extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "在本回合你的英雄获得2点攻击;获得2点护甲。";
     private static final String CARD_NAME = "爪击";
@@ -21,7 +22,7 @@ public class ClawCard extends MagicCard {
     private static final long ADD_ARMOR = 2;
 
     public ClawCard() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid);
     }
 
     @Override

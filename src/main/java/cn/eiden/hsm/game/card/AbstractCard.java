@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.GameObject;
 
 /**
@@ -13,14 +14,16 @@ public abstract class AbstractCard extends GameObject implements Card{
     private String cardName;
     private int cost;
     private String description;
+    private Profession profession;
 
     public AbstractCard() {
     }
 
-    public AbstractCard(int cost, String description,String cardName) {
+    public AbstractCard(int cost, String description,String cardName,Profession profession) {
         this.cost = cost;
         this.description = description;
         this.cardName = cardName;
+        this.profession = profession;
     }
 
     @Override
@@ -36,5 +39,10 @@ public abstract class AbstractCard extends GameObject implements Card{
     @Override
     public String getCardName() {
         return cardName;
+    }
+
+    @Override
+    public Profession getProfession() {
+        return profession;
     }
 }

@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -11,7 +12,7 @@ import cn.eiden.hsm.game.card.MagicCard;
  *  猎人标记
  *
  */
-public class HuntersMark extends MagicCard {
+public class HuntersMark extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "使一个随从生命值变为1。";
     private static final String CARD_NAME = "猎人标记";
@@ -20,7 +21,7 @@ public class HuntersMark extends MagicCard {
 
 
     public HuntersMark() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
     }
 
     @Override

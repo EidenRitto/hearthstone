@@ -1,8 +1,9 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class Tracking extends MagicCard {
+public class Tracking extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "从排队顶部检索3张卡牌，选择一张抽取，丢弃其他2张。";
     private static final String CARD_NAME = "追踪术";
@@ -20,7 +21,7 @@ public class Tracking extends MagicCard {
     private static final int CHECK_NUMBER = 3;
 
     public Tracking() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
     }
 
     @Override

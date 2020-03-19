@@ -2,7 +2,7 @@ package cn.eiden.hsm.controller;
 
 
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
@@ -55,7 +55,7 @@ public class GameController {
                         log.info("请输入需要打出的手牌编号");
                         int cardId = scan.nextInt();
                         if (nowGamer.checkUse(cardId)){
-                            if (nowGamer.getHandsCards().get(cardId) instanceof MinionCard){
+                            if (nowGamer.getHandsCards().get(cardId) instanceof AbstractMinionCard){
                                 nowGamer.useThisMinionCard(cardId,null);
                             }else {
                                 nowGamer.useThisMagicCard(cardId,null);

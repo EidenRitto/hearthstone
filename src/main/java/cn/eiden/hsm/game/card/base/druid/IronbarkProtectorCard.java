@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.druid;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.druid.IronbarkProtector;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  *  埃隆巴克保护者
  *
  */
-public class IronbarkProtectorCard extends MinionCard {
+public class IronbarkProtectorCard extends AbstractMinionCard {
     private static final int COST = 8;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "埃隆巴克保护者";
@@ -18,6 +19,6 @@ public class IronbarkProtectorCard extends MinionCard {
 
 
     public IronbarkProtectorCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new IronbarkProtector());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid, HEALTH_LIMIT, ATTACK_VALUE,new IronbarkProtector());
     }
 }

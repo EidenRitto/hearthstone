@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  * @version : 1.0
  *  淡水鳄卡牌
  * */
-public class FreshwaterCrocodileCard extends MinionCard{
+public class FreshwaterCrocodileCard extends AbstractMinionCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "淡水鳄";
@@ -18,6 +19,6 @@ public class FreshwaterCrocodileCard extends MinionCard{
 
 
     public FreshwaterCrocodileCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new FreshwaterCrocodile());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new FreshwaterCrocodile());
     }
 }

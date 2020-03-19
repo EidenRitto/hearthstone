@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.hunter.TimberWolf;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  *
  *
  */
-public class TimberWolfCard extends MinionCard{
+public class TimberWolfCard extends AbstractMinionCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "其他野兽获得+1攻击";
     private static final String CARD_NAME = "森林狼";
@@ -18,6 +19,6 @@ public class TimberWolfCard extends MinionCard{
 
 
     public TimberWolfCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new TimberWolf());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE,new TimberWolf());
     }
 }

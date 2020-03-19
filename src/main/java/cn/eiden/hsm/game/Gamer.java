@@ -7,8 +7,8 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.card.MagicCard;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
@@ -207,7 +207,7 @@ public class Gamer extends GameObject {
      */
     public void useThisMinionCard(int number, GameObject target) {
         //获得随从卡
-        MinionCard minionCard = (MinionCard) handsCards.get(number);
+        AbstractMinionCard minionCard = (AbstractMinionCard) handsCards.get(number);
         //消耗对应的法力值
         getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
@@ -230,7 +230,7 @@ public class Gamer extends GameObject {
      */
     public void useThisMagicCard(int number, GameObject target) {
         //获得法术卡
-        MagicCard magicCard = (MagicCard) handsCards.get(number);
+        AbstractMagicCard magicCard = (AbstractMagicCard) handsCards.get(number);
         //消耗对应的法力值
         getManaCrystal().applyAvailable(magicCard.getCost());
         //魔法效果
@@ -280,8 +280,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
      * 获取一个随从
      */
     public AbstractMinionObject getMinion(int index) {
@@ -290,9 +288,6 @@ public class Gamer extends GameObject {
 
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/18 16:15
-     * @method : gameOver
      * 游戏结束
      */
     private void gameOver() {
@@ -301,8 +296,6 @@ public class Gamer extends GameObject {
 
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
      * 洗牌
      */
     public List<Card> initRandomCards(List<Card> oldCards) {
@@ -311,11 +304,7 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @return : int
      * 计算总法强
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/19 9:39
-     * @method : getGamerSpellDamage
      */
     public int getGamerSpellDamage() {
         int gamerSpellDamage = hero.getSpellDamage();
@@ -326,8 +315,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/14
      * 获取当前状态
      */
     public void getState() {
@@ -343,7 +330,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
      * @date : 2018/9/13
      * 初始化游戏
      */
@@ -361,8 +347,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
      * 手牌是否已满
      */
     public boolean isHandsFull() {
@@ -370,8 +354,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/14
      * 是否是敌人
      */
     public boolean isEnemy() {
@@ -379,8 +361,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/11/21 16:30
      * 检查场上是否拥有指定种族的随从
      */
     public boolean checkHaveEthnicity(Ethnicity ethnicity) {
@@ -393,8 +373,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/14
      * 检查手牌能否使用
      */
     public boolean checkUse(int cardId) {
@@ -407,8 +385,6 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/14
      * 检查随从血量，小于1则死亡
      */
     public void checkMinion() {
@@ -434,30 +410,24 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/19 18:11
-     * @method : addMinionsAttack
      * 友方全部随从增加攻击力
+     * @param addAttack 攻击力
      */
     public void addMinionsAttack(long addAttack) {
         minions.forEach(minionObject -> minionObject.addAttack(addAttack));
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/20 9:00
-     * @method : addMinionsHealth
      * 友方全部随从增加生命值
+     * @param addHealth 生命值
      */
     public void addMinionsHealth(long addHealth) {
         minions.forEach(minionObject -> minionObject.addHealthLimit(addHealth));
     }
 
     /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/20 9:03
-     * @method : buffYourAllMinions
-     * @params : [addAttack, addHealth]
+     * @param addAttack 攻击力
+     * @param addHealth 生命值
      * 友方随从获得 +[addAttack]/+[addHealth]
      */
     public void buffYourAllMinions(long addAttack, long addHealth) {
@@ -466,15 +436,11 @@ public class Gamer extends GameObject {
     }
 
     /**
-     * @return : java.util.List<java.lang.Integer>
      * 查找全部能够攻击的随从
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/21 16:29
-     * @method : findAllCanAttackMinionsId
      */
     public List<Integer> findAllCanAttackMinionsId() {
         List<Integer> resultList = new ArrayList<>();
-        for (Integer i = 0; i < minions.size(); i++) {
+        for (int i = 0; i < minions.size(); i++) {
             if (minions.get(i).getAttackTime() > 0) {
                 resultList.add(i);
             }
@@ -487,19 +453,18 @@ public class Gamer extends GameObject {
      * 查找全部能够被攻击的随从(敌方的)
      * @author : Eiden J.P Zhou
      * @date : 2018/9/21 17:12
-     * @method : findAllCanBeAttackMinionsId
      */
     public List<Integer> findAllCanBeAttackMinionsId() {
         List<Integer> resultList = new ArrayList<>();
         //判断敌方是否拥有嘲讽随从，有则添加嘲讽随从，
-        for (Integer i = 0; i < enemy.getMinions().size(); i++) {
+        for (int i = 0; i < enemy.getMinions().size(); i++) {
             if (enemy.getMinion(i).isTaunt()) {
                 resultList.add(i);
             }
         }
         //无则添加全部
         if (resultList.size() == 0) {
-            for (Integer i = 0; i < enemy.getMinions().size(); i++) {
+            for (int i = 0; i < enemy.getMinions().size(); i++) {
                 resultList.add(i);
             }
         }

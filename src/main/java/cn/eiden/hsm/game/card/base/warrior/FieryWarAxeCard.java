@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.warrior;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.weapon.base.warrior.FieryWarAxe;
-import cn.eiden.hsm.game.card.WeaponCard;
+import cn.eiden.hsm.game.card.AbstractWeaponCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.WeaponCard;
  *  炙炎战斧
  *
  */
-public class FieryWarAxeCard extends WeaponCard{
+public class FieryWarAxeCard extends AbstractWeaponCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "炙炎战斧";
@@ -18,6 +19,6 @@ public class FieryWarAxeCard extends WeaponCard{
 
 
     public FieryWarAxeCard() {
-        super(COST, DESCRIPTION, CARD_NAME, DURABLE, ATTACK_VALUE,new FieryWarAxe());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Warrior, DURABLE, ATTACK_VALUE,new FieryWarAxe());
     }
 }

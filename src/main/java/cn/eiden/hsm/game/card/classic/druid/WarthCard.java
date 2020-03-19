@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -13,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class WarthCard extends MagicCard {
+public class WarthCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";
     private static final String CARD_NAME = "愤怒";
@@ -24,7 +25,7 @@ public class WarthCard extends MagicCard {
     private static final int DRAW_CARD_NUMBER = 1;
 
     public WarthCard() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
     }
 
     @Override

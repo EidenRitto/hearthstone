@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.paladin;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.weapon.base.paladin.TruesilverChampion;
-import cn.eiden.hsm.game.card.WeaponCard;
+import cn.eiden.hsm.game.card.AbstractWeaponCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.WeaponCard;
  *
  *
  */
-public class TruesilverChampionCard extends WeaponCard {
+public class TruesilverChampionCard extends AbstractWeaponCard {
     private static final int COST = 4;
     private static final String DESCRIPTION = "英雄攻击时恢复2点生命值";
     private static final String CARD_NAME = "真银圣剑";
@@ -18,6 +19,6 @@ public class TruesilverChampionCard extends WeaponCard {
 
 
     public TruesilverChampionCard() {
-        super(COST, DESCRIPTION, CARD_NAME, DURABLE, ATTACK_VALUE,new TruesilverChampion());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Paladin, DURABLE, ATTACK_VALUE,new TruesilverChampion());
     }
 }

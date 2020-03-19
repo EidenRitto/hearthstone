@@ -163,7 +163,7 @@ public class CardTest {
     }
 
     @Test
-    public void MarkofNatureTest(){
+    public void MarkOfNatureTest(){
         //测试自然印记
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();

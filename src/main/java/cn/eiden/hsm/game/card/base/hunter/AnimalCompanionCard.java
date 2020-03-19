@@ -1,11 +1,12 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionHoff;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionReoque;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.MagicCard;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,13 +16,13 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-public class AnimalCompanionCard extends MagicCard{
+public class AnimalCompanionCard extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "召唤一个随机的动物伙伴。";
     private static final String CARD_NAME = "动物伙伴";
 
     public AnimalCompanionCard() {
-        super(COST, DESCRIPTION, CARD_NAME);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
     }
 
     @Override

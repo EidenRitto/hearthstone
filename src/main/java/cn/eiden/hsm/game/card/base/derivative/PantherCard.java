@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  *  黑豹
  *
  */
-public class PantherCard extends MinionCard {
+public class PantherCard extends AbstractMinionCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "黑豹";
@@ -18,6 +19,6 @@ public class PantherCard extends MinionCard {
 
 
     public PantherCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new Panther());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid, HEALTH_LIMIT, ATTACK_VALUE,new Panther());
     }
 }

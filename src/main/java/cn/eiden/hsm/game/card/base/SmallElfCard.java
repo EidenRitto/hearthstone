@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.card.base;
 
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.SmallElf;
-import cn.eiden.hsm.game.card.MinionCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +10,7 @@ import cn.eiden.hsm.game.card.MinionCard;
  * @version : 1.0
  *  小精灵卡牌
  * */
-public class SmallElfCard extends MinionCard {
+public class SmallElfCard extends AbstractMinionCard {
     private static final int COST = 0;
     private static final String DESCRIPTION = "";
     private static final String CARD_NAME = "小精灵";
@@ -18,6 +19,6 @@ public class SmallElfCard extends MinionCard {
 
 
     public SmallElfCard() {
-        super(COST, DESCRIPTION, CARD_NAME, HEALTH_LIMIT, ATTACK_VALUE,new SmallElf());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new SmallElf());
     }
 }
