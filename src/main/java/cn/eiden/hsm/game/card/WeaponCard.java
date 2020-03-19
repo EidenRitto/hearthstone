@@ -18,7 +18,7 @@ public class WeaponCard extends AbstractCard {
     private WeaponObject weapon;
 
     @Override
-    public void useCard() {
+    public void usingCard() {
 
     }
 

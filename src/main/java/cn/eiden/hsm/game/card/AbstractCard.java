@@ -9,12 +9,10 @@ import cn.eiden.hsm.game.objct.GameObject;
  * @version : 1.0
  *
  * */
-public abstract class AbstractCard extends GameObject {
+public abstract class AbstractCard extends GameObject implements Card{
     private String cardName;
     private int cost;
     private String description;
-
-    public abstract void useCard();
 
     public AbstractCard() {
     }
@@ -25,27 +23,18 @@ public abstract class AbstractCard extends GameObject {
         this.cardName = cardName;
     }
 
+    @Override
     public int getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
-
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    @Override
     public String getCardName() {
         return cardName;
-    }
-
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
     }
 }

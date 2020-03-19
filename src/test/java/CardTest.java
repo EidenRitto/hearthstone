@@ -1,5 +1,6 @@
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractCard;
+import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.LeperGnomeCard;
 import cn.eiden.hsm.game.card.base.SmallElfCard;
 import cn.eiden.hsm.game.card.base.hunter.HoundMasterCard;
@@ -187,7 +188,7 @@ public class CardTest {
 
 
     private Gamer initTest(){
-        List<AbstractCard> cards = new ArrayList<>(30);
+        List<Card> cards = new ArrayList<>(30);
         for (int i = 0;i<10;i++){
             cards.add(new SmallElfCard());
             cards.add(new LeperGnomeCard());

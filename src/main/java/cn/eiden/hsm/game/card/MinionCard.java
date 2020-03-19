@@ -22,7 +22,7 @@ public class MinionCard extends AbstractCard {
     private AbstractMinionObject minion;
 
     @Override
-    public void useCard() {
+    public void usingCard() {
 
     }
 

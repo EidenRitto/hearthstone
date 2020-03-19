@@ -12,7 +12,7 @@ import cn.eiden.hsm.game.Gamer;
  * */
 public class MagicCard extends AbstractCard {
     @Override
-    public void useCard() {
+    public void usingCard() {
 
     }
 
