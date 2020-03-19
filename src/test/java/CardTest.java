@@ -1,5 +1,4 @@
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.AbstractCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.LeperGnomeCard;
 import cn.eiden.hsm.game.card.base.SmallElfCard;
@@ -12,6 +11,7 @@ import cn.eiden.hsm.game.card.classic.druid.NaturalizeCard;
 import cn.eiden.hsm.game.card.classic.druid.PowerOfTheWildCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
 import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
@@ -42,7 +42,7 @@ public class CardTest {
         gamer.addMinion(new FreshwaterCrocodile());
         gamer.getState();
         gamer.addHandsCard(new HoundMasterCard());
-        gamer.useThisMinionCard(0,gamer.getMinion(0));
+        gamer.useThisMinionCard(0, (GameObject) gamer.getMinion(0));
         gamer.getState();
         Assert.assertEquals(gamer.getMinion(0).getAttackValue(),4L);
         Assert.assertEquals(gamer.getMinion(0).getHealth(),5L);
@@ -68,10 +68,10 @@ public class CardTest {
         Gamer enemy = gamer.getEnemy();
         enemy.addMinion(new IronbarkProtector());
         enemy.addMinion(new IronbarkProtector());
-        new KillCommandCard().magicEffect(gamer,enemy.getMinion(0));
+        new KillCommandCard().magicEffect(gamer, (GameObject) enemy.getMinion(0));
         Assert.assertEquals(enemy.getMinion(0).getHealth(),5L);
         gamer.addMinion(new FreshwaterCrocodile());
-        new KillCommandCard().magicEffect(gamer,enemy.getMinion(1));
+        new KillCommandCard().magicEffect(gamer, (GameObject) enemy.getMinion(1));
         Assert.assertEquals(enemy.getMinion(1).getHealth(),3L);
     }
 
@@ -112,7 +112,7 @@ public class CardTest {
         enemy.getState();
 
 
-        new SwipeCard().magicEffect(gamer,enemy.getMinion(1));
+        new SwipeCard().magicEffect(gamer, (GameObject) enemy.getMinion(1));
 
 
         enemy.checkMinion();
@@ -134,7 +134,7 @@ public class CardTest {
         enemy.addMinion(leperGnome);
         enemy.getState();
         log.info("===测试自然平衡，目标淡水鳄===");
-        new NaturalizeCard().magicEffect(gamer,enemy.getMinion(1));
+        new NaturalizeCard().magicEffect(gamer, (GameObject) enemy.getMinion(1));
         enemy.checkMinion();
         gamer.getState();
         Assert.assertEquals(enemy.getHandsCards().size(),2);
@@ -175,9 +175,9 @@ public class CardTest {
         new PowerOfTheWildCard().magicEffect(gamer,null);
         gamer.getState();
         gamer.setChooseOne(0);
-        new MarkOfNatureCard().magicEffect(gamer,gamer.getMinion(0));
+        new MarkOfNatureCard().magicEffect(gamer, (GameObject) gamer.getMinion(0));
         gamer.setChooseOne(1);
-        new MarkOfNatureCard().magicEffect(gamer,gamer.getMinion(1));
+        new MarkOfNatureCard().magicEffect(gamer, (GameObject) gamer.getMinion(1));
         gamer.getState();
 
 
