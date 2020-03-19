@@ -2,9 +2,8 @@ package cn.eiden.hsm.event.events;
 
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
-import lombok.Data;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +17,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UseMinionCardFromHandEvent extends AbstractEvent {
-    private AbstractMinionObject minionObject;
+    private Minion minionObject;
     private GameObject target;
 
-    public UseMinionCardFromHandEvent(Gamer owner, AbstractMinionObject minionObject, GameObject target) {
+    public UseMinionCardFromHandEvent(Gamer owner, Minion minionObject, GameObject target) {
         super(owner);
         this.minionObject = minionObject;
         this.target = target;

@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.card;
 
 
 import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +20,14 @@ public abstract class AbstractMinionCard extends AbstractCard {
     /**攻击力*/
     private Long attackValue;
     /**卡牌对应的随从*/
-    private AbstractMinionObject minion;
+    private Minion minion;
 
     public AbstractMinionCard(Long healthLimit, Long attackValue) {
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;
     }
 
-    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long healthLimit, Long attackValue, AbstractMinionObject minion) {
+    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long healthLimit, Long attackValue, Minion minion) {
         super(cost, description, cardName, profession);
         this.healthLimit = healthLimit;
         this.attackValue = attackValue;

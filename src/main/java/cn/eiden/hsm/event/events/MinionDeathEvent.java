@@ -2,7 +2,7 @@ package cn.eiden.hsm.event.events;
 
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +16,9 @@ import lombok.Setter;
 @Setter
 @Getter
 public class MinionDeathEvent extends AbstractEvent {
-    private AbstractMinionObject deathMinion;
+    private Minion deathMinion;
 
-    public MinionDeathEvent(Gamer owner ,AbstractMinionObject deathMinion) {
+    public MinionDeathEvent(Gamer owner ,Minion deathMinion) {
         super(owner);
         this.deathMinion = deathMinion;
     }

@@ -5,6 +5,7 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.keyword.BuffHole;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class BuffHoleListener implements HearthListener {
     @EventHandler
     public void onEvent(BattlefieldChangeEvent event){
         Gamer owner = event.getOwner();
-        List<AbstractMinionObject> minions = owner.getMinions();
-        for (AbstractMinionObject minion : minions) {
+        List<Minion> minions = owner.getMinions();
+        for (Minion minion : minions) {
             if (minion instanceof BuffHole){
                 BuffHole buffHoleMinion = (BuffHole) minion;
                 buffHoleMinion.doBuffHole();

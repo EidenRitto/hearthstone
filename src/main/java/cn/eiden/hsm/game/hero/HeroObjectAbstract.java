@@ -16,17 +16,12 @@ public class HeroObjectAbstract extends AbstractMinionObject {
     /**护甲*/
     private long armor;
     public HeroObjectAbstract(Profession profession) {
-        super();
-        setMinionName(profession.name());
-        setHealthLimit(HEALTH);
-        setHealth(HEALTH);
+        super(profession.name(),HEALTH,0L);
     }
 
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/19 15:59
-     * @method : addArmor
-     * @params : [armorNumber]
      *  叠甲
      */
     public void addArmor(long armorNumber){

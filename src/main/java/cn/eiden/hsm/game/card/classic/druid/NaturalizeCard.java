@@ -1,10 +1,10 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
 import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 
 /**
  * @author : Eiden J.P Zhou
@@ -24,8 +24,8 @@ public class NaturalizeCard extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        if (target instanceof AbstractMinionObject){
-            AbstractMinionObject minion = (AbstractMinionObject)target;
+        if (target instanceof Minion){
+            Minion minion = (Minion)target;
             if (gamer.getMinions().contains(target)) {
                 gamer.deathMinion(gamer.getMinions().indexOf(target));
             }else if (gamer.getEnemy().getMinions().contains(target)){

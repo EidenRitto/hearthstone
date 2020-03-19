@@ -21,7 +21,7 @@ public class TruesilverChampion extends WeaponObject {
     @Override
     public void whenAttackDo(Gamer gamer){
         log.info("真银圣剑发动特效:");
-        gamer.getHero().recovery(RECOVERY_HEALTH);
+        gamer.getHero().recoveryHp(RECOVERY_HEALTH);
     }
 
     public TruesilverChampion() {

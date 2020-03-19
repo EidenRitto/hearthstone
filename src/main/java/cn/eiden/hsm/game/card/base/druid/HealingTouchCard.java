@@ -23,6 +23,6 @@ public class HealingTouchCard extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        gamer.getHero().recovery(HEALTH_NUMBER);
+        gamer.getHero().recoveryHp(HEALTH_NUMBER);
     }
 }

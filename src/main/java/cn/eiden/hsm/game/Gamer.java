@@ -11,10 +11,10 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.Ethnicity;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.objct.ManaCrystal;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -65,11 +65,11 @@ public class Gamer extends GameObject {
     /**
      * 场面上的随从
      */
-    private List<AbstractMinionObject> minions;
+    private List<Minion> minions;
     /**
      * 墓地
      */
-    private List<AbstractMinionObject> tomb;
+    private List<Minion> tomb;
     /**
      * 法力水晶
      */
@@ -211,14 +211,14 @@ public class Gamer extends GameObject {
         //消耗对应的法力值
         getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
-        AbstractMinionObject abstractMinionObject = minionCard.getMinion();
-        abstractMinionObject.setOwner(this);
+        Minion minion = minionCard.getMinion();
+        minion.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
-        AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this, abstractMinionObject, target);
+        AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
         eventManager.call(abstractEvent);
 
         //随从进入战场
-        addMinion(abstractMinionObject);
+        addMinion(minion);
         //从手牌中移除随从卡牌
         lossHandsCard(number);
     }
@@ -244,7 +244,7 @@ public class Gamer extends GameObject {
      * @date : 2018/9/13
      * 添加一个随从
      */
-    public void addMinion(AbstractMinionObject minion) {
+    public void addMinion(Minion minion) {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
         eventManager.call(battlefieldChangeEvent);
         minions.add(minion);
@@ -268,7 +268,7 @@ public class Gamer extends GameObject {
      * @date : 2018/9/14
      */
     public void deathMinion(int index) {
-        AbstractMinionObject abstractMinionObject = minions.get(index);
+        Minion abstractMinionObject = minions.get(index);
         log.info(abstractMinionObject.getMinionName() + "死亡");
         //执行亡语
         AbstractEvent minionDeathEvent = new MinionDeathEvent(this, abstractMinionObject);
@@ -282,7 +282,7 @@ public class Gamer extends GameObject {
     /**
      * 获取一个随从
      */
-    public AbstractMinionObject getMinion(int index) {
+    public Minion getMinion(int index) {
         return minions.get(index);
     }
 
@@ -308,7 +308,7 @@ public class Gamer extends GameObject {
      */
     public int getGamerSpellDamage() {
         int gamerSpellDamage = hero.getSpellDamage();
-        for (AbstractMinionObject minion : minions) {
+        for (Minion minion : minions) {
             gamerSpellDamage += minion.getSpellDamage();
         }
         return gamerSpellDamage;
@@ -364,7 +364,7 @@ public class Gamer extends GameObject {
      * 检查场上是否拥有指定种族的随从
      */
     public boolean checkHaveEthnicity(Ethnicity ethnicity) {
-        for (AbstractMinionObject minion : minions) {
+        for (Minion minion : minions) {
             if (minion.getEthnicity() == ethnicity) {
                 return true;
             }
@@ -441,7 +441,7 @@ public class Gamer extends GameObject {
     public List<Integer> findAllCanAttackMinionsId() {
         List<Integer> resultList = new ArrayList<>();
         for (int i = 0; i < minions.size(); i++) {
-            if (minions.get(i).getAttackTime() > 0) {
+            if (minions.get(i).isAttack()) {
                 resultList.add(i);
             }
         }

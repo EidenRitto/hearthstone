@@ -16,14 +16,12 @@ public class HoundMaster extends AbstractMinionObject implements Battle {
     private static final String SERVANT_NAME = "驯兽师";
     private static final Long ATTACK = 4L;
     private static final Long HEALTH = 3L;
-    private static final boolean ATTACK_STATE = false;
-    private static final int ATTACK_TIME = 0;
 
     private static final Long ADD_ATTACK = 2L;
     private static final Long ADD_HEALTH = 2L;
 
     public HoundMaster() {
-        super(SERVANT_NAME, HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
+        super(SERVANT_NAME, HEALTH, ATTACK);
     }
 
     @Override

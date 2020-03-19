@@ -3,7 +3,7 @@ package cn.eiden.hsm.listener.listeners;
 import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.game.keyword.DeathRattle;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
 /**
@@ -14,7 +14,7 @@ public class DeathRattleListener implements HearthListener {
 
     @EventHandler
     public void onEvent(MinionDeathEvent event){
-        AbstractMinionObject deathMinion = event.getDeathMinion();
+        Minion deathMinion = event.getDeathMinion();
         if (deathMinion instanceof DeathRattle){
             DeathRattle minion = (DeathRattle) deathMinion;
             minion.doDeathRattle();

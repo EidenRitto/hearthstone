@@ -13,8 +13,8 @@ import java.util.List;
  *
  * */
 public class GamerboardObject {
-    List<AbstractMinionObject> ourMinionPlace;
-    List<AbstractMinionObject> yourMinionPlace;
+    List<Minion> ourMinionPlace;
+    List<Minion> yourMinionPlace;
 
     List<AbstractCard> ourHandsCard;
     List<AbstractCard> yourHandsCard;

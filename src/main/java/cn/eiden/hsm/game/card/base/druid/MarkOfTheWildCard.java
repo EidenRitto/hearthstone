@@ -5,6 +5,7 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,11 +29,11 @@ public class MarkOfTheWildCard extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        if (target instanceof AbstractMinionObject){
-            AbstractMinionObject targetMinion = (AbstractMinionObject)target;
+        if (target instanceof Minion){
+            Minion targetMinion = (Minion)target;
             targetMinion.addAttack(ADD_ATTACK);
             targetMinion.addHealthLimit(ADD_HEALTH);
-            targetMinion.setTaunt(true);
+            targetMinion.addTaunt();
             log.info(targetMinion.getMinionName()+"获得嘲讽.");
             log.info("by野性印记.");
         }

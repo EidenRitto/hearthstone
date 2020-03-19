@@ -1,10 +1,10 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
 import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -28,8 +28,8 @@ public class MarkOfNatureCard extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        if (target instanceof AbstractMinionObject){
-            AbstractMinionObject targetMinion = (AbstractMinionObject)target;
+        if (target instanceof Minion){
+            Minion targetMinion = (Minion)target;
             if (gamer.getChooseOne()==0){
                 //+4攻击力
                 targetMinion.addAttack(ADD_ATTACK);
@@ -37,7 +37,7 @@ public class MarkOfNatureCard extends AbstractMagicCard {
             }else if (gamer.getChooseOne()==1){
                 //+4生命值并获得嘲讽
                 targetMinion.addHealthLimit(ADD_HEALTH);
-                targetMinion.setTaunt(true);
+                targetMinion.addTaunt();
                 log.info(targetMinion.getMinionName()+"获得嘲讽.");
                 log.info("by自然印记.");
             }

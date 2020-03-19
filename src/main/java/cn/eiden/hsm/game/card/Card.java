@@ -4,7 +4,7 @@ import cn.eiden.hsm.game.hero.Profession;
 
 /**
  * 卡牌
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/3/19 9:42
  */
 public interface Card {

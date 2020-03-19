@@ -15,8 +15,6 @@ public class LeperGnome extends AbstractMinionObject implements DeathRattle {
     private static final String SERVANT_NAME = "麻风侏儒";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;
-    private static final boolean ATTACK_STATE = false;
-    private static final int ATTACK_TIME = 1;
 
     @Override
     public void doDeathRattle(){
@@ -27,7 +25,6 @@ public class LeperGnome extends AbstractMinionObject implements DeathRattle {
     }
 
     public LeperGnome() {
-        super(SERVANT_NAME,HEALTH, HEALTH, ATTACK, ATTACK_STATE, ATTACK_TIME);
-        isDeathVoice = true;
+        super(SERVANT_NAME,HEALTH, ATTACK);
     }
 }
