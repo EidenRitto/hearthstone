@@ -247,8 +247,9 @@ public class Gamer extends GameObject {
      */
     public void addMinion(Minion minion) {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
-        eventManager.call(battlefieldChangeEvent);
+        minion.setOwner(this);
         minions.add(minion);
+        eventManager.call(battlefieldChangeEvent);
     }
 
     /**
@@ -258,8 +259,8 @@ public class Gamer extends GameObject {
      */
     public void removeMinion(int index) {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
-        eventManager.call(battlefieldChangeEvent);
         minions.remove(index);
+        eventManager.call(battlefieldChangeEvent);
     }
 
     /**
@@ -271,13 +272,12 @@ public class Gamer extends GameObject {
     public void deathMinion(int index) {
         Minion abstractMinionObject = minions.get(index);
         log.info(abstractMinionObject.getMinionName() + "死亡");
-        //执行亡语
         AbstractEvent minionDeathEvent = new MinionDeathEvent(this, abstractMinionObject);
         eventManager.call(minionDeathEvent);
-        //随从进入墓地
-        tomb.add(abstractMinionObject);
         //移除随从
         this.removeMinion(index);
+        //随从进入墓地
+        tomb.add(abstractMinionObject);
     }
 
     /**

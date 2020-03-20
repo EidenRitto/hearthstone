@@ -138,7 +138,6 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
 
     @Override
     public void addTaunt() {
-        log.info(minionName + "获得嘲讽");
         isTaunt = true;
     }
 
