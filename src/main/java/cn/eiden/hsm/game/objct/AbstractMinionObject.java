@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.objct;
 
 
+import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.objct.minion.base.derivative;
 
-import cn.eiden.hsm.game.objct.Ethnicity;
+import cn.eiden.hsm.game.Ethnicity;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 
 /**

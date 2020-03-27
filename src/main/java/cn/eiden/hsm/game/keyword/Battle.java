@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.keyword;
 
-import cn.eiden.hsm.game.objct.GameObject;
+import cn.eiden.hsm.game.GameObject;
 
 /**
  * 战吼接口

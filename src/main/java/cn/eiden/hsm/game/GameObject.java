@@ -1,4 +1,4 @@
-package cn.eiden.hsm.game.objct;
+package cn.eiden.hsm.game;
 
 
 /**

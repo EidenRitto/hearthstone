@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.objct;
 
+import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 
 /**
@@ -8,7 +9,7 @@ import cn.eiden.hsm.game.Gamer;
  *  武器对象
  *
  */
-public class WeaponObject extends GameObject{
+public class WeaponObject extends GameObject {
     private String weaponName;
     private long weaponAttack;
     private long weaponDurable;

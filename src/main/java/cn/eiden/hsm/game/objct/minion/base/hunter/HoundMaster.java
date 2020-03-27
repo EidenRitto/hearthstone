@@ -2,8 +2,8 @@ package cn.eiden.hsm.game.objct.minion.base.hunter;
 
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
-import cn.eiden.hsm.game.objct.Ethnicity;
-import cn.eiden.hsm.game.objct.GameObject;
+import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.GameObject;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
 import cn.eiden.hsm.game.keyword.BuffHole;
-import cn.eiden.hsm.game.objct.Ethnicity;
+import cn.eiden.hsm.game.Ethnicity;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.objct.Minion;
 

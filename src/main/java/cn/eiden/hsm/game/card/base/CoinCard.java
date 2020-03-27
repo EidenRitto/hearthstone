@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.objct.GameObject;
+import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 
