@@ -22,7 +22,7 @@ public class BuffHoleListener implements HearthListener {
         Gamer owner = event.getOwner();
         List<Minion> minions = owner.getMinions();
         for (Minion minion : minions) {
-            if (minion instanceof BuffHole){
+            if (!minion.isSilence() && minion instanceof BuffHole){
                 BuffHole buffHoleMinion = (BuffHole) minion;
                 buffHoleMinion.doBuffHole();
             }

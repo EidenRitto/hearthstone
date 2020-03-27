@@ -20,6 +20,9 @@ public class SimpleKeyWordListener implements HearthListener {
     {
         List<Minion> minions = event.getOwner().getMinions();
         for (Minion minion : minions) {
+            if (minion.isSilence()){
+                continue;
+            }
             if (minion instanceof Taunt){
                 minion.addTaunt();
             }

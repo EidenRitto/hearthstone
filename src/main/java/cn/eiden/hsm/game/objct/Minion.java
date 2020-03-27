@@ -188,4 +188,15 @@ public interface Minion {
      * 解冻
      */
     void unfreeze();
+
+    /**
+     * 沉默
+     */
+    void silence();
+
+    /**
+     * 是否沉默
+     * @return 沉默true
+     */
+    boolean isSilence();
 }

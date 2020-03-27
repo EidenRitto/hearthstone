@@ -73,6 +73,21 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
      */
     private long attackValueThisTurn = 0;
 
+    /**
+     * 是否被沉默
+     */
+    private boolean isSilence = false;
+
+    /**
+     * 原始生命值
+     */
+    private long originalHealth;
+    /**
+     * 原始攻击力
+     */
+    private long originalAttack;
+
+
     @Override
     public void attack(Minion beAttackMinion) {
         //攻击次数减少1
@@ -234,6 +249,19 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
         isFrozen = false;
     }
 
+    @Override
+    public void silence() {
+        health = Math.min(health, originalHealth);
+        healthLimit = originalHealth;
+        attackValue = originalAttack;
+        isSilence = true;
+    }
+
+    @Override
+    public boolean isSilence() {
+        return isSilence;
+    }
+
     public AbstractMinionObject() {
     }
 
@@ -242,5 +270,7 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
         this.healthLimit = healthLimit;
         this.health = healthLimit;
         this.attackValue = attackValue;
+        this.originalHealth = healthLimit;
+        this.originalAttack = attackValue;
     }
 }
