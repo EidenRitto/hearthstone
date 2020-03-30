@@ -54,7 +54,7 @@ public class Gamer extends GameObject {
     /**
      * 手牌
      */
-    private List<Card> handsCards;
+    private Hand hand;
     /**
      * 牌堆
      */
@@ -104,7 +104,6 @@ public class Gamer extends GameObject {
     public void newTurnStart() {
         //抽一张牌
         drawCard(1);
-        log.info("--你抽到了" + handsCards.get(handsCards.size() - 1).getCardName());
         getManaCrystal().newTurnStart();
         getMinions().forEach(Minion::newTurnStart);
     }
@@ -127,40 +126,15 @@ public class Gamer extends GameObject {
             drawCard(FIRST_HANDS_INIT);
             getEnemy().drawCard(LAST_HANDS_INIT);
             //后手加入幸运币
-            getEnemy().addHandsCard(new CoinCard());
+            getEnemy().getHand().addHandsCard(new CoinCard());
         } else {
             drawCard(LAST_HANDS_INIT);
-            addHandsCard(new CoinCard());
+            getHand().addHandsCard(new CoinCard());
             getEnemy().drawCard(FIRST_HANDS_INIT);
         }
         //换牌阶段(==暂无==)
         //分配手牌
         return isFirstTurn;
-    }
-
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     * 得到一张手牌
-     */
-    public void addHandsCard(Card card) {
-        if (!isHandsFull()) {
-            //如果手牌没满，添加到手牌中
-            handsCards.add(card);
-        } else {
-            //手排满了，爆牌
-            log.info(card.getCardName() + "因手牌满消失");
-        }
-    }
-
-    /**
-     * @param cardIndex 手牌编号
-     *                  失去一张手牌
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/13
-     */
-    public void lossHandsCard(int cardIndex) {
-        handsCards.remove(cardIndex);
     }
 
     /**
@@ -193,7 +167,8 @@ public class Gamer extends GameObject {
             //移除牌堆顶的牌
             lossLastCards();
             //添加到手牌中
-            addHandsCard(lastCard);
+            getHand().addHandsCard(lastCard);
+            log.info("--你抽到了" + lastCard.getCardName());
         }
     }
 
@@ -205,7 +180,7 @@ public class Gamer extends GameObject {
      */
     public void useThisMinionCard(int number, GameObject target) {
         //获得随从卡
-        AbstractMinionCard minionCard = (AbstractMinionCard) handsCards.get(number);
+        AbstractMinionCard minionCard = (AbstractMinionCard) getHand().getCard(number);
         //消耗对应的法力值
         getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
@@ -218,7 +193,7 @@ public class Gamer extends GameObject {
         //随从进入战场
         addMinion(minion);
         //从手牌中移除随从卡牌
-        lossHandsCard(number);
+        getHand().loss(number);
     }
 
     /**
@@ -228,13 +203,13 @@ public class Gamer extends GameObject {
      */
     public void useThisMagicCard(int number, GameObject target) {
         //获得法术卡
-        AbstractMagicCard magicCard = (AbstractMagicCard) handsCards.get(number);
+        AbstractMagicCard magicCard = (AbstractMagicCard) getHand().getCard(number);
         //消耗对应的法力值
         getManaCrystal().applyAvailable(magicCard.getCost());
         //魔法效果
         magicCard.magicEffect(this, target);
         //从手牌中移除随从卡牌
-        lossHandsCard(number);
+        getHand().loss(number);
     }
 
     /**
@@ -317,7 +292,7 @@ public class Gamer extends GameObject {
      */
     public void getState() {
         log.info("玩家当前手牌：");
-        handsCards.forEach(card -> System.out.print(card.getCardName() + " "));
+        getHand().getCards().forEach(card -> System.out.print(card.getCardName() + " "));
         log.info("当前生命值：" + hero.getHealth() + "/" + hero.getHealthLimit());
         log.info("当前法力水晶：" + getManaCrystal().getAvailable() + "/" + getManaCrystal().getManaCrystal() + "[" + getManaCrystal().getLocked() + "]");
         log.info("场上随从:");
@@ -331,7 +306,7 @@ public class Gamer extends GameObject {
      */
     public void init(HeroObjectAbstract heroObject, List<Card> cards) {
         this.hero = heroObject;
-        this.handsCards = new ArrayList<>(10);
+        this.hand = new Hand();
         this.cards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
         this.manaCrystal = new ManaCrystal();
@@ -340,13 +315,6 @@ public class Gamer extends GameObject {
         this.randomSeed = new Random();
         this.fatigueCounter = 0;
         this.chooseOne = -1;
-    }
-
-    /**
-     * 手牌是否已满
-     */
-    public boolean isHandsFull() {
-        return handsCards.size() >= handsLimit;
     }
 
     /**
@@ -472,7 +440,7 @@ public class Gamer extends GameObject {
      *               检查手牌费用是否足够打出
      */
     public boolean checkCardMagic(int cardId) {
-        return getManaCrystal().checkCost(handsCards.get(cardId).getCost());
+        return getManaCrystal().checkCost(getHand().getCard(cardId).getCost());
     }
 
     public Gamer(HeroObjectAbstract heroObject, List<Card> cards) {

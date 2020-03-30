@@ -55,7 +55,7 @@ public class GameController {
                         log.info("请输入需要打出的手牌编号");
                         int cardId = scan.nextInt();
                         if (nowGamer.checkUse(cardId)){
-                            if (nowGamer.getHandsCards().get(cardId) instanceof AbstractMinionCard){
+                            if (nowGamer.getHand().getCard(cardId) instanceof AbstractMinionCard){
                                 nowGamer.useThisMinionCard(cardId,null);
                             }else {
                                 nowGamer.useThisMagicCard(cardId,null);
