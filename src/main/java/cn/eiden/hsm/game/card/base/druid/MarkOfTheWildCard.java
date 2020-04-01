@@ -1,10 +1,11 @@
 package cn.eiden.hsm.game.card.base.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,8 +34,8 @@ public class MarkOfTheWildCard extends AbstractMagicCard {
             targetMinion.addAttack(ADD_ATTACK);
             targetMinion.addHealthLimit(ADD_HEALTH);
             targetMinion.addTaunt();
-            log.info(targetMinion.getMinionName()+"获得嘲讽.");
-            log.info("by野性印记.");
+            OutputInfo.info(targetMinion.getMinionName()+"获得嘲讽.");
+            OutputInfo.info("by野性印记.");
         }
 
     }

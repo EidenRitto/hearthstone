@@ -1,10 +1,11 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
-import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -30,11 +31,11 @@ public class PowerOfTheWildCard extends AbstractMagicCard {
         if (gamer.getChooseOne()==0){
             //+1/+1
             gamer.buffYourAllMinions(ADD_ATTACK,ADD_HEALTH);
-            log.info("野性之力+1/+1.");
+            OutputInfo.info("野性之力+1/+1.");
         }else if (gamer.getChooseOne()==1){
             //召唤3/2猎豹
             gamer.addMinion(new Panther());
-            log.info("召唤3/2的黑豹.");
+            OutputInfo.info("召唤3/2的黑豹.");
         }
         gamer.setChooseOne(-1);
     }

@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
-import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,6 +34,6 @@ public class HoundMaster extends AbstractMinionObject implements Battle {
         minion.addAttack(ADD_ATTACK);
         minion.addHealthLimit(ADD_HEALTH);
         minion.addTaunt();
-        log.info("打出卡牌"+SERVANT_NAME+",目标"+minion.getMinionName()+"+2/+2和嘲讽");
+        OutputInfo.info("打出卡牌"+SERVANT_NAME+",目标"+minion.getMinionName()+"+2/+2和嘲讽");
     }
 }

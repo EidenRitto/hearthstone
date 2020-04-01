@@ -1,17 +1,17 @@
+import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.LeperGnomeCard;
 import cn.eiden.hsm.game.card.base.SmallElfCard;
+import cn.eiden.hsm.game.card.base.druid.SwipeCard;
 import cn.eiden.hsm.game.card.base.hunter.HoundMasterCard;
 import cn.eiden.hsm.game.card.base.hunter.KillCommandCard;
 import cn.eiden.hsm.game.card.base.hunter.MultiShotCard;
 import cn.eiden.hsm.game.card.classic.druid.MarkOfNatureCard;
-import cn.eiden.hsm.game.card.base.druid.SwipeCard;
 import cn.eiden.hsm.game.card.classic.druid.NaturalizeCard;
 import cn.eiden.hsm.game.card.classic.druid.PowerOfTheWildCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
 import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
@@ -19,6 +19,7 @@ import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionReoque;
 import cn.eiden.hsm.game.objct.minion.base.druid.IronbarkProtector;
 import cn.eiden.hsm.game.objct.minion.base.hunter.TimberWolf;
 import cn.eiden.hsm.game.objct.minion.classic.BloodMageThalnos;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class CardTest {
 
     @Test
     public void testHoundMaster(){
-        log.info("随从驯兽师测试");
+        OutputInfo.info("随从驯兽师测试");
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
         gamer.addMinion(new FreshwaterCrocodile());
@@ -50,7 +51,7 @@ public class CardTest {
 
     @Test
     public void testMultiShotCard(){
-        log.info("卡牌多重射击测试");
+        OutputInfo.info("卡牌多重射击测试");
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
         enemy.addMinion(new IronbarkProtector());
@@ -63,7 +64,7 @@ public class CardTest {
 
     @Test
     public void testKillCommandCard(){
-        log.info("卡牌杀戮命令测试");
+        OutputInfo.info("卡牌杀戮命令测试");
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
         enemy.addMinion(new IronbarkProtector());
@@ -77,7 +78,7 @@ public class CardTest {
 
     @Test
     public void testBuffHole(){
-        log.info("光环效果测试");
+        OutputInfo.info("光环效果测试");
         //初始化测试环境
         Gamer gamer = initTest();
         Gamer enemy = gamer.getEnemy();
@@ -92,7 +93,7 @@ public class CardTest {
         Assert.assertEquals(gamer.getMinion(0).getAttackValue(),3L);
         Assert.assertEquals(gamer.getMinion(2).getAttackValue(),2L);
         Assert.assertEquals(gamer.getMinion(3).getAttackValue(),5L);
-        log.info("测试通过");
+        OutputInfo.info("测试通过");
     }
 
     @Test
@@ -108,7 +109,7 @@ public class CardTest {
         enemy.addMinion(new LeperGnome());
         enemy.addMinion(new LeperGnome());
         enemy.getState();
-        log.info("===测试【血法】[横扫]，目标淡水鳄===");
+        OutputInfo.info("===测试【血法】[横扫]，目标淡水鳄===");
         enemy.getState();
 
 
@@ -133,7 +134,7 @@ public class CardTest {
         enemy.addMinion(new FreshwaterCrocodile());
         enemy.addMinion(leperGnome);
         enemy.getState();
-        log.info("===测试自然平衡，目标淡水鳄===");
+        OutputInfo.info("===测试自然平衡，目标淡水鳄===");
         new NaturalizeCard().magicEffect(gamer, (GameObject) enemy.getMinion(1));
         enemy.checkMinion();
         gamer.getState();

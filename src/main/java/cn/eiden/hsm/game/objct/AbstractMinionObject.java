@@ -5,6 +5,7 @@ import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -104,33 +105,33 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
     @Override
     public void beHurt(long number) {
         MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(),this);
-        log.info(minionName + "受到" + number + "点伤害");
+        OutputInfo.info(minionName + "受到" + number + "点伤害");
         health -= number;
         getOwner().getEventManager().call(minionBeHurtEvent);
     }
 
     @Override
     public void addAttack(long addAttack) {
-        log.info(minionName + "增加" + addAttack + "点攻击");
+        OutputInfo.info(minionName + "增加" + addAttack + "点攻击");
         attackValue += addAttack;
     }
 
     @Override
     public void addAttackThisTurn(long addAttack) {
-        log.info(minionName + "本回合增加" + addAttack + "点攻击");
+        OutputInfo.info(minionName + "本回合增加" + addAttack + "点攻击");
         attackValue += addAttack;
         attackValueThisTurn += addAttack;
     }
 
     @Override
     public void reduceAttack(long reduceAttack) {
-        log.info(minionName + "减少" + reduceAttack + "点攻击");
+        OutputInfo.info(minionName + "减少" + reduceAttack + "点攻击");
         attackValue -= reduceAttack;
     }
 
     @Override
     public void reduceHealthLimit(long reduceHealthLimit) {
-        log.info(minionName + "减少" + reduceHealthLimit + "点生命上限");
+        OutputInfo.info(minionName + "减少" + reduceHealthLimit + "点生命上限");
         healthLimit -= reduceHealthLimit;
         //如果当前生命值大于生命值上限，一并减少
         checkHealth();
@@ -151,7 +152,7 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
 
     @Override
     public void addHealthLimit(long addHealthLimit) {
-        log.info(minionName + "增加" + addHealthLimit + "点生命值");
+        OutputInfo.info(minionName + "增加" + addHealthLimit + "点生命值");
         healthLimit += addHealthLimit;
         health += addHealthLimit;
     }
@@ -170,7 +171,7 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
     public void recoveryHp(long number) {
         //防止上限溢出
         long newHealth = Math.min(health + number, healthLimit);
-        log.info(minionName + "恢复" + number + "点生命值");
+        OutputInfo.info(minionName + "恢复" + number + "点生命值");
         health = newHealth;
     }
 

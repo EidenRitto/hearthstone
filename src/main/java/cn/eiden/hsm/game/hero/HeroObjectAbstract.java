@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.hero;
 
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,7 +26,7 @@ public class HeroObjectAbstract extends AbstractMinionObject {
      *  叠甲
      */
     public void addArmor(long armorNumber){
-        log.info(getMinionName()+"获得"+armorNumber+"点护甲.");
+        OutputInfo.info(getMinionName()+"获得"+armorNumber+"点护甲.");
         armor += armorNumber;
     }
 

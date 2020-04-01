@@ -38,6 +38,6 @@ public class KillCommandCard extends AbstractMagicCard {
         if (target instanceof AbstractMinionObject){
             ((AbstractMinionObject)target).beHurt(damage);
         }
-//        log.info("使用"+CARD_NAME+"对"+((AbstractMinionObject)target).getMinionName()+"造成"+damage+"点伤害");
+//        OutputInfo.info("使用"+CARD_NAME+"对"+((AbstractMinionObject)target).getMinionName()+"造成"+damage+"点伤害");
     }
 }

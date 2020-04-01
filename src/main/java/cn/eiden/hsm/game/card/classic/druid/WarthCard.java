@@ -1,10 +1,11 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -36,11 +37,11 @@ public class WarthCard extends AbstractMagicCard {
             AbstractMinionObject targetMinion = (AbstractMinionObject)target;
             if (gamer.getChooseOne()==0){
                 targetMinion.beHurt(damage);
-                log.info("愤怒选择伤害.");
+                OutputInfo.info("愤怒选择伤害.");
             }else if (gamer.getChooseOne()==1){
                 targetMinion.beHurt(damageDrawCard);
                 gamer.drawCard(DRAW_CARD_NUMBER);
-                log.info("愤怒选择抽牌.");
+                OutputInfo.info("愤怒选择抽牌.");
             }
             gamer.setChooseOne(-1);
         }

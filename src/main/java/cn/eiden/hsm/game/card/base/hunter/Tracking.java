@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -26,9 +27,9 @@ public class Tracking extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target){
-        log.info("追踪术:");
+        OutputInfo.info("追踪术:");
         for (int i=0;i<CHECK_NUMBER;i++){
-            log.info(gamer.getLastCards().getCardName());
+            OutputInfo.info(gamer.getLastCards().getCardName());
         }
         if (gamer.getChooseOne()!=-1){
             if (gamer.getChooseOne()==0){

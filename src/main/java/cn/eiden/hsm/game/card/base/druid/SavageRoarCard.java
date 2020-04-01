@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game.card.base.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,7 +26,7 @@ public class SavageRoarCard extends AbstractMagicCard {
 
     @Override
     public void magicEffect(Gamer gamer, GameObject target) {
-        log.info("使用法术：野蛮咆哮.");
+        OutputInfo.info("使用法术：野蛮咆哮.");
         gamer.getHero().addAttackThisTurn(ADD_ATTACK);
         gamer.getMinions().forEach(minionObject -> minionObject.addAttackThisTurn(ADD_ATTACK));
     }

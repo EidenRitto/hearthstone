@@ -1,10 +1,11 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -33,13 +34,13 @@ public class MarkOfNatureCard extends AbstractMagicCard {
             if (gamer.getChooseOne()==0){
                 //+4攻击力
                 targetMinion.addAttack(ADD_ATTACK);
-                log.info("by自然印记.");
+                OutputInfo.info("by自然印记.");
             }else if (gamer.getChooseOne()==1){
                 //+4生命值并获得嘲讽
                 targetMinion.addHealthLimit(ADD_HEALTH);
                 targetMinion.addTaunt();
-                log.info(targetMinion.getMinionName()+"获得嘲讽.");
-                log.info("by自然印记.");
+                OutputInfo.info(targetMinion.getMinionName()+"获得嘲讽.");
+                OutputInfo.info("by自然印记.");
             }
             gamer.setChooseOne(-1);
         }

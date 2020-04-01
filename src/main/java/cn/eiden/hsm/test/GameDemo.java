@@ -1,3 +1,5 @@
+package cn.eiden.hsm.test;
+
 import cn.eiden.hsm.controller.GameController;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
@@ -10,11 +12,11 @@ import cn.eiden.hsm.game.hero.Profession;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameTest {
-    public static void main(String[] args) {
-        GameTest.start();
-    }
-
+/**
+ * @author 周晋平
+ * @date 2020/4/1 12:55
+ */
+public class GameDemo {
     public static void start(){
         List<Card> cards = new ArrayList<>(30);
         for (int i = 0;i<10;i++){

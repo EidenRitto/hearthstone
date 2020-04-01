@@ -1,9 +1,10 @@
 package cn.eiden.hsm.game;
 
 import cn.eiden.hsm.game.card.Card;
-import lombok.Getter;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,12 +13,13 @@ import java.util.List;
  */
 @Slf4j
 public class Hand extends GameObject {
+
     private int handsLimit = 10;
 
     /**
      * 手牌
      */
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
 
     /**
      * @author : Eiden J.P Zhou
@@ -30,7 +32,7 @@ public class Hand extends GameObject {
             cards.add(card);
         } else {
             //手排满了，爆牌
-            log.info(card.getCardName() + "因手牌满消失");
+            OutputInfo.info(card.getCardName() + "因手牌满消失");
         }
     }
 

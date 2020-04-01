@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.objct.minion.base;
 
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,7 +20,7 @@ public class LeperGnome extends AbstractMinionObject implements DeathRattle {
     @Override
     public void doDeathRattle(){
         //如果是敌人的随从，我方掉血，反之对方掉血
-        log.info(this.getMinionName()+"触发亡语");
+        OutputInfo.info(this.getMinionName()+"触发亡语");
         this.owner.getEnemy().getHero().beHurt(2);
 
     }

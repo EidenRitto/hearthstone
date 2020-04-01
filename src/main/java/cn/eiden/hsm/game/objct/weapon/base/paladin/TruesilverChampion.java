@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.objct.weapon.base.paladin;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.objct.WeaponObject;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,7 +21,7 @@ public class TruesilverChampion extends WeaponObject {
 
     @Override
     public void whenAttackDo(Gamer gamer){
-        log.info("真银圣剑发动特效:");
+        OutputInfo.info("真银圣剑发动特效:");
         gamer.getHero().recoveryHp(RECOVERY_HEALTH);
     }
 

@@ -1,12 +1,13 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
-import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.hero.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionHoff;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionReoque;
-import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -31,15 +32,15 @@ public class AnimalCompanionCard extends AbstractMagicCard {
             int randomAnimal = gamer.getRandomSeed().nextInt(3);
             switch (randomAnimal){
                 case 0:
-                    log.info("动物伙伴随机召唤了霍夫");
+                    OutputInfo.info("动物伙伴随机召唤了霍夫");
                     gamer.addMinion(new AnimalCompanionHoff());
                     break;
                 case 1:
-                    log.info("动物伙伴随机召唤了米莎");
+                    OutputInfo.info("动物伙伴随机召唤了米莎");
                     gamer.addMinion(new AnimalCompanionMisa());
                     break;
                 default:
-                    log.info("动物伙伴随机召唤了雷欧克");
+                    OutputInfo.info("动物伙伴随机召唤了雷欧克");
                     gamer.addMinion(new AnimalCompanionReoque());
                     break;
             }
