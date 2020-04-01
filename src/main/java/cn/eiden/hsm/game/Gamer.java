@@ -3,6 +3,7 @@ package cn.eiden.hsm.game;
 
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.event.EventManager;
+import cn.eiden.hsm.event.events.AddMinionEvent;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
@@ -219,9 +220,11 @@ public class Gamer extends GameObject {
      */
     public void addMinion(Minion minion) {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+        AddMinionEvent addMinionEvent = new AddMinionEvent(this,minion);
         minion.setOwner(this);
         minions.add(minion);
         eventManager.call(battlefieldChangeEvent);
+        eventManager.call(addMinionEvent);
     }
 
     /**
@@ -441,6 +444,10 @@ public class Gamer extends GameObject {
      */
     public boolean checkCardMagic(int cardId) {
         return getManaCrystal().checkCost(getHand().getCard(cardId).getCost());
+    }
+
+    public Hand getHand() {
+        return hand;
     }
 
     public Gamer(HeroObjectAbstract heroObject, List<Card> cards) {

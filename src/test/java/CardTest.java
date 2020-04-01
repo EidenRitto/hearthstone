@@ -41,7 +41,7 @@ public class CardTest {
         Gamer enemy = gamer.getEnemy();
         gamer.addMinion(new FreshwaterCrocodile());
         gamer.getState();
-        gamer.addHandsCard(new HoundMasterCard());
+        gamer.getHand().addHandsCard(new HoundMasterCard());
         gamer.useThisMinionCard(0, (GameObject) gamer.getMinion(0));
         gamer.getState();
         Assert.assertEquals(gamer.getMinion(0).getAttackValue(),4L);
@@ -137,7 +137,7 @@ public class CardTest {
         new NaturalizeCard().magicEffect(gamer, (GameObject) enemy.getMinion(1));
         enemy.checkMinion();
         gamer.getState();
-        Assert.assertEquals(enemy.getHandsCards().size(),2);
+        Assert.assertEquals(enemy.getHand().getCards().size(),2);
     }
 
     @Test

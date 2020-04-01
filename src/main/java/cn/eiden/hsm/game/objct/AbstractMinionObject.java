@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.objct;
 
 
+import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
@@ -102,8 +103,10 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
 
     @Override
     public void beHurt(long number) {
+        MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(),this);
         log.info(minionName + "受到" + number + "点伤害");
         health -= number;
+        getOwner().getEventManager().call(minionBeHurtEvent);
     }
 
     @Override
