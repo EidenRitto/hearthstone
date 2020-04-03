@@ -17,7 +17,7 @@ public class HeroObjectAbstract extends AbstractMinionObject {
     /**护甲*/
     private long armor;
     public HeroObjectAbstract(Profession profession) {
-        super(profession.name(),HEALTH,0L);
+        super(profession.getName(),HEALTH,0L);
     }
 
     /**

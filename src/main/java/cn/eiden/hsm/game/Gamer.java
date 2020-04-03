@@ -182,7 +182,13 @@ public class Gamer extends GameObject {
      */
     public void useThisMinionCard(int number, GameObject target) {
         //获得随从卡
-        AbstractMinionCard minionCard = (AbstractMinionCard) getHand().getCard(number);
+        Card card = getHand().getCard(number);
+        this.useThisMinionCard(card,target);
+    }
+
+    public void useThisMinionCard(Card card, GameObject target) {
+        //获得随从卡
+        AbstractMinionCard minionCard = (AbstractMinionCard) card;
         //消耗对应的法力值
         getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
@@ -195,7 +201,7 @@ public class Gamer extends GameObject {
         //随从进入战场
         addMinion(minion);
         //从手牌中移除随从卡牌
-        getHand().loss(number);
+        getHand().loss(card);
     }
 
     /**
@@ -204,14 +210,19 @@ public class Gamer extends GameObject {
      * 从手牌中打出法术
      */
     public void useThisMagicCard(int number, GameObject target) {
+        Card card = getHand().getCard(number);
+        this.useThisMagicCard(card,target);
+    }
+
+    public void useThisMagicCard(Card card, GameObject target) {
         //获得法术卡
-        AbstractMagicCard magicCard = (AbstractMagicCard) getHand().getCard(number);
+        AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值
         getManaCrystal().applyAvailable(magicCard.getCost());
         //魔法效果
         magicCard.magicEffect(this, target);
         //从手牌中移除随从卡牌
-        getHand().loss(number);
+        getHand().loss(card);
     }
 
     /**
@@ -295,18 +306,41 @@ public class Gamer extends GameObject {
      * 获取当前状态
      */
     public void getState() {
-        OutputInfo.info("玩家当前手牌：");
-        getHand().getCards().forEach(card -> System.out.print(card.getCardName() + " "));
-        OutputInfo.info("当前生命值：" + hero.getHealth() + "/" + hero.getHealthLimit());
-        OutputInfo.info("当前法力水晶：" + getManaCrystal().getAvailable() + "/" + getManaCrystal().getManaCrystal() + "[" + getManaCrystal().getLocked() + "]");
-        OutputInfo.info("场上随从:");
-        minions.forEach(minionObject -> System.out.print(minionObject.getMinionName() + " " + minionObject.getAttackValue() + "/"
-                + minionObject.getHealth() + "  "));
+        StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
+        List<Card> cards = getHand().getCards();
+        for (Card card : cards) {
+            handInfo.append(card.getCardName());
+            handInfo.append(" ");
+        }
+        handInfo.append("\n");
+        handInfo.append("当前生命值：");
+        handInfo.append(hero.getHealth());
+        handInfo.append("/");
+        handInfo.append(hero.getHealthLimit());
+        handInfo.append("\n");
+        handInfo.append("当前法力水晶：");
+        handInfo.append(getManaCrystal().getAvailable());
+        handInfo.append("/");
+        handInfo.append(getManaCrystal().getManaCrystal());
+        handInfo.append("[").append(getManaCrystal().getLocked()).append("]");
+        OutputInfo.info(handInfo.toString());
+
+        StringBuilder stringBuilder = new StringBuilder("场上随从:");
+        for (Minion minionObject : minions) {
+            stringBuilder.append(minionObject.getMinionName());
+            stringBuilder.append(" ");
+            stringBuilder.append(minionObject.getMinionName());
+            stringBuilder.append(" ");
+            stringBuilder.append(minionObject.getAttackValue());
+            stringBuilder.append("/");
+            stringBuilder.append(minionObject.getHealth());
+        }
+        OutputInfo.info(stringBuilder.toString());
     }
 
     /**
      * @date : 2018/9/13
-     * 初始化游戏
+     * 初始化
      */
     public void init(HeroObjectAbstract heroObject, List<Card> cards) {
         this.hero = heroObject;
@@ -343,14 +377,15 @@ public class Gamer extends GameObject {
     /**
      * 检查手牌能否使用
      */
-    public boolean checkUse(int cardId) {
+    public boolean checkUse(Card card) {
         boolean result = true;
-        if (!checkCardMagic(cardId)) {
+        if (!checkCardMagic(card)) {
             OutputInfo.info("你没有足够的法力值!");
             result = false;
         }
         return result;
     }
+
 
     /**
      * 检查随从血量，小于1则死亡
@@ -444,7 +479,12 @@ public class Gamer extends GameObject {
      *               检查手牌费用是否足够打出
      */
     public boolean checkCardMagic(int cardId) {
-        return getManaCrystal().checkCost(getHand().getCard(cardId).getCost());
+        Card card = getHand().getCard(cardId);
+        return this.checkCardMagic(card);
+    }
+
+    public boolean checkCardMagic(Card cardId) {
+        return getManaCrystal().checkCost(cardId.getCost());
     }
 
     public Hand getHand() {

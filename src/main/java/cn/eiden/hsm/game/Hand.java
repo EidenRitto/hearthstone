@@ -44,6 +44,10 @@ public class Hand extends GameObject {
         cards.remove(cardIndex);
     }
 
+    public void loss(Card card) {
+        cards.remove(card);
+    }
+
     /**
      * 手牌是否已满
      */

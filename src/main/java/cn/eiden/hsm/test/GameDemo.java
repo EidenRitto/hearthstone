@@ -17,7 +17,7 @@ import java.util.List;
  * @date 2020/4/1 12:55
  */
 public class GameDemo {
-    public static void start(){
+    public void start(){
         List<Card> cards = new ArrayList<>(30);
         for (int i = 0;i<10;i++){
             cards.add(new SmallElfCard());
@@ -30,6 +30,7 @@ public class GameDemo {
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 
-        GameController.gameStart(gamer,enemy);
+        GameController gameController = new GameController(gamer,enemy);
+        gameController.gameStart();
     }
 }

@@ -27,7 +27,7 @@ public class GameTest {
         Gamer enemy = new Gamer(new HeroObjectAbstract(Profession.Druid),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
-
-        GameController.gameStart(gamer,enemy);
+        GameController gameController = new GameController(gamer,enemy);
+        gameController.gameStart();
     }
 }
