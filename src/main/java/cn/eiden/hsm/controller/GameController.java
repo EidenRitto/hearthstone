@@ -164,9 +164,4 @@ public class GameController {
         OutputInfo.info(useInfo.toString());
     }
 
-    public static void main(String[] args) {
-        GameController controller = new GameController();
-        controller.redirectOrder("我使用 大");
-    }
-
 }

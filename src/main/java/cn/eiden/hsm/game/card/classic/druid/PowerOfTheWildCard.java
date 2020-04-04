@@ -25,7 +25,7 @@ public class PowerOfTheWildCard extends AbstractMagicCard {
     private static final long ADD_ATTACK = 1;
 
     public PowerOfTheWildCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid);
     }
 
     @Override

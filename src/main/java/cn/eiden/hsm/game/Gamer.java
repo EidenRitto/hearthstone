@@ -311,6 +311,7 @@ public class Gamer extends GameObject {
         List<Card> cards = getHand().getCards();
         for (Card card : cards) {
             handInfo.append(card.getCardName());
+            handInfo.append("(").append(card.getCost()).append(")");
             handInfo.append(" ");
         }
         handInfo.append("\n");
@@ -328,8 +329,6 @@ public class Gamer extends GameObject {
 
         StringBuilder stringBuilder = new StringBuilder("场上随从:");
         for (Minion minionObject : minions) {
-            stringBuilder.append(minionObject.getMinionName());
-            stringBuilder.append(" ");
             stringBuilder.append(minionObject.getMinionName());
             stringBuilder.append(" ");
             stringBuilder.append(minionObject.getAttackValue());

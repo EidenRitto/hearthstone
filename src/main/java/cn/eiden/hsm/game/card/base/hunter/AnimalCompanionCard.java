@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Tags(profession = Profession.Hunter,version = Version.BASE)
 public class AnimalCompanionCard extends AbstractMagicCard {
-    private static final int COST = 1;
+    private static final int COST = 3;
     private static final String DESCRIPTION = "召唤一个随机的动物伙伴。";
     private static final String CARD_NAME = "动物伙伴";
 
