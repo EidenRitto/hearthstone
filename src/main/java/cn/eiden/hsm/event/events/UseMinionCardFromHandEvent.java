@@ -18,9 +18,9 @@ import lombok.Setter;
 @Setter
 public class UseMinionCardFromHandEvent extends AbstractEvent {
     private Minion minionObject;
-    private GameObject target;
+    private Minion target;
 
-    public UseMinionCardFromHandEvent(Gamer owner, Minion minionObject, GameObject target) {
+    public UseMinionCardFromHandEvent(Gamer owner, Minion minionObject, Minion target) {
         super(owner);
         this.minionObject = minionObject;
         this.target = target;

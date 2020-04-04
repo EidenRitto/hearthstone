@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
 import cn.eiden.hsm.game.tags.Version;
@@ -29,7 +30,7 @@ public class PowerOfTheWildCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target) {
+    public void magicEffect(Gamer gamer, Minion target) {
         if (gamer.getChooseOne()==0){
             //+1/+1
             gamer.buffYourAllMinions(ADD_ATTACK,ADD_HEALTH);

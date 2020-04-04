@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.GameObject;
@@ -27,10 +29,11 @@ public class ArcaneShotCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target){
+    @TargetScope
+    public void magicEffect(Gamer gamer, Minion target){
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         if (target instanceof AbstractMinionObject){
-            ((AbstractMinionObject)target).beHurt(damage);
+            target.beHurt(damage);
         }
     }
 }

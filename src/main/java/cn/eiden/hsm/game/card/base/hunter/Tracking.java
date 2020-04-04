@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
@@ -28,7 +29,8 @@ public class Tracking extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target){
+    public void magicEffect(Gamer gamer, Minion target){
+        // FIXME: 2020/4/4 选择效果未实装
         OutputInfo.info("追踪术:");
         for (int i=0;i<CHECK_NUMBER;i++){
             OutputInfo.info(gamer.getLastCards().getCardName());

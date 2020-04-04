@@ -1,12 +1,14 @@
 package cn.eiden.hsm.game.card.base.druid;
 
 import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.game.hero.HeroObjectAbstract;
+import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.tags.Stand;
 import cn.eiden.hsm.game.tags.Version;
 
 /**
@@ -30,7 +32,8 @@ public class SwipeCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target){
+    @TargetScope(stand = Stand.FOE)
+    public void magicEffect(Gamer gamer, Minion target){
         int gamerSpellDamage = gamer.getGamerSpellDamage();
         int damageMain = MAGIC_DAMAGE_MAIN + gamerSpellDamage;
         int damageOther = MAGIC_DAMAGE_OTHER + gamerSpellDamage;

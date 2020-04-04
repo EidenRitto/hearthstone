@@ -7,7 +7,7 @@ import org.reflections.Reflections;
 import java.util.*;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/3 14:56
  */
 public class CardFactory {
@@ -80,14 +80,6 @@ public class CardFactory {
                 //存入缓存池
                 professionCardPool.get(annotation.profession()).add(cardClass);
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        CardFactory instance = CardFactory.getInstance();
-        for (int i = 0; i < 30; i++) {
-            Card randomCard = instance.getRandomCard(Profession.Druid);
-            System.out.println(randomCard.getCardName());
         }
     }
 }

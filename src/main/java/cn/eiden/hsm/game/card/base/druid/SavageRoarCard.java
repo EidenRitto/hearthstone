@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
@@ -26,7 +27,7 @@ public class SavageRoarCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target) {
+    public void magicEffect(Gamer gamer, Minion target) {
         OutputInfo.info("使用法术：野蛮咆哮.");
         gamer.getHero().addAttackThisTurn(ADD_ATTACK);
         gamer.getMinions().forEach(minionObject -> minionObject.addAttackThisTurn(ADD_ATTACK));

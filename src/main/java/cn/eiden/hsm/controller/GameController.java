@@ -99,8 +99,13 @@ public class GameController {
     private void redirectOrder(String order){
         if (order.contains(TAKE)){
             int i = order.indexOf(TAKE);
-            String minString = order.substring(i+TAKE.length()).trim();
-            this.useOrder(minString);
+            String minString = order.substring(i+TAKE.length());
+            String[] s = minString.split(" ");
+            if (s.length == 1){
+                this.useOrder(s[0],null);
+            }else {
+                this.useOrder(s[0],s[1]);
+            }
         }else if (order.contains(ATTACK)){
             String[] split = order.split(ATTACK);
             assert split.length == 2;
@@ -116,7 +121,14 @@ public class GameController {
         }
     }
 
-    private void useOrder(String cardName){
+    private void useOrder(String cardName,String targetName){
+        Minion target = null;
+        if (targetName.equals(FACE)){
+            target = nowGamer.getEnemy().getHero();
+        }else {
+            target = this.chooseMinion(targetName,nowGamer.getEnemy());
+        }
+
         Card card = chooseCard(cardName);
         if (card == null){
             OutputInfo.info("无效指令");
@@ -124,9 +136,9 @@ public class GameController {
         }
         if (nowGamer.checkUse(card)){
             if (card instanceof AbstractMinionCard){
-                nowGamer.useThisMinionCard(card,null);
+                nowGamer.useThisMinionCard(card,target);
             }else {
-                nowGamer.useThisMagicCard(card,null);
+                nowGamer.useThisMagicCard(card,target);
             }
             nowGamer.getState();
         }

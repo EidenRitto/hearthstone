@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.tags;
 
 /**
  * 版本
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/4 12:09
  */
 public enum Version {

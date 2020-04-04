@@ -1,20 +1,18 @@
 package cn.eiden.hsm.game.card.base.druid;
 
 import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
  *  爪击
  */
-@Slf4j
 @Tags(profession = Profession.Druid,version = Version.BASE)
 public class ClawCard extends AbstractMagicCard {
     private static final int COST = 1;
@@ -30,7 +28,7 @@ public class ClawCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target) {
+    public void magicEffect(Gamer gamer, Minion target) {
         OutputInfo.info("使用法术：爪击.");
         gamer.getHero().addArmor(ADD_ARMOR);
         gamer.getHero().addAttackThisTurn(ADD_ATTACK);
