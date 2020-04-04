@@ -1,10 +1,12 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
+import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  *  愤怒
  *
  */
-@Slf4j
+@Tags(profession = Profession.Druid,version = Version.BASE)
 public class WarthCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";

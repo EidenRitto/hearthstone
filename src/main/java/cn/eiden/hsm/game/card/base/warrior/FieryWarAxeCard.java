@@ -1,8 +1,10 @@
 package cn.eiden.hsm.game.card.base.warrior;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.weapon.base.warrior.FieryWarAxe;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
+import cn.eiden.hsm.game.tags.Version;
 
 /**
  * @author : Eiden J.P Zhou
@@ -10,6 +12,7 @@ import cn.eiden.hsm.game.card.AbstractWeaponCard;
  *  炙炎战斧
  *
  */
+@Tags(profession = Profession.Warrior,version = Version.BASE)
 public class FieryWarAxeCard extends AbstractWeaponCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "";

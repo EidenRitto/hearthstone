@@ -11,7 +11,7 @@ import cn.eiden.hsm.game.card.classic.druid.MarkOfNatureCard;
 import cn.eiden.hsm.game.card.classic.druid.NaturalizeCard;
 import cn.eiden.hsm.game.card.classic.druid.PowerOfTheWildCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
 import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;

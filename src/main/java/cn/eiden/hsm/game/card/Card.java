@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.card;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 
 /**
  * 卡牌

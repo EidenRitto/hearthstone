@@ -1,11 +1,13 @@
 package cn.eiden.hsm.game.card.base.druid;
 
+import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.tags.Version;
 
 /**
  * @author : Eiden J.P Zhou
@@ -13,6 +15,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
  *  德鲁伊法术-横扫
  *
  */
+@Tags(profession = Profession.Druid,version = Version.BASE)
 public class SwipeCard extends AbstractMagicCard {
     private static final int COST = 4;
     private static final String DESCRIPTION = "对一个敌人造成4点伤害，对其他敌人造成1点伤害";

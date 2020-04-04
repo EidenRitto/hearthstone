@@ -13,6 +13,7 @@ import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

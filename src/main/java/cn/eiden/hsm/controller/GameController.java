@@ -22,6 +22,7 @@ public class GameController {
     private static final String TAKE = "使用";
     private static final String ATTACK = "攻击";
     private static final String END = "回合结束";
+    private static final String FACE = "打脸";
 
     private boolean endTurn;
     private boolean endGame;
@@ -106,7 +107,10 @@ public class GameController {
             this.attackOrder(split[0].trim(),split[1].trim());
         }else if (order.contains(END)){
             this.endOrder();
-        }else {
+        } else if (order.contains(FACE)) {
+            String minionName = order.substring(0,order.length()-FACE.length()).trim();
+            this.faceOrder(minionName);
+        } else {
             //输出提示信息
             this.tips();
         }
@@ -136,6 +140,13 @@ public class GameController {
         nowGamer.getEnemy().checkMinion();
     }
 
+    private void faceOrder(String minionName){
+        Minion minion = chooseMinion(minionName,nowGamer);
+        minion.attack(nowGamer.getEnemy().getHero());
+        nowGamer.checkMinion();
+        nowGamer.getEnemy().checkMinion();
+    }
+
     private void endOrder(){
         isYours = !isYours;
         endTurn = true;
@@ -147,7 +158,7 @@ public class GameController {
         useInfo.append("\n");
         useInfo.append("出牌,输入[使用]+卡牌名称");
         useInfo.append("\n");
-        useInfo.append("随从攻击,输入随从名称+[攻击]+随从名称");
+        useInfo.append("随从攻击,输入随从名称+[攻击]+随从名称;随从打脸，输入随从名称+[打脸]");
         useInfo.append("\n");
         useInfo.append("回合结束：输入[回合结束]");
         OutputInfo.info(useInfo.toString());

@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionHoff;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 

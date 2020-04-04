@@ -7,7 +7,7 @@ import cn.eiden.hsm.game.card.base.FreshwaterCrocodileCard;
 import cn.eiden.hsm.game.card.base.LeperGnomeCard;
 import cn.eiden.hsm.game.card.base.SmallElfCard;
 import cn.eiden.hsm.game.hero.HeroObjectAbstract;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class GameDemo {
             cards.add(new FreshwaterCrocodileCard());
         }
 
-        Gamer gamer = new Gamer(new HeroObjectAbstract(Profession.Mega),cards);
+        Gamer gamer = new Gamer(new HeroObjectAbstract(Profession.Hunter),cards);
         Gamer enemy = new Gamer(new HeroObjectAbstract(Profession.Druid),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);

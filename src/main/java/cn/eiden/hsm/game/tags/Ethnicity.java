@@ -1,4 +1,4 @@
-package cn.eiden.hsm.game;
+package cn.eiden.hsm.game.tags;
 
 /**
  * @author : Eiden J.P Zhou

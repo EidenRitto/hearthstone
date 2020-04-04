@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.objct;
 
-import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.Gamer;
 
 /**

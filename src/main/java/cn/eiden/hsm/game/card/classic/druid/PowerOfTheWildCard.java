@@ -1,10 +1,12 @@
 package cn.eiden.hsm.game.card.classic.druid;
 
+import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
+import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  *  野性之力
  *
  */
-@Slf4j
+@Tags(profession = Profession.Druid,version = Version.BASE)
 public class PowerOfTheWildCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择:你的随从获得+1/+1;或者召唤一个3/2猎豹。";

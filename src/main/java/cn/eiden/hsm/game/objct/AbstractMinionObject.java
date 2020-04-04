@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.objct;
 
 
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
-import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.output.OutputInfo;
@@ -94,6 +94,10 @@ public abstract class AbstractMinionObject extends GameObject implements Minion 
 
     @Override
     public void attack(Minion beAttackMinion) {
+        if (!this.isAttack()){
+            OutputInfo.info("这个随从无法进行攻击");
+            return;
+        }
         //攻击次数减少1
         attackTime--;
         //敌人掉血

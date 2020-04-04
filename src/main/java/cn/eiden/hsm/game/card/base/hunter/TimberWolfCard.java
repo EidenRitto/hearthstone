@@ -1,8 +1,10 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.hunter.TimberWolf;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.tags.Version;
 
 /**
  * @author : Eiden J.P Zhou
@@ -10,6 +12,7 @@ import cn.eiden.hsm.game.card.AbstractMinionCard;
  *
  *
  */
+@Tags(profession = Profession.Hunter,version = Version.BASE)
 public class TimberWolfCard extends AbstractMinionCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "其他野兽获得+1攻击";

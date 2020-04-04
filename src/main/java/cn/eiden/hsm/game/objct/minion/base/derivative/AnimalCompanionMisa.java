@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.objct.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.Taunt;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
-import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.tags.Ethnicity;
 
 /**
  * @author : Eiden J.P Zhou

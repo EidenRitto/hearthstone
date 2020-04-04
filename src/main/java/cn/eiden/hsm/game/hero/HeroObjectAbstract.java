@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.hero;
 
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
-import cn.eiden.hsm.game.Ethnicity;
+import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;

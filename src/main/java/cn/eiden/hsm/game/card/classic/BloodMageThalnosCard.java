@@ -1,8 +1,10 @@
 package cn.eiden.hsm.game.card.classic;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.classic.BloodMageThalnos;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.tags.Version;
 
 
 /**
@@ -11,6 +13,7 @@ import cn.eiden.hsm.game.card.AbstractMinionCard;
  *  血法
  *
  */
+@Tags(profession = Profession.Neutral,version = Version.BASE)
 public class BloodMageThalnosCard extends AbstractMinionCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "";

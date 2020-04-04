@@ -1,10 +1,12 @@
 package cn.eiden.hsm.game.card.base.druid;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.tags.Version;
 
 /**
  * @author : Eiden J.P Zhou
@@ -12,6 +14,7 @@ import cn.eiden.hsm.game.objct.Minion;
  *  星火术
  *
  */
+@Tags(profession = Profession.Druid,version = Version.BASE)
 public class StarFireCard extends AbstractMagicCard {
     private static final int COST = 6;
     private static final String DESCRIPTION = "造成5点伤害，抽一张牌。";

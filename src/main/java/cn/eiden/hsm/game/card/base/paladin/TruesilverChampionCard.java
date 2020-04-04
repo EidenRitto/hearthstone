@@ -1,8 +1,10 @@
 package cn.eiden.hsm.game.card.base.paladin;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.weapon.base.paladin.TruesilverChampion;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
+import cn.eiden.hsm.game.tags.Version;
 
 /**
  * @author : Eiden J.P Zhou
@@ -10,6 +12,7 @@ import cn.eiden.hsm.game.card.AbstractWeaponCard;
  *
  *
  */
+@Tags(profession = Profession.Paladin,version = Version.BASE)
 public class TruesilverChampionCard extends AbstractWeaponCard {
     private static final int COST = 4;
     private static final String DESCRIPTION = "英雄攻击时恢复2点生命值";

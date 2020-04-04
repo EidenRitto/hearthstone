@@ -1,9 +1,11 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
+import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.game.tags.Profession;
+import cn.eiden.hsm.game.tags.Version;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
  *  追踪术
  *
  */
-@Slf4j
+@Tags(profession = Profession.Hunter,version = Version.BASE)
 public class Tracking extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "从排队顶部检索3张卡牌，选择一张抽取，丢弃其他2张。";

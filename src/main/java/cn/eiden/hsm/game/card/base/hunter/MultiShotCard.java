@@ -1,9 +1,11 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
-import cn.eiden.hsm.game.hero.Profession;
+import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.tags.Version;
 
 import java.util.Random;
 
@@ -13,6 +15,7 @@ import java.util.Random;
  *  多重射击
  *
  */
+@Tags(profession = Profession.Hunter,version = Version.BASE)
 public class MultiShotCard extends AbstractMagicCard {
     private static final int COST = 4;
     private static final String DESCRIPTION = "对2个随机敌方随从造成3点伤害";
