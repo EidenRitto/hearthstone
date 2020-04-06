@@ -220,6 +220,7 @@ public class Gamer extends GameObject {
     public void useThisMagicCard(Card card, Minion target) {
         if (!isRightTarget(target)){
             OutputInfo.info("这不是一个有效的目标");
+            return;
         }
         //获得法术卡
         AbstractMagicCard magicCard = (AbstractMagicCard) card;

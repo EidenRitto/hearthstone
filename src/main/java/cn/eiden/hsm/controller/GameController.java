@@ -13,10 +13,10 @@ import java.util.List;
 
 /**
  * @author : Eiden J.P Zhou
+ * @version : 1.1
  * @date : 2018/9/13
  * @since 1.0
- * @version : 1.1
- * */
+ */
 @Slf4j
 public class GameController {
     private static final String TAKE = "使用";
@@ -42,24 +42,24 @@ public class GameController {
         this.isYours = false;
     }
 
-    public void gameStart(){
+    public void gameStart() {
 
         isYours = gamer.newGameStart();
-        while (!endGame){
-            if(isYours){
+        while (!endGame) {
+            if (isYours) {
                 OutputInfo.info("=========你的回合=========");
                 //开始一个新回合
                 gamer.newTurnStart();
                 gamer.getState();
-                nowGamer=gamer;
-            }else {
+                nowGamer = gamer;
+            } else {
                 OutputInfo.info("=========对手回合=========");
                 enemy.newTurnStart();
                 enemy.getState();
-                nowGamer=enemy;
+                nowGamer = enemy;
             }
             endTurn = false;
-            while (!endTurn){
+            while (!endTurn) {
                 //输入指令
                 OutputInfo.info("请输入指令：");
                 String order = getOrder();
@@ -69,10 +69,7 @@ public class GameController {
     }
 
 
-
-
-
-    private String getOrder(){
+    private String getOrder() {
         String order = "";
         try {
             order = HearthLinkContext.inputMessage.take();
@@ -82,38 +79,39 @@ public class GameController {
         return order;
     }
 
-    private Card chooseCard(final String name){
+    private Card chooseCard(final String name) {
         List<Card> cards = nowGamer.getHand().getCards();
         return cards.stream().filter(e -> name.equals(e.getCardName())).findAny().orElse(null);
     }
 
-    private Minion chooseMinion(final String name,Gamer gamer){
+    private Minion chooseMinion(final String name, Gamer gamer) {
         List<Minion> minions = gamer.getMinions();
-        return minions.stream().filter(e->name.equals(e.getMinionName())).findAny().orElse(null);
+        return minions.stream().filter(e -> name.equals(e.getMinionName())).findAny().orElse(null);
     }
 
     /**
      * 派发请求
+     *
      * @param order 命令请求
      */
-    private void redirectOrder(String order){
-        if (order.contains(TAKE)){
+    private void redirectOrder(String order) {
+        if (order.contains(TAKE)) {
             int i = order.indexOf(TAKE);
-            String minString = order.substring(i+TAKE.length());
+            String minString = order.substring(i + TAKE.length());
             String[] s = minString.split(" ");
-            if (s.length == 1){
-                this.useOrder(s[0],null);
-            }else {
-                this.useOrder(s[0],s[1]);
+            if (s.length == 1) {
+                this.useOrder(s[0], null);
+            } else {
+                this.useOrder(s[0], s[1]);
             }
-        }else if (order.contains(ATTACK)){
+        } else if (order.contains(ATTACK)) {
             String[] split = order.split(ATTACK);
             assert split.length == 2;
-            this.attackOrder(split[0].trim(),split[1].trim());
-        }else if (order.contains(END)){
+            this.attackOrder(split[0].trim(), split[1].trim());
+        } else if (order.contains(END)) {
             this.endOrder();
         } else if (order.contains(FACE)) {
-            String minionName = order.substring(0,order.length()-FACE.length()).trim();
+            String minionName = order.substring(0, order.length() - FACE.length()).trim();
             this.faceOrder(minionName);
         } else {
             //输出提示信息
@@ -121,51 +119,51 @@ public class GameController {
         }
     }
 
-    private void useOrder(String cardName,String targetName){
+    private void useOrder(String cardName, String targetName) {
         Minion target = null;
-        if (targetName != null){
-            if (targetName.equals(FACE)){
+        if (targetName != null) {
+            if (targetName.equals(FACE)) {
                 target = nowGamer.getEnemy().getHero();
-            }else {
-                target = this.chooseMinion(targetName,nowGamer.getEnemy());
+            } else {
+                target = this.chooseMinion(targetName, nowGamer.getEnemy());
             }
         }
         Card card = chooseCard(cardName);
-        if (card == null){
+        if (card == null) {
             OutputInfo.info("无效指令");
             return;
         }
-        if (nowGamer.checkUse(card)){
-            if (card instanceof AbstractMinionCard){
-                nowGamer.useThisMinionCard(card,target);
-            }else {
-                nowGamer.useThisMagicCard(card,target);
+        if (nowGamer.checkUse(card)) {
+            if (card instanceof AbstractMinionCard) {
+                nowGamer.useThisMinionCard(card, target);
+            } else {
+                nowGamer.useThisMagicCard(card, target);
             }
             nowGamer.getState();
         }
     }
 
-    private void attackOrder(String minionName,String enemyName){
-        Minion minion = chooseMinion(minionName,nowGamer);
-        Minion enemy = chooseMinion(enemyName,nowGamer.getEnemy());
+    private void attackOrder(String minionName, String enemyName) {
+        Minion minion = chooseMinion(minionName, nowGamer);
+        Minion enemy = chooseMinion(enemyName, nowGamer.getEnemy());
         minion.attack(enemy);
         nowGamer.checkMinion();
         nowGamer.getEnemy().checkMinion();
     }
 
-    private void faceOrder(String minionName){
-        Minion minion = chooseMinion(minionName,nowGamer);
+    private void faceOrder(String minionName) {
+        Minion minion = chooseMinion(minionName, nowGamer);
         minion.attack(nowGamer.getEnemy().getHero());
         nowGamer.checkMinion();
         nowGamer.getEnemy().checkMinion();
     }
 
-    private void endOrder(){
+    private void endOrder() {
         isYours = !isYours;
         endTurn = true;
     }
 
-    private void tips(){
+    private void tips() {
         StringBuilder useInfo = new StringBuilder();
         useInfo.append("操作说明：");
         useInfo.append("\n");
