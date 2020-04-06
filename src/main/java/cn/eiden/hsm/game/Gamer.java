@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game;
 
 
+import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.event.EventManager;
 import cn.eiden.hsm.event.events.AddMinionEvent;
@@ -14,6 +15,7 @@ import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Ethnicity;
+import cn.eiden.hsm.game.tags.Stand;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -216,6 +218,9 @@ public class Gamer extends GameObject {
     }
 
     public void useThisMagicCard(Card card, Minion target) {
+        if (!isRightTarget(target)){
+            OutputInfo.info("这不是一个有效的目标");
+        }
         //获得法术卡
         AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值
@@ -224,6 +229,39 @@ public class Gamer extends GameObject {
         magicCard.magicEffect(this, target);
         //从手牌中移除随从卡牌
         getHand().loss(card);
+    }
+
+    /**
+     * 是否是正确的目标
+     * @param target 目标，可能为随从或英雄
+     * @return 正确的目标返回true
+     */
+    private boolean isRightTarget(Minion target){
+        Class<? extends Minion> clazz = target.getClass();
+        boolean friend = isFriend(target);
+        TargetScope annotation = clazz.getAnnotation(TargetScope.class);
+        if (!clazz.isAssignableFrom(annotation.classScope())){
+            return false;
+        }
+        switch (annotation.stand()){
+            case FRIEND:
+                return friend;
+            case FOE:
+                return !friend;
+            case ALL:
+                return true;
+        }
+        return true;
+    }
+
+    /**
+     * 是否是友方单位
+     * @param minion 随从或英雄
+     * @return 是友方返回true
+     */
+    private boolean isFriend(Minion minion){
+        HeroObjectAbstract hero = getHero();
+        return minions.contains(minion) || hero == minion;
     }
 
     /**

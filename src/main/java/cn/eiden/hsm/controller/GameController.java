@@ -123,12 +123,13 @@ public class GameController {
 
     private void useOrder(String cardName,String targetName){
         Minion target = null;
-        if (targetName.equals(FACE)){
-            target = nowGamer.getEnemy().getHero();
-        }else {
-            target = this.chooseMinion(targetName,nowGamer.getEnemy());
+        if (targetName != null){
+            if (targetName.equals(FACE)){
+                target = nowGamer.getEnemy().getHero();
+            }else {
+                target = this.chooseMinion(targetName,nowGamer.getEnemy());
+            }
         }
-
         Card card = chooseCard(cardName);
         if (card == null){
             OutputInfo.info("无效指令");

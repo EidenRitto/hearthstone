@@ -14,6 +14,11 @@ import cn.eiden.hsm.game.Gamer;
  * */
 public abstract class AbstractMagicCard extends AbstractCard {
 
+    /**
+     * 魔法效果
+     * @param gamer 当前玩家
+     * @param target 目标单位
+     */
     public abstract void magicEffect(Gamer gamer, Minion target);
 
     public AbstractMagicCard(int cost, String description, String cardName, Profession profession) {
