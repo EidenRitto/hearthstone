@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.AbstractMinionObject;
 import cn.eiden.hsm.game.tags.Ethnicity;
@@ -30,7 +32,8 @@ public class KillCommandCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target){
+    @TargetScope
+    public void magicEffect(Gamer gamer, Minion target){
         int damage;
         //检查是否有野兽
         if (gamer.checkHaveEthnicity(Ethnicity.Beast)){
@@ -39,7 +42,7 @@ public class KillCommandCard extends AbstractMagicCard {
             damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         }
         if (target instanceof AbstractMinionObject){
-            ((AbstractMinionObject)target).beHurt(damage);
+           target.beHurt(damage);
         }
 //        OutputInfo.info("使用"+CARD_NAME+"对"+((AbstractMinionObject)target).getMinionName()+"造成"+damage+"点伤害");
     }

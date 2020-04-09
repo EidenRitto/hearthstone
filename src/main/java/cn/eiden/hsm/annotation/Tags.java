@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 /**
  * 标签属性
  * 包含种族，职业
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/4 11:59
  */
 @Target(ElementType.TYPE)

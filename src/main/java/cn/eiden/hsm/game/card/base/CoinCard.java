@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
@@ -25,7 +26,7 @@ public class CoinCard extends AbstractMagicCard {
     }
 
     @Override
-    public void magicEffect(Gamer gamer, GameObject target) {
+    public void magicEffect(Gamer gamer, Minion target) {
         gamer.getManaCrystal().addAlive(MAGIC_CRYSTAL);
     }
 }

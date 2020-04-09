@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.keyword;
 
 import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.objct.Minion;
 
 /**
  * 战吼接口
@@ -12,5 +13,5 @@ public interface Battle {
      * 执行战吼
      * @param target 所选目标
      */
-    void doBattle(GameObject target);
+    void doBattle(Minion target);
 }

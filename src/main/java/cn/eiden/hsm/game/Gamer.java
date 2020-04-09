@@ -11,7 +11,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.CoinCard;
-import cn.eiden.hsm.game.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.output.OutputInfo;
@@ -181,13 +181,13 @@ public class Gamer extends GameObject {
      * @param number 编号
      * @param target 所选目标
      */
-    public void useThisMinionCard(int number, GameObject target) {
+    public void useThisMinionCard(int number, Minion target) {
         //获得随从卡
         Card card = getHand().getCard(number);
         this.useThisMinionCard(card,target);
     }
 
-    public void useThisMinionCard(Card card, GameObject target) {
+    public void useThisMinionCard(Card card, Minion target) {
         //获得随从卡
         AbstractMinionCard minionCard = (AbstractMinionCard) card;
         //消耗对应的法力值
@@ -210,12 +210,12 @@ public class Gamer extends GameObject {
      * @date : 2018/9/14
      * 从手牌中打出法术
      */
-    public void useThisMagicCard(int number, GameObject target) {
+    public void useThisMagicCard(int number, Minion target) {
         Card card = getHand().getCard(number);
         this.useThisMagicCard(card,target);
     }
 
-    public void useThisMagicCard(Card card, GameObject target) {
+    public void useThisMagicCard(Card card, Minion target) {
         //获得法术卡
         AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值

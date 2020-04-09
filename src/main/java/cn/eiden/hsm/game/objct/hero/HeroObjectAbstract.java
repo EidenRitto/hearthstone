@@ -1,16 +1,14 @@
-package cn.eiden.hsm.game.hero;
+package cn.eiden.hsm.game.objct.hero;
 
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.AbstractMinion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.output.OutputInfo;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/26
  */
-@Slf4j
-public class HeroObjectAbstract extends AbstractMinionObject {
+public class HeroObjectAbstract extends AbstractMinion {
     /**生命值上限*/
     private static final Long HEALTH = 30L;
     /**职业*/
