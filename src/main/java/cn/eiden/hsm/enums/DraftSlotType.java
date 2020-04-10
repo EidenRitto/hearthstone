@@ -1,7 +1,7 @@
 package cn.eiden.hsm.enums;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/9 11:55
  */
 public enum DraftSlotType {

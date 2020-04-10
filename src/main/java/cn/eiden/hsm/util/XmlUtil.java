@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/8 10:17
  */
 public class XmlUtil {

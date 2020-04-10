@@ -2,7 +2,7 @@ package cn.eiden.hsm.enums;
 
 /**
  * 种族
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/10 11:15
  */
 public enum Race {

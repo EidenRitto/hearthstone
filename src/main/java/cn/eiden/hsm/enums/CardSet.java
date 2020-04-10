@@ -2,7 +2,7 @@ package cn.eiden.hsm.enums;
 
 /**
  * 卡牌扩展包
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/4/9 11:41
  */
 public enum CardSet {
