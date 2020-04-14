@@ -1,6 +1,8 @@
 package cn.eiden.hsm.util;
 
+import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
+import cn.eiden.hsm.dbdata.Tag;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -8,8 +10,10 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.tree.DefaultElement;
 import org.dom4j.tree.DefaultText;
 
+import java.beans.IntrospectionException;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -22,6 +26,7 @@ import java.util.List;
  */
 public class XmlUtil {
     private static final String SIMPLIFIED_CHINESE = "zhCN";
+    private static final String ENGLISH = "enUS";
 
     /**
      * 将XML转为指定的POJO
@@ -66,13 +71,9 @@ public class XmlUtil {
                 if (next instanceof Element){
                     Element childElement = (Element) next;
                     if (SIMPLIFIED_CHINESE.equals(childElement.getQualifiedName()) && childElement.hasContent()){
-                        List textList = childElement.content();
-                        StringBuilder fullText = new StringBuilder();
-                        for (Object textObj : textList) {
-                            DefaultText text = (DefaultText) textObj;
-                            fullText.append(text.getStringValue());
-                        }
-                        Introspection.setPropertyValue(rootNode,SIMPLIFIED_CHINESE,fullText.toString());
+                        buildTag(rootNode, childElement, SIMPLIFIED_CHINESE);
+                    }else if (ENGLISH.equals(childElement.getQualifiedName()) && childElement.hasContent()){
+                        buildTag(rootNode, childElement, ENGLISH);
                     }
 
                     for (Field declaredField : declaredFields) {
@@ -103,12 +104,37 @@ public class XmlUtil {
         return resultList;
     }
 
+    private static <T> void buildTag(T rootNode, Element childElement, String language) throws InvocationTargetException, IllegalAccessException, IntrospectionException {
+        List textList = childElement.content();
+        StringBuilder fullText = new StringBuilder();
+        for (Object textObj : textList) {
+            DefaultText text = (DefaultText) textObj;
+            fullText.append(text.getStringValue());
+        }
+        Introspection.setPropertyValue(rootNode, language, fullText.toString());
+    }
+
     public static void main(String[] args) {
         try {
-            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\ProjectVS\\HearthDb-master\\HearthDb\\CardDefs.xml");
-            System.out.println("");
+//            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\ProjectVS\\HearthDb-master\\HearthDb\\CardDefs.xml");
+            System.out.println(System.getProperty("user.dir"));
+            char value[] = {'g','o','o','d'};
+            String a = new String(value, 0, 4);
+            System.out.println(a.intern() == a);
+            String b = new String("cvcv");
+            System.out.println(b.intern() == b);
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private CardInfo buildCardInfo(Entity entity){
+        CardInfo cardInfo = new CardInfo();
+        cardInfo.setCardId(entity.getCardId());
+        cardInfo.setId(entity.getId());
+        List<Tag> tagList = entity.getTag();
+        for (Tag tag : tagList) {
+        }
+        return cardInfo;
     }
 }

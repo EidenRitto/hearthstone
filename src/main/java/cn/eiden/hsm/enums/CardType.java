@@ -5,6 +5,7 @@ package cn.eiden.hsm.enums;
  * @date 2020/4/9 11:44
  */
 public enum CardType {
+    /**无效*/
     INVALID (0),
     GAME (1),
     PLAYER (2),

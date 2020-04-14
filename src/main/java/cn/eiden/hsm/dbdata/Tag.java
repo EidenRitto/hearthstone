@@ -15,4 +15,5 @@ public class Tag {
     private String type;
     private String value;
     private String zhCN;
+    private String enUS;
 }
