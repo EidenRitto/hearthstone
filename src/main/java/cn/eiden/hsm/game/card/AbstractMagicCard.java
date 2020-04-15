@@ -3,7 +3,6 @@ package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 
 /**

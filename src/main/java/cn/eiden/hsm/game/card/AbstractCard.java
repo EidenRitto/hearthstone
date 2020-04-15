@@ -1,6 +1,10 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.GameObject;
 
@@ -15,6 +19,17 @@ public abstract class AbstractCard extends GameObject implements Card{
     private int cost;
     private String description;
     private Profession profession;
+
+    /**id*/
+    private String cardId;
+    /**版本*/
+    private CardSet cardSet;
+    /**职业*/
+    private CardClass cardClass;
+    /**类型*/
+    private CardType cardType;
+    /**稀有度*/
+    private Rarity rarity;
 
     public AbstractCard() {
     }

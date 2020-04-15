@@ -27,4 +27,8 @@ public enum CardClass {
     CardClass(int code) {
         this.code = code;
     }
+
+    public int getCode() {
+        return code;
+    }
 }

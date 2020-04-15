@@ -3,7 +3,6 @@ package cn.eiden.hsm.game.card.base;
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.tags.Version;

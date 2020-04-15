@@ -116,13 +116,8 @@ public class XmlUtil {
 
     public static void main(String[] args) {
         try {
-//            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\ProjectVS\\HearthDb-master\\HearthDb\\CardDefs.xml");
+            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\ProjectVS\\HearthDb-master\\HearthDb\\CardDefs.xml");
             System.out.println(System.getProperty("user.dir"));
-            char value[] = {'g','o','o','d'};
-            String a = new String(value, 0, 4);
-            System.out.println(a.intern() == a);
-            String b = new String("cvcv");
-            System.out.println(b.intern() == b);
         }catch (Exception e){
             e.printStackTrace();
         }

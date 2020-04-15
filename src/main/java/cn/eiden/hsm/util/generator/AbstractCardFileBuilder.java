@@ -1,0 +1,91 @@
+package cn.eiden.hsm.util.generator;
+
+import cn.eiden.hsm.dbdata.CardInfo;
+import cn.eiden.hsm.dbdata.Entity;
+import cn.eiden.hsm.dbdata.Tag;
+import cn.eiden.hsm.enums.*;
+import cn.eiden.hsm.util.EnumUtils;
+import cn.eiden.hsm.util.JavaBeansUtil;
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * java文件建造者
+ * @author Eiden J.P Zhou
+ * @date 2020/4/15 10:14
+ */
+@Slf4j
+public abstract class AbstractCardFileBuilder {
+    /**时间格式化*/
+    protected static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    /**作者*/
+    protected static final String AUTHOR = "Eiden J.P Zhou";
+    /**
+     * 创建文件
+     * @param entity 内存对象
+     */
+    abstract void buildFile(Entity entity);
+
+    protected CardInfo loadInCache(Entity entity){
+        //缓存
+        CardInfo cardCache = new CardInfo();
+
+        cardCache.setId(entity.getId());
+        cardCache.setCardId(entity.getCardId());
+        List<Tag> tags = entity.getTag();
+        for (Tag tag : tags) {
+            final int enumId = Integer.parseInt(tag.getEnumId());
+            GameTag gameTag = Objects.requireNonNull(
+                    EnumUtils.getEnumObject(GameTag.class, e -> e.getCode() == enumId))
+                    .orElse(null);
+            assert gameTag != null;
+            switch (gameTag){
+                case CARDNAME:
+                    cardCache.setCardName(tag.getEnUS());
+                    cardCache.setCardCnName(tag.getZhCN());
+                    break;
+                case CARDTEXT:
+                    cardCache.setCardText(tag.getZhCN());
+                    break;
+                case COST:
+                    cardCache.setCost(Integer.parseInt(tag.getValue()));
+                    break;
+                case CARD_SET:
+                    final int cardSetValue = Integer.parseInt(tag.getValue());
+                    CardSet cardSet = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            CardSet.class, e -> e.getCode() == cardSetValue)).orElse(null);
+                    cardCache.setCardSet(cardSet);
+                    break;
+                case CLASS:
+                    final int cardClassValue = Integer.parseInt(tag.getValue());
+                    CardClass cardClass = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            CardClass.class, e -> e.getCode() == cardClassValue)).orElse(null);
+                    cardCache.setCardClass(cardClass);
+                    break;
+                case CARDTYPE:
+                    final int cardTypeValue = Integer.parseInt(tag.getValue());
+                    CardType cardType = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            CardType.class, e -> e.getCode() == cardTypeValue)).orElse(null);
+                    cardCache.setCardType(cardType);
+                    break;
+                case RARITY:
+                    final int cardRarityValue = Integer.parseInt(tag.getValue());
+                    Rarity cardRarity = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            Rarity.class, e -> e.getCode() == cardRarityValue)).orElse(null);
+                    cardCache.setRarity(cardRarity);
+                    break;
+                default:
+                    log.error(gameTag.name()+" 标签无法识别，enumId="+enumId);
+                    break;
+            }
+        }
+        return cardCache;
+    }
+
+    protected String formatFileName(String name){
+        return JavaBeansUtil.getCamelCaseString(name,true);
+    }
+}

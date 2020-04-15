@@ -60,4 +60,8 @@ public enum CardSet {
     CardSet(int code) {
         this.code = code;
     }
+
+    public int getCode() {
+        return code;
+    }
 }
