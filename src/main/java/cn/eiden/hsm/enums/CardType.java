@@ -10,7 +10,9 @@ public enum CardType {
     GAME (1),
     PLAYER (2),
     HERO (3),
+    /**随从牌*/
     MINION (4),
+    /**法术牌*/
     SPELL (5),
     ABILITY (5),
     ENCHANTMENT (6),

@@ -3,6 +3,7 @@ package cn.eiden.hsm.util;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
 import cn.eiden.hsm.dbdata.Tag;
+import cn.eiden.hsm.util.generator.SpellCardFileBuilder;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -116,8 +117,11 @@ public class XmlUtil {
 
     public static void main(String[] args) {
         try {
-            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\ProjectVS\\HearthDb-master\\HearthDb\\CardDefs.xml");
-            System.out.println(System.getProperty("user.dir"));
+            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\projectVS\\hsdata-master\\CardDefs.xml");
+            SpellCardFileBuilder spellCardFileBuilder = new SpellCardFileBuilder();
+            for (Entity entity : entities) {
+                spellCardFileBuilder.buildFile(entity);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

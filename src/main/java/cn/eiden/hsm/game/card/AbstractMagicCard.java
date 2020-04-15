@@ -1,6 +1,10 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.Gamer;
@@ -22,5 +26,9 @@ public abstract class AbstractMagicCard extends AbstractCard {
 
     public AbstractMagicCard(int cost, String description, String cardName, Profession profession) {
         super(cost, description, cardName ,profession);
+    }
+
+    public AbstractMagicCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+        super(cardName, cost, description, cardId, cardSet, cardClass, cardType, rarity);
     }
 }

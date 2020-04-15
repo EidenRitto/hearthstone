@@ -27,7 +27,7 @@ public abstract class AbstractCardFileBuilder {
      * 创建文件
      * @param entity 内存对象
      */
-    abstract void buildFile(Entity entity);
+    abstract public void buildFile(Entity entity);
 
     protected CardInfo loadInCache(Entity entity){
         //缓存
@@ -41,7 +41,10 @@ public abstract class AbstractCardFileBuilder {
             GameTag gameTag = Objects.requireNonNull(
                     EnumUtils.getEnumObject(GameTag.class, e -> e.getCode() == enumId))
                     .orElse(null);
-            assert gameTag != null;
+            if (gameTag == null){
+                log.error("枚举id"+enumId+"找不到对应的枚举");
+                continue;
+            }
             switch (gameTag){
                 case CARDNAME:
                     cardCache.setCardName(tag.getEnUS());
@@ -78,7 +81,7 @@ public abstract class AbstractCardFileBuilder {
                     cardCache.setRarity(cardRarity);
                     break;
                 default:
-                    log.error(gameTag.name()+" 标签无法识别，enumId="+enumId);
+                    log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;
             }
         }

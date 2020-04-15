@@ -18,6 +18,7 @@ public abstract class AbstractCard extends GameObject implements Card{
     private String cardName;
     private int cost;
     private String description;
+    @Deprecated
     private Profession profession;
 
     /**id*/
@@ -39,6 +40,17 @@ public abstract class AbstractCard extends GameObject implements Card{
         this.description = description;
         this.cardName = cardName;
         this.profession = profession;
+    }
+
+    public AbstractCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+        this.cardName = cardName;
+        this.cost = cost;
+        this.description = description;
+        this.cardId = cardId;
+        this.cardSet = cardSet;
+        this.cardClass = cardClass;
+        this.cardType = cardType;
+        this.rarity = rarity;
     }
 
     @Override
