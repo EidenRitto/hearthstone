@@ -14,4 +14,8 @@ public enum FormatType {
     FormatType(int code) {
         this.code = code;
     }
+
+    public int getCode() {
+        return code;
+    }
 }
