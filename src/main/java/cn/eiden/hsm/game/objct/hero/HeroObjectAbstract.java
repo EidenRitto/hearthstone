@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.objct.hero;
 
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.objct.AbstractMinion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.output.OutputInfo;
@@ -16,7 +17,7 @@ public class HeroObjectAbstract extends AbstractMinion {
     /**护甲*/
     private long armor;
     public HeroObjectAbstract(Profession profession) {
-        super(profession.getName(),HEALTH,0L);
+        super(profession.getName(),HEALTH,0L, Race.INVALID);
     }
 
     /**

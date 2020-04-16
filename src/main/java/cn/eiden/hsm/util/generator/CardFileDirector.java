@@ -28,6 +28,7 @@ public class CardFileDirector {
                 abstractCardFileBuilder = new SpellCardFileBuilder(cardInfo);
                 break;
             case MINION:
+                abstractCardFileBuilder = new MinionCardFileBuilder(cardInfo);
                 break;
             default:
                 break;

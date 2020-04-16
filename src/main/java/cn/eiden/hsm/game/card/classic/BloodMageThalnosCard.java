@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.classic;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.classic.BloodMageThalnos;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -22,7 +23,11 @@ public class BloodMageThalnosCard extends AbstractMinionCard {
     private static final Long HEALTH_LIMIT = 1L;
 
     public BloodMageThalnosCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new BloodMageThalnos());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE);
     }
 
+    @Override
+    public MinionObject createMinion() {
+        return null;
+    }
 }

@@ -37,5 +37,6 @@ public class CardInfo {
     public CardInfo() {
         this.rarity = Rarity.INVALID;
         this.cardClass = CardClass.INVALID;
+        this.race = Race.INVALID;
     }
 }

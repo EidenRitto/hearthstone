@@ -195,7 +195,7 @@ public class Gamer extends GameObject {
         //消耗对应的法力值
         getManaCrystal().applyAvailable(minionCard.getCost());
         //获得一张手牌指向的随从
-        Minion minion = minionCard.getMinion();
+        Minion minion = minionCard.createMinion();
         minion.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
         AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
