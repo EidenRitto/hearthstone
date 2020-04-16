@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.hunter.HoundMaster;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -22,6 +23,11 @@ public class HoundMasterCard extends AbstractMinionCard {
 
 
     public HoundMasterCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE, new HoundMaster());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }

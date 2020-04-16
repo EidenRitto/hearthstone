@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.hunter.TimberWolf;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -22,6 +23,11 @@ public class TimberWolfCard extends AbstractMinionCard {
 
 
     public TimberWolfCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE,new TimberWolf());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }

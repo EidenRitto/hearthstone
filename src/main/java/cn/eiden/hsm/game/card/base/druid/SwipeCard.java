@@ -5,7 +5,7 @@ import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.tags.Stand;
@@ -40,7 +40,7 @@ public class SwipeCard extends AbstractMagicCard {
         if (target instanceof HeroObjectAbstract){
             ((HeroObjectAbstract)target).beHurt(damageMain);
             gamer.getEnemy().getMinions().forEach(minionObject -> minionObject.beHurt(damageOther));
-        }else if (target instanceof AbstractMinionObject){
+        }else if (target instanceof MinionObject){
             gamer.getEnemy().getHero().beHurt(damageOther);
             gamer.getEnemy().getMinions().forEach(minionObject -> {
                 if (minionObject == target){

@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.objct;
 
 
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
@@ -66,7 +67,10 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     /**
      * 种族
      */
+    @Deprecated
     protected Ethnicity ethnicity;
+
+    private Race race;
     /**
      * 拥有者
      */
@@ -275,12 +279,13 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     public AbstractMinion() {
     }
 
-    public AbstractMinion(String minionName, Long healthLimit, Long attackValue) {
+    public AbstractMinion(String minionName, Long healthLimit, Long attackValue,Race race) {
         this.minionName = minionName;
         this.healthLimit = healthLimit;
         this.health = healthLimit;
         this.attackValue = attackValue;
         this.originalHealth = healthLimit;
         this.originalAttack = attackValue;
+        this.race = race;
     }
 }

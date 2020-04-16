@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.enums.*;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -19,9 +21,19 @@ public class FreshwaterCrocodileCard extends AbstractMinionCard {
     private static final String CARD_NAME = "淡水鳄";
     private static final Long ATTACK_VALUE = 2L;
     private static final Long HEALTH_LIMIT = 3L;
+    private static final Race RACE = Race.BEAST;
 
 
     public FreshwaterCrocodileCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new FreshwaterCrocodile());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    public FreshwaterCrocodileCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
+        super(cardName, cost, description, cardId, cardSet, cardClass, cardType, rarity, health, atk, race);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return new MinionObject(CARD_NAME,HEALTH_LIMIT,ATTACK_VALUE,RACE);
     }
 }

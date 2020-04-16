@@ -1,7 +1,8 @@
 package cn.eiden.hsm.game.objct.minion.base;
 
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.tags.Ethnicity;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,13 +10,13 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
  * @version : 1.0
  *  淡水鳄 223
  * */
-public class FreshwaterCrocodile extends AbstractMinionObject {
+public class FreshwaterCrocodile extends MinionObject {
     private static final String SERVANT_NAME = "淡水鳄";
     private static final Long ATTACK = 2L;
     private static final Long HEALTH = 3L;
+    private static final Race RACE = Race.BEAST;
 
     public FreshwaterCrocodile() {
-        super(SERVANT_NAME,HEALTH, ATTACK);
-        ethnicity = Ethnicity.Beast;
+        super(SERVANT_NAME,HEALTH, ATTACK, RACE);
     }
 }

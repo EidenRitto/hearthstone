@@ -2,10 +2,9 @@ package cn.eiden.hsm.game.card.base.druid;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
-import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Version;
@@ -31,7 +30,7 @@ public class MarkOfTheWildCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = AbstractMinionObject.class)
+    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         target.addAttack(ADD_ATTACK);
         target.addHealthLimit(ADD_HEALTH);

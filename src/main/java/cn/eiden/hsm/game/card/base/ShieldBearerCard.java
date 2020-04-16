@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.ShieldBearer;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -22,6 +23,11 @@ public class ShieldBearerCard extends AbstractMinionCard {
 
 
     public ShieldBearerCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new ShieldBearer());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }

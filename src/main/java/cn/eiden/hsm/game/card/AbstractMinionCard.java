@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.enums.*;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.Minion;
 import lombok.Getter;
@@ -16,21 +18,29 @@ import lombok.Setter;
 @Getter
 public abstract class AbstractMinionCard extends AbstractCard {
     /**生命值上限*/
-    private Long healthLimit;
+    private Long health;
     /**攻击力*/
-    private Long attackValue;
-    /**卡牌对应的随从*/
-    private Minion minion;
+    private Long atk;
+    /**种族*/
+    private Race race;
 
-    public AbstractMinionCard(Long healthLimit, Long attackValue) {
-        this.healthLimit = healthLimit;
-        this.attackValue = attackValue;
+    public AbstractMinionCard(Long health, Long atk) {
+        this.health = health;
+        this.atk = atk;
     }
 
-    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long healthLimit, Long attackValue, Minion minion) {
+    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long health, Long atk) {
         super(cost, description, cardName, profession);
-        this.healthLimit = healthLimit;
-        this.attackValue = attackValue;
-        this.minion = minion;
+        this.health = health;
+        this.atk = atk;
     }
+
+    public AbstractMinionCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
+        super(cardName, cost, description, cardId, cardSet, cardClass, cardType, rarity);
+        this.health = health;
+        this.atk = atk;
+        this.race = race;
+    }
+
+    public abstract MinionObject createMinion();
 }

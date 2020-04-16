@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base;
 
 import cn.eiden.hsm.game.keyword.Taunt;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +9,7 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
  *  持盾卫士
  *
  */
-public class ShieldBearer extends AbstractMinionObject implements Taunt {
+public class ShieldBearer extends MinionObject implements Taunt {
     private static final String SERVANT_NAME = "持盾卫士";
     private static final Long HEALTH = 4L;
     private static final Long ATTACK = 0L;

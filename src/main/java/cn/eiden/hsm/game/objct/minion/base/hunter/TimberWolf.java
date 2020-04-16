@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.objct.minion.base.hunter;
 
 import cn.eiden.hsm.game.keyword.BuffHole;
 import cn.eiden.hsm.game.tags.Ethnicity;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.objct.Minion;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  *
  */
-public class TimberWolf extends AbstractMinionObject implements BuffHole {
+public class TimberWolf extends MinionObject implements BuffHole {
     private static final String SERVANT_NAME = "森林狼";
     private static final Long ATTACK = 1L;
     private static final Long HEALTH = 1L;

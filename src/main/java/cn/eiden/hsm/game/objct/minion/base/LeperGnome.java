@@ -1,7 +1,9 @@
 package cn.eiden.hsm.game.objct.minion.base;
 
+import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.keyword.DeathRattle;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  *  麻风侏儒 111
  * */
 @Slf4j
-public class LeperGnome extends AbstractMinionObject implements DeathRattle {
+public class LeperGnome extends MinionObject implements DeathRattle {
     private static final String SERVANT_NAME = "麻风侏儒";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;

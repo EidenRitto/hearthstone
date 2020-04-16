@@ -3,7 +3,7 @@ package cn.eiden.hsm.util.generator;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
 import cn.eiden.hsm.enums.CardType;
-import cn.eiden.hsm.util.CardGenerator;
+import cn.eiden.hsm.util.CardGeneratorUtils;
 
 /**
  * 指挥者
@@ -21,7 +21,7 @@ public class CardFileDirector {
     public void createCardFile(Entity entity){
         AbstractCardFileBuilder abstractCardFileBuilder = null;
 
-        CardInfo cardInfo = CardGenerator.loadInCache(entity);
+        CardInfo cardInfo = CardGeneratorUtils.loadInCache(entity);
         CardType cardType = cardInfo.getCardType();
         switch (cardType){
             case SPELL:

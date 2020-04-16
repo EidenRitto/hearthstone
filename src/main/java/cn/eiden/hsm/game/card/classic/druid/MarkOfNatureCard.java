@@ -4,7 +4,7 @@ import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Version;
@@ -30,7 +30,7 @@ public class MarkOfNatureCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = AbstractMinionObject.class)
+    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         if (gamer.getChooseOne()==0){
             //+4攻击力

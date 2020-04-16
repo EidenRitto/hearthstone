@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base;
 
 
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 
 
 /**
@@ -10,7 +10,7 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
  * @version : 1.0
  *  小精灵 011
  * */
-public class SmallElf extends AbstractMinionObject {
+public class SmallElf extends MinionObject {
     private static final String SERVANT_NAME = "小精灵";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;

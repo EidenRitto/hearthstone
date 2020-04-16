@@ -1,44 +1,31 @@
 package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
-import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.card.AbstractMagicCard;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.util.CardGeneratorUtils;
-import com.squareup.javapoet.JavaFile;
+import cn.eiden.hsm.game.objct.MinionObject;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.lang.model.element.Modifier;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 
 /**
- *
  * @author Eiden J.P Zhou
- * @date 2020/4/15 16:34
+ * @date 2020/4/16 14:02
  */
 @Slf4j
-public class SpellCardFileBuilder extends AbstractCardFileBuilder {
-
-    public SpellCardFileBuilder(CardInfo cardInfo) {
+public class MinionCardFileBuilder extends AbstractCardFileBuilder {
+    public MinionCardFileBuilder(CardInfo cardInfo) {
         super(cardInfo);
     }
 
     @Override
     public void buildFile() {
-        if (cardInfo.getCardType() != CardType.SPELL){
-            log.debug("暂无指定建造者,跳过卡牌【"+cardInfo.getCardCnName()+"】");
-            return;
-        }
         final String fileName = formatFileName();
-
         TypeSpec myClass = TypeSpec.classBuilder(fileName)
-                .superclass(AbstractMagicCard.class)
+                .superclass(AbstractMinionCard.class)
                 .addJavadoc(this.classComment())
                 .addModifiers(Modifier.PUBLIC)
                 .addField(this.buildFieldCost())
@@ -49,22 +36,22 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldCardClass())
                 .addField(this.buildFieldCardType())
                 .addField(this.buildFieldRarity())
+                .addField(this.buildFieldHealth())
+                .addField(this.buildFieldAtk())
+                .addField(this.buildFieldRace())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N)"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
                                 , "CARD_NAME", "COST", "DESCRIPTION", "CARD_ID"
-                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY")
+                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY"
+                                ,"HEALTH","ATK","RACE")
                         .build())
-                .addMethod(MethodSpec.methodBuilder("magicEffect")
+                .addMethod(MethodSpec.methodBuilder("createMinion")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
-                        .returns(void.class)
-                        .addParameter(Gamer.class, "gamer")
-                        .addParameter(Minion.class, "target")
-                        .addStatement("// TODO: 需要手动补全的效果")
+                        .returns(MinionObject.class)
+                        .addStatement("return new $T($N, $N, $N, $N)",MinionObject.class,"CARD_NAME","HEALTH","ATK","RACE")
                         .addJavadoc("$S\n", cardInfo.getCardText())
-                        .addJavadoc("@param gamer 当前卡牌所有者\n")
-                        .addJavadoc("@param target 所指定目标")
                         .build())
                 .build();
         writeToSourceFile(myClass);

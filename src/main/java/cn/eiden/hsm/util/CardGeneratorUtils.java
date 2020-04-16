@@ -15,7 +15,7 @@ import java.util.Objects;
  * @date 2020/4/10 11:55
  */
 @Slf4j
-public class CardGenerator {
+public class CardGeneratorUtils {
     public static final String PACKAGE_PATH = "\\src\\main\\java\\";
 
     public static CardInfo loadInCache(Entity entity){

@@ -4,8 +4,7 @@ import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
-import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.tags.Stand;
@@ -31,9 +30,9 @@ public class HuntersMark extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = AbstractMinionObject.class ,stand = Stand.ALL)
+    @TargetScope(classScope = MinionObject.class ,stand = Stand.ALL)
     public void magicEffect(Gamer gamer, Minion target){
-        if (target instanceof AbstractMinionObject){
+        if (target instanceof MinionObject){
             target.changeHealth(HEALTH_CHANGE);
         }
     }

@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base.derivative;
 
 import cn.eiden.hsm.game.tags.Ethnicity;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
@@ -9,7 +9,7 @@ import cn.eiden.hsm.game.objct.AbstractMinionObject;
  *  野性之力衍生物 黑豹
  *
  */
-public class Panther extends AbstractMinionObject {
+public class Panther extends MinionObject {
     private static final String SERVANT_NAME = "黑豹";
     private static final Long ATTACK = 3L;
     private static final Long HEALTH = 2L;

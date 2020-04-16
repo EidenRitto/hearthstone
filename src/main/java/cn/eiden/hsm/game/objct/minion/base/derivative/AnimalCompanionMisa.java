@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.Taunt;
-import cn.eiden.hsm.game.objct.AbstractMinionObject;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Ethnicity;
 
 /**
@@ -10,7 +10,7 @@ import cn.eiden.hsm.game.tags.Ethnicity;
  *  米莎
  *
  */
-public class AnimalCompanionMisa extends AbstractMinionObject implements Taunt {
+public class AnimalCompanionMisa extends MinionObject implements Taunt {
     private static final String SERVANT_NAME = "米莎";
     private static final Long ATTACK = 4L;
     private static final Long HEALTH = 4L;

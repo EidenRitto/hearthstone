@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base.druid;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.druid.IronbarkProtector;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -22,6 +23,11 @@ public class IronbarkProtectorCard extends AbstractMinionCard {
 
 
     public IronbarkProtectorCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid, HEALTH_LIMIT, ATTACK_VALUE,new IronbarkProtector());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }

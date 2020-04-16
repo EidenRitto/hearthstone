@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -21,6 +22,11 @@ public class LeperGnomeCard extends AbstractMinionCard {
     private static final Long HEALTH_LIMIT = 1L;
 
     public LeperGnomeCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE,new LeperGnome());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }

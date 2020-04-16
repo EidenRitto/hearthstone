@@ -1,5 +1,7 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
+import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionHoff;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
@@ -16,9 +18,15 @@ public class AnimalCompanionHoffCard extends AbstractMinionCard {
     private static final String CARD_NAME = "霍夫";
     private static final Long ATTACK_VALUE = 4L;
     private static final Long HEALTH_LIMIT = 2L;
+    private static final Race RACE = Race.BEAST;
 
 
     public AnimalCompanionHoffCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE,new AnimalCompanionHoff());
+        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE);
+    }
+
+    @Override
+    public MinionObject createMinion() {
+        return null;
     }
 }
