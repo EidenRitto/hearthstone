@@ -1,6 +1,9 @@
 package cn.eiden.hsm.util.generator;
 
+import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.util.CardGenerator;
 
 /**
  * 指挥者
@@ -8,17 +11,29 @@ import cn.eiden.hsm.dbdata.Entity;
  * @date 2020/4/15 10:13
  */
 public class CardFileDirector {
-    /**指定的建造者*/
-    private AbstractCardFileBuilder abstractCardFileBuilder;
-
     public CardFileDirector() {
-    }
 
+    }
     /***
      * 生成java源文件
      * @param entity 内存中的数据对象
      */
     public void createCardFile(Entity entity){
-        abstractCardFileBuilder.buildFile(entity);
+        AbstractCardFileBuilder abstractCardFileBuilder = null;
+
+        CardInfo cardInfo = CardGenerator.loadInCache(entity);
+        CardType cardType = cardInfo.getCardType();
+        switch (cardType){
+            case SPELL:
+                abstractCardFileBuilder = new SpellCardFileBuilder(cardInfo);
+                break;
+            case MINION:
+                break;
+            default:
+                break;
+        }
+        if (abstractCardFileBuilder != null){
+            abstractCardFileBuilder.buildFile();
+        }
     }
 }

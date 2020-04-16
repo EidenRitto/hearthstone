@@ -3,7 +3,10 @@ package cn.eiden.hsm.util;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
 import cn.eiden.hsm.dbdata.Tag;
+import cn.eiden.hsm.util.generator.AbstractCardFileBuilder;
+import cn.eiden.hsm.util.generator.CardFileDirector;
 import cn.eiden.hsm.util.generator.SpellCardFileBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -25,6 +28,7 @@ import java.util.List;
  * @author Eiden J.P Zhou
  * @date 2020/4/8 10:17
  */
+@Slf4j
 public class XmlUtil {
     private static final String SIMPLIFIED_CHINESE = "zhCN";
     private static final String ENGLISH = "enUS";
@@ -118,10 +122,11 @@ public class XmlUtil {
     public static void main(String[] args) {
         try {
             List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\projectVS\\hsdata-master\\CardDefs.xml");
-            SpellCardFileBuilder spellCardFileBuilder = new SpellCardFileBuilder();
+            CardFileDirector cardFileDirector = new CardFileDirector();
             for (Entity entity : entities) {
-                spellCardFileBuilder.buildFile(entity);
+                cardFileDirector.createCardFile(entity);
             }
+        log.info("总计写入成功卡牌数量："+ AbstractCardFileBuilder.successNum);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -6,8 +6,12 @@ import cn.eiden.hsm.dbdata.Tag;
 import cn.eiden.hsm.enums.*;
 import cn.eiden.hsm.util.EnumUtils;
 import cn.eiden.hsm.util.JavaBeansUtil;
+import com.squareup.javapoet.CodeBlock;
+import com.squareup.javapoet.FieldSpec;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.lang.model.element.Modifier;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -19,76 +23,102 @@ import java.util.Objects;
  */
 @Slf4j
 public abstract class AbstractCardFileBuilder {
+    public static int successNum = 0;
+
+    /**卡牌信息*/
+    protected final CardInfo cardInfo;
+
     /**时间格式化*/
     protected static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     /**作者*/
     protected static final String AUTHOR = "Eiden J.P Zhou";
-    /**
-     * 创建文件
-     * @param entity 内存对象
-     */
-    abstract public void buildFile(Entity entity);
+    /**输出生成文件的包名*/
+    protected static final String PACKAGE_NAME_PREFIX = "cn.eiden.hsm.game.card.dynamic.";
 
-    protected CardInfo loadInCache(Entity entity){
-        //缓存
-        CardInfo cardCache = new CardInfo();
-
-        cardCache.setId(entity.getId());
-        cardCache.setCardId(entity.getCardId());
-        List<Tag> tags = entity.getTag();
-        for (Tag tag : tags) {
-            final int enumId = Integer.parseInt(tag.getEnumId());
-            GameTag gameTag = Objects.requireNonNull(
-                    EnumUtils.getEnumObject(GameTag.class, e -> e.getCode() == enumId))
-                    .orElse(null);
-            if (gameTag == null){
-                log.error("枚举id"+enumId+"找不到对应的枚举");
-                continue;
-            }
-            switch (gameTag){
-                case CARDNAME:
-                    cardCache.setCardName(tag.getEnUS());
-                    cardCache.setCardCnName(tag.getZhCN());
-                    break;
-                case CARDTEXT:
-                    cardCache.setCardText(tag.getZhCN());
-                    break;
-                case COST:
-                    cardCache.setCost(Integer.parseInt(tag.getValue()));
-                    break;
-                case CARD_SET:
-                    final int cardSetValue = Integer.parseInt(tag.getValue());
-                    CardSet cardSet = Objects.requireNonNull(EnumUtils.getEnumObject(
-                            CardSet.class, e -> e.getCode() == cardSetValue)).orElse(null);
-                    cardCache.setCardSet(cardSet);
-                    break;
-                case CLASS:
-                    final int cardClassValue = Integer.parseInt(tag.getValue());
-                    CardClass cardClass = Objects.requireNonNull(EnumUtils.getEnumObject(
-                            CardClass.class, e -> e.getCode() == cardClassValue)).orElse(null);
-                    cardCache.setCardClass(cardClass);
-                    break;
-                case CARDTYPE:
-                    final int cardTypeValue = Integer.parseInt(tag.getValue());
-                    CardType cardType = Objects.requireNonNull(EnumUtils.getEnumObject(
-                            CardType.class, e -> e.getCode() == cardTypeValue)).orElse(null);
-                    cardCache.setCardType(cardType);
-                    break;
-                case RARITY:
-                    final int cardRarityValue = Integer.parseInt(tag.getValue());
-                    Rarity cardRarity = Objects.requireNonNull(EnumUtils.getEnumObject(
-                            Rarity.class, e -> e.getCode() == cardRarityValue)).orElse(null);
-                    cardCache.setRarity(cardRarity);
-                    break;
-                default:
-                    log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
-                    break;
-            }
-        }
-        return cardCache;
+    public AbstractCardFileBuilder(CardInfo cardInfo) {
+        this.cardInfo = cardInfo;
     }
 
+    /**
+     * 创建文件
+     */
+    abstract public void buildFile();
+
+    /**
+     * 把英文名称格式化为Java所允许的合法文件名
+     * @param name 英文名称
+     * @return 合法java类名
+     */
     protected String formatFileName(String name){
         return JavaBeansUtil.getCamelCaseString(name,true);
     }
+
+    /**
+     * 生成类注释
+     * @return 注释代码块
+     */
+    protected CodeBlock classComment(){
+        return CodeBlock.builder()
+                .add("@L\n",cardInfo.getCardCnName())
+                .add("本java源文件由java poet自动生成<br/>\n")
+                .add("@author $L\n", AUTHOR)
+                .add("@date $L", DTF.format(LocalDateTime.now()))
+                .build();
+    }
+
+    protected String getPackageName(){
+        return PACKAGE_NAME_PREFIX
+                + cardInfo.getCardSet().name().toLowerCase()
+                + "." + cardInfo.getCardClass().name().toLowerCase();
+    }
+
+    protected FieldSpec buildFieldCost(){
+        return FieldSpec.builder(int.class, "COST")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getCost())
+                .build();
+    }
+    protected FieldSpec buildFieldDesc(){
+        return FieldSpec.builder(String.class, "DESCRIPTION")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", cardInfo.getCardText())
+                .build();
+    }
+    protected FieldSpec buildFieldCardName(){
+        return FieldSpec.builder(String.class, "CARD_NAME")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", cardInfo.getCardCnName())
+                .build();
+    }
+    protected FieldSpec buildFieldCardId(){
+        return FieldSpec.builder(String.class, "CARD_ID")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", cardInfo.getCardId())
+                .build();
+    }
+    protected FieldSpec buildFieldCardSet(){
+        return FieldSpec.builder(CardSet.class, "CARD_SET")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getCardSet().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardSet())
+                .build();
+    }
+    protected FieldSpec buildFieldCardClass(){
+        return FieldSpec.builder(CardClass.class, "CARD_CLASS")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getCardClass().getClass().getSimpleName() + "." + cardInfo.getCardClass())
+                .build();
+    }
+    protected FieldSpec buildFieldCardType(){
+        return FieldSpec.builder(CardType.class, "CARD_TYPE")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getCardType().getClass().getSimpleName() + "." + cardInfo.getCardType())
+                .build();
+    }
+    protected FieldSpec buildFieldRarity(){
+        return FieldSpec.builder(Rarity.class, "RARITY")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getRarity().getClass().getSimpleName() + "." + cardInfo.getRarity())
+                .build();
+    }
+
 }

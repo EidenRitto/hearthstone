@@ -33,4 +33,9 @@ public class CardInfo {
     private int charge;
     /**种族*/
     private Race race;
+
+    public CardInfo() {
+        this.rarity = Rarity.INVALID;
+        this.cardClass = CardClass.INVALID;
+    }
 }
