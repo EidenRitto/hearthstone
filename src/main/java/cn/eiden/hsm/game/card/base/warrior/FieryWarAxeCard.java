@@ -1,6 +1,11 @@
 package cn.eiden.hsm.game.card.base.warrior;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.enums.Rarity;
+import cn.eiden.hsm.game.objct.WeaponObject;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.weapon.base.warrior.FieryWarAxe;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
@@ -20,8 +25,13 @@ public class FieryWarAxeCard extends AbstractWeaponCard {
     private static final Long ATTACK_VALUE = 3L;
     private static final Long DURABLE = 2L;
 
+    public FieryWarAxeCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, long atk, long durability) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity, atk, durability);
+    }
 
-    public FieryWarAxeCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Warrior, DURABLE, ATTACK_VALUE,new FieryWarAxe());
+
+    @Override
+    public WeaponObject createWeapon() {
+        return null;
     }
 }

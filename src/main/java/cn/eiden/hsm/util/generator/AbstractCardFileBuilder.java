@@ -1,5 +1,6 @@
 package cn.eiden.hsm.util.generator;
 
+import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
 import cn.eiden.hsm.dbdata.Tag;
@@ -7,10 +8,7 @@ import cn.eiden.hsm.enums.*;
 import cn.eiden.hsm.util.CardGeneratorUtils;
 import cn.eiden.hsm.util.EnumUtils;
 import cn.eiden.hsm.util.JavaBeansUtil;
-import com.squareup.javapoet.CodeBlock;
-import com.squareup.javapoet.FieldSpec;
-import com.squareup.javapoet.JavaFile;
-import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.*;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.lang.model.element.Modifier;
@@ -185,6 +183,20 @@ public abstract class AbstractCardFileBuilder {
         return FieldSpec.builder(Race.class, "RACE")
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
                 .initializer("$L", cardInfo.getRace().getClass().getSimpleName() + "." + cardInfo.getRace())
+                .build();
+    }
+
+    protected FieldSpec buildFieldDurability() {
+        return FieldSpec.builder(long.class, "DURABILITY")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", Long.parseLong(String.valueOf(cardInfo.getDurability())))
+                .build();
+    }
+
+    protected AnnotationSpec buildClassAnnotation(){
+        return AnnotationSpec.builder(Id.class)
+                .addMember("value","$L",Integer.parseInt(cardInfo.getId()))
+                .addMember("name","$S",cardInfo.getCardCnName())
                 .build();
     }
 

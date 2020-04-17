@@ -69,6 +69,18 @@ public class CardGeneratorUtils {
                             Rarity.class, e -> e.getCode() == cardRarityValue)).orElse(null);
                     cardCache.setRarity(cardRarity);
                     break;
+                case DURABILITY:
+                    final int durabilityValue = Integer.parseInt(tag.getValue());
+                    cardCache.setDurability(durabilityValue);
+                    break;
+                case ATK:
+                    final int atkValue = Integer.parseInt(tag.getValue());
+                    cardCache.setAtk(atkValue);
+                    break;
+                case HEALTH:
+                    final int healthValue = Integer.parseInt(tag.getValue());
+                    cardCache.setHealth(healthValue);
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

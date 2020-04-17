@@ -16,6 +16,7 @@ public enum CardType {
     SPELL (5),
     ABILITY (5),
     ENCHANTMENT (6),
+    /**武器牌*/
     WEAPON (7),
     ITEM (8),
     TOKEN (9),

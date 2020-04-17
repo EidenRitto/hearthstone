@@ -1,6 +1,10 @@
 package cn.eiden.hsm.game.card;
 
 
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.WeaponObject;
 import lombok.Getter;
@@ -14,16 +18,20 @@ import lombok.Setter;
 @Getter
 public abstract class AbstractWeaponCard extends AbstractCard {
     /**武器攻击力*/
-    private long weaponAttack;
+    private long atk;
     /**耐久度*/
-    private long weaponDurable;
-    /**卡牌对应的随从*/
-    private WeaponObject weapon;
+    private long durability;
 
-    public AbstractWeaponCard(int cost, String description, String cardName, Profession profession, long weaponAttack, long weaponDurable, WeaponObject weapon) {
-        super(cost, description, cardName, profession);
-        this.weaponAttack = weaponAttack;
-        this.weaponDurable = weaponDurable;
-        this.weapon = weapon;
+    public AbstractWeaponCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, long atk, long durability) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
+        this.atk = atk;
+        this.durability = durability;
     }
+
+    /**
+     * 组合优于继承
+     * 创建卡牌对应的武器
+     * @return 卡牌对应的武器
+     * */
+    public abstract WeaponObject createWeapon();
 }

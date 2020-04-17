@@ -30,6 +30,9 @@ public class CardFileDirector {
             case MINION:
                 abstractCardFileBuilder = new MinionCardFileBuilder(cardInfo);
                 break;
+            case WEAPON:
+                abstractCardFileBuilder = new WeaponCardFileBuilder(cardInfo);
+                break;
             default:
                 break;
         }

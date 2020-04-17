@@ -33,6 +33,8 @@ public class CardInfo {
     private int charge;
     /**种族*/
     private Race race;
+    /**武器耐久*/
+    private int durability;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

@@ -59,6 +59,7 @@ public enum GameTag {
     CARDTEXT_INHAND (184),
     CARDNAME (185),
     CARD_ID (186),
+    /**（武器）耐久*/
     DURABILITY (187),
     SILENCED (188),
     WINDFURY (189),

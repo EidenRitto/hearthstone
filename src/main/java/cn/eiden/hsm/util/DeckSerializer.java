@@ -44,7 +44,8 @@ public class DeckSerializer {
         return deck;
     }
 
-    public Deck deserializeDeckString(String deckString) {
+    public String deserializeDeckString(String deckString) {
+        StringBuilder stringBuilder = new StringBuilder();
         Reflections reflections = new Reflections("cn.eiden.hsm.game.card.dynamic");
         //反射获取全部事件
         Map<Integer, String> cardDictionary = new HashMap<>(7000);
@@ -74,31 +75,33 @@ public class DeckSerializer {
         int numSingleCards = (int) read(bytes);
         for (int i = 0; i < numSingleCards; i++) {
             int dbfId = (int) read(bytes);
-            OutputInfo.info(cardDictionary.get(dbfId) + "1张");
+            System.out.println(cardDictionary.get(dbfId) + "1张");
+            stringBuilder.append(cardDictionary.get(dbfId)).append("1张").append("\n");
         }
 
         int numDoubleCards = (int) read(bytes);
         for (int i = 0; i < numDoubleCards; i++) {
             int dbfId = (int) read(bytes);
-            OutputInfo.info(cardDictionary.get(dbfId) + "2张");
+            System.out.println(cardDictionary.get(dbfId) + "2张");
+            stringBuilder.append(cardDictionary.get(dbfId)).append("2张").append("\n");
         }
 
         int numMultiCards = (int) read(bytes);
         for (int i = 0; i < numMultiCards; i++) {
             int dbfId = (int) read(bytes);
             int count = (int) read(bytes);
-            OutputInfo.info(cardDictionary.get(dbfId) + count + "张");
+            stringBuilder.append(cardDictionary.get(dbfId)).append(count).append("张").append("\n");
         }
         offset = 0;
-        return null;
+        return stringBuilder.toString();
     }
 
     public static void main(String[] args) {
         new DeckSerializer().deserializeDeckString("AAECAQcCrwSRvAIOHLACkQP/A44FqAXUBaQG7gbnB+8HgrACiLACub8CAA==");
     }
 
-    public static void decodeStr(String deckStr) {
-        new DeckSerializer().deserializeDeckString(deckStr);
+    public static String decodeStr(String deckStr) {
+        return new DeckSerializer().deserializeDeckString(deckStr);
     }
 
     public long read(byte[] bytes) {

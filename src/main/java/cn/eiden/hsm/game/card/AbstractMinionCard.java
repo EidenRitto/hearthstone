@@ -42,5 +42,10 @@ public abstract class AbstractMinionCard extends AbstractCard {
         this.race = race;
     }
 
+    /**
+     * 组合优于继承！
+     * 创建卡牌对应的随从
+     * @return 卡牌对应的随从
+     * */
     public abstract MinionObject createMinion();
 }
