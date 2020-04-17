@@ -35,8 +35,8 @@ public abstract class AbstractMinionCard extends AbstractCard {
         this.atk = atk;
     }
 
-    public AbstractMinionCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
-        super(cardName, cost, description, cardId, cardSet, cardClass, cardType, rarity);
+    public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
         this.health = health;
         this.atk = atk;
         this.race = race;

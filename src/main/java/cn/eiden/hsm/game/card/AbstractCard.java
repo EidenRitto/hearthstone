@@ -11,7 +11,7 @@ import cn.eiden.hsm.game.GameObject;
 /**
  * @author : Eiden J.P Zhou
  * @date : 2018/9/12
- * @version : 1.0
+ * @version : 2.0
  *
  * */
 public abstract class AbstractCard extends GameObject implements Card{
@@ -22,6 +22,8 @@ public abstract class AbstractCard extends GameObject implements Card{
     private Profession profession;
 
     /**id*/
+    private String id;
+    /**cardId*/
     private String cardId;
     /**版本*/
     private CardSet cardSet;
@@ -42,10 +44,11 @@ public abstract class AbstractCard extends GameObject implements Card{
         this.profession = profession;
     }
 
-    public AbstractCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
         this.cardName = cardName;
         this.cost = cost;
         this.description = description;
+        this.id = id;
         this.cardId = cardId;
         this.cardSet = cardSet;
         this.cardClass = cardClass;

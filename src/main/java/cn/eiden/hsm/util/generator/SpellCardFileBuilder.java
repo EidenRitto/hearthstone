@@ -1,11 +1,13 @@
 package cn.eiden.hsm.util.generator;
 
+import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.util.CardGeneratorUtils;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -31,19 +33,21 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
 
     @Override
     public void buildFile() {
-        if (cardInfo.getCardType() != CardType.SPELL){
-            log.debug("暂无指定建造者,跳过卡牌【"+cardInfo.getCardCnName()+"】");
-            return;
-        }
+
         final String fileName = formatFileName();
 
         TypeSpec myClass = TypeSpec.classBuilder(fileName)
                 .superclass(AbstractMagicCard.class)
                 .addJavadoc(this.classComment())
                 .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(AnnotationSpec.builder(Id.class)
+                        .addMember("value","$L",Integer.parseInt(cardInfo.getId()))
+                        .addMember("name","$S",cardInfo.getCardCnName())
+                        .build())
                 .addField(this.buildFieldCost())
                 .addField(this.buildFieldDesc())
                 .addField(this.buildFieldCardName())
+                .addField(this.buildFieldId())
                 .addField(this.buildFieldCardId())
                 .addField(this.buildFieldCardSet())
                 .addField(this.buildFieldCardClass())
@@ -51,8 +55,8 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldRarity())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N)"
-                                , "CARD_NAME", "COST", "DESCRIPTION", "CARD_ID"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                                , "CARD_NAME", "COST", "DESCRIPTION", "ID", "CARD_ID"
                                 , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY")
                         .build())
                 .addMethod(MethodSpec.methodBuilder("magicEffect")

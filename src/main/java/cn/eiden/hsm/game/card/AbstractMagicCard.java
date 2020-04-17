@@ -28,7 +28,7 @@ public abstract class AbstractMagicCard extends AbstractCard {
         super(cost, description, cardName ,profession);
     }
 
-    public AbstractMagicCard(String cardName, int cost, String description, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
-        super(cardName, cost, description, cardId, cardSet, cardClass, cardType, rarity);
+    public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
     }
 }

@@ -125,6 +125,13 @@ public abstract class AbstractCardFileBuilder {
                 .build();
     }
 
+    protected FieldSpec buildFieldId() {
+        return FieldSpec.builder(String.class, "ID")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$S", cardInfo.getId())
+                .build();
+    }
+
     protected FieldSpec buildFieldCardId() {
         return FieldSpec.builder(String.class, "CARD_ID")
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
