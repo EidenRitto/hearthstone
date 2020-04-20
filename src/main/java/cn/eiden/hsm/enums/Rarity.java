@@ -8,7 +8,9 @@ package cn.eiden.hsm.enums;
 public enum Rarity {
     /**无效*/
     INVALID(0),
+    /**普通*/
     COMMON(1),
+    /**基本*/
     FREE(2),
     /**稀有*/
     RARE(3),

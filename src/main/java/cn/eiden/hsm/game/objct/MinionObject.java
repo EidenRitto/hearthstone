@@ -18,4 +18,9 @@ public class MinionObject extends AbstractMinion {
     public MinionObject(String minionName, Long healthLimit, Long attackValue, Race race) {
         super(minionName, healthLimit, attackValue,race);
     }
+
+    @Override
+    public void setTaunt(boolean taunt) {
+        super.setTaunt(taunt);
+    }
 }
