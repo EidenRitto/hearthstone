@@ -81,6 +81,8 @@ public class CardGeneratorUtils {
                     final int healthValue = Integer.parseInt(tag.getValue());
                     cardCache.setHealth(healthValue);
                     break;
+                case TAUNT:
+                    cardCache.setTaunt(Integer.parseInt(tag.getValue()));
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

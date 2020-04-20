@@ -36,6 +36,8 @@ public class CardInfo {
     /**武器耐久*/
     private int durability;
 
+    private int taunt;
+
     public CardInfo() {
         this.rarity = Rarity.INVALID;
         this.cardClass = CardClass.INVALID;
