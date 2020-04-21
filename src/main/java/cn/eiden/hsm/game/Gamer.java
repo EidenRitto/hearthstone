@@ -334,9 +334,9 @@ public class Gamer extends GameObject {
      * 计算总法强
      */
     public int getGamerSpellDamage() {
-        int gamerSpellDamage = hero.getSpellDamage();
+        int gamerSpellDamage = hero.getSpellPower();
         for (Minion minion : minions) {
-            gamerSpellDamage += minion.getSpellDamage();
+            gamerSpellDamage += minion.getSpellPower();
         }
         return gamerSpellDamage;
     }
@@ -497,16 +497,22 @@ public class Gamer extends GameObject {
      */
     public List<Integer> findAllCanBeAttackMinionsId() {
         List<Integer> resultList = new ArrayList<>();
+        boolean hasTaunt = false;
         //判断敌方是否拥有嘲讽随从，有则添加嘲讽随从，
         for (int i = 0; i < enemy.getMinions().size(); i++) {
-            if (enemy.getMinion(i).isTaunt()) {
+            Minion minion = enemy.getMinion(i);
+            if (minion.isTaunt() && !minion.isStealth()) {
                 resultList.add(i);
+                hasTaunt = true;
             }
         }
         //无则添加全部
-        if (resultList.size() == 0) {
+        if (!hasTaunt) {
             for (int i = 0; i < enemy.getMinions().size(); i++) {
-                resultList.add(i);
+                Minion minion = enemy.getMinion(i);
+                if (!minion.isStealth()){
+                    resultList.add(i);
+                }
             }
         }
         return resultList;

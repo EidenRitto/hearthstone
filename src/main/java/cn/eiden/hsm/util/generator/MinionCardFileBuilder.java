@@ -71,6 +71,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
             CodeBlock charge = CodeBlock.builder().addStatement("minionObject.addCharge()").build();
             core = core.toBuilder().add(charge).build();
         }
+        if (cardInfo.getStealth() == 1){
+            CodeBlock stealth = CodeBlock.builder().addStatement("minionObject.addStealth()").build();
+            core = core.toBuilder().add(stealth).build();
+        }
         return core;
     }
 }

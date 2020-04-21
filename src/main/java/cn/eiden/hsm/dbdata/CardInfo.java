@@ -38,6 +38,8 @@ public class CardInfo {
 
     private int taunt;
 
+    private int stealth;
+
     public CardInfo() {
         this.rarity = Rarity.INVALID;
         this.cardClass = CardClass.INVALID;

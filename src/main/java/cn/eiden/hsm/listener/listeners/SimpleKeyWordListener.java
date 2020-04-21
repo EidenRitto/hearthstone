@@ -8,8 +8,6 @@ import cn.eiden.hsm.game.keyword.Taunt;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
-import java.util.List;
-
 /**
  * @author Eiden J.P Zhou
  * @date 2020/3/19 15:59
@@ -26,7 +24,7 @@ public class SimpleKeyWordListener implements HearthListener {
             minion.addCharge();
         }
         if (minion instanceof SpellDamage){
-            minion.setSpellDamage(((SpellDamage) minion).spellDamageAdd());
+            minion.setSpellPower(((SpellDamage) minion).spellDamageAdd());
         }
     }
 }

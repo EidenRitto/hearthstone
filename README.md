@@ -16,9 +16,7 @@ PS：业余时间做，进度缓慢，AI的机器学习还得拖到N个版本后
 
 尚未实装的功能：
 
-191---STEALTH--隐藏
 1186---TWINSPELL_COPY--双生法术
-192---SPELLPOWER--法术强度
 194---DIVINE_SHIELD--圣盾
 470---FINISH_ATTACK_SPELL_ON_DAMAGE
 350---ADJACENT_BUFF

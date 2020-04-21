@@ -59,10 +59,13 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      * 是否具有嘲讽
      */
     private boolean isTaunt = false;
+
+    /**是否具有隐藏*/
+    private boolean stealth = false;
     /**
      * 法术强度
      */
-    private int spellDamage = 0;
+    private int spellPower = 0;
     /**
      * 种族
      */
@@ -225,13 +228,13 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     }
 
     @Override
-    public int getSpellDamage() {
-        return spellDamage;
+    public int getSpellPower() {
+        return spellPower;
     }
 
     @Override
-    public void setSpellDamage(int spellDamage) {
-        this.spellDamage = spellDamage;
+    public void setSpellPower(int spellPower) {
+        this.spellPower = spellPower;
     }
 
     @Override
@@ -270,6 +273,21 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     @Override
     public boolean isSilence() {
         return isSilence;
+    }
+
+    @Override
+    public void addStealth() {
+        stealth = true;
+    }
+
+    @Override
+    public void removeStealth() {
+        stealth = false;
+    }
+
+    @Override
+    public boolean isStealth() {
+        return stealth;
     }
 
     public AbstractMinion() {

@@ -150,14 +150,14 @@ public interface Minion {
      *
      * @return 法强
      */
-    int getSpellDamage();
+    int getSpellPower();
 
     /**
      * 设置法强
      *
-     * @param spellDamage 法强
+     * @param spellPower 法强
      */
-    void setSpellDamage(int spellDamage);
+    void setSpellPower(int spellPower);
 
     /**
      * 获取生命值上限
@@ -200,4 +200,20 @@ public interface Minion {
      * @return 沉默true
      */
     boolean isSilence();
+
+    /**
+     * 添加隐藏
+     * */
+    void addStealth();
+
+    /**
+     * 添加隐藏
+     * */
+    void removeStealth();
+
+    /**
+     * 是否隐藏
+     * @return 隐藏返回true
+     * */
+    boolean isStealth();
 }

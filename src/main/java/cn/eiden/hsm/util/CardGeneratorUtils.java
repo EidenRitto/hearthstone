@@ -86,6 +86,9 @@ public class CardGeneratorUtils {
                 case CHARGE:
                     cardCache.setCharge(Integer.parseInt(tag.getValue()));
                     break;
+                case STEALTH:
+                    cardCache.setStealth(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;
