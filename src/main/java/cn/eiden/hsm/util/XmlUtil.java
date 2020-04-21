@@ -20,9 +20,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Eiden J.P Zhou
@@ -40,7 +38,7 @@ public class XmlUtil {
      * @return
      * @throws Exception
      */
-    public static <T> List<T> xmlStrToObject(Class<T> clazz, String xmlPath) throws Exception {
+    public static <T> List<T> xmlStrToObject(Class<T> clazz, String xmlPath, String nodeName) throws Exception {
 
         //1.创建Reader对象
         SAXReader reader = new SAXReader();
@@ -49,16 +47,20 @@ public class XmlUtil {
         //3.获取根节点
         Element rootElement = document.getRootElement();
 
-        return elementToObject(clazz,rootElement);
+        return elementToObject(clazz,rootElement,nodeName);
     }
 
-    private static <T> List<T> elementToObject(Class<T> clazz, Element rootElement) throws Exception{
+    private static <T> List<T> elementToObject(Class<T> clazz, Element rootElement,String nodeName) throws Exception{
         List<T> resultList = new ArrayList<>();
         Field[] declaredFields = clazz.getDeclaredFields();
         Iterator rootIterator = rootElement.elementIterator();
         while (rootIterator.hasNext()){
-            T rootNode = clazz.newInstance();
             Element nextElement = (Element) rootIterator.next();
+            String qualifiedName = nextElement.getQualifiedName();
+            if (!qualifiedName.toLowerCase().equals(nodeName.toLowerCase())){
+                continue;
+            }
+            T rootNode = clazz.newInstance();
             List<Attribute> attributes = nextElement.attributes();
             for (Attribute attribute : attributes) {
                 for (Field declaredField : declaredFields) {
@@ -95,7 +97,7 @@ public class XmlUtil {
                                     ParameterizedType pt = (ParameterizedType) genericType;
                                     // 得到泛型里的class类型对象
                                     Class<?> actualTypeArgument = (Class<?>)pt.getActualTypeArguments()[0];
-                                    List<?> objects = elementToObject(actualTypeArgument, nextElement);
+                                    List<?> objects = elementToObject(actualTypeArgument, nextElement,name);
                                     Introspection.setPropertyValue(rootNode,declaredField.getName(),objects);
                                 }
                             }
@@ -121,24 +123,14 @@ public class XmlUtil {
 
     public static void main(String[] args) {
         try {
-            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\projectVS\\hsdata-master\\CardDefs.xml");
+            List<Entity> entities = XmlUtil.xmlStrToObject(Entity.class, "D:\\projectVS\\hsdata-master\\CardDefs.xml","Entity");
             CardFileDirector cardFileDirector = new CardFileDirector();
             for (Entity entity : entities) {
                 cardFileDirector.createCardFile(entity);
             }
-        log.info("总计写入成功卡牌数量："+ AbstractCardFileBuilder.successNum);
+            log.info("总计写入成功卡牌数量："+ AbstractCardFileBuilder.successNum);
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    private CardInfo buildCardInfo(Entity entity){
-        CardInfo cardInfo = new CardInfo();
-        cardInfo.setCardId(entity.getCardId());
-        cardInfo.setId(entity.getId());
-        List<Tag> tagList = entity.getTag();
-        for (Tag tag : tagList) {
-        }
-        return cardInfo;
     }
 }

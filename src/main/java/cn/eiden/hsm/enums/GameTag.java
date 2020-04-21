@@ -64,6 +64,7 @@ public enum GameTag {
     SILENCED (188),
     WINDFURY (189),
     TAUNT (190),
+    /**隐藏*/
     STEALTH (191),
     SPELLPOWER (192),
     DIVINE_SHIELD (194),
@@ -461,9 +462,11 @@ public enum GameTag {
     EXTRA_SPELL_CASTS_BASE (1140),
     MOUSE_OVER_CARD_APPEARANCE (1142),
     IS_ADVENTURE_SCENARIO (1172),
+    /**双生法术（复制）*/
     TWINSPELL_COPY (1186),
     PROXY_GALAKROND (1190),
     SIDEQUEST (1192),
+    /**双生法术*/
     TWINSPELL (1193),
     GALAKROND_IN_PLAY (1194),
     COIN_MANA_GEM (1199),

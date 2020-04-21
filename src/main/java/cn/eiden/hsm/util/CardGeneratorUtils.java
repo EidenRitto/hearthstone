@@ -17,7 +17,6 @@ import java.util.Objects;
 @Slf4j
 public class CardGeneratorUtils {
     public static final String PACKAGE_PATH = "\\src\\main\\java\\";
-
     public static CardInfo loadInCache(Entity entity){
         //缓存
         CardInfo cardCache = new CardInfo();
@@ -83,6 +82,10 @@ public class CardGeneratorUtils {
                     break;
                 case TAUNT:
                     cardCache.setTaunt(Integer.parseInt(tag.getValue()));
+                    break;
+                case CHARGE:
+                    cardCache.setCharge(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

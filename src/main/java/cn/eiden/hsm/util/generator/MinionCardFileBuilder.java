@@ -5,6 +5,7 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.objct.MinionObject;
 import com.squareup.javapoet.AnnotationSpec;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import lombok.extern.slf4j.Slf4j;
@@ -52,10 +53,24 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
                         .returns(MinionObject.class)
-                        .addStatement("return new $T($N, $N, $N, $N)", MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE")
+                        .addCode(addAdditionalField())
+                        .addStatement("return minionObject")
                         .addJavadoc("$S\n", cardInfo.getCardText())
                         .build())
                 .build();
         writeToSourceFile(myClass);
+    }
+
+    private CodeBlock addAdditionalField(){
+        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)",MinionObject.class,MinionObject.class,"CARD_NAME", "HEALTH", "ATK", "RACE").build();
+        if (cardInfo.getTaunt() == 1){
+            CodeBlock taunt = CodeBlock.builder().addStatement("minionObject.addTaunt()").build();
+            core = core.toBuilder().add(taunt).build();
+        }
+        if (cardInfo.getCharge() == 1){
+            CodeBlock charge = CodeBlock.builder().addStatement("minionObject.addCharge()").build();
+            core = core.toBuilder().add(charge).build();
+        }
+        return core;
     }
 }
