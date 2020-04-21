@@ -62,6 +62,9 @@ public abstract class AbstractMinion extends GameObject implements Minion {
 
     /**是否具有隐藏*/
     private boolean stealth = false;
+
+    /**是否具有圣盾*/
+    private boolean divineShield = false;
     /**
      * 法术强度
      */
@@ -111,10 +114,15 @@ public abstract class AbstractMinion extends GameObject implements Minion {
 
     @Override
     public void beHurt(long number) {
-        MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(),this);
-        OutputInfo.info(minionName + "受到" + number + "点伤害");
-        health -= number;
-        getOwner().getEventManager().call(minionBeHurtEvent);
+        if (divineShield){
+            OutputInfo.info(minionName + "圣盾抵消伤害");
+            removeDivineShield();
+        }else {
+            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(),this);
+            OutputInfo.info(minionName + "受到" + number + "点伤害");
+            health -= number;
+            getOwner().getEventManager().call(minionBeHurtEvent);
+        }
     }
 
     @Override
@@ -288,6 +296,21 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     @Override
     public boolean isStealth() {
         return stealth;
+    }
+
+    @Override
+    public void addDivineShield() {
+        divineShield = true;
+    }
+
+    @Override
+    public void removeDivineShield() {
+        divineShield = false;
+    }
+
+    @Override
+    public boolean isDivineShield() {
+        return divineShield;
     }
 
     public AbstractMinion() {

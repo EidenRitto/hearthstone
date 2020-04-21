@@ -40,6 +40,8 @@ public class CardInfo {
 
     private int stealth;
 
+    private int divineShield;
+
     public CardInfo() {
         this.rarity = Rarity.INVALID;
         this.cardClass = CardClass.INVALID;

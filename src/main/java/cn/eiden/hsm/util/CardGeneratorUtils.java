@@ -89,6 +89,9 @@ public class CardGeneratorUtils {
                 case STEALTH:
                     cardCache.setStealth(Integer.parseInt(tag.getValue()));
                     break;
+                case DIVINE_SHIELD:
+                    cardCache.setDivineShield(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

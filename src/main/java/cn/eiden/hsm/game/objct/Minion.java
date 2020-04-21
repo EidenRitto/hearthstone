@@ -207,7 +207,7 @@ public interface Minion {
     void addStealth();
 
     /**
-     * 添加隐藏
+     * 移除隐藏
      * */
     void removeStealth();
 
@@ -216,4 +216,20 @@ public interface Minion {
      * @return 隐藏返回true
      * */
     boolean isStealth();
+
+    /**
+     * 添加圣盾
+     * */
+    void addDivineShield();
+
+    /**
+     * 移除圣盾
+     * */
+    void removeDivineShield();
+
+    /**
+     * 是否有圣盾
+     * @return 有圣盾返回true
+     * */
+    boolean isDivineShield();
 }
