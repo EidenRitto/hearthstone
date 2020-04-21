@@ -3,7 +3,6 @@ package cn.eiden.hsm.game.objct;
 
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.output.OutputInfo;
@@ -67,9 +66,6 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     /**
      * 种族
      */
-    @Deprecated
-    protected Ethnicity ethnicity;
-
     private Race race;
     /**
      * 拥有者
@@ -244,8 +240,8 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     }
 
     @Override
-    public Ethnicity getEthnicity() {
-        return ethnicity;
+    public Race getRace() {
+        return race;
     }
 
     @Override

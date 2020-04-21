@@ -1,6 +1,5 @@
 package cn.eiden.hsm.game.objct.minion.base.derivative;
 
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.objct.MinionObject;
 
 /**
@@ -16,6 +15,5 @@ public class Panther extends MinionObject {
 
     public Panther() {
         super(SERVANT_NAME,HEALTH, ATTACK);
-        ethnicity = Ethnicity.Beast;
     }
 }

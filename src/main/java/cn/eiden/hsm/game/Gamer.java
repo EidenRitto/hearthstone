@@ -2,6 +2,7 @@ package cn.eiden.hsm.game;
 
 
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.event.EventManager;
 import cn.eiden.hsm.event.events.AddMinionEvent;
@@ -14,8 +15,6 @@ import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Ethnicity;
-import cn.eiden.hsm.game.tags.Stand;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -404,9 +403,9 @@ public class Gamer extends GameObject {
     /**
      * 检查场上是否拥有指定种族的随从
      */
-    public boolean checkHaveEthnicity(Ethnicity ethnicity) {
+    public boolean checkHaveEthnicity(Race race) {
         for (Minion minion : minions) {
-            if (minion.getEthnicity() == ethnicity) {
+            if (minion.getRace() == race) {
                 return true;
             }
         }

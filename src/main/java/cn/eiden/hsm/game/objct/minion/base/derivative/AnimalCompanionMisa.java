@@ -2,7 +2,6 @@ package cn.eiden.hsm.game.objct.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.Taunt;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Ethnicity;
 
 /**
  * @author : Eiden J.P Zhou
@@ -17,6 +16,5 @@ public class AnimalCompanionMisa extends MinionObject implements Taunt {
 
     public AnimalCompanionMisa() {
         super(SERVANT_NAME,HEALTH, ATTACK);
-        ethnicity = Ethnicity.Beast;
     }
 }

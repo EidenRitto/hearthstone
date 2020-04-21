@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.keyword.BuffHole;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.objct.Minion;
 
@@ -21,11 +21,10 @@ public class TimberWolf extends MinionObject implements BuffHole {
 
     private static final long BUFF_ATTACK = 1;
     private static final long BUFF_HEALTH = 0;
-    private static final Ethnicity BUFF_PREREQUISITE = Ethnicity.Beast;
+    private static final Race BUFF_PREREQUISITE = Race.BEAST;
 
     public TimberWolf() {
         super(SERVANT_NAME,HEALTH, ATTACK);
-        ethnicity = Ethnicity.Beast;
     }
 
 
@@ -33,7 +32,7 @@ public class TimberWolf extends MinionObject implements BuffHole {
     public void doBuffHole() {
         List<Minion> minions = this.getOwner().getMinions();
         for (Minion minion : minions) {
-            if (minion.getEthnicity() == BUFF_PREREQUISITE && !minion.equals(this) ){
+            if (minion.getRace() == BUFF_PREREQUISITE && !minion.equals(this) ){
                 minion.addAttack(BUFF_ATTACK);
             }
         }

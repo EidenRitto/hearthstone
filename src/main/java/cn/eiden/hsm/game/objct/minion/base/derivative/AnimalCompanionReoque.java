@@ -1,7 +1,6 @@
 package cn.eiden.hsm.game.objct.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.BuffHole;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.objct.Minion;
 
@@ -23,7 +22,6 @@ public class AnimalCompanionReoque extends MinionObject implements BuffHole {
 
     public AnimalCompanionReoque() {
         super(SERVANT_NAME, HEALTH, ATTACK);
-        ethnicity = Ethnicity.Beast;
     }
 
     @Override

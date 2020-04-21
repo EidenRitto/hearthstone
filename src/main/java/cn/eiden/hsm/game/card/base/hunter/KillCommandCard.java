@@ -2,10 +2,10 @@ package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.tags.Version;
@@ -35,7 +35,7 @@ public class KillCommandCard extends AbstractMagicCard {
     public void magicEffect(Gamer gamer, Minion target){
         int damage;
         //检查是否有野兽
-        if (gamer.checkHaveEthnicity(Ethnicity.Beast)){
+        if (gamer.checkHaveEthnicity(Race.BEAST)){
             damage = MAGIC_DAMAGE_PLUS + gamer.getGamerSpellDamage();
         }else {
             damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();

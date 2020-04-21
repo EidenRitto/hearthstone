@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.objct.minion.base.hunter;
 
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.output.OutputInfo;
@@ -27,7 +27,7 @@ public class HoundMaster extends MinionObject implements Battle {
 
     @Override
     public void doBattle(Minion minion){
-        if (minion.getEthnicity() != Ethnicity.Beast){
+        if (minion.getRace() != Race.BEAST){
             return;
         }
         minion.addAttack(ADD_ATTACK);

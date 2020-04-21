@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.objct;
 
-import cn.eiden.hsm.game.tags.Ethnicity;
+import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
 
 /**
@@ -171,7 +171,7 @@ public interface Minion {
      *
      * @return 种族
      */
-    Ethnicity getEthnicity();
+    Race getRace();
 
     /**
      * 是否嘲讽

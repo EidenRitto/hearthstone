@@ -1,6 +1,5 @@
 package cn.eiden.hsm.annotation;
 
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.tags.Version;
 

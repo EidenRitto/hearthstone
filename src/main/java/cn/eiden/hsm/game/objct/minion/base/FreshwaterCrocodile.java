@@ -1,7 +1,6 @@
 package cn.eiden.hsm.game.objct.minion.base;
 
 import cn.eiden.hsm.enums.Race;
-import cn.eiden.hsm.game.tags.Ethnicity;
 import cn.eiden.hsm.game.objct.MinionObject;
 
 /**
