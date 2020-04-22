@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.card;
 
-import cn.eiden.hsm.game.tags.Profession;
+import cn.eiden.hsm.enums.CardClass;
 
 /**
  * 卡牌
@@ -30,5 +30,5 @@ public interface Card {
      * 获取职业
      * @return 职业
      */
-    Profession getProfession();
+    CardClass getCardClass();
 }

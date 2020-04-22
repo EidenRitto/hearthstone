@@ -2,12 +2,14 @@ package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.tags.Version;
+
 
 /**
  * @author : Eiden J.P Zhou
@@ -15,7 +17,7 @@ import cn.eiden.hsm.game.tags.Version;
  *  奥术射击
  *
  */
-@Tags(profession = Profession.Hunter,version = Version.BASE)
+@Tags(cardClass = CardClass.HUNTER, cardSet = CardSet.CORE)
 public class ArcaneShotCard extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "造成2点伤害。";
@@ -24,7 +26,7 @@ public class ArcaneShotCard extends AbstractMagicCard {
     private static final int MAGIC_DAMAGE = 2;
 
     public ArcaneShotCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.HUNTER);
     }
 
     @Override

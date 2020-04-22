@@ -1,12 +1,13 @@
 package cn.eiden.hsm.game.card.base.druid;
 
 import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.tags.Version;
+
+
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -14,7 +15,7 @@ import cn.eiden.hsm.output.OutputInfo;
  * @author : Eiden J.P Zhou
  * @date 2018/9/22
  */
-@Tags(profession = Profession.Druid,version = Version.BASE)
+@Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
 public class SavageRoarCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "在本回合你的所有角色获得2点攻击。";
@@ -23,7 +24,7 @@ public class SavageRoarCard extends AbstractMagicCard {
     private static final long ADD_ATTACK = 2;
 
     public SavageRoarCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.DRUID);
     }
 
     @Override

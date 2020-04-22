@@ -2,12 +2,14 @@ package cn.eiden.hsm.game.card.classic.druid;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Version;
+
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -16,7 +18,7 @@ import cn.eiden.hsm.output.OutputInfo;
  *  愤怒
  *
  */
-@Tags(profession = Profession.Druid,version = Version.BASE)
+@Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
 public class WarthCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";
@@ -28,7 +30,7 @@ public class WarthCard extends AbstractMagicCard {
     private static final int DRAW_CARD_NUMBER = 1;
 
     public WarthCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.HUNTER);
     }
 
     @Override

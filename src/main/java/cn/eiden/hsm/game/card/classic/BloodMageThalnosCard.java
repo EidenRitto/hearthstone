@@ -1,11 +1,12 @@
 package cn.eiden.hsm.game.card.classic;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.minion.classic.BloodMageThalnos;
+
 import cn.eiden.hsm.game.card.AbstractMinionCard;
-import cn.eiden.hsm.game.tags.Version;
+
 
 
 /**
@@ -14,7 +15,7 @@ import cn.eiden.hsm.game.tags.Version;
  *  血法
  *
  */
-@Tags(profession = Profession.Neutral,version = Version.BASE)
+@Tags(cardClass = CardClass.NEUTRAL, cardSet = CardSet.CORE)
 public class BloodMageThalnosCard extends AbstractMinionCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "";
@@ -23,7 +24,7 @@ public class BloodMageThalnosCard extends AbstractMinionCard {
     private static final Long HEALTH_LIMIT = 1L;
 
     public BloodMageThalnosCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral, HEALTH_LIMIT, ATTACK_VALUE);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.NEUTRAL, HEALTH_LIMIT, ATTACK_VALUE);
     }
 
     @Override

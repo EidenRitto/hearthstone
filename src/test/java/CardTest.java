@@ -1,3 +1,4 @@
+import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.LeperGnomeCard;
@@ -10,7 +11,7 @@ import cn.eiden.hsm.game.card.classic.druid.MarkOfNatureCard;
 import cn.eiden.hsm.game.card.classic.druid.NaturalizeCard;
 import cn.eiden.hsm.game.card.classic.druid.PowerOfTheWildCard;
 import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.game.objct.minion.base.FreshwaterCrocodile;
 import cn.eiden.hsm.game.objct.minion.base.LeperGnome;
 import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
@@ -195,8 +196,8 @@ public class CardTest {
             cards.add(new SwipeCard());
         }
 
-        Gamer gamer = new Gamer(new HeroObjectAbstract(Profession.Priest),cards);
-        Gamer enemy = new Gamer(new HeroObjectAbstract(Profession.Warlock),cards);
+        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.PRIEST),cards);
+        Gamer enemy = new Gamer(new HeroObjectAbstract(CardClass.WARLOCK),cards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
         return gamer;

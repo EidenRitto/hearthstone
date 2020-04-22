@@ -1,6 +1,7 @@
 package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.annotation.Id;
+import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
 import cn.eiden.hsm.dbdata.Tag;
@@ -197,6 +198,13 @@ public abstract class AbstractCardFileBuilder {
         return AnnotationSpec.builder(Id.class)
                 .addMember("value","$L",Integer.parseInt(cardInfo.getId()))
                 .addMember("name","$S",cardInfo.getCardCnName())
+                .build();
+    }
+
+    protected AnnotationSpec buildTagAnnotation(){
+        return AnnotationSpec.builder(Tags.class)
+                .addMember("cardClass","$L",cardInfo.getCardClass().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardClass())
+                .addMember("cardSet","$L",cardInfo.getCardSet().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardSet())
                 .build();
     }
 

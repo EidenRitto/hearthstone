@@ -3,8 +3,6 @@ package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.enums.*;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.Minion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,13 +27,13 @@ public abstract class AbstractMinionCard extends AbstractCard {
         this.atk = atk;
     }
 
-    public AbstractMinionCard(int cost, String description, String cardName, Profession profession, Long health, Long atk) {
-        super(cost, description, cardName, profession);
+    public AbstractMinionCard(int cost, String description, String cardName, CardClass cardClass, Long health, Long atk) {
+        super(cost, description, cardName, cardClass);
         this.health = health;
         this.atk = atk;
     }
 
-    public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
+    public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
         this.health = health;
         this.atk = atk;

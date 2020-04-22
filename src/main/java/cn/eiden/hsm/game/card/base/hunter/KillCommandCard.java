@@ -2,13 +2,15 @@ package cn.eiden.hsm.game.card.base.hunter;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.game.objct.MinionObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.tags.Version;
+
 
 /**
  * @author : Eiden J.P Zhou
@@ -16,7 +18,7 @@ import cn.eiden.hsm.game.tags.Version;
  *  杀戮命令
  *
  */
-@Tags(profession = Profession.Hunter,version = Version.BASE)
+@Tags(cardClass = CardClass.HUNTER, cardSet = CardSet.CORE)
 public class KillCommandCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "造成3点伤害。如果你控制野兽，则造成5点伤害";
@@ -27,7 +29,7 @@ public class KillCommandCard extends AbstractMagicCard {
     private static final int MAGIC_DAMAGE_PLUS = 5;
 
     public KillCommandCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.HUNTER);
     }
 
     @Override

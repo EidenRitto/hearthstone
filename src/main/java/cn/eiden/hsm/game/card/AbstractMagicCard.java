@@ -6,7 +6,6 @@ import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.Gamer;
 
 /**
@@ -24,11 +23,11 @@ public abstract class AbstractMagicCard extends AbstractCard {
      */
     public abstract void magicEffect(Gamer gamer, Minion target);
 
-    public AbstractMagicCard(int cost, String description, String cardName, Profession profession) {
-        super(cost, description, cardName ,profession);
+    public AbstractMagicCard(int cost, String description, String cardName, CardClass cardClass) {
+        super(cost, description, cardName ,cardClass);
     }
 
-    public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+    public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
     }
 }

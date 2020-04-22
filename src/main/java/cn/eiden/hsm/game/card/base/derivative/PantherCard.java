@@ -1,8 +1,8 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
+import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
+
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
@@ -20,7 +20,7 @@ public class PantherCard extends AbstractMinionCard {
 
 
     public PantherCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Druid, HEALTH_LIMIT, ATTACK_VALUE);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.DRUID, HEALTH_LIMIT, ATTACK_VALUE);
     }
 
     @Override

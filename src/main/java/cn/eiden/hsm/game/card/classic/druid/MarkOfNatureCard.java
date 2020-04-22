@@ -2,12 +2,14 @@ package cn.eiden.hsm.game.card.classic.druid;
 
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Version;
+
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -15,7 +17,7 @@ import cn.eiden.hsm.output.OutputInfo;
  * @date 2018/9/22
  * 自然印记
  */
-@Tags(profession = Profession.Druid,version = Version.BASE)
+@Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
 public class MarkOfNatureCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "抉择：让一个随从获得+4攻击力;或者获得+4生命值并具有嘲讽。";
@@ -26,7 +28,7 @@ public class MarkOfNatureCard extends AbstractMagicCard {
     private static final long ADD_ATTACK = 4;
 
     public MarkOfNatureCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.HUNTER);
     }
 
     @Override

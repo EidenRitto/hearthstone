@@ -30,6 +30,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .addJavadoc(this.classComment())
                 .addModifiers(Modifier.PUBLIC)
                 .addAnnotation(this.buildClassAnnotation())
+                .addAnnotation(this.buildTagAnnotation())
                 .addField(this.buildFieldCost())
                 .addField(this.buildFieldDesc())
                 .addField(this.buildFieldCardName())

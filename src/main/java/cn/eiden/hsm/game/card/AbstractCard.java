@@ -5,7 +5,6 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
-import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.GameObject;
 
 /**
@@ -18,8 +17,6 @@ public abstract class AbstractCard extends GameObject implements Card{
     private String cardName;
     private int cost;
     private String description;
-    @Deprecated
-    private Profession profession;
 
     /**id*/
     private String id;
@@ -28,7 +25,7 @@ public abstract class AbstractCard extends GameObject implements Card{
     /**版本*/
     private CardSet cardSet;
     /**职业*/
-    private CardClass cardClass;
+    private cn.eiden.hsm.enums.CardClass cardClass;
     /**类型*/
     private CardType cardType;
     /**稀有度*/
@@ -37,14 +34,14 @@ public abstract class AbstractCard extends GameObject implements Card{
     public AbstractCard() {
     }
 
-    public AbstractCard(int cost, String description,String cardName,Profession profession) {
+    public AbstractCard(int cost, String description, String cardName, CardClass cardClass) {
         this.cost = cost;
         this.description = description;
         this.cardName = cardName;
-        this.profession = profession;
+        this.cardClass = cardClass;
     }
 
-    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
+    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity) {
         this.cardName = cardName;
         this.cost = cost;
         this.description = description;
@@ -72,7 +69,7 @@ public abstract class AbstractCard extends GameObject implements Card{
     }
 
     @Override
-    public Profession getProfession() {
-        return profession;
+    public CardClass getCardClass() {
+        return cardClass;
     }
 }

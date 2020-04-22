@@ -1,11 +1,12 @@
 package cn.eiden.hsm.game.card.base;
 
 import cn.eiden.hsm.annotation.Tags;
+import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.tags.Profession;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.tags.Version;
+
 
 /**
  * @author : Eiden J.P Zhou
@@ -13,7 +14,7 @@ import cn.eiden.hsm.game.tags.Version;
  * @version : 1.0
  *
  * */
-@Tags(profession = Profession.Neutral,version = Version.BASE)
+@Tags(cardClass = CardClass.NEUTRAL, cardSet = CardSet.CORE)
 public class CoinCard extends AbstractMagicCard {
     private static final int COST = 0;
     private static final String DESCRIPTION = "获得一个法力水晶。";
@@ -21,7 +22,7 @@ public class CoinCard extends AbstractMagicCard {
     private static final int MAGIC_CRYSTAL = 1;
 
     public CoinCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Neutral);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.NEUTRAL);
     }
 
     @Override

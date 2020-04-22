@@ -1,8 +1,9 @@
 package cn.eiden.hsm.game.objct.hero;
 
+import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.objct.AbstractMinion;
-import cn.eiden.hsm.game.tags.Profession;
+
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -13,11 +14,11 @@ public class HeroObjectAbstract extends AbstractMinion {
     /**生命值上限*/
     private static final Long HEALTH = 30L;
     /**职业*/
-    private Profession profession;
+    private CardClass cardClass;
     /**护甲*/
     private long armor;
-    public HeroObjectAbstract(Profession profession) {
-        super(profession.getName(),HEALTH,0L, Race.INVALID);
+    public HeroObjectAbstract(CardClass cardClass) {
+        super(cardClass.name(),HEALTH,0L, Race.INVALID);
     }
 
     /**
@@ -30,12 +31,12 @@ public class HeroObjectAbstract extends AbstractMinion {
         armor += armorNumber;
     }
 
-    public Profession getProfession() {
-        return profession;
+    public CardClass getCardClass() {
+        return cardClass;
     }
 
-    public void setProfession(Profession profession) {
-        this.profession = profession;
+    public void setCardClass(CardClass cardClass) {
+        this.cardClass = cardClass;
     }
 
     public long getArmor() {

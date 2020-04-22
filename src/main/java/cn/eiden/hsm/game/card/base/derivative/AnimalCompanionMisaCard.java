@@ -1,8 +1,8 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
+import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.tags.Profession;
-import cn.eiden.hsm.game.objct.minion.base.derivative.AnimalCompanionMisa;
+
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 /**
@@ -20,7 +20,7 @@ public class AnimalCompanionMisaCard extends AbstractMinionCard {
 
 
     public AnimalCompanionMisaCard() {
-        super(COST, DESCRIPTION, CARD_NAME, Profession.Hunter, HEALTH_LIMIT, ATTACK_VALUE);
+        super(COST, DESCRIPTION, CARD_NAME, CardClass.HUNTER, HEALTH_LIMIT, ATTACK_VALUE);
     }
 
     @Override

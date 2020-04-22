@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.game.tags.Profession;
+import cn.eiden.hsm.enums.CardClass;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -23,7 +23,7 @@ public class CardFactory {
     /**
      * 职业-反射缓存池
      */
-    private Map<Profession, Set<Class<? extends Card>>> professionCardPool;
+    private Map<CardClass, Set<Class<? extends Card>>> professionCardPool;
 
     public static CardFactory getInstance() {
         if (cardFactory == null) {
@@ -38,7 +38,7 @@ public class CardFactory {
         this.initCache();
     }
 
-    public Card getRandomCard(Profession profession) {
+    public Card getRandomCard(CardClass profession) {
         Set<Class<? extends Card>> subTypesOfCard = this.findInCache(profession);
         //从反射获取到的类中随机取一个类，由于set无序，使用迭代器，迭代随机的次数
         Class<? extends Card> next = null;
@@ -59,14 +59,14 @@ public class CardFactory {
         return card;
     }
 
-    private Set<Class<? extends Card>> findInCache(Profession profession) {
+    private Set<Class<? extends Card>> findInCache(CardClass profession) {
         //缓存中存在则直接返回
         return professionCardPool.get(profession);
     }
 
     private void initCache() {
         //初始化职业卡牌缓存池
-        for (Profession profession : Profession.values()) {
+        for (CardClass profession : CardClass.values()) {
             Set<Class<? extends Card>> professionSet = new HashSet<>();
             professionCardPool.put(profession, professionSet);
         }
@@ -78,7 +78,7 @@ public class CardFactory {
             Tags annotation = cardClass.getAnnotation(Tags.class);
             if (annotation != null) {
                 //存入缓存池
-                professionCardPool.get(annotation.profession()).add(cardClass);
+                professionCardPool.get(annotation.cardClass()).add(cardClass);
             }
         }
     }
