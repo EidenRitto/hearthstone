@@ -23,6 +23,9 @@ public class GameController {
     private static final String ATTACK = "攻击";
     private static final String END = "回合结束";
     private static final String FACE = "打脸";
+    private static final String HELP = "帮助";
+    private static final String HELP_2 = "help";
+    private static final String HELP_3 = "h";
 
     private boolean endTurn;
     private boolean endGame;
@@ -113,7 +116,9 @@ public class GameController {
         } else if (order.contains(FACE)) {
             String minionName = order.substring(0, order.length() - FACE.length()).trim();
             this.faceOrder(minionName);
-        } else {
+        } else if (order.equals(HELP) || order.equals(HELP_2) || order.equals(HELP_3)){
+            this.help();
+        }else {
             //输出提示信息
             this.tips();
         }
@@ -172,6 +177,17 @@ public class GameController {
         useInfo.append("随从攻击,输入随从名称+[攻击]+随从名称;随从打脸，输入随从名称+[打脸]");
         useInfo.append("\n");
         useInfo.append("回合结束：输入[回合结束]");
+        OutputInfo.info(useInfo.toString());
+    }
+
+
+    private void help() {
+        StringBuilder useInfo = new StringBuilder();
+        useInfo.append("指令说明(指令直接输入数字)：\n");
+        useInfo.append("[0]回合结束\n");
+        useInfo.append("[1]出牌\n");
+        useInfo.append("[2]攻击\n");
+        useInfo.append("[3]英雄技能");
         OutputInfo.info(useInfo.toString());
     }
 
