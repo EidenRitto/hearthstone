@@ -7,6 +7,7 @@ import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.objct.Minion;
 import cn.eiden.hsm.output.HearthLinkContext;
 import cn.eiden.hsm.output.OutputInfo;
+import cn.eiden.hsm.util.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -19,10 +20,11 @@ import java.util.List;
  */
 @Slf4j
 public class GameController {
-    private static final String TAKE = "使用";
-    private static final String ATTACK = "攻击";
-    private static final String END = "回合结束";
-    private static final String FACE = "打脸";
+    private static final String TAKE = "1";
+    private static final String ATTACK = "2";
+    private static final String END = "0";
+    private static final String RETURN = "99";
+
     private static final String HELP = "帮助";
     private static final String HELP_2 = "help";
     private static final String HELP_3 = "h";
@@ -99,23 +101,37 @@ public class GameController {
      */
     private void redirectOrder(String order) {
         if (order.contains(TAKE)) {
-            int i = order.indexOf(TAKE);
-            String minString = order.substring(i + TAKE.length());
-            String[] s = minString.split(" ");
-            if (s.length == 1) {
-                this.useOrder(s[0], null);
-            } else {
-                this.useOrder(s[0], s[1]);
+            //列出全部手牌
+            StringBuilder handInfo = new StringBuilder("选择手牌:\n");
+            List<Card> cards = nowGamer.getHand().getCards();
+            for (int i = 0; i < cards.size(); i++) {
+                handInfo.append("[").append(i).append("]");
+                handInfo.append(cards.get(i).getCardName());
+                handInfo.append("(").append(cards.get(i).getCost()).append(")\n");
             }
+            handInfo.append("[").append(RETURN).append("]返回上一级");
+            while (true){
+                OutputInfo.info(handInfo.toString());
+                //-----等待2级指令
+                String order2 = getOrder();
+                if (!RegexUtil.isNumberStr(order2)){
+                    OutputInfo.info("非法输入");
+                }else {
+                    int index = Integer.parseInt(order2);
+                    break;
+                }
+            }
+
+//            if (s.length == 1) {
+//                this.useOrder(s[0], null);
+//            } else {
+//                this.useOrder(s[0], s[1]);
+//            }
         } else if (order.contains(ATTACK)) {
-            String[] split = order.split(ATTACK);
-            assert split.length == 2;
-            this.attackOrder(split[0].trim(), split[1].trim());
+            //列出全部能够攻击的随从
+//            this.attackOrder(split[0].trim(), split[1].trim());
         } else if (order.contains(END)) {
             this.endOrder();
-        } else if (order.contains(FACE)) {
-            String minionName = order.substring(0, order.length() - FACE.length()).trim();
-            this.faceOrder(minionName);
         } else if (order.equals(HELP) || order.equals(HELP_2) || order.equals(HELP_3)){
             this.help();
         }else {
@@ -126,13 +142,7 @@ public class GameController {
 
     private void useOrder(String cardName, String targetName) {
         Minion target = null;
-        if (targetName != null) {
-            if (targetName.equals(FACE)) {
-                target = nowGamer.getEnemy().getHero();
-            } else {
-                target = this.chooseMinion(targetName, nowGamer.getEnemy());
-            }
-        }
+
         Card card = chooseCard(cardName);
         if (card == null) {
             OutputInfo.info("无效指令");

@@ -347,9 +347,10 @@ public class Gamer extends GameObject {
     public void getState() {
         StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
         List<Card> cards = getHand().getCards();
-        for (Card card : cards) {
-            handInfo.append(card.getCardName());
-            handInfo.append("(").append(card.getCost()).append(")");
+        for (int i = 0; i < cards.size(); i++) {
+            handInfo.append(cards.get(i).getCardName());
+            handInfo.append("[").append(i).append("]");
+            handInfo.append("(").append(cards.get(i).getCost()).append(")");
             handInfo.append(" ");
         }
         handInfo.append("\n");
