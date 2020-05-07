@@ -2,20 +2,28 @@ package cn.eiden.hsm.controller.order;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.output.OutputInfo;
+import cn.eiden.hsm.util.RegexUtil;
 import lombok.Setter;
+
+import java.util.List;
 
 /**
  * @author Eiden J.P Zhou
  * @date 2020/4/23 17:32
  */
 @Setter
-public class AtkOrder implements Order {
-    private Integer sourceIndex;
-    private Integer targetIndex;
+public class AtkOrder extends AbstractOrder implements Order {
     private Gamer gamer;
 
     @Override
     public void execute() {
+        Integer sourceIndex = getSourceIndex();
+        Integer targetIndex = getTargetIndex();
+
+        if (sourceIndex == null || targetIndex == null){
+            return;
+        }
         Minion attacker;
         Minion beAttacker;
         if (sourceIndex == OrderConstant.TARGET_HERO_INDEX) {
@@ -31,14 +39,43 @@ public class AtkOrder implements Order {
         attacker.attack(beAttacker);
     }
 
-    @Override
-    public boolean isComplete() {
-        return sourceIndex != null && targetIndex != null && gamer != null;
+    public Integer getSourceIndex(){
+        while (true){
+            List<Integer> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
+            //打印提示信息
+            gamer.printAllCanAttackMinionsInfo();
+            //等待输入信息
+            String input = getOrder();
+            if (RegexUtil.isNumberStr(input)){
+                Integer index = Integer.parseInt(input);
+                if (allCanAttackMinionsId.contains(index)){
+                    // TODO: 2020/5/7 提示具体非法信息
+                    return index;
+                }
+            }else {
+                return null;
+            }
+            OutputInfo.info("非法输入！");
+        }
     }
 
-    private void resetOrder() {
-        this.targetIndex = null;
-        this.sourceIndex = null;
-        this.gamer = null;
+    public Integer getTargetIndex(){
+        while (true){
+            List<Integer> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
+            //打印提示信息
+            gamer.printAllCanBeAttackMinionsInfo();
+            //等待输入信息
+            String input = getOrder();
+            if (RegexUtil.isNumberStr(input)){
+                Integer index = Integer.parseInt(input);
+                if (allCanBeAttackMinionsId.contains(index)){
+                    // TODO: 2020/5/7 提示具体非法信息
+                    return index;
+                }
+            }else {
+                return null;
+            }
+            OutputInfo.info("非法输入！");
+        }
     }
 }

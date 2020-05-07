@@ -10,10 +10,4 @@ public interface Order {
      * 执行指令
      */
     void execute();
-
-    /**
-     * 命令是否完整
-     * @return 完整返回true
-     */
-    boolean isComplete();
 }

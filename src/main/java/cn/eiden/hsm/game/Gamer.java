@@ -491,6 +491,32 @@ public class Gamer extends GameObject {
     }
 
     /**
+     * 打印全部能够攻击的随从信息
+     */
+    public void printAllCanAttackMinionsInfo(){
+        List<Integer> allCanAttackMinionsId = findAllCanAttackMinionsId();
+        StringBuilder info = new StringBuilder();
+        for (Integer mid : allCanAttackMinionsId) {
+            Minion minion = minions.get(mid);
+            info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");
+        }
+        OutputInfo.info(info.toString());
+    }
+
+    /**
+     * 打印全部能够[被]攻击的随从信息
+     */
+    public void printAllCanBeAttackMinionsInfo(){
+        List<Integer> allCanBeAttackMinionsId = findAllCanBeAttackMinionsId();
+        StringBuilder info = new StringBuilder();
+        for (Integer mid : allCanBeAttackMinionsId) {
+            Minion minion = getEnemy().getMinions().get(mid);
+            info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");
+        }
+        OutputInfo.info(info.toString());
+    }
+
+    /**
      * @return : java.util.List<java.lang.Integer>
      * 查找全部能够被攻击的随从(敌方的)
      * @author : Eiden J.P Zhou

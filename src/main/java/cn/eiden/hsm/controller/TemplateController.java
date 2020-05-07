@@ -6,25 +6,18 @@ import cn.eiden.hsm.output.HearthLinkContext;
 import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.EnumUtils;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * @author Eiden J.P Zhou
  * @date 2020/4/30 8:53
  */
-public abstract class TemplateController {
+public class TemplateController {
 
     private Invoker orderInvoker;
-
-    Queue<String> orderQueue = new LinkedList<>();
 
     private void template(){
         boolean endTurnFlag = false;
         while (!endTurnFlag){
             redirectOrder();
-            buildOrder();
-            executeOrder();
         }
     }
 
@@ -47,21 +40,22 @@ public abstract class TemplateController {
                 .orElse(OrderType.INVALID);
         switch (orderType){
             case END:
+                orderInvoker.callEnd();
                 break;
             case PLAY:
+                orderInvoker.callPlay();
                 break;
             case SPELL:
+                orderInvoker.callSpell();
                 break;
             case ATK:
+                orderInvoker.callAtk();
                 break;
             case HELP:
+                orderInvoker.callHelp();
                 break;
             case INVALID:
             default:
         }
     }
-    /**建造命令*/
-    abstract void buildOrder();
-    /**执行命令*/
-    abstract void executeOrder();
 }

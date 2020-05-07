@@ -13,7 +13,7 @@ public class Invoker {
     private Order endOrder;
     private Order atkOrder;
     private Order playOrder;
-    private Order skillOrder;
+    private Order spellOrder;
 
     public void callHelp(){
         helpOrder.execute();
@@ -27,7 +27,7 @@ public class Invoker {
     public void callPlay(){
         playOrder.execute();
     }
-    public void callSkill(){
-        skillOrder.execute();
+    public void callSpell(){
+        spellOrder.execute();
     }
 }
