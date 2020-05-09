@@ -6,23 +6,65 @@ import cn.eiden.hsm.output.HearthLinkContext;
 import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.EnumUtils;
 
+import java.util.Objects;
+
 /**
  * @author Eiden J.P Zhou
  * @date 2020/4/30 8:53
  */
 public class TemplateController {
 
-    private Invoker orderInvoker;
+    private Invoker gamerInvoker;
+    private Invoker enemyInvoker;
+    private Invoker nowInvoker;
+    private boolean finishFlag;
 
-    private void template(){
-        boolean endTurnFlag = false;
-        while (!endTurnFlag){
-            redirectOrder();
+    public TemplateController(Invoker gamerInvoker, Invoker enemyInvoker) {
+        this.gamerInvoker = gamerInvoker;
+        this.enemyInvoker = enemyInvoker;
+        this.finishFlag = false;
+    }
+
+    public void gameStart(boolean b) {
+
+        nowInvoker = b ? gamerInvoker : enemyInvoker;
+        nowInvoker.callHelp();
+        while (!finishFlag) {
+            runTurn();
         }
     }
 
-    /**等待命令*/
-    String waitOrder(){
+    /**
+     * 切换当前执行者
+     */
+    private void reverseInvoker() {
+        nowInvoker = nowInvoker == gamerInvoker ? enemyInvoker : gamerInvoker;
+    }
+
+    /**
+     * 开始一个新回合
+     */
+    private void runTurn() {
+        nowInvoker.callStartTurn();
+        boolean endTurnFlag = false;
+        while (!endTurnFlag) {
+            final String poll = waitOrder();
+            OrderType orderType = Objects.requireNonNull(EnumUtils.getEnumObject(
+                    OrderType.class,
+                    e -> e.getCode().equals(poll)))
+                    .orElse(OrderType.INVALID);
+            redirectOrder(orderType);
+            if (orderType == OrderType.END) {
+                endTurnFlag = true;
+                this.reverseInvoker();
+            }
+        }
+    }
+
+    /**
+     * 等待命令
+     */
+    private String waitOrder() {
         String order = "";
         try {
             order = HearthLinkContext.inputMessage.take();
@@ -31,28 +73,27 @@ public class TemplateController {
         }
         return order;
     }
-    /**命令分派*/
-    void redirectOrder(){
-        final String poll = waitOrder();
-        OrderType orderType = EnumUtils.getEnumObject(
-                OrderType.class,
-                e -> e.getCode().equals(poll))
-                .orElse(OrderType.INVALID);
-        switch (orderType){
+
+    /**
+     * 命令分派
+     */
+    void redirectOrder(OrderType orderType) {
+
+        switch (orderType) {
             case END:
-                orderInvoker.callEnd();
+                nowInvoker.callEnd();
                 break;
             case PLAY:
-                orderInvoker.callPlay();
+                nowInvoker.callPlay();
                 break;
             case SPELL:
-                orderInvoker.callSpell();
+                nowInvoker.callSpell();
                 break;
             case ATK:
-                orderInvoker.callAtk();
+                nowInvoker.callAtk();
                 break;
             case HELP:
-                orderInvoker.callHelp();
+                nowInvoker.callHelp();
                 break;
             case INVALID:
             default:

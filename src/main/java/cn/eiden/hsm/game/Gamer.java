@@ -517,6 +517,21 @@ public class Gamer extends GameObject {
     }
 
     /**
+     * 打印手牌信息
+     */
+    public void printHandsInfo(){
+        StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
+        List<Card> cards = getHand().getCards();
+        for (int i = 0; i < cards.size(); i++) {
+            handInfo.append("[").append(i).append("]");
+            handInfo.append(cards.get(i).getCardName());
+            handInfo.append("(").append(cards.get(i).getCost()).append(")");
+            handInfo.append("\n");
+        }
+        OutputInfo.info(handInfo.toString());
+    }
+
+    /**
      * @return : java.util.List<java.lang.Integer>
      * 查找全部能够被攻击的随从(敌方的)
      * @author : Eiden J.P Zhou

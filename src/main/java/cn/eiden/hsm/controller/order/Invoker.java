@@ -1,5 +1,6 @@
 package cn.eiden.hsm.controller.order;
 
+import cn.eiden.hsm.game.Gamer;
 import lombok.Setter;
 
 /**
@@ -14,6 +15,8 @@ public class Invoker {
     private Order atkOrder;
     private Order playOrder;
     private Order spellOrder;
+    private Order startTurnOrder;
+    private Gamer gamer;
 
     public void callHelp(){
         helpOrder.execute();
@@ -29,5 +32,15 @@ public class Invoker {
     }
     public void callSpell(){
         spellOrder.execute();
+    }
+    public void callStartTurn(){
+        startTurnOrder.execute();
+    }
+
+    public Invoker(Gamer gamer) {
+        helpOrder = new HelpOrder();
+        atkOrder = new AtkOrder(gamer);
+        startTurnOrder = new StartTurnOrder(gamer);
+        playOrder = new PlayOrder(gamer);
     }
 }

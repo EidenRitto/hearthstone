@@ -78,4 +78,8 @@ public class AtkOrder extends AbstractOrder implements Order {
             OutputInfo.info("非法输入！");
         }
     }
+
+    public AtkOrder(Gamer gamer) {
+        this.gamer = gamer;
+    }
 }

@@ -1,6 +1,8 @@
 package cn.eiden.hsm.test;
 
 import cn.eiden.hsm.controller.GameController;
+import cn.eiden.hsm.controller.TemplateController;
+import cn.eiden.hsm.controller.order.Invoker;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
@@ -32,7 +34,10 @@ public class GameDemo {
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 
-        GameController gameController = new GameController(gamer,enemy);
-        gameController.gameStart();
+        boolean b = gamer.newGameStart();
+        Invoker gamerInvoker = new Invoker(gamer);
+        Invoker enemyInvoker = new Invoker(enemy);
+        TemplateController templateController = new TemplateController(gamerInvoker,enemyInvoker);
+        templateController.gameStart(b);
     }
 }
