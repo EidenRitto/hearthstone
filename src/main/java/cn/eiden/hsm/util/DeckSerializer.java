@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.enums.FormatType;
 import cn.eiden.hsm.game.Deck;
 import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.output.OutputInfo;
 import com.google.common.base.Strings;
 import org.reflections.Reflections;
@@ -44,7 +45,7 @@ public class DeckSerializer {
         return deck;
     }
 
-    public String deserializeDeckString(String deckString) {
+    public Deck deserializeDeckString(String deckString) throws Exception{
         StringBuilder stringBuilder = new StringBuilder();
         Reflections reflections = new Reflections("cn.eiden.hsm.game.card.dynamic");
         //反射获取全部事件
@@ -75,6 +76,7 @@ public class DeckSerializer {
         int numSingleCards = (int) read(bytes);
         for (int i = 0; i < numSingleCards; i++) {
             int dbfId = (int) read(bytes);
+            deck.addCard(CardFactory.getInstance().buildCardById(dbfId));
             System.out.println(cardDictionary.get(dbfId) + "1张");
             stringBuilder.append(cardDictionary.get(dbfId)).append("1张").append("\n");
         }
@@ -83,6 +85,8 @@ public class DeckSerializer {
         for (int i = 0; i < numDoubleCards; i++) {
             int dbfId = (int) read(bytes);
             System.out.println(cardDictionary.get(dbfId) + "2张");
+            deck.addCard(CardFactory.getInstance().buildCardById(dbfId));
+            deck.addCard(CardFactory.getInstance().buildCardById(dbfId));
             stringBuilder.append(cardDictionary.get(dbfId)).append("2张").append("\n");
         }
 
@@ -93,16 +97,20 @@ public class DeckSerializer {
             stringBuilder.append(cardDictionary.get(dbfId)).append(count).append("张").append("\n");
         }
         offset = 0;
-        return stringBuilder.toString();
+        return deck;
     }
 
     public static void main(String[] args) {
-        new DeckSerializer().deserializeDeckString("AAECAQcCrwSRvAIOHLACkQP/A44FqAXUBaQG7gbnB+8HgrACiLACub8CAA==");
+        try {
+            new DeckSerializer().deserializeDeckString("AAECAQcCrwSRvAIOHLACkQP/A44FqAXUBaQG7gbnB+8HgrACiLACub8CAA==");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static String decodeStr(String deckStr) {
-        return new DeckSerializer().deserializeDeckString(deckStr);
-    }
+//    public static String decodeStr(String deckStr) {
+//        return new DeckSerializer().deserializeDeckString(deckStr);
+//    }
 
     public long read(byte[] bytes) {
         if (offset > bytes.length) {

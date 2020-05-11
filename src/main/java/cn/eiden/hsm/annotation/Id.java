@@ -13,6 +13,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Id {
+    /**id*/
     int value();
+    /**牌名*/
     String name();
 }

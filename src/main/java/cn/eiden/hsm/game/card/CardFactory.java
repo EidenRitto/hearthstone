@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.card;
 
+import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.enums.CardClass;
 import org.reflections.Reflections;
@@ -24,6 +25,8 @@ public class CardFactory {
      * 职业-反射缓存池
      */
     private Map<CardClass, Set<Class<? extends Card>>> professionCardPool;
+    /**id卡牌池*/
+    private Map<Integer,Class<? extends Card>> cardPool;
 
     public static CardFactory getInstance() {
         if (cardFactory == null) {
@@ -35,6 +38,7 @@ public class CardFactory {
     private CardFactory() {
         random = new Random();
         professionCardPool = new HashMap<>(16);
+        cardPool = new HashMap<>(7000);
         this.initCache();
     }
 
@@ -80,6 +84,15 @@ public class CardFactory {
                 //存入缓存池
                 professionCardPool.get(annotation.cardClass()).add(cardClass);
             }
+            Id id = cardClass.getAnnotation(Id.class);
+            if (id != null){
+                cardPool.put(id.value(),cardClass);
+            }
         }
+    }
+
+    public Card buildCardById(Integer id) throws Exception{
+        Class<? extends Card> aClass = cardPool.get(id);
+        return aClass.newInstance();
     }
 }
