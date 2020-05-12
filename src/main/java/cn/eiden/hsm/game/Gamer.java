@@ -15,6 +15,7 @@ import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.tags.Stand;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -174,6 +175,11 @@ public class Gamer extends GameObject {
             getHand().addHandsCard(lastCard);
             OutputInfo.info("--你抽到了" + lastCard.getCardName());
         }
+    }
+
+    public void useThisCard(int number){
+        //获得随从卡
+        Card card = getHand().getCard(number);
     }
 
     /**
@@ -530,6 +536,19 @@ public class Gamer extends GameObject {
         }
         OutputInfo.info(handInfo.toString());
     }
+
+    public void printLegitimateTarget(Card card){
+        Class<? extends Card> cardClass = card.getClass();
+        TargetScope targetScope = cardClass.getDeclaredAnnotation(TargetScope.class);
+        Stand stand = targetScope.stand();
+        Class<? extends Minion> aClass = targetScope.classScope();
+    }
+
+
+
+
+
+
 
     /**
      * @return : java.util.List<java.lang.Integer>

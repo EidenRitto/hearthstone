@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 
 /**
  * 卡牌选择目标时，能够选择的目标范围<br/>
- * 打出卡牌时需要选择目标的战吼和法术，在被invoke的方法上添加本注解<br/>
+ * 打出卡牌时需要选择目标的战吼和法术，在被invoke的类上添加本注解<br/>
  * classScope用来确定指定的目标类型
  * 如果目标可以选择为双方随从和双方英雄 例如 {@link ArcaneShotCard#magicEffect} 则注解不需要添加参数<br/>
  * 如果目标只能为随从 例如{@link MarkOfNatureCard#magicEffect} 则参数填写{@link MinionObject} 随从的抽象子类<br/>
@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * @author Eiden J.P Zhou
  * @date 2020/4/4 15:12
  */
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TargetScope {
     Class<? extends Minion> classScope() default Minion.class;

@@ -19,7 +19,12 @@ public class PlayOrder extends AbstractOrder implements Order {
         Integer cardNum = getCardNum();
         Card card = gamer.getHand().getCard(cardNum);
         if (gamer.checkUse(card)){
-            gamer.useThisMinionCard(cardNum,null);
+            if (card.isNoneTarget()){
+                gamer.useThisMinionCard(cardNum,null);
+            }else {
+                // TODO: 2020/5/12
+                //带目标
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.card;
 
+import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
 
 /**
@@ -31,4 +32,12 @@ public interface Card {
      * @return 职业
      */
     CardClass getCardClass();
+
+    /**
+     * 是否不需要目标
+     * @return 不需要目标返回true
+     */
+    default boolean isNoneTarget(){
+        return !this.getClass().isAnnotationPresent(TargetScope.class);
+    }
 }

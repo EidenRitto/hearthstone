@@ -16,6 +16,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
  *  生命之触
  *
  */
+@TargetScope
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
 public class HealingTouchCard extends AbstractMagicCard {
     private static final int COST = 3;
@@ -28,7 +29,6 @@ public class HealingTouchCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope
     public void magicEffect(Gamer gamer, Minion target) {
         gamer.getHero().recoveryHp(HEALTH_NUMBER);
     }
