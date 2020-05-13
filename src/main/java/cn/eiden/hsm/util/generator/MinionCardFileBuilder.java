@@ -1,10 +1,9 @@
 package cn.eiden.hsm.util.generator;
 
-import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.objct.MinionObject;
-import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -59,26 +58,39 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                         .addJavadoc("$S\n", cardInfo.getCardText())
                         .build())
                 .build();
+        if (cardInfo.getDeathRattle() == 1) {
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfDeathRattle")
+                    .addModifiers(Modifier.PRIVATE)
+                    .returns(DeathRattle.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
     }
 
-    private CodeBlock addAdditionalField(){
-        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)",MinionObject.class,MinionObject.class,"CARD_NAME", "HEALTH", "ATK", "RACE").build();
-        if (cardInfo.getTaunt() == 1){
+    private CodeBlock addAdditionalField() {
+        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)", MinionObject.class, MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE").build();
+        if (cardInfo.getTaunt() == 1) {
             CodeBlock taunt = CodeBlock.builder().addStatement("minionObject.addTaunt()").build();
             core = core.toBuilder().add(taunt).build();
         }
-        if (cardInfo.getCharge() == 1){
+        if (cardInfo.getCharge() == 1) {
             CodeBlock charge = CodeBlock.builder().addStatement("minionObject.addCharge()").build();
             core = core.toBuilder().add(charge).build();
         }
-        if (cardInfo.getStealth() == 1){
+        if (cardInfo.getStealth() == 1) {
             CodeBlock stealth = CodeBlock.builder().addStatement("minionObject.addStealth()").build();
             core = core.toBuilder().add(stealth).build();
         }
-        if (cardInfo.getDivineShield() == 1){
+        if (cardInfo.getDivineShield() == 1) {
             CodeBlock divineShield = CodeBlock.builder().addStatement("minionObject.addDivineShield()").build();
             core = core.toBuilder().add(divineShield).build();
+        }
+        if (cardInfo.getDeathRattle() == 1) {
+            CodeBlock deathRattle = CodeBlock.builder().addStatement("minionObject.addDeathRattle(this.selfDeathRattle())").build();
+            core = core.toBuilder().add(deathRattle).build();
         }
         return core;
     }

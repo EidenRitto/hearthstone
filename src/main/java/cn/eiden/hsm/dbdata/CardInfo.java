@@ -42,6 +42,12 @@ public class CardInfo {
 
     private int divineShield;
 
+    private int deathRattle;
+
+    private int battleCry;
+
+
+
     public CardInfo() {
         this.rarity = Rarity.INVALID;
         this.cardClass = CardClass.INVALID;

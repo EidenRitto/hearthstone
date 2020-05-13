@@ -20,7 +20,6 @@ public class GameTest {
         for (int i = 0;i<10;i++){
             cards.add(new SmallElfCard());
             cards.add(new LeperGnomeCard());
-            cards.add(new FreshwaterCrocodileCard());
         }
 
         Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.MAGE),cards);

@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.objct;
 
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.DeathRattle;
 
 /**
  * @author Eiden J.P Zhou
@@ -232,4 +233,19 @@ public interface Minion {
      * @return 有圣盾返回true
      * */
     boolean isDivineShield();
+
+    /**
+     * 添加亡语
+     * @param deathRattle 亡语
+     * */
+    void addDeathRattle(DeathRattle deathRattle);
+
+    /**移除亡语*/
+    void removeDeathRattle();
+
+    /**
+     * 是否有亡语
+     * @return 有亡语返回true
+     * */
+    boolean isDeathRattle();
 }

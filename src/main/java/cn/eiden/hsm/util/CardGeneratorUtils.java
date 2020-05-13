@@ -92,6 +92,12 @@ public class CardGeneratorUtils {
                 case DIVINE_SHIELD:
                     cardCache.setDivineShield(Integer.parseInt(tag.getValue()));
                     break;
+                case DEATHRATTLE:
+                    cardCache.setDeathRattle(Integer.parseInt(tag.getValue()));
+                    break;
+                case BATTLECRY:
+                    cardCache.setBattleCry(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

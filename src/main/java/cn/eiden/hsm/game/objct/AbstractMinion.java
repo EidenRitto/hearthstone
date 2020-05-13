@@ -5,9 +5,13 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 随从 抽象
@@ -97,6 +101,8 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     private long originalAttack;
 
+    /**亡语*/
+    private List<DeathRattle> deathRattle = new ArrayList<>();
 
     @Override
     public void attack(Minion beAttackMinion) {
@@ -311,6 +317,32 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     @Override
     public boolean isDivineShield() {
         return divineShield;
+    }
+
+    /**
+     * 添加亡语
+     */
+    @Override
+    public void addDeathRattle(DeathRattle deathRattle) {
+
+    }
+
+    /**
+     * 移除亡语
+     */
+    @Override
+    public void removeDeathRattle() {
+
+    }
+
+    /**
+     * 是否有亡语
+     *
+     * @return 有亡语返回true
+     */
+    @Override
+    public boolean isDeathRattle() {
+        return false;
     }
 
     public AbstractMinion() {
