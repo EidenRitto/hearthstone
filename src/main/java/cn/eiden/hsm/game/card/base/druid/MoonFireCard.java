@@ -17,6 +17,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
  *
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope
 public class MoonFireCard extends AbstractMagicCard {
     private static final int COST = 0;
     private static final String DESCRIPTION = "造成一点伤害。";
@@ -29,7 +30,6 @@ public class MoonFireCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope
     public void magicEffect(Gamer gamer, Minion target){
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         target.beHurt(damage);

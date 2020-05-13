@@ -249,7 +249,7 @@ public class Gamer extends GameObject {
         Class<? extends Minion> targetClass = target.getClass();
         boolean friend = isFriend(target);
         TargetScope annotation = clazz.getAnnotation(TargetScope.class);
-        if (!targetClass.isAssignableFrom(annotation.classScope())) {
+        if (!annotation.classScope().isAssignableFrom(targetClass)) {
             return false;
         }
         switch (annotation.stand()) {

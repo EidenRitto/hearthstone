@@ -25,8 +25,10 @@ public class CardFactory {
      * 职业-反射缓存池
      */
     private Map<CardClass, Set<Class<? extends Card>>> professionCardPool;
-    /**id卡牌池*/
-    private Map<Integer,Class<? extends Card>> cardPool;
+    /**
+     * id卡牌池
+     */
+    private Map<Integer, Class<? extends Card>> cardPool;
 
     public static CardFactory getInstance() {
         if (cardFactory == null) {
@@ -74,7 +76,7 @@ public class CardFactory {
             Set<Class<? extends Card>> professionSet = new HashSet<>();
             professionCardPool.put(profession, professionSet);
         }
-        //获取某个所有版本的卡牌类
+        //获取某个包中所有版本的卡牌类
         Reflections reflections = new Reflections(BASE_PACKAGE_PATH);
 
         Set<Class<? extends Card>> subTypesOfCard = reflections.getSubTypesOf(Card.class);
@@ -85,13 +87,21 @@ public class CardFactory {
                 professionCardPool.get(annotation.cardClass()).add(cardClass);
             }
             Id id = cardClass.getAnnotation(Id.class);
-            if (id != null){
-                cardPool.put(id.value(),cardClass);
+            if (id != null) {
+                if (cardPool.containsKey(id.value())) {
+                    Class<? extends Card> aClass = cardPool.get(id.value());
+                    //如果缓存池中存在父类则用子类覆盖，否则跳过(什么也不做)
+                    if (aClass.isAssignableFrom(cardClass)) {
+                        cardPool.put(id.value(), cardClass);
+                    }
+                } else {
+                    cardPool.put(id.value(), cardClass);
+                }
             }
         }
     }
 
-    public Card buildCardById(Integer id) throws Exception{
+    public Card buildCardById(Integer id) throws Exception {
         Class<? extends Card> aClass = cardPool.get(id);
         return aClass.newInstance();
     }

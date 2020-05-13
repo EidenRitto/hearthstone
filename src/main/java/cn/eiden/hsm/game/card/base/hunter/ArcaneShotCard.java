@@ -18,6 +18,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
  *
  */
 @Tags(cardClass = CardClass.HUNTER, cardSet = CardSet.CORE)
+@TargetScope
 public class ArcaneShotCard extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "造成2点伤害。";
@@ -30,7 +31,6 @@ public class ArcaneShotCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope
     public void magicEffect(Gamer gamer, Minion target){
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         if (target instanceof MinionObject){

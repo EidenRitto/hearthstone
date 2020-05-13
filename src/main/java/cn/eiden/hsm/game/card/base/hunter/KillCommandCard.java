@@ -19,6 +19,7 @@ import cn.eiden.hsm.game.card.AbstractMagicCard;
  *
  */
 @Tags(cardClass = CardClass.HUNTER, cardSet = CardSet.CORE)
+@TargetScope
 public class KillCommandCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "造成3点伤害。如果你控制野兽，则造成5点伤害";
@@ -33,7 +34,6 @@ public class KillCommandCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope
     public void magicEffect(Gamer gamer, Minion target){
         int damage;
         //检查是否有野兽

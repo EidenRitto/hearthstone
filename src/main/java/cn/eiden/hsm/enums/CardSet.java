@@ -8,7 +8,9 @@ package cn.eiden.hsm.enums;
 public enum CardSet {
     INVALID (0),
     TEST_TEMPORARY (1),
+    /**基本*/
     CORE (2),
+    /**经典*/
     EXPERT1 (3),
     HOF (4),
     REWARD (4),
