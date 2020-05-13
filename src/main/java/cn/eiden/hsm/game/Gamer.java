@@ -21,10 +21,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 玩家类
@@ -177,9 +174,12 @@ public class Gamer extends GameObject {
         }
     }
 
-    public void useThisCard(int number){
-        //获得随从卡
-        Card card = getHand().getCard(number);
+    public void useThisCard(Card card, Minion target) {
+        if (card instanceof AbstractMagicCard) {
+            this.useThisMagicCard(card, target);
+        } else if (card instanceof AbstractMinionCard) {
+            this.useThisMinionCard(card, target);
+        }
     }
 
     /**
@@ -191,7 +191,7 @@ public class Gamer extends GameObject {
     public void useThisMinionCard(int number, Minion target) {
         //获得随从卡
         Card card = getHand().getCard(number);
-        this.useThisMinionCard(card,target);
+        this.useThisMinionCard(card, target);
     }
 
     public void useThisMinionCard(Card card, Minion target) {
@@ -219,11 +219,11 @@ public class Gamer extends GameObject {
      */
     public void useThisMagicCard(int number, Minion target) {
         Card card = getHand().getCard(number);
-        this.useThisMagicCard(card,target);
+        this.useThisMagicCard(card, target);
     }
 
     public void useThisMagicCard(Card card, Minion target) {
-        if (!isRightTarget(target)){
+        if (!isRightTarget(card, target)) {
             OutputInfo.info("这不是一个有效的目标");
             return;
         }
@@ -239,17 +239,20 @@ public class Gamer extends GameObject {
 
     /**
      * 是否是正确的目标
-     * @param target 目标，可能为随从或英雄
+     *
+     * @param card   当前使用卡
+     * @param target 所选目标，可能为随从或英雄
      * @return 正确的目标返回true
      */
-    private boolean isRightTarget(Minion target){
-        Class<? extends Minion> clazz = target.getClass();
+    private boolean isRightTarget(Card card, Minion target) {
+        Class<? extends Card> clazz = card.getClass();
+        Class<? extends Minion> targetClass = target.getClass();
         boolean friend = isFriend(target);
         TargetScope annotation = clazz.getAnnotation(TargetScope.class);
-        if (!clazz.isAssignableFrom(annotation.classScope())){
+        if (!targetClass.isAssignableFrom(annotation.classScope())) {
             return false;
         }
-        switch (annotation.stand()){
+        switch (annotation.stand()) {
             case FRIEND:
                 return friend;
             case FOE:
@@ -262,10 +265,11 @@ public class Gamer extends GameObject {
 
     /**
      * 是否是友方单位
+     *
      * @param minion 随从或英雄
      * @return 是友方返回true
      */
-    private boolean isFriend(Minion minion){
+    private boolean isFriend(Minion minion) {
         HeroObjectAbstract hero = getHero();
         return minions.contains(minion) || hero == minion;
     }
@@ -277,7 +281,7 @@ public class Gamer extends GameObject {
      */
     public void addMinion(Minion minion) {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
-        AddMinionEvent addMinionEvent = new AddMinionEvent(this,minion);
+        AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
         minion.setOwner(this);
         minions.add(minion);
         eventManager.call(battlefieldChangeEvent);
@@ -459,6 +463,7 @@ public class Gamer extends GameObject {
 
     /**
      * 友方全部随从增加攻击力
+     *
      * @param addAttack 攻击力
      */
     public void addMinionsAttack(long addAttack) {
@@ -467,6 +472,7 @@ public class Gamer extends GameObject {
 
     /**
      * 友方全部随从增加生命值
+     *
      * @param addHealth 生命值
      */
     public void addMinionsHealth(long addHealth) {
@@ -476,7 +482,7 @@ public class Gamer extends GameObject {
     /**
      * @param addAttack 攻击力
      * @param addHealth 生命值
-     * 友方随从获得 +[addAttack]/+[addHealth]
+     *                  友方随从获得 +[addAttack]/+[addHealth]
      */
     public void buffYourAllMinions(long addAttack, long addHealth) {
         addMinionsAttack(addAttack);
@@ -499,7 +505,7 @@ public class Gamer extends GameObject {
     /**
      * 打印全部能够攻击的随从信息
      */
-    public void printAllCanAttackMinionsInfo(){
+    public void printAllCanAttackMinionsInfo() {
         List<Integer> allCanAttackMinionsId = findAllCanAttackMinionsId();
         StringBuilder info = new StringBuilder();
         for (Integer mid : allCanAttackMinionsId) {
@@ -512,7 +518,7 @@ public class Gamer extends GameObject {
     /**
      * 打印全部能够[被]攻击的随从信息
      */
-    public void printAllCanBeAttackMinionsInfo(){
+    public void printAllCanBeAttackMinionsInfo() {
         List<Integer> allCanBeAttackMinionsId = findAllCanBeAttackMinionsId();
         StringBuilder info = new StringBuilder();
         for (Integer mid : allCanBeAttackMinionsId) {
@@ -525,7 +531,7 @@ public class Gamer extends GameObject {
     /**
      * 打印手牌信息
      */
-    public void printHandsInfo(){
+    public void printHandsInfo() {
         StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
@@ -537,17 +543,30 @@ public class Gamer extends GameObject {
         OutputInfo.info(handInfo.toString());
     }
 
-    public void printLegitimateTarget(Card card){
-        Class<? extends Card> cardClass = card.getClass();
-        TargetScope targetScope = cardClass.getDeclaredAnnotation(TargetScope.class);
-        Stand stand = targetScope.stand();
-        Class<? extends Minion> aClass = targetScope.classScope();
+    public List<Minion> getLegitimateTarget(final Card card) {
+        List<Minion> allTarget = getAllTarget();
+        allTarget.removeIf(target -> !isRightTarget(card, target));
+        return allTarget;
     }
 
+    public void printMinion(List<Minion> minionList, String title) {
+        StringBuilder sb = new StringBuilder(title);
+        for (int i = 0; i < minionList.size(); i++) {
+            sb.append("\n");
+            sb.append("[").append(i).append("]");
+            sb.append(minionList.get(i).getMinionName());
+        }
+        OutputInfo.info(sb.toString());
+    }
 
-
-
-
+    public List<Minion> getAllTarget() {
+        List<Minion> allTarget = new ArrayList<>();
+        allTarget.add(getHero());
+        allTarget.addAll(getMinions());
+        allTarget.add(getEnemy().getHero());
+        allTarget.addAll(getEnemy().getMinions());
+        return allTarget;
+    }
 
 
     /**
@@ -571,7 +590,7 @@ public class Gamer extends GameObject {
         if (!hasTaunt) {
             for (int i = 0; i < enemy.getMinions().size(); i++) {
                 Minion minion = enemy.getMinion(i);
-                if (!minion.isStealth()){
+                if (!minion.isStealth()) {
                     resultList.add(i);
                 }
             }
