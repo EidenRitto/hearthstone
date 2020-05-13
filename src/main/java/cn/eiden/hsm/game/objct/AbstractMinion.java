@@ -64,10 +64,14 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     private boolean isTaunt = false;
 
-    /**是否具有隐藏*/
+    /**
+     * 是否具有隐藏
+     */
     private boolean stealth = false;
 
-    /**是否具有圣盾*/
+    /**
+     * 是否具有圣盾
+     */
     private boolean divineShield = false;
     /**
      * 法术强度
@@ -101,12 +105,14 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     private long originalAttack;
 
-    /**亡语*/
+    /**
+     * 亡语
+     */
     private List<DeathRattle> deathRattle = new ArrayList<>();
 
     @Override
     public void attack(Minion beAttackMinion) {
-        if (!this.isAttack()){
+        if (!this.isAttack()) {
             OutputInfo.info("这个随从无法进行攻击");
             return;
         }
@@ -120,11 +126,11 @@ public abstract class AbstractMinion extends GameObject implements Minion {
 
     @Override
     public void beHurt(long number) {
-        if (divineShield){
+        if (divineShield) {
             OutputInfo.info(minionName + "圣盾抵消伤害");
             removeDivineShield();
-        }else {
-            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(),this);
+        } else {
+            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(), this);
             OutputInfo.info(minionName + "受到" + number + "点伤害");
             health -= number;
             getOwner().getEventManager().call(minionBeHurtEvent);
@@ -324,7 +330,8 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     @Override
     public void addDeathRattle(DeathRattle deathRattle) {
-
+        deathRattle.setCurrentMinion(this);
+        this.deathRattle.add(deathRattle);
     }
 
     /**
@@ -332,7 +339,7 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     @Override
     public void removeDeathRattle() {
-
+        this.deathRattle = new ArrayList<>();
     }
 
     /**
@@ -342,13 +349,13 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     @Override
     public boolean isDeathRattle() {
-        return false;
+        return this.deathRattle.size() > 0;
     }
 
     public AbstractMinion() {
     }
 
-    public AbstractMinion(String minionName, Long healthLimit, Long attackValue,Race race) {
+    public AbstractMinion(String minionName, Long healthLimit, Long attackValue, Race race) {
         this.minionName = minionName;
         this.healthLimit = healthLimit;
         this.health = healthLimit;

@@ -1,11 +1,12 @@
 package cn.eiden.hsm.game.card.base;
 
-import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.enums.CardClass;
-import cn.eiden.hsm.enums.CardSet;
-import cn.eiden.hsm.game.objct.MinionObject;
-
-import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.dynamic.expert1.neutral.LeperGnome;
+import cn.eiden.hsm.game.keyword.DeathRattle;
+import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -14,20 +15,26 @@ import cn.eiden.hsm.game.card.AbstractMinionCard;
  * @version : 1.0
  *  麻风侏儒卡牌
  * */
-@Tags(cardClass = CardClass.NEUTRAL, cardSet = CardSet.CORE)
-public class LeperGnomeCard extends AbstractMinionCard {
-    private static final int COST = 1;
-    private static final String DESCRIPTION = "亡语：对敌方英雄造成2点伤害";
-    private static final String CARD_NAME = "麻风侏儒";
-    private static final Long ATTACK_VALUE = 1L;
-    private static final Long HEALTH_LIMIT = 1L;
 
-    public LeperGnomeCard() {
-        super(COST, DESCRIPTION, CARD_NAME, CardClass.NEUTRAL, HEALTH_LIMIT, ATTACK_VALUE);
+public class LeperGnomeCard extends LeperGnome {
+    @Override
+    protected DeathRattle selfDeathRattle() {
+        return new MyDeathRattle();
     }
 
-    @Override
-    public MinionObject createMinion() {
-        return null;
+    static class MyDeathRattle implements DeathRattle{
+        @Getter
+        private Minion minion;
+
+        @Override
+        public void setCurrentMinion(Minion minion) {
+            this.minion = minion;
+        }
+
+        @Override
+        public void doDeathRattle() {
+            minion.getOwner().getEnemy().getHero().beHurt(2);
+        }
+
     }
 }

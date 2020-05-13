@@ -60,7 +60,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .build();
         if (cardInfo.getDeathRattle() == 1) {
             myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfDeathRattle")
-                    .addModifiers(Modifier.PRIVATE)
+                    .addModifiers(Modifier.PROTECTED)
                     .returns(DeathRattle.class)
                     .addStatement("// 重写以补全效果")
                     .addStatement("return null")
