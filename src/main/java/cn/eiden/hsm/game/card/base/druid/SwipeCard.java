@@ -20,6 +20,7 @@ import cn.eiden.hsm.game.tags.Stand;
  *
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(stand = Stand.FOE)
 public class SwipeCard extends AbstractMagicCard {
     private static final int COST = 4;
     private static final String DESCRIPTION = "对一个敌人造成4点伤害，对其他敌人造成1点伤害";
@@ -34,7 +35,6 @@ public class SwipeCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(stand = Stand.FOE)
     public void magicEffect(Gamer gamer, Minion target){
         int gamerSpellDamage = gamer.getGamerSpellDamage();
         int damageMain = MAGIC_DAMAGE_MAIN + gamerSpellDamage;

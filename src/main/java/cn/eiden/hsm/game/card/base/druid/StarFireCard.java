@@ -17,6 +17,7 @@ import cn.eiden.hsm.game.objct.Minion;
  * 星火术
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class)
 public class StarFireCard extends AbstractMagicCard {
     private static final int COST = 6;
     private static final String DESCRIPTION = "造成5点伤害，抽一张牌。";
@@ -29,7 +30,6 @@ public class StarFireCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         target.beHurt(damage);

@@ -18,6 +18,7 @@ import cn.eiden.hsm.output.OutputInfo;
  * 自然印记
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class)
 public class MarkOfNatureCard extends AbstractMagicCard {
     private static final int COST = 3;
     private static final String DESCRIPTION = "抉择：让一个随从获得+4攻击力;或者获得+4生命值并具有嘲讽。";
@@ -32,7 +33,6 @@ public class MarkOfNatureCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         if (gamer.getChooseOne()==0){
             //+4攻击力

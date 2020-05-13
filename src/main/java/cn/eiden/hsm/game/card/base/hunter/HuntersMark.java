@@ -19,6 +19,7 @@ import cn.eiden.hsm.game.tags.Stand;
  *
  */
 @Tags(cardClass = CardClass.HUNTER, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class ,stand = Stand.ALL)
 public class HuntersMark extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "使一个随从生命值变为1。";
@@ -32,7 +33,6 @@ public class HuntersMark extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class ,stand = Stand.ALL)
     public void magicEffect(Gamer gamer, Minion target){
         if (target instanceof MinionObject){
             target.changeHealth(HEALTH_CHANGE);

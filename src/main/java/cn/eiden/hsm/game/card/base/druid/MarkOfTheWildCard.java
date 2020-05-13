@@ -19,6 +19,7 @@ import cn.eiden.hsm.output.OutputInfo;
  *
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class)
 public class MarkOfTheWildCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "让一个随从获得+2/+2并具有嘲讽。";
@@ -32,7 +33,6 @@ public class MarkOfTheWildCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         target.addAttack(ADD_ATTACK);
         target.addHealthLimit(ADD_HEALTH);

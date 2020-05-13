@@ -19,6 +19,7 @@ import cn.eiden.hsm.output.OutputInfo;
  *
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class)
 public class WarthCard extends AbstractMagicCard {
     private static final int COST = 2;
     private static final String DESCRIPTION = "抉择：对一个随从造成3点伤害;或者1点伤害并抽一张牌。";
@@ -34,7 +35,6 @@ public class WarthCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         int damage = MAGIC_DAMAGE + gamer.getGamerSpellDamage();
         int damageDrawCard = MAGIC_DAMAGE_DRAW_CARD + gamer.getGamerSpellDamage();

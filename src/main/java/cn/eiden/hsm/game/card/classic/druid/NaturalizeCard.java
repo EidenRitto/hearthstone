@@ -18,6 +18,7 @@ import cn.eiden.hsm.game.objct.Minion;
  *
  */
 @Tags(cardClass = CardClass.DRUID, cardSet = CardSet.CORE)
+@TargetScope(classScope = MinionObject.class)
 public class NaturalizeCard extends AbstractMagicCard {
     private static final int COST = 1;
     private static final String DESCRIPTION = "消灭一个随从，你的对手抽两张牌。";
@@ -29,7 +30,6 @@ public class NaturalizeCard extends AbstractMagicCard {
     }
 
     @Override
-    @TargetScope(classScope = MinionObject.class)
     public void magicEffect(Gamer gamer, Minion target) {
         if (gamer.getMinions().contains(target)) {
             gamer.deathMinion(gamer.getMinions().indexOf(target));
