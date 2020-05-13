@@ -84,6 +84,7 @@ public abstract class AbstractCardFileBuilder {
     protected void writeToSourceFile(TypeSpec myClass) {
         String packageName = getPackageName();
         JavaFile javaFile = JavaFile.builder(packageName, myClass)
+                .indent("    ")
                 .build();
         String outputPath = System.getProperty("user.dir") + CardGeneratorUtils.PACKAGE_PATH;
         Path path = Paths.get(outputPath);
