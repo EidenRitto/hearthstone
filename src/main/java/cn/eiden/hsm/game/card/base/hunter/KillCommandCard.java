@@ -5,9 +5,9 @@ import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.Race;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 

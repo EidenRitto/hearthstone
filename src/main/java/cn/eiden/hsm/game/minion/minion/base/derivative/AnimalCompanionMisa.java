@@ -1,7 +1,7 @@
-package cn.eiden.hsm.game.objct.minion.base.derivative;
+package cn.eiden.hsm.game.minion.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.Taunt;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou

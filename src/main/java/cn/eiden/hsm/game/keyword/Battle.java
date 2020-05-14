@@ -1,7 +1,6 @@
 package cn.eiden.hsm.game.keyword;
 
-import cn.eiden.hsm.game.GameObject;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 
 /**
  * 战吼接口

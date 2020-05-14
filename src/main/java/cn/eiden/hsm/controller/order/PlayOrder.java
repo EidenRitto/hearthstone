@@ -2,7 +2,7 @@ package cn.eiden.hsm.controller.order;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.RegexUtil;
 

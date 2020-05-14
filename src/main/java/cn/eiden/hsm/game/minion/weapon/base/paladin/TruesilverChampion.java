@@ -1,7 +1,7 @@
-package cn.eiden.hsm.game.objct.weapon.base.paladin;
+package cn.eiden.hsm.game.minion.weapon.base.paladin;
 
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.objct.WeaponObject;
+import cn.eiden.hsm.game.minion.WeaponObject;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 

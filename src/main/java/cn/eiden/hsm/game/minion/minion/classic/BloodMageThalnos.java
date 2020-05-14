@@ -1,14 +1,13 @@
-package cn.eiden.hsm.game.objct.minion.classic;
+package cn.eiden.hsm.game.minion.minion.classic;
 
-import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.keyword.SpellDamage;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 
 /**
  * @author : Eiden J.P Zhou
  * @date 2018/9/18
  */
-public class BloodMageThalnos extends MinionObject implements DeathRattle, SpellDamage {
+public class BloodMageThalnos extends MinionObject implements SpellDamage {
     private static final String SERVANT_NAME = "血法师萨尔诺斯";
     private static final Long HEALTH = 1L;
     private static final Long ATTACK = 1L;
@@ -20,11 +19,6 @@ public class BloodMageThalnos extends MinionObject implements DeathRattle, Spell
 
     public BloodMageThalnos() {
         super(SERVANT_NAME,HEALTH, ATTACK);
-    }
-
-    @Override
-    public void doDeathRattle(){
-        this.owner.drawCard(DRAW_CARD_NUMBER);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class CardInfo {
 
     private int battleCry;
 
-
+    private int spellPower;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

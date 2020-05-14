@@ -5,7 +5,7 @@ import cn.eiden.hsm.event.events.AddMinionEvent;
 import cn.eiden.hsm.game.keyword.Charge;
 import cn.eiden.hsm.game.keyword.SpellDamage;
 import cn.eiden.hsm.game.keyword.Taunt;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
 /**

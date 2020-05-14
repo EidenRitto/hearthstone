@@ -1,8 +1,8 @@
-package cn.eiden.hsm.game.objct.hero;
+package cn.eiden.hsm.game.minion.hero;
 
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.Race;
-import cn.eiden.hsm.game.objct.AbstractMinion;
+import cn.eiden.hsm.game.minion.AbstractMinion;
 
 import cn.eiden.hsm.output.OutputInfo;
 

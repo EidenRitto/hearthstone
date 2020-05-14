@@ -1,13 +1,9 @@
 package cn.eiden.hsm.game.card.base;
 
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.dynamic.expert1.neutral.LeperGnome;
 import cn.eiden.hsm.game.keyword.DeathRattle;
-import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.minion.Minion;
 import lombok.Getter;
-import lombok.Setter;
-
 
 /**
  * @author : Eiden J.P Zhou

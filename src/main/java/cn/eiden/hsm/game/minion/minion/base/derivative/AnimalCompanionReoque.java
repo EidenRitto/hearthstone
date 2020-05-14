@@ -1,8 +1,8 @@
-package cn.eiden.hsm.game.objct.minion.base.derivative;
+package cn.eiden.hsm.game.minion.minion.base.derivative;
 
 import cn.eiden.hsm.game.keyword.BuffHole;
-import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.MinionObject;
+import cn.eiden.hsm.game.minion.Minion;
 
 import java.util.List;
 

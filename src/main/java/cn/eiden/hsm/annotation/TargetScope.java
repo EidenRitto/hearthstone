@@ -2,9 +2,9 @@ package cn.eiden.hsm.annotation;
 
 import cn.eiden.hsm.game.card.base.hunter.ArcaneShotCard;
 import cn.eiden.hsm.game.card.classic.druid.MarkOfNatureCard;
-import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.objct.Minion;
-import cn.eiden.hsm.game.objct.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.minion.MinionObject;
+import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.tags.Stand;
 
 import java.lang.annotation.ElementType;

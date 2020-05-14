@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.card;
 
 
 import cn.eiden.hsm.enums.*;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
-package cn.eiden.hsm.game.objct.weapon.base.warrior;
+package cn.eiden.hsm.game.minion.weapon.base.warrior;
 
-import cn.eiden.hsm.game.objct.WeaponObject;
+import cn.eiden.hsm.game.minion.WeaponObject;
 
 /**
  * @author : Eiden J.P Zhou

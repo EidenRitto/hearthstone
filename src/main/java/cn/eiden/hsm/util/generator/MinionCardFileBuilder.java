@@ -3,7 +3,7 @@ package cn.eiden.hsm.util.generator;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.keyword.DeathRattle;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
@@ -91,6 +91,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getDeathRattle() == 1) {
             CodeBlock deathRattle = CodeBlock.builder().addStatement("minionObject.addDeathRattle(this.selfDeathRattle())").build();
             core = core.toBuilder().add(deathRattle).build();
+        }
+        if (cardInfo.getSpellPower() > 0) {
+            CodeBlock spellPower = CodeBlock.builder().addStatement("minionObject.setSpellPower($L)", cardInfo.getSpellPower()).build();
+            core = core.toBuilder().add(spellPower).build();
         }
         return core;
     }

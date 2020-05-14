@@ -98,6 +98,9 @@ public class CardGeneratorUtils {
                 case BATTLECRY:
                     cardCache.setBattleCry(Integer.parseInt(tag.getValue()));
                     break;
+                case SPELLPOWER:
+                    cardCache.setSpellPower(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

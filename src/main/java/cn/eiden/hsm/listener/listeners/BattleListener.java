@@ -3,7 +3,7 @@ package cn.eiden.hsm.listener.listeners;
 import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
 /**

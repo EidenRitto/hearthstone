@@ -1,10 +1,8 @@
 package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
-import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
-import cn.eiden.hsm.game.objct.MinionObject;
-import cn.eiden.hsm.game.objct.WeaponObject;
+import cn.eiden.hsm.game.minion.WeaponObject;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import lombok.extern.slf4j.Slf4j;

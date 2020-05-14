@@ -4,7 +4,7 @@ import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.keyword.BuffHole;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.listener.HearthListener;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package cn.eiden.hsm.game.card.base;
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 

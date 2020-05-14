@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.card.base.derivative;
 
 import cn.eiden.hsm.enums.CardClass;
-import cn.eiden.hsm.game.objct.MinionObject;
+import cn.eiden.hsm.game.minion.MinionObject;
 
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 

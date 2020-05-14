@@ -5,9 +5,9 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 
-import cn.eiden.hsm.game.objct.minion.base.derivative.Panther;
+import cn.eiden.hsm.game.minion.minion.base.derivative.Panther;
 
 import cn.eiden.hsm.output.OutputInfo;
 

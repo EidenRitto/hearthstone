@@ -5,7 +5,7 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.Gamer;
 
 /**

@@ -2,7 +2,7 @@ package cn.eiden.hsm.event.events;
 
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.game.Gamer;
-import cn.eiden.hsm.game.objct.Minion;
+import cn.eiden.hsm.game.minion.Minion;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
