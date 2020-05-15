@@ -33,6 +33,9 @@ public class CardFileDirector {
             case WEAPON:
                 abstractCardFileBuilder = new WeaponCardFileBuilder(cardInfo);
                 break;
+            case HERO_POWER:
+                abstractCardFileBuilder = new HeroPowerFileBuilder(cardInfo);
+                break;
             default:
                 break;
         }

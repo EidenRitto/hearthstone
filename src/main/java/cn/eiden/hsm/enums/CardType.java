@@ -20,6 +20,7 @@ public enum CardType {
     WEAPON (7),
     ITEM (8),
     TOKEN (9),
+    /**英雄技能*/
     HERO_POWER (10),
     BLANK (11),
     GAME_MODE_BUTTON (12),

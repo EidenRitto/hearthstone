@@ -64,7 +64,12 @@ public abstract class AbstractCardFileBuilder {
      * @return 合法java类名
      */
     protected String formatFileName() {
-        return JavaBeansUtil.getCamelCaseString(cardInfo.getCardName(), true);
+        try {
+            return JavaBeansUtil.getCamelCaseString(cardInfo.getCardName(), true);
+        }catch (Exception e){
+            log.error(cardInfo.getCardCnName());
+            return "unknow";
+        }
     }
 
     /**
