@@ -52,11 +52,9 @@ public class HeroPowerFileBuilder extends AbstractCardFileBuilder {
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
                         .returns(void.class)
-                        .addParameter(Gamer.class, "gamer")
                         .addParameter(Minion.class, "target")
                         .addStatement("// 重写以补全效果")
                         .addJavadoc("$S\n", cardInfo.getCardText())
-                        .addJavadoc("@param gamer 当前卡牌所有者\n")
                         .addJavadoc("@param target 所指定目标")
                         .build())
                 .build();

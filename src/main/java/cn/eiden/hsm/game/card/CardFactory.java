@@ -105,4 +105,13 @@ public class CardFactory {
         Class<? extends Card> aClass = cardPool.get(id);
         return aClass.newInstance();
     }
+
+    public static Card getCardById(int id){
+        try {
+            return getInstance().buildCardById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -192,7 +192,6 @@ public class CardTest {
         List<Card> cards = new ArrayList<>(30);
         for (int i = 0;i<10;i++){
             cards.add(new SmallElfCard());
-            cards.add(new LeperGnomeCard());
             cards.add(new SwipeCard());
         }
 

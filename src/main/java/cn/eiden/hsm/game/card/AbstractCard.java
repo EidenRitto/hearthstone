@@ -25,7 +25,7 @@ public abstract class AbstractCard extends GameObject implements Card{
     /**版本*/
     private CardSet cardSet;
     /**职业*/
-    private cn.eiden.hsm.enums.CardClass cardClass;
+    private CardClass cardClass;
     /**类型*/
     private CardType cardType;
     /**稀有度*/

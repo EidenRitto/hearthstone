@@ -9,9 +9,7 @@ import cn.eiden.hsm.event.events.AddMinionEvent;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
-import cn.eiden.hsm.game.card.AbstractMagicCard;
-import cn.eiden.hsm.game.card.AbstractMinionCard;
-import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.minion.Minion;
@@ -103,6 +101,8 @@ public class Gamer extends GameObject {
      * 开始一个新的回合
      */
     public void newTurnStart() {
+        //恢复英雄技能
+        getHero().getHeroPower().recoveryTimes();
         //抽一张牌
         drawCard(1);
         getManaCrystal().newTurnStart();
@@ -127,10 +127,10 @@ public class Gamer extends GameObject {
             drawCard(FIRST_HANDS_INIT);
             getEnemy().drawCard(LAST_HANDS_INIT);
             //后手加入幸运币
-            getEnemy().getHand().addHandsCard(new CoinCard());
+            getEnemy().getHand().addHandsCard(CardFactory.getCardById(1746));
         } else {
             drawCard(LAST_HANDS_INIT);
-            getHand().addHandsCard(new CoinCard());
+            getHand().addHandsCard(CardFactory.getCardById(1746));
             getEnemy().drawCard(FIRST_HANDS_INIT);
         }
         //换牌阶段(==暂无==)
@@ -212,6 +212,28 @@ public class Gamer extends GameObject {
     }
 
     /**
+     * 使用英雄技能
+     * @param target 技能目标
+     */
+    public void useHeroPower(Minion target){
+        AbstractHeroPowerCard heroPower = this.getHero().getHeroPower();
+        if (heroPower.getTimesOfUse() < 1){
+            OutputInfo.info("本回合已经使用过技能");
+            return;
+        }
+        if (!isRightTarget(heroPower, target)) {
+            OutputInfo.info("这不是一个有效的目标");
+            return;
+        }
+        //消耗对应的法力值
+        getManaCrystal().applyAvailable(heroPower.getCost());
+        //技能效果
+        heroPower.powerEffect(target);
+        //次数-1
+        heroPower.subTimes();
+    }
+
+    /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/14
      * 从手牌中打出法术
@@ -221,6 +243,11 @@ public class Gamer extends GameObject {
         this.useThisMagicCard(card, target);
     }
 
+    /**
+     * 使用法术牌
+     * @param card 卡牌
+     * @param target 目标
+     */
     public void useThisMagicCard(Card card, Minion target) {
         if (!isRightTarget(card, target)) {
             OutputInfo.info("这不是一个有效的目标");
@@ -392,6 +419,7 @@ public class Gamer extends GameObject {
      */
     public void init(HeroObjectAbstract heroObject, List<Card> cards) {
         this.hero = heroObject;
+        this.hero.setOwner(this);
         this.hand = new Hand();
         this.cards = initRandomCards(cards);
         this.tomb = new ArrayList<>();

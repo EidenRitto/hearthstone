@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.card.base;
 
+
 import cn.eiden.hsm.game.card.dynamic.core.neutral.TheCoin;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.Gamer;
