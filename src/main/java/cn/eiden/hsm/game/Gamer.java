@@ -217,6 +217,9 @@ public class Gamer extends GameObject {
      */
     public void useHeroPower(Minion target){
         AbstractHeroPowerCard heroPower = this.getHero().getHeroPower();
+        if (!checkUse(heroPower)){
+            return;
+        }
         if (heroPower.getTimesOfUse() < 1){
             OutputInfo.info("本回合已经使用过技能");
             return;

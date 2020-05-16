@@ -86,7 +86,7 @@ public class TemplateController {
             case PLAY:
                 nowInvoker.callPlay();
                 break;
-            case SPELL:
+            case HERO_POWER:
                 nowInvoker.callSpell();
                 break;
             case ATK:

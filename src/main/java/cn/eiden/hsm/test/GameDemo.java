@@ -4,6 +4,7 @@ import cn.eiden.hsm.controller.TemplateController;
 import cn.eiden.hsm.controller.order.Invoker;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
@@ -24,14 +25,10 @@ public class GameDemo {
             druidCards.add(CardFactory.getInstance().getRandomCard(CardClass.DRUID));
         }
 
-//        List<Card> hunterCards = new ArrayList<>(30);
-//        for (int i = 0;i<30;i++){
-//            hunterCards.add(CardFactory.getInstance().getRandomCard(CardClass.HUNTER));
-//        }
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
-        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.HUNTER),deck);
-        Gamer enemy = new Gamer(new HeroObjectAbstract(CardClass.DRUID),druidCards);
+        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.HUNTER, (AbstractHeroPowerCard) CardFactory.getCardById(229)),deck);
+        Gamer enemy = new Gamer(new HeroObjectAbstract(CardClass.DRUID, (AbstractHeroPowerCard) CardFactory.getCardById(1123)),druidCards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 

@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.card;
 
+import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
@@ -16,9 +17,10 @@ import lombok.Setter;
  */
 public abstract class AbstractHeroPowerCard extends AbstractCard {
     private static final int TIMES = 1;
+
+    /**使用次数*/
     @Setter
     @Getter
-    /**使用次数*/
     private int timesOfUse;
 
     /**
@@ -45,5 +47,14 @@ public abstract class AbstractHeroPowerCard extends AbstractCard {
      */
     public void recoveryTimes(){
         this.timesOfUse = TIMES;
+    }
+
+    /**
+     * 当前技能是否需要选择目标
+     * @return 需要返回true
+     */
+    public boolean hasTarget(){
+        Class<? extends AbstractHeroPowerCard> aClass = this.getClass();
+        return aClass.isAnnotationPresent(TargetScope.class);
     }
 }

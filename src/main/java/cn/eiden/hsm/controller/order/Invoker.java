@@ -14,9 +14,8 @@ public class Invoker {
     private Order endOrder;
     private Order atkOrder;
     private Order playOrder;
-    private Order spellOrder;
+    private Order heroPowerOrder;
     private Order startTurnOrder;
-    private Gamer gamer;
 
     public void callHelp(){
         helpOrder.execute();
@@ -31,7 +30,7 @@ public class Invoker {
         playOrder.execute();
     }
     public void callSpell(){
-        spellOrder.execute();
+        heroPowerOrder.execute();
     }
     public void callStartTurn(){
         startTurnOrder.execute();
@@ -42,5 +41,6 @@ public class Invoker {
         atkOrder = new AtkOrder(gamer);
         startTurnOrder = new StartTurnOrder(gamer);
         playOrder = new PlayOrder(gamer);
+        heroPowerOrder = new HeroPowerOrder(gamer);
     }
 }

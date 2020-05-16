@@ -33,6 +33,11 @@ public class HeroObjectAbstract extends AbstractMinion {
         super(cardClass.name(),HEALTH,0L, Race.INVALID);
     }
 
+    public HeroObjectAbstract(CardClass cardClass, AbstractHeroPowerCard heroPower) {
+        super(cardClass.name(),HEALTH,0L, Race.INVALID);
+        this.heroPower = heroPower;
+    }
+
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/19 15:59

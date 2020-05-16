@@ -26,8 +26,7 @@ public class PlayOrder extends AbstractOrder implements Order {
                 gamer.useThisCard(card,null);
             }else {
                 List<Minion> legitimateTarget = gamer.getLegitimateTarget(card);
-                Integer targetNum = getTargetNum(legitimateTarget);
-                printLegitimateTarget(legitimateTarget);
+                Integer targetNum = getTargetNum(legitimateTarget,gamer);
                 Minion targetMinion = legitimateTarget.get(targetNum);
                 gamer.useThisCard(card,targetMinion);
             }
@@ -50,28 +49,6 @@ public class PlayOrder extends AbstractOrder implements Order {
             }
             OutputInfo.info("非法输入！");
         }
-    }
-
-    public Integer getTargetNum(List<Minion> legitimateTarget){
-        while (true){
-            //打印提示信息
-            this.printLegitimateTarget(legitimateTarget);
-            //等待输入信息
-            String input = getOrder();
-            if (RegexUtil.isNumberStr(input)) {
-                int index = Integer.parseInt(input);
-                if (index < legitimateTarget.size() && index >= 0) {
-                    return index;
-                }
-            } else {
-                return null;
-            }
-            OutputInfo.info("非法输入！");
-        }
-    }
-
-    public void printLegitimateTarget(List<Minion> allTarget) {
-        gamer.printMinion(allTarget,"选择合法的目标：");
     }
 
     public PlayOrder(Gamer gamer) {
