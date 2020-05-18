@@ -6,7 +6,12 @@
 
     <groupId>eiden</groupId>
     <artifactId>hearthstone</artifactId>
+    <packaging>pom</packaging>
     <version>1.1-SNAPSHOT</version>
+    <modules>
+        <module>card-generator</module>
+        <module>hearth-core</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

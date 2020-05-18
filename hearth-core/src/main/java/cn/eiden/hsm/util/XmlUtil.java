@@ -1,17 +1,13 @@
 package cn.eiden.hsm.util;
 
-import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.dbdata.Entity;
-import cn.eiden.hsm.dbdata.Tag;
 import cn.eiden.hsm.util.generator.AbstractCardFileBuilder;
 import cn.eiden.hsm.util.generator.CardFileDirector;
-import cn.eiden.hsm.util.generator.SpellCardFileBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.dom4j.tree.DefaultElement;
 import org.dom4j.tree.DefaultText;
 
 import java.beans.IntrospectionException;
