@@ -11,6 +11,7 @@
     <modules>
         <module>card-generator</module>
         <module>hearth-core</module>
+        <module>hearth-card</module>
     </modules>
     <dependencies>
         <dependency>
@@ -53,13 +54,6 @@
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.squareup/javapoet -->
-        <dependency>
-            <groupId>com.squareup</groupId>
-            <artifactId>javapoet</artifactId>
-            <version>1.12.1</version>
         </dependency>
 
 

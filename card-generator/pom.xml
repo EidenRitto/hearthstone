@@ -10,6 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>card-generator</artifactId>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.squareup/javapoet -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>1.12.1</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>hearth-core</artifactId>
+            <groupId>eiden</groupId>
+            <version>1.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
