@@ -2,8 +2,6 @@ import cn.eiden.hsm.controller.GameController;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.card.base.LeperGnomeCard;
-import cn.eiden.hsm.game.card.base.SmallElfCard;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class GameTest {
     public static void start(){
         List<Card> cards = new ArrayList<>(30);
         for (int i = 0;i<10;i++){
-            cards.add(new SmallElfCard());
+            cards.add(null);
         }
 
         Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.MAGE),cards);

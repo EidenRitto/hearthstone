@@ -10,7 +10,6 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.*;
-import cn.eiden.hsm.game.card.base.CoinCard;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;

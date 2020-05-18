@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.card.base;
 
 
+import cn.eiden.hsm.game.card.defs.expert1.neutral.LeperGnome;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.Minion;
 import lombok.Getter;
@@ -12,8 +13,9 @@ import lombok.Getter;
  *  麻风侏儒卡牌
  * */
 
-public class LeperGnomeCard {
+public class LeperGnomeCard extends LeperGnome {
 
+    @Override
     protected DeathRattle selfDeathRattle() {
         return new MyDeathRattle();
     }
