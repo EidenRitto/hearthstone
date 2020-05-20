@@ -16,9 +16,9 @@ public class BattleListener implements HearthListener {
     public void onEvent(UseMinionCardFromHandEvent event)
     {
         Minion minion = event.getMinionObject();
-        if (minion instanceof Battle){
-            Battle battleMinion = (Battle) minion;
-            battleMinion.doBattle(event.getTarget());
+        Minion target = event.getTarget();
+        if (minion.hasBattle()){
+            minion.doBattle(event.getOwner(),target);
         }
     }
 }

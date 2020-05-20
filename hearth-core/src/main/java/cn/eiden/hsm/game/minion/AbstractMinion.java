@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.GameObject;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
@@ -109,6 +110,10 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      * 亡语
      */
     private List<DeathRattle> deathRattle = new ArrayList<>();
+    /**
+     * 战吼
+     */
+    private Battle battle;
 
     @Override
     public void attack(Minion beAttackMinion) {
@@ -330,7 +335,6 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     @Override
     public void addDeathRattle(DeathRattle deathRattle) {
-        deathRattle.setCurrentMinion(this);
         this.deathRattle.add(deathRattle);
     }
 
@@ -348,8 +352,28 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      * @return 有亡语返回true
      */
     @Override
-    public boolean isDeathRattle() {
+    public boolean hasDeathRattle() {
         return this.deathRattle.size() > 0;
+    }
+
+    @Override
+    public void doDeathRattle() {
+        this.deathRattle.forEach(e->e.doDeathRattle(this));
+    }
+
+    @Override
+    public void setBattle(Battle battle) {
+        this.battle = battle;
+    }
+
+    @Override
+    public void doBattle(Gamer gamer, Minion target) {
+        this.battle.doBattle(gamer, this, target);
+    }
+
+    @Override
+    public boolean hasBattle() {
+        return this.battle != null;
     }
 
     public AbstractMinion() {

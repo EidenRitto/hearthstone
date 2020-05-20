@@ -1,6 +1,7 @@
 package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
+import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.Minion;
 import com.squareup.javapoet.MethodSpec;
@@ -51,9 +52,11 @@ public class HeroPowerFileBuilder extends AbstractCardFileBuilder {
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
                         .returns(void.class)
+                        .addParameter(Gamer.class, "gamer")
                         .addParameter(Minion.class, "target")
                         .addStatement("// 重写以补全效果")
                         .addJavadoc("$S\n", cardInfo.getCardText())
+                        .addJavadoc("@param gamer 当期玩家角色\n")
                         .addJavadoc("@param target 所指定目标")
                         .build())
                 .build();

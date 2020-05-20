@@ -9,12 +9,8 @@ import cn.eiden.hsm.game.minion.Minion;
  */
 public interface DeathRattle {
     /**
-     * 设置当前随从
-     * @param minion 随从
-     */
-    void setCurrentMinion(Minion minion);
-    /**
      * 执行亡语
+     * @param minion 当前随从
      */
-    void doDeathRattle();
+    void doDeathRattle(Minion minion);
 }

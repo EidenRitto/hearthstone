@@ -230,7 +230,7 @@ public class Gamer extends GameObject {
         //消耗对应的法力值
         getManaCrystal().applyAvailable(heroPower.getCost());
         //技能效果
-        heroPower.powerEffect(target);
+        heroPower.powerEffect(this,target);
         //次数-1
         heroPower.subTimes();
     }

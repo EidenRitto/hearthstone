@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
+import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.minion.Minion;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,9 +27,10 @@ public abstract class AbstractHeroPowerCard extends AbstractCard {
     /**
      * 技能效果
      *
+     * @param gamer 当期角色
      * @param target 目标单位
      */
-    public abstract void powerEffect(Minion target);
+    public abstract void powerEffect(Gamer gamer, Minion target);
 
     public AbstractHeroPowerCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
@@ -47,14 +49,5 @@ public abstract class AbstractHeroPowerCard extends AbstractCard {
      */
     public void recoveryTimes(){
         this.timesOfUse = TIMES;
-    }
-
-    /**
-     * 当前技能是否需要选择目标
-     * @return 需要返回true
-     */
-    public boolean hasTarget(){
-        Class<? extends AbstractHeroPowerCard> aClass = this.getClass();
-        return aClass.isAnnotationPresent(TargetScope.class);
     }
 }

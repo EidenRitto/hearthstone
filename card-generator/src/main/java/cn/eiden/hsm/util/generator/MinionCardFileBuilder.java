@@ -2,6 +2,7 @@ package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.MinionObject;
 import com.squareup.javapoet.CodeBlock;
@@ -67,6 +68,15 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
+        if (cardInfo.getBattleCry() == 1) {
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfBattleCry")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(Battle.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
     }
 
@@ -95,6 +105,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getSpellPower() > 0) {
             CodeBlock spellPower = CodeBlock.builder().addStatement("minionObject.setSpellPower($L)", cardInfo.getSpellPower()).build();
             core = core.toBuilder().add(spellPower).build();
+        }
+        if (cardInfo.getBattleCry() == 1) {
+            CodeBlock battleCry = CodeBlock.builder().addStatement("minionObject.setBattle(this.selfBattleCry())").build();
+            core = core.toBuilder().add(battleCry).build();
         }
         return core;
     }

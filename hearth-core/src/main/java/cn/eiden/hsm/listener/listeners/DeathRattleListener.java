@@ -15,9 +15,8 @@ public class DeathRattleListener implements HearthListener {
     @EventHandler
     public void onEvent(MinionDeathEvent event){
         Minion deathMinion = event.getDeathMinion();
-        if (!deathMinion.isSilence() && deathMinion instanceof DeathRattle){
-            DeathRattle minion = (DeathRattle) deathMinion;
-            minion.doDeathRattle();
+        if (deathMinion.hasDeathRattle()){
+            deathMinion.doDeathRattle();
         }
     }
 }

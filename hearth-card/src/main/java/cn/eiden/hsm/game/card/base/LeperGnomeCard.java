@@ -4,7 +4,6 @@ package cn.eiden.hsm.game.card.base;
 import cn.eiden.hsm.game.card.defs.expert1.neutral.LeperGnome;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.Minion;
-import lombok.Getter;
 
 /**
  * @author : Eiden J.P Zhou
@@ -20,19 +19,10 @@ public class LeperGnomeCard extends LeperGnome {
         return new MyDeathRattle();
     }
 
-    static class MyDeathRattle implements DeathRattle{
-        @Getter
-        private Minion minion;
-
+    static public class MyDeathRattle implements DeathRattle{
         @Override
-        public void setCurrentMinion(Minion minion) {
-            this.minion = minion;
-        }
-
-        @Override
-        public void doDeathRattle() {
+        public void doDeathRattle(Minion minion) {
             minion.getOwner().getEnemy().getHero().beHurt(2);
         }
-
     }
 }

@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.minion;
 
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 
 /**
@@ -247,5 +248,29 @@ public interface Minion {
      * 是否有亡语
      * @return 有亡语返回true
      * */
-    boolean isDeathRattle();
+    boolean hasDeathRattle();
+
+    /**
+     * 执行亡语
+     */
+    void doDeathRattle();
+
+    /**
+     * 设置战吼
+     * @param battle 战吼
+     * */
+    void setBattle(Battle battle);
+
+    /**
+     * 战吼
+     * @param gamer 当前角色
+     * @param target 目标角色
+     */
+    void doBattle(Gamer gamer, Minion target);
+
+    /**
+     * 是否具有战吼
+     * @return 有返回true
+     */
+    boolean hasBattle();
 }
