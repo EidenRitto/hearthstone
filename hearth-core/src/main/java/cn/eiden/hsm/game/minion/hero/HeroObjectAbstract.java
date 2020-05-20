@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.AbstractMinion;
 
+import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,21 +14,19 @@ import lombok.Setter;
  * @author : Eiden J.P Zhou
  * @date 2018/9/26
  */
-public class HeroObjectAbstract extends AbstractMinion {
+@Getter
+@Setter
+public class HeroObjectAbstract extends AbstractMinion implements Hero{
     /**生命值上限*/
     private static final Long HEALTH = 30L;
     /**职业*/
-    @Getter
-    @Setter
     private CardClass cardClass;
     /**护甲*/
-    @Getter
-    @Setter
     private long armor;
     /**英雄技能*/
-    @Getter
-    @Setter
     private AbstractHeroPowerCard heroPower;
+
+    private Weapon weapon;
 
     public HeroObjectAbstract(CardClass cardClass) {
         super(cardClass.name(),HEALTH,0L, Race.INVALID);
@@ -38,13 +37,15 @@ public class HeroObjectAbstract extends AbstractMinion {
         this.heroPower = heroPower;
     }
 
-    /**
-     * @author : Eiden J.P Zhou
-     * @date : 2018/9/19 15:59
-     *  叠甲
-     */
+
+    @Override
     public void addArmor(long armorNumber){
         OutputInfo.info(getMinionName()+"获得"+armorNumber+"点护甲.");
         armor += armorNumber;
+    }
+
+    @Override
+    public void equipWeapons(Weapon weapon) {
+
     }
 }

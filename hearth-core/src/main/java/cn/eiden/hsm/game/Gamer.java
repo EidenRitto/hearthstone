@@ -10,6 +10,8 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.*;
+import cn.eiden.hsm.game.minion.Weapon;
+import cn.eiden.hsm.game.minion.WeaponObject;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
@@ -177,6 +179,8 @@ public class Gamer extends GameObject {
             this.useThisMagicCard(card, target);
         } else if (card instanceof AbstractMinionCard) {
             this.useThisMinionCard(card, target);
+        } else if (card instanceof AbstractWeaponCard) {
+            this.useThisWeaponCard(card, target);
         }
     }
 
@@ -192,6 +196,16 @@ public class Gamer extends GameObject {
         this.useThisMinionCard(card, target);
     }
 
+    public void useThisWeaponCard(Card card, Minion target) {
+        AbstractWeaponCard weaponCard = (AbstractWeaponCard) card;
+        getManaCrystal().applyAvailable(weaponCard.getCost());
+        Weapon weapon = weaponCard.createWeapon();
+
+        //从手牌中移除卡牌
+        getHand().loss(card);
+    }
+
+
     public void useThisMinionCard(Card card, Minion target) {
         //获得随从卡
         AbstractMinionCard minionCard = (AbstractMinionCard) card;
@@ -205,6 +219,8 @@ public class Gamer extends GameObject {
         eventManager.call(abstractEvent);
 
         //随从进入战场
+        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+        eventManager.call(battlefieldChangeEvent);
         addMinion(minion);
         //从手牌中移除随从卡牌
         getHand().loss(card);
@@ -308,11 +324,10 @@ public class Gamer extends GameObject {
      * 添加一个随从
      */
     public void addMinion(Minion minion) {
-        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+
         AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
         minion.setOwner(this);
         minions.add(minion);
-        eventManager.call(battlefieldChangeEvent);
         eventManager.call(addMinionEvent);
     }
 
