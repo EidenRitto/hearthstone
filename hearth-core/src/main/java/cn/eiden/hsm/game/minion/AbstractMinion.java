@@ -3,16 +3,13 @@ package cn.eiden.hsm.game.minion;
 
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
-import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 随从 抽象
@@ -23,7 +20,7 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
-public abstract class AbstractMinion extends GameObject implements Minion {
+public abstract class AbstractMinion extends AbstractGeneralItem implements Minion {
     /**
      * 随从名称
      */
@@ -82,10 +79,6 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      * 种族
      */
     private Race race;
-    /**
-     * 拥有者
-     */
-    protected Gamer owner;
 
     /**
      * 本回合增加的攻击力
@@ -106,10 +99,7 @@ public abstract class AbstractMinion extends GameObject implements Minion {
      */
     private long originalAttack;
 
-    /**
-     * 亡语
-     */
-    private List<DeathRattle> deathRattle = new ArrayList<>();
+
     /**
      * 战吼
      */
@@ -238,18 +228,8 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     }
 
     @Override
-    public Gamer getOwner() {
-        return owner;
-    }
-
-    @Override
     public void setTaunt(boolean taunt) {
         isTaunt = taunt;
-    }
-
-    @Override
-    public void setOwner(Gamer owner) {
-        this.owner = owner;
     }
 
     @Override
@@ -328,37 +308,6 @@ public abstract class AbstractMinion extends GameObject implements Minion {
     @Override
     public boolean isDivineShield() {
         return divineShield;
-    }
-
-    /**
-     * 添加亡语
-     */
-    @Override
-    public void addDeathRattle(DeathRattle deathRattle) {
-        this.deathRattle.add(deathRattle);
-    }
-
-    /**
-     * 移除亡语
-     */
-    @Override
-    public void removeDeathRattle() {
-        this.deathRattle = new ArrayList<>();
-    }
-
-    /**
-     * 是否有亡语
-     *
-     * @return 有亡语返回true
-     */
-    @Override
-    public boolean hasDeathRattle() {
-        return this.deathRattle.size() > 0;
-    }
-
-    @Override
-    public void doDeathRattle() {
-        this.deathRattle.forEach(e->e.doDeathRattle(this));
     }
 
     @Override

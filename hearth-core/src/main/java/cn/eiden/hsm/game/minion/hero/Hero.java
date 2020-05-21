@@ -18,4 +18,10 @@ public interface Hero {
      * @param weapon 武器
      */
     void equipWeapons(Weapon weapon);
+
+    /**
+     * 是否具有武器
+     * @return 有武器返回true
+     */
+    boolean hasWeapon();
 }

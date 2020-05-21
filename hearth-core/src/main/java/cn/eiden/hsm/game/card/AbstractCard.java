@@ -5,7 +5,7 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
-import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.game.AbstractGeneralItem;
 
 /**
  * @author : Eiden J.P Zhou
@@ -13,7 +13,7 @@ import cn.eiden.hsm.game.GameObject;
  * @version : 2.0
  *
  * */
-public abstract class AbstractCard extends GameObject implements Card{
+public abstract class AbstractCard extends AbstractGeneralItem implements Card{
     private String cardName;
     private int cost;
     private String description;

@@ -1,9 +1,15 @@
 package cn.eiden.hsm.game.minion;
 
-import cn.eiden.hsm.game.GameObject;
+import cn.eiden.hsm.event.EventManager;
+import cn.eiden.hsm.event.events.WeaponDestroyEvent;
+import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.DeathRattle;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Eiden J.P Zhou
@@ -11,10 +17,18 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class WeaponObject extends GameObject implements Weapon{
+public class WeaponObject extends AbstractGeneralItem implements Weapon{
     private String weaponName;
     private long weaponAttack;
     private long weaponDurable;
+    /**
+     * 亡语
+     */
+    private List<DeathRattle> deathRattle = new ArrayList<>();
+    /**
+     * 事件管理器
+     */
+    private final EventManager eventManager = EventManager.getInstance();
 
     public void whenAttackDo(Gamer gamer){
 
@@ -24,5 +38,16 @@ public class WeaponObject extends GameObject implements Weapon{
         this.weaponName = weaponName;
         this.weaponAttack = weaponAttack;
         this.weaponDurable = weaponDurable;
+    }
+
+    @Override
+    public void destroy() {
+        WeaponDestroyEvent destroyEvent = new WeaponDestroyEvent(this);
+        eventManager.call(destroyEvent);
+    }
+
+    @Override
+    public void durableConsumed() {
+        weaponDurable = weaponDurable - 1L;
     }
 }

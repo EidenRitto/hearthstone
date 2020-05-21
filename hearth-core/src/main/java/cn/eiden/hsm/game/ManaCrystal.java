@@ -7,7 +7,7 @@ import lombok.Getter;
  * @date 2020/3/17 19:09
  */
 @Getter
-public class ManaCrystal extends GameObject {
+public class ManaCrystal extends AbstractGeneralItem {
     /**
      * 上限
      */

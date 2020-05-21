@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/3/27 17:29
  */
 @Slf4j
-public class Hand extends GameObject {
+public class Hand extends AbstractGeneralItem {
 
     private int handsLimit = 10;
 

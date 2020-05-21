@@ -2,14 +2,14 @@ package cn.eiden.hsm.game.minion;
 
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.GeneralItem;
 import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.keyword.DeathRattle;
 
 /**
  * @author Eiden J.P Zhou
  * @date 2020/3/19 14:53
  */
-public interface Minion {
+public interface Minion extends GeneralItem {
     /**
      * 攻击
      *
@@ -127,25 +127,11 @@ public interface Minion {
     boolean isAttack();
 
     /**
-     * 获取拥有者
-     *
-     * @return 拥有者
-     */
-    Gamer getOwner();
-
-    /**
      * 设置嘲讽
      *
      * @param taunt 是否嘲讽
      */
     void setTaunt(boolean taunt);
-
-    /**
-     * 设置拥有者
-     *
-     * @param owner 拥有者
-     */
-    void setOwner(Gamer owner);
 
     /**
      * 获取法强
@@ -234,26 +220,6 @@ public interface Minion {
      * @return 有圣盾返回true
      * */
     boolean isDivineShield();
-
-    /**
-     * 添加亡语
-     * @param deathRattle 亡语
-     * */
-    void addDeathRattle(DeathRattle deathRattle);
-
-    /**移除亡语*/
-    void removeDeathRattle();
-
-    /**
-     * 是否有亡语
-     * @return 有亡语返回true
-     * */
-    boolean hasDeathRattle();
-
-    /**
-     * 执行亡语
-     */
-    void doDeathRattle();
 
     /**
      * 设置战吼

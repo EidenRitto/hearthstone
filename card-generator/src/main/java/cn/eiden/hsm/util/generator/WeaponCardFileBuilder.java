@@ -48,7 +48,6 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                         .build())
                 .addMethod(MethodSpec.methodBuilder("createWeapon")
                         .addModifiers(Modifier.PUBLIC)
-                        .addAnnotation(Override.class)
                         .returns(WeaponObject.class)
                         .addStatement("return new $T($N, $N, $N)", WeaponObject.class, "CARD_NAME", "ATK", "DURABILITY")
                         .addJavadoc("$S\n", cardInfo.getCardText())

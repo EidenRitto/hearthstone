@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.keyword;
 
-import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.game.GeneralItem;
 
 /**
  * 亡语
@@ -12,5 +12,5 @@ public interface DeathRattle {
      * 执行亡语
      * @param minion 当前随从
      */
-    void doDeathRattle(Minion minion);
+    void doDeathRattle(GeneralItem minion);
 }

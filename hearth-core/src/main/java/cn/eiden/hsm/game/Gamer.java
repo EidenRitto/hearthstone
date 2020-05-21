@@ -11,7 +11,6 @@ import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.minion.Weapon;
-import cn.eiden.hsm.game.minion.WeaponObject;
 import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
@@ -30,7 +29,7 @@ import java.util.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Slf4j
-public class Gamer extends GameObject {
+public class Gamer extends AbstractGeneralItem {
     /**
      * 手牌上限
      */
