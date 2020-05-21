@@ -30,23 +30,26 @@ public class CardInfo {
 
     private int atk;
     private int health;
+    /**冲锋*/
     private int charge;
     /**种族*/
     private Race race;
     /**武器耐久*/
     private int durability;
-
+    /**嘲讽*/
     private int taunt;
-
+    /**潜行*/
     private int stealth;
-
+    /**圣盾*/
     private int divineShield;
-
+    /**亡语*/
     private int deathRattle;
-
+    /**战吼*/
     private int battleCry;
-
+    /**法强*/
     private int spellPower;
+    /**光环*/
+    private int aura;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

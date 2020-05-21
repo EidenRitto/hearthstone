@@ -2,6 +2,7 @@ package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
+import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.Minion;
@@ -78,6 +79,15 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
+        if (cardInfo.getAura() == 1){
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfAura")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(Aura.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
     }
 
@@ -110,6 +120,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getBattleCry() == 1) {
             CodeBlock battleCry = CodeBlock.builder().addStatement("minionObject.setBattle(this.selfBattleCry())").build();
             core = core.toBuilder().add(battleCry).build();
+        }
+        if (cardInfo.getAura() == 1){
+            CodeBlock aura = CodeBlock.builder().addStatement("minionObject.setAura(this.selfAura())").build();
+            core = core.toBuilder().add(aura).build();
         }
         return core;
     }

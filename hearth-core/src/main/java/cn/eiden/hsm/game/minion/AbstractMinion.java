@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.output.OutputInfo;
@@ -43,6 +44,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      * 第一回的准备时间
      */
     private boolean ready = false;
+
+    /**冲锋*/
+    private boolean charge = false;
 
     /**
      * 被冻结
@@ -105,6 +109,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      * 战吼
      */
     private Battle battle;
+
+    /**光环*/
+    private Aura aura;
 
     /**
      * 自带监听
@@ -192,7 +199,12 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void addCharge() {
-        ready = true;
+        charge = true;
+    }
+
+    @Override
+    public void removeCharge() {
+        charge = false;
     }
 
     @Override
@@ -235,7 +247,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public boolean isAttack() {
-        return ready && !isFrozen && attackTime > 0;
+        return (ready || charge) && !isFrozen && attackTime > 0;
     }
 
     @Override
@@ -327,13 +339,28 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
-    public void doBattle(Gamer gamer, Minion target) {
-        this.battle.doBattle(gamer, this, target);
+    public void doBattle(Minion target) {
+        this.battle.doBattle(this, target);
     }
 
     @Override
     public boolean hasBattle() {
         return this.battle != null;
+    }
+
+    @Override
+    public void setAura(Aura aura) {
+        this.aura = aura;
+    }
+
+    @Override
+    public Aura getAura() {
+        return aura;
+    }
+
+    @Override
+    public boolean hasAura() {
+        return this.aura != null;
     }
 
     @Override

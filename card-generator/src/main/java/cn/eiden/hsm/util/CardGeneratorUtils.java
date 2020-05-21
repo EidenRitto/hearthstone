@@ -68,6 +68,11 @@ public class CardGeneratorUtils {
                             Rarity.class, e -> e.getCode() == cardRarityValue)).orElse(null);
                     cardCache.setRarity(cardRarity);
                     break;
+                case CARDRACE:
+                    final int cardRaceValue = Integer.parseInt(tag.getValue());
+                    Race race = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            Race.class, e -> e.getCode() == cardRaceValue)).orElse(null);
+                    cardCache.setRace(race);
                 case DURABILITY:
                     final int durabilityValue = Integer.parseInt(tag.getValue());
                     cardCache.setDurability(durabilityValue);
@@ -100,6 +105,9 @@ public class CardGeneratorUtils {
                     break;
                 case SPELLPOWER:
                     cardCache.setSpellPower(Integer.parseInt(tag.getValue()));
+                    break;
+                case AURA:
+                    cardCache.setAura(Integer.parseInt(tag.getValue()));
                     break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);

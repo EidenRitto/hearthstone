@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.minion;
 
+import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.WeaponDestroyEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
@@ -31,11 +32,13 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon{
     public void destroy() {
         WeaponDestroyEvent destroyEvent = new WeaponDestroyEvent(this);
         getOwner().getEventManager().call(destroyEvent);
+        getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
     }
 
     @Override
     public void durableConsumed() {
         weaponDurable = weaponDurable - 1L;
+        getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
     }
 
     @Override

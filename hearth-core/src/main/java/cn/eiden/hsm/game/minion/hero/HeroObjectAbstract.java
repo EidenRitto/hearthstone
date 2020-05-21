@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.minion.hero;
 
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.AbstractMinion;
 
@@ -62,6 +63,8 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
             weapon.destroy();
         }
         this.weapon = weapon;
+        this.weapon.setOwner(getOwner());
+        getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
     }
 
     @Override
@@ -79,6 +82,13 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
             weapon.destroy();
             weapon = null;
         }
+    }
+
+    @Override
+    public void beHurt(long number) {
+        number -= armor;
+        armor = Math.max(armor - number, 0L);
+        super.beHurt(number);
     }
 
     @Override

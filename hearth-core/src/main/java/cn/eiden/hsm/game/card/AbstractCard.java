@@ -13,7 +13,7 @@ import cn.eiden.hsm.game.AbstractGeneralItem;
  * @version : 2.0
  *
  * */
-public abstract class AbstractCard extends AbstractGeneralItem implements Card{
+public abstract class AbstractCard implements Card{
     private String cardName;
     private int cost;
     private String description;

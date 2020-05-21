@@ -14,7 +14,7 @@ import cn.eiden.hsm.game.minion.Minion;
  */
 public class LeeroyJenkinsCard extends LeeroyJenkins {
     /**雏龙id*/
-    private static final int WhelpId = 1912;
+    private static final int WHELP_ID = 1912;
     @Override
     protected Battle selfBattleCry() {
         return new BattleCry();
@@ -22,11 +22,11 @@ public class LeeroyJenkinsCard extends LeeroyJenkins {
 
     static public class BattleCry implements Battle {
         @Override
-        public void doBattle(Gamer gamer, Minion self, Minion target) {
-            AbstractMinionCard whelpCard = (AbstractMinionCard) CardFactory.getCardById(WhelpId);
+        public void doBattle(Minion self, Minion target) {
+            AbstractMinionCard whelpCard = (AbstractMinionCard) CardFactory.getCardById(WHELP_ID);
             assert whelpCard != null;
-            gamer.getEnemy().addMinion(whelpCard.createMinion());
-            gamer.getEnemy().addMinion(whelpCard.createMinion());
+            self.getOwner().getEnemy().addMinion(whelpCard.createMinion());
+            self.getOwner().getEnemy().addMinion(whelpCard.createMinion());
         }
     }
 }

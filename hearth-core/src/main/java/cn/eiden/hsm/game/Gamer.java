@@ -222,9 +222,6 @@ public class Gamer extends AbstractGeneralItem {
         AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
         eventManager.call(abstractEvent);
 
-        //随从进入战场
-        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
-        eventManager.call(battlefieldChangeEvent);
         addMinion(minion);
         //从手牌中移除随从卡牌
         getHand().loss(card);
@@ -334,6 +331,9 @@ public class Gamer extends AbstractGeneralItem {
         if (minion.getHearthListener() != null) {
             eventManager.registerListener(minion.getHearthListener());
         }
+        BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
+        eventManager.call(battlefieldChangeEvent);
+        //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
         minion.setOwner(this);
         minions.add(minion);
@@ -674,5 +674,6 @@ public class Gamer extends AbstractGeneralItem {
 
     public Gamer(Hero heroObject, List<Card> cards) {
         init(heroObject, cards);
+        this.hero.setOwner(this);
     }
 }

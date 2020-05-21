@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.minion;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.GeneralItem;
+import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.HearthListener;
 
@@ -85,6 +86,7 @@ public interface Minion extends GeneralItem {
      */
     void addHealthLimit(long addHealthLimit);
 
+
     /**
      * 获得嘲讽
      */
@@ -95,6 +97,8 @@ public interface Minion extends GeneralItem {
      */
     void addCharge();
 
+    /**移除冲锋*/
+    void removeCharge();
     /**
      * 恢复生命值
      *
@@ -236,16 +240,34 @@ public interface Minion extends GeneralItem {
 
     /**
      * 战吼
-     * @param gamer 当前角色
      * @param target 目标角色
      */
-    void doBattle(Gamer gamer, Minion target);
+    void doBattle(Minion target);
 
     /**
      * 是否具有战吼
      * @return 有返回true
      */
     boolean hasBattle();
+
+
+    /**
+     * 设置光环
+     * @param aura 光环
+     */
+    void setAura(Aura aura);
+
+    /**
+     * 获取光环
+     * @return 光环
+     * */
+    Aura getAura();
+
+    /**
+     * 是否具有光环
+     * @return 有返回true
+     */
+    boolean hasAura();
 
     /**
      * 获取自带特效监听
