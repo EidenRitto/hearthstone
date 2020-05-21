@@ -223,6 +223,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public void setAttackValue(long attackValue) {
+        this.attackValue = attackValue;
+    }
+
+    @Override
     public boolean isAttack() {
         return ready && !isFrozen && attackTime > 0;
     }

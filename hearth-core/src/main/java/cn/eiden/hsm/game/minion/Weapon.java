@@ -12,4 +12,16 @@ public interface Weapon extends GeneralItem {
 
     /**耐久消耗*/
     void durableConsumed();
+
+    /**
+     * 是否还有耐久度，检查耐久是否大于0
+     * @return 大于0返回true
+     */
+    boolean hasDurable();
+
+    /**
+     * 获取武器攻击力的值
+     * @return 武器攻击力的值
+     */
+    long getWeaponAttack();
 }

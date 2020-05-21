@@ -39,6 +39,12 @@ public interface Minion extends GeneralItem {
     long getAttackValue();
 
     /**
+     * 设置攻击力
+     * @param attackValue 数值
+     * */
+    void setAttackValue(long attackValue);
+
+    /**
      * 本回合增加攻击力
      *
      * @param addAttack 数量

@@ -2,7 +2,9 @@ package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
+import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.WeaponObject;
+import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import lombok.extern.slf4j.Slf4j;
@@ -48,11 +50,31 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                         .build())
                 .addMethod(MethodSpec.methodBuilder("createWeapon")
                         .addModifiers(Modifier.PUBLIC)
+                        .addAnnotation(Override.class)
                         .returns(WeaponObject.class)
+                        .addCode(this.addAdditionalField())
                         .addStatement("return new $T($N, $N, $N)", WeaponObject.class, "CARD_NAME", "ATK", "DURABILITY")
                         .addJavadoc("$S\n", cardInfo.getCardText())
                         .build())
                 .build();
+        if (cardInfo.getDeathRattle() == 1) {
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfDeathRattle")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(DeathRattle.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
+    }
+
+    private CodeBlock addAdditionalField() {
+        CodeBlock core = CodeBlock.builder().addStatement("$T weaponObject = new $T($N, $N, $N)", WeaponObject.class, WeaponObject.class, "CARD_NAME", "ATK", "DURABILITY").build();
+        if (cardInfo.getDeathRattle() == 1) {
+            CodeBlock deathRattle = CodeBlock.builder().addStatement("weaponObject.addDeathRattle(this.selfDeathRattle())").build();
+            core = core.toBuilder().add(deathRattle).build();
+        }
+        return core;
     }
 }

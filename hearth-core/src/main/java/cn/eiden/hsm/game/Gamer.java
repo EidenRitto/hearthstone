@@ -11,7 +11,7 @@ import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.minion.Weapon;
-import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 英雄
      */
-    private HeroObjectAbstract hero;
+    private Hero hero;
 
     /**
      * 手牌
@@ -101,6 +101,8 @@ public class Gamer extends AbstractGeneralItem {
      * 开始一个新的回合
      */
     public void newTurnStart() {
+        //回合开始时英雄获得武器的攻击力
+        getHero().turnAtk();
         //恢复英雄技能
         getHero().getHeroPower().recoveryTimes();
         //抽一张牌
@@ -313,7 +315,7 @@ public class Gamer extends AbstractGeneralItem {
      * @return 是友方返回true
      */
     private boolean isFriend(Minion minion) {
-        HeroObjectAbstract hero = getHero();
+        Hero hero = getHero();
         return minions.contains(minion) || hero == minion;
     }
 
@@ -433,7 +435,7 @@ public class Gamer extends AbstractGeneralItem {
      * @date : 2018/9/13
      * 初始化
      */
-    public void init(HeroObjectAbstract heroObject, List<Card> cards) {
+    public void init(Hero heroObject, List<Card> cards) {
         this.hero = heroObject;
         this.hero.setOwner(this);
         this.hand = new Hand();
@@ -658,7 +660,7 @@ public class Gamer extends AbstractGeneralItem {
         return hand;
     }
 
-    public Gamer(HeroObjectAbstract heroObject, List<Card> cards) {
+    public Gamer(Hero heroObject, List<Card> cards) {
         init(heroObject, cards);
     }
 }

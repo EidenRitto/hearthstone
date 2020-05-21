@@ -22,10 +22,6 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon{
     private long weaponAttack;
     private long weaponDurable;
     /**
-     * 亡语
-     */
-    private List<DeathRattle> deathRattle = new ArrayList<>();
-    /**
      * 事件管理器
      */
     private final EventManager eventManager = EventManager.getInstance();
@@ -49,5 +45,15 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon{
     @Override
     public void durableConsumed() {
         weaponDurable = weaponDurable - 1L;
+    }
+
+    @Override
+    public boolean hasDurable() {
+        return weaponDurable > 0;
+    }
+
+    @Override
+    public long getWeaponAttack() {
+        return weaponAttack;
     }
 }

@@ -1,5 +1,7 @@
 package cn.eiden.hsm.game.minion.hero;
 
+import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Weapon;
 
 /**
@@ -7,7 +9,7 @@ import cn.eiden.hsm.game.minion.Weapon;
  * @author Eiden J.P Zhou
  * @date 2020/5/20 17:43
  */
-public interface Hero {
+public interface Hero extends Minion {
     /**
      * 叠甲
      * @param armorNumber 护甲值
@@ -24,4 +26,20 @@ public interface Hero {
      * @return 有武器返回true
      */
     boolean hasWeapon();
+
+    /**
+     * 回合开始时英雄获得武器的攻击力
+     */
+    void turnAtk();
+
+    /**
+     * 回合开始时充值攻击力为0
+     */
+    void resetAtk();
+
+    /**
+     * 获取英雄技能卡牌
+     * @return 英雄技能卡牌
+     */
+    AbstractHeroPowerCard getHeroPower();
 }

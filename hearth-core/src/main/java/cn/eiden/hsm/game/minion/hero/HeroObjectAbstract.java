@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.AbstractMinion;
 
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Getter;
@@ -66,5 +67,32 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     @Override
     public boolean hasWeapon() {
         return weapon != null;
+    }
+
+    @Override
+    public void attack(Minion beAttackMinion) {
+        super.attack(beAttackMinion);
+        //减去武器耐久
+        weapon.durableConsumed();
+        //如果耐久度没了就摧毁武器
+        if (!weapon.hasDurable()){
+            weapon.destroy();
+            weapon = null;
+        }
+    }
+
+    @Override
+    public void turnAtk(){
+        this.setAttackValue(weapon.getWeaponAttack());
+    }
+
+    @Override
+    public void resetAtk(){
+        this.setAttackValue(0L);
+    }
+
+    @Override
+    public AbstractHeroPowerCard getHeroPower() {
+        return heroPower;
     }
 }
