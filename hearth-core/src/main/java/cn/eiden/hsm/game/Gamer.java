@@ -572,6 +572,9 @@ public class Gamer extends AbstractGeneralItem {
     public void printAllCanAttackMinionsInfo() {
         List<Integer> allCanAttackMinionsId = findAllCanAttackMinionsId();
         StringBuilder info = new StringBuilder();
+        if (allCanAttackMinionsId.size() == 0){
+            info.append("当前没有能攻击的随从");
+        }
         for (Integer mid : allCanAttackMinionsId) {
             Minion minion = minions.get(mid);
             info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");
@@ -585,6 +588,9 @@ public class Gamer extends AbstractGeneralItem {
     public void printAllCanBeAttackMinionsInfo() {
         List<Integer> allCanBeAttackMinionsId = findAllCanBeAttackMinionsId();
         StringBuilder info = new StringBuilder();
+        if (allCanBeAttackMinionsId.size() == 0){
+            info.append("当前没有能被攻击的随从");
+        }
         for (Integer mid : allCanBeAttackMinionsId) {
             Minion minion = getEnemy().getMinions().get(mid);
             info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");

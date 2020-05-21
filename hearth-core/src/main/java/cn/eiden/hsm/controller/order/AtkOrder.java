@@ -19,9 +19,11 @@ public class AtkOrder extends AbstractOrder implements Order {
     @Override
     public void execute() {
         Integer sourceIndex = getSourceIndex();
+        if (sourceIndex == null){
+            return;
+        }
         Integer targetIndex = getTargetIndex();
-
-        if (sourceIndex == null || targetIndex == null){
+        if (targetIndex == null){
             return;
         }
         Minion attacker;
@@ -44,6 +46,9 @@ public class AtkOrder extends AbstractOrder implements Order {
             List<Integer> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
             //打印提示信息
             gamer.printAllCanAttackMinionsInfo();
+            if (allCanAttackMinionsId.size() == 0){
+                return null;
+            }
             //等待输入信息
             String input = getOrder();
             if (RegexUtil.isNumberStr(input)){
@@ -64,6 +69,9 @@ public class AtkOrder extends AbstractOrder implements Order {
             List<Integer> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
             //打印提示信息
             gamer.printAllCanBeAttackMinionsInfo();
+            if (allCanBeAttackMinionsId.size() == 0){
+                return null;
+            }
             //等待输入信息
             String input = getOrder();
             if (RegexUtil.isNumberStr(input)){
