@@ -294,9 +294,13 @@ public class Gamer extends AbstractGeneralItem {
      */
     private boolean isRightTarget(Card card, Minion target) {
         Class<? extends Card> clazz = card.getClass();
+        TargetScope annotation = clazz.getAnnotation(TargetScope.class);
+        if (target == null) {
+            return annotation == null;
+        }
         Class<? extends Minion> targetClass = target.getClass();
         boolean friend = isFriend(target);
-        TargetScope annotation = clazz.getAnnotation(TargetScope.class);
+
         if (!annotation.classScope().isAssignableFrom(targetClass)) {
             return false;
         }
@@ -332,13 +336,15 @@ public class Gamer extends AbstractGeneralItem {
         if (minion.getHearthListener() != null) {
             eventManager.registerListener(minion.getHearthListener());
         }
+        minion.setOwner(this);
+        minions.add(minion);
+
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
         eventManager.call(battlefieldChangeEvent);
         //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
-        minion.setOwner(this);
-        minions.add(minion);
         eventManager.call(addMinionEvent);
+        OutputInfo.info(minion.getMinionName()+"进入战场");
     }
 
     /**
@@ -412,7 +418,7 @@ public class Gamer extends AbstractGeneralItem {
      * 获取当前状态
      */
     public void getState() {
-        StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
+        StringBuilder handInfo = new StringBuilder("玩家当前手牌:\n");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
             handInfo.append(cards.get(i).getCardName());
@@ -590,7 +596,7 @@ public class Gamer extends AbstractGeneralItem {
      * 打印手牌信息
      */
     public void printHandsInfo() {
-        StringBuilder handInfo = new StringBuilder("玩家当前手牌:");
+        StringBuilder handInfo = new StringBuilder("玩家当前手牌:\n");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
             handInfo.append("[").append(i).append("]");

@@ -20,6 +20,9 @@ public class PlayOrder extends AbstractOrder implements Order {
     @Override
     public void execute() {
         Integer cardNum = getCardNum();
+        if (cardNum == null){
+            return;
+        }
         Card card = gamer.getHand().getCard(cardNum);
         if (gamer.checkUse(card)){
             if (card.isNoneTarget()){

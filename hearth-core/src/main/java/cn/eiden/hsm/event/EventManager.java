@@ -39,6 +39,9 @@ public class EventManager {
         //反射获取并注册监听
         Set<Class<? extends HearthListener>> listeners = reflections.getSubTypesOf(HearthListener.class);
         for (Class<? extends HearthListener> listener : listeners) {
+            if (listener.isMemberClass()){
+                continue;
+            }
             try {
                 HearthListener hearthListener = listener.newInstance();
                 registerListener(hearthListener);

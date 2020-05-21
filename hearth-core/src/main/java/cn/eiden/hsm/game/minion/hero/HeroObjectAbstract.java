@@ -93,7 +93,9 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
 
     @Override
     public void turnAtk(){
-        this.setAttackValue(weapon.getWeaponAttack());
+        if (hasWeapon()){
+            this.setAttackValue(weapon.getWeaponAttack());
+        }
     }
 
     @Override

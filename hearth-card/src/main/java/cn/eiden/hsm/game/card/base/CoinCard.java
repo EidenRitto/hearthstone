@@ -4,6 +4,7 @@ package cn.eiden.hsm.game.card.base;
 import cn.eiden.hsm.game.card.defs.core.neutral.TheCoin;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.output.OutputInfo;
 
 
 /**
@@ -18,5 +19,6 @@ public class CoinCard extends TheCoin {
     @Override
     public void magicEffect(Gamer gamer, Minion target) {
         gamer.getManaCrystal().addAlive(MAGIC_CRYSTAL);
+        OutputInfo.info("获得一点法力值");
     }
 }

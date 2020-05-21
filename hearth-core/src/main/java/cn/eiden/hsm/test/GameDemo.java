@@ -27,7 +27,7 @@ public class GameDemo {
 
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
-        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.HUNTER, (AbstractHeroPowerCard) CardFactory.getCardById(229)),deck);
+        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
         Gamer enemy = new Gamer(new HeroObjectAbstract(CardClass.DRUID, (AbstractHeroPowerCard) CardFactory.getCardById(1123)),druidCards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);

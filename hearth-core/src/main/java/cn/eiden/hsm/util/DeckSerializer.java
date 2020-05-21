@@ -47,7 +47,7 @@ public class DeckSerializer {
 
     public Deck deserializeDeckString(String deckString) throws Exception{
         StringBuilder stringBuilder = new StringBuilder();
-        Reflections reflections = new Reflections("cn.eiden.hsm.game.card.dynamic");
+        Reflections reflections = new Reflections("cn.eiden.hsm.game.card");
         //反射获取全部事件
         Map<Integer, String> cardDictionary = new HashMap<>(7000);
         Set<Class<? extends Card>> cardSet = reflections.getSubTypesOf(Card.class);

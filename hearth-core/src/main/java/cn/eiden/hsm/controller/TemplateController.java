@@ -28,7 +28,6 @@ public class TemplateController {
     public void gameStart(boolean b) {
 
         nowInvoker = b ? gamerInvoker : enemyInvoker;
-        nowInvoker.callHelp();
         while (!finishFlag) {
             runTurn();
         }
@@ -48,6 +47,7 @@ public class TemplateController {
         nowInvoker.callStartTurn();
         boolean endTurnFlag = false;
         while (!endTurnFlag) {
+            nowInvoker.callHelp();
             final String poll = waitOrder();
             OrderType orderType = Objects.requireNonNull(EnumUtils.getEnumObject(
                     OrderType.class,
@@ -81,7 +81,6 @@ public class TemplateController {
 
         switch (orderType) {
             case END:
-                nowInvoker.callEnd();
                 break;
             case PLAY:
                 nowInvoker.callPlay();
