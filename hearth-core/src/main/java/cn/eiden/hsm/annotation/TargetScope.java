@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  * example:<br/>
  * 友方随从 ：@TargetScope(AbstractMinionObject.class,Stand.FRIEND)
  * 敌方英雄和随从 ：@TargetScope(Minion.class,Stand.FOE)
- * 敌友英雄和随从 ： @TargetScope
+ * 全部英雄和随从 ： @TargetScope
  *
  * @author Eiden J.P Zhou
  * @date 2020/4/4 15:12

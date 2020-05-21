@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.card.classic.warrior;
 
+import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.expert1.warrior.MortalStrike;
 import cn.eiden.hsm.game.minion.Minion;
@@ -8,6 +9,7 @@ import cn.eiden.hsm.game.minion.Minion;
  * @author Eiden J.P Zhou
  * @date 2020/5/21 15:41
  */
+@TargetScope
 public class MortalStrikeCard extends MortalStrike {
     private static final long BASE_DMG = 4L;
     private static final long EXT_DMG = 6L;

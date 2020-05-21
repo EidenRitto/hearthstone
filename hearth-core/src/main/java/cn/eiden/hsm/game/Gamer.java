@@ -170,6 +170,7 @@ public class Gamer extends AbstractGeneralItem {
         for (int i = 0; i < number; i++) {
             //获取牌堆顶那一张牌
             Card lastCard = getLastCards();
+            lastCard.setOwner(this);
             //移除牌堆顶的牌
             lossLastCards();
             //添加到手牌中

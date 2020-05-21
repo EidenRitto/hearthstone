@@ -2,13 +2,14 @@ package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.game.GeneralItem;
 
 /**
  * 卡牌
  * @author Eiden J.P Zhou
  * @date 2020/3/19 9:42
  */
-public interface Card {
+public interface Card extends GeneralItem {
     /**
      * 获取卡排名称
      * @return 卡排名称
