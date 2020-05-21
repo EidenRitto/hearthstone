@@ -19,7 +19,7 @@ public class LeperGnomeCard extends LeperGnome {
         return new MyDeathRattle();
     }
 
-    static public class MyDeathRattle implements DeathRattle{
+    public static class MyDeathRattle implements DeathRattle{
         @Override
         public void doDeathRattle(GeneralItem generalItem) {
             generalItem.getOwner().getEnemy().getHero().beHurt(2);

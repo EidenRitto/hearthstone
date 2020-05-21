@@ -8,6 +8,7 @@ import cn.eiden.hsm.enums.Race;
  * @date 2020/4/4 15:44
  */
 public class MinionObject extends AbstractMinion {
+
     public MinionObject() {
     }
 

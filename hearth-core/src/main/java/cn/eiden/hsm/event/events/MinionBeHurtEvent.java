@@ -15,8 +15,8 @@ import lombok.Setter;
 public class MinionBeHurtEvent extends AbstractEvent {
     private Minion minion;
 
-    public MinionBeHurtEvent(Gamer owner, Minion minion) {
-        super(owner);
+    public MinionBeHurtEvent(Minion minion) {
+        super(minion.getOwner());
         this.minion = minion;
     }
 }

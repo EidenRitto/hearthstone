@@ -95,4 +95,9 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     public AbstractHeroPowerCard getHeroPower() {
         return heroPower;
     }
+
+    @Override
+    public Weapon getWeapon() {
+        return weapon;
+    }
 }

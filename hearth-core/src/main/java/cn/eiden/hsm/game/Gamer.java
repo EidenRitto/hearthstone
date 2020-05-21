@@ -10,12 +10,14 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.game.card.*;
+import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -93,6 +95,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 事件管理器
      */
+    @Getter
     private final EventManager eventManager = EventManager.getInstance();
 
     /**
@@ -229,14 +232,15 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 使用英雄技能
+     *
      * @param target 技能目标
      */
-    public void useHeroPower(Minion target){
+    public void useHeroPower(Minion target) {
         AbstractHeroPowerCard heroPower = this.getHero().getHeroPower();
-        if (!checkUse(heroPower)){
+        if (!checkUse(heroPower)) {
             return;
         }
-        if (heroPower.getTimesOfUse() < 1){
+        if (heroPower.getTimesOfUse() < 1) {
             OutputInfo.info("本回合已经使用过技能");
             return;
         }
@@ -247,7 +251,7 @@ public class Gamer extends AbstractGeneralItem {
         //消耗对应的法力值
         getManaCrystal().applyAvailable(heroPower.getCost());
         //技能效果
-        heroPower.powerEffect(this,target);
+        heroPower.powerEffect(this, target);
         //次数-1
         heroPower.subTimes();
     }
@@ -264,7 +268,8 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 使用法术牌
-     * @param card 卡牌
+     *
+     * @param card   卡牌
      * @param target 目标
      */
     public void useThisMagicCard(Card card, Minion target) {
@@ -325,7 +330,10 @@ public class Gamer extends AbstractGeneralItem {
      * 添加一个随从
      */
     public void addMinion(Minion minion) {
-
+        //添加随从前注册特效监听
+        if (minion.getHearthListener() != null) {
+            eventManager.registerListener(minion.getHearthListener());
+        }
         AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
         minion.setOwner(this);
         minions.add(minion);
@@ -337,9 +345,13 @@ public class Gamer extends AbstractGeneralItem {
      * @date : 2018/9/13
      * 移除一个随从
      */
-    public void removeMinion(int index) {
+    public void removeMinion(Minion minion) {
+        //移除随从前注销特效监听
+        if (minion.getHearthListener() != null) {
+            eventManager.removeListener(minion.getHearthListener());
+        }
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
-        minions.remove(index);
+        minions.remove(minion);
         eventManager.call(battlefieldChangeEvent);
     }
 
@@ -350,14 +362,14 @@ public class Gamer extends AbstractGeneralItem {
      * @date : 2018/9/14
      */
     public void deathMinion(int index) {
-        Minion abstractMinionObject = minions.get(index);
-        OutputInfo.info(abstractMinionObject.getMinionName() + "死亡");
-        AbstractEvent minionDeathEvent = new MinionDeathEvent(this, abstractMinionObject);
+        Minion minion = minions.get(index);
+        OutputInfo.info(minion.getMinionName() + "死亡");
+        AbstractEvent minionDeathEvent = new MinionDeathEvent(this, minion);
         eventManager.call(minionDeathEvent);
         //移除随从
-        this.removeMinion(index);
+        this.removeMinion(minion);
         //随从进入墓地
-        tomb.add(abstractMinionObject);
+        tomb.add(minion);
     }
 
     /**

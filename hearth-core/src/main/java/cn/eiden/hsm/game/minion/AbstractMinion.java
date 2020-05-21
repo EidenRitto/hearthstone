@@ -6,6 +6,7 @@ import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -105,6 +106,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private Battle battle;
 
+    /**
+     * 自带监听
+     */
+    private HearthListener hearthListener;
+
     @Override
     public void attack(Minion beAttackMinion) {
         if (!this.isAttack()) {
@@ -125,7 +131,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             OutputInfo.info(minionName + "圣盾抵消伤害");
             removeDivineShield();
         } else {
-            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(getOwner(), this);
+            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this);
             OutputInfo.info(minionName + "受到" + number + "点伤害");
             health -= number;
             getOwner().getEventManager().call(minionBeHurtEvent);
@@ -328,6 +334,16 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public boolean hasBattle() {
         return this.battle != null;
+    }
+
+    @Override
+    public HearthListener getHearthListener() {
+        return hearthListener;
+    }
+
+    @Override
+    public void setHearthListener(HearthListener hearthListener) {
+        this.hearthListener = hearthListener;
     }
 
     public AbstractMinion() {

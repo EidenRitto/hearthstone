@@ -24,4 +24,16 @@ public interface Weapon extends GeneralItem {
      * @return 武器攻击力的值
      */
     long getWeaponAttack();
+
+    /**
+     * 增加攻击力
+     * @param atkValue 攻击力
+     */
+    void addAttackValue(long atkValue);
+
+    /**
+     * 增加耐久度
+     * @param durableValue 耐久度
+     */
+    void addDurable(long durableValue);
 }

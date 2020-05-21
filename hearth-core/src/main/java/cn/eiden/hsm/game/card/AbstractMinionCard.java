@@ -2,7 +2,7 @@ package cn.eiden.hsm.game.card;
 
 
 import cn.eiden.hsm.enums.*;
-import cn.eiden.hsm.game.minion.MinionObject;
+import cn.eiden.hsm.game.minion.Minion;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,5 +45,5 @@ public abstract class AbstractMinionCard extends AbstractCard {
      * 创建卡牌对应的随从
      * @return 卡牌对应的随从
      * */
-    public abstract MinionObject createMinion();
+    public abstract Minion createMinion();
 }

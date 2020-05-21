@@ -4,6 +4,7 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
+import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
@@ -53,7 +54,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .addMethod(MethodSpec.methodBuilder("createMinion")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
-                        .returns(MinionObject.class)
+                        .returns(Minion.class)
                         .addCode(addAdditionalField())
                         .addStatement("return minionObject")
                         .addJavadoc("$S\n", cardInfo.getCardText())
@@ -81,7 +82,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
     }
 
     private CodeBlock addAdditionalField() {
-        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)", MinionObject.class, MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE").build();
+        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)", Minion.class, MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE").build();
         if (cardInfo.getTaunt() == 1) {
             CodeBlock taunt = CodeBlock.builder().addStatement("minionObject.addTaunt()").build();
             core = core.toBuilder().add(taunt).build();

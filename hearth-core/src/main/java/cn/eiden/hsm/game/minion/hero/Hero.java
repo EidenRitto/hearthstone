@@ -42,4 +42,10 @@ public interface Hero extends Minion {
      * @return 英雄技能卡牌
      */
     AbstractHeroPowerCard getHeroPower();
+
+    /**
+     * 获取武器
+     * @return 武器
+     */
+    Weapon getWeapon();
 }

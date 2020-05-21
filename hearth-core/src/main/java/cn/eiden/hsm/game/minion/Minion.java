@@ -4,6 +4,7 @@ import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.GeneralItem;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.listener.HearthListener;
 
 /**
  * @author Eiden J.P Zhou
@@ -245,4 +246,16 @@ public interface Minion extends GeneralItem {
      * @return 有返回true
      */
     boolean hasBattle();
+
+    /**
+     * 获取自带特效监听
+     * @return 监听
+     */
+    HearthListener getHearthListener();
+
+    /**
+     * 设置自带特效监听
+     * @param hearthListener 监听
+     */
+    void setHearthListener(HearthListener hearthListener);
 }

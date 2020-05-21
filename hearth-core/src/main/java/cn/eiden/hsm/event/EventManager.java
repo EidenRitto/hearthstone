@@ -88,6 +88,27 @@ public class EventManager {
     }
 
     /**
+     * 注销事件监听器</br>
+     * 并解除事件监听绑定
+     * @param listener 需要被注销的监听
+     */
+    public void removeListener(final HearthListener listener){
+        registeredListeners.remove(listener);
+        //遍历当前监听中全部的方法
+        for (Method method : listener.getClass().getMethods()) {
+            Class<?> event = method.getParameterTypes()[0];
+            //判断传入的event是否是Event的子类
+            if (!AbstractEvent.class.isAssignableFrom(event)) {continue;}
+            for (Class<? extends AbstractEvent> eventClass : eventClasses) {
+                //注解方法的参数事件是否是扫描包中的事件(或其子类)
+                if (!event.isAssignableFrom(eventClass)) {continue;}
+                ArrayList<RegisteredListenerMethod> registeredListenerMethods = this.registeredListenerMethods.get(eventClass.getName());
+                registeredListenerMethods.removeIf(e->e.getListener().equals(listener));
+            }
+        }
+    }
+
+    /**
      * 执行事件
      * @param abstractEvent 事件对象
      */
