@@ -99,6 +99,12 @@ public interface Minion extends GeneralItem {
 
     /**移除冲锋*/
     void removeCharge();
+
+    /**
+     * 是否具有冲锋
+     * @return 有返回true
+     * */
+    boolean hasCharge();
     /**
      * 恢复生命值
      *

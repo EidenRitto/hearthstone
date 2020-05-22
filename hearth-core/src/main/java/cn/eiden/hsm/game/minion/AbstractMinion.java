@@ -208,6 +208,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public boolean hasCharge() {
+        return charge;
+    }
+
+    @Override
     public void recoveryHp(long number) {
         //防止上限溢出
         long newHealth = Math.min(health + number, healthLimit);

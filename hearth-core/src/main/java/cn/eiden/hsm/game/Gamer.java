@@ -153,6 +153,14 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     /**
+     * 移除牌堆中的一张牌
+     * @param card 排队中的牌
+     */
+    public boolean deckLoss(Card card){
+        return cards.remove(card);
+    }
+
+    /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
      * 获取牌堆顶部一张牌
@@ -342,7 +350,7 @@ public class Gamer extends AbstractGeneralItem {
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
         eventManager.call(battlefieldChangeEvent);
         //随从进入战场
-        AddMinionEvent addMinionEvent = new AddMinionEvent(this, minion);
+        AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
         OutputInfo.info(minion.getMinionName()+"进入战场");
     }

@@ -5,6 +5,7 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.card.defs.expert1.neutral.SouthseaDeckhand;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.output.OutputInfo;
 import lombok.Setter;
 
 /**
@@ -27,9 +28,15 @@ public class SouthseaDeckhandCard extends SouthseaDeckhand {
         @EventHandler
         public void onEvent(BattlefieldChangeEvent event){
             if (minion.getOwner().getHero().hasWeapon()){
-                minion.addCharge();
+                if (!minion.hasCharge()){
+                    minion.addCharge();
+                    OutputInfo.info("%s获得冲锋",minion.getMinionName());
+                }
             }else {
-                minion.removeCharge();
+                if (minion.hasCharge()){
+                    minion.removeCharge();
+                    OutputInfo.info("%s失去冲锋",minion.getMinionName());
+                }
             }
         }
 

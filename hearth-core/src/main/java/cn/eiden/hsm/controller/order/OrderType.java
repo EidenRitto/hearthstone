@@ -12,7 +12,7 @@ public enum OrderType {
     /**使用（打出）*/
     PLAY("1","使用卡牌"),
     /**技能*/
-    HERO_POWER("2","技能"),
+    HERO_POWER("2","英雄技能"),
     /**攻击*/
     ATK("3","攻击"),
     /**帮助*/

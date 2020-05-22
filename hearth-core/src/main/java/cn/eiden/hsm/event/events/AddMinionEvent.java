@@ -16,12 +16,8 @@ public class AddMinionEvent extends AbstractEvent {
     @Getter
     private Minion minion;
 
-    public AddMinionEvent(Gamer owner) {
-        super(owner);
-    }
-
-    public AddMinionEvent(Gamer owner, Minion minion) {
-        super(owner);
+    public AddMinionEvent(Minion minion) {
+        super(minion.getOwner());
         this.minion = minion;
     }
 }

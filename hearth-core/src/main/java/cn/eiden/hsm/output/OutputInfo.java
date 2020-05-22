@@ -19,5 +19,11 @@ public class OutputInfo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void info(String format,Object... args){
+        String str = String.format(format, args);
+        info(str);
     }
 }
