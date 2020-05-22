@@ -4,7 +4,6 @@ package cn.eiden.hsm.game.minion;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.HearthListener;
@@ -45,7 +44,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private boolean ready = false;
 
-    /**冲锋*/
+    /**
+     * 冲锋
+     */
     private boolean charge = false;
 
     /**
@@ -110,7 +111,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private Battle battle;
 
-    /**光环*/
+    /**
+     * 光环
+     */
     private Aura aura;
 
     /**
@@ -134,14 +137,16 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void beHurt(long number) {
-        if (divineShield) {
-            OutputInfo.info(minionName + "圣盾抵消伤害");
-            removeDivineShield();
-        } else {
-            MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this);
-            OutputInfo.info(minionName + "受到" + number + "点伤害");
-            health -= number;
-            getOwner().getEventManager().call(minionBeHurtEvent);
+        if (number > 0) {
+            if (divineShield) {
+                OutputInfo.info(minionName + "圣盾抵消伤害");
+                removeDivineShield();
+            } else {
+                MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this);
+                OutputInfo.info(minionName + "受到" + number + "点伤害");
+                health -= number;
+                getOwner().getEventManager().call(minionBeHurtEvent);
+            }
         }
     }
 
@@ -252,7 +257,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public boolean isAttack() {
-        return (ready || charge) && !isFrozen && attackTime > 0;
+        return attackValue > 0 && (ready || charge) && !isFrozen && attackTime > 0;
     }
 
     @Override
@@ -288,6 +293,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void freeze() {
         isFrozen = true;
+    }
+
+    public boolean isFreeze() {
+        return isFrozen;
+    }
+
+    public int getAttackTime() {
+        return attackTime;
     }
 
     @Override
@@ -376,6 +389,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void setHearthListener(HearthListener hearthListener) {
         this.hearthListener = hearthListener;
+    }
+
+    @Override
+    public void setReady() {
+        ready = true;
     }
 
     public AbstractMinion() {

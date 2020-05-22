@@ -18,69 +18,61 @@ public class AtkOrder extends AbstractOrder implements Order {
 
     @Override
     public void execute() {
-        Integer sourceIndex = getSourceIndex();
-        if (sourceIndex == null){
+        Minion sourceMinion = getSourceMinion();
+        if (sourceMinion == null) {
             return;
         }
-        Integer targetIndex = getTargetIndex();
-        if (targetIndex == null){
+        Minion targetMinion = getTargetIndex();
+        if (targetMinion == null) {
             return;
         }
-        Minion attacker;
-        Minion beAttacker;
-        if (sourceIndex == OrderConstant.TARGET_HERO_INDEX) {
-            attacker = gamer.getHero();
-        } else {
-            attacker = gamer.getMinion(sourceIndex);
-        }
-        if (targetIndex == OrderConstant.TARGET_HERO_INDEX) {
-            beAttacker = gamer.getEnemy().getHero();
-        } else {
-            beAttacker = gamer.getEnemy().getMinion(sourceIndex);
-        }
-        attacker.attack(beAttacker);
+        sourceMinion.attack(targetMinion);
     }
 
-    public Integer getSourceIndex(){
-        while (true){
-            List<Integer> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
-            //打印提示信息
-            gamer.printAllCanAttackMinionsInfo();
-            if (allCanAttackMinionsId.size() == 0){
+    public Minion getSourceMinion() {
+        while (true) {
+            List<Minion> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
+            if (allCanAttackMinionsId.size() == 0) {
+                OutputInfo.info("当前没有能攻击的随从");
                 return null;
             }
+            //打印提示信息
+            gamer.printMinion(allCanAttackMinionsId, "选择需要攻击的随从");
             //等待输入信息
             String input = getOrder();
-            if (RegexUtil.isNumberStr(input)){
-                Integer index = Integer.parseInt(input);
-                if (allCanAttackMinionsId.contains(index)){
-                    // TODO: 2020/5/7 提示具体非法信息
-                    return index;
+            if (RegexUtil.isNumberStr(input)) {
+                int i = Integer.parseInt(input);
+                if (getInRange(allCanAttackMinionsId, i)) {
+                    return allCanAttackMinionsId.get(i);
                 }
-            }else {
+            } else {
                 return null;
             }
             OutputInfo.info("非法输入！");
         }
     }
 
-    public Integer getTargetIndex(){
-        while (true){
-            List<Integer> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
-            //打印提示信息
-            gamer.printAllCanBeAttackMinionsInfo();
-            if (allCanBeAttackMinionsId.size() == 0){
+    public boolean getInRange(List<Minion> allCanAttackMinionsId, int i) {
+        return i >= 0 && i < allCanAttackMinionsId.size();
+    }
+
+    public Minion getTargetIndex() {
+        while (true) {
+            List<Minion> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
+            if (allCanBeAttackMinionsId.size() == 0) {
+                OutputInfo.info("当前没有能被攻击的随从/英雄，这是不可能的，看见这句话请反馈BUG");
                 return null;
             }
+            //打印提示信息
+            gamer.printMinion(allCanBeAttackMinionsId, "选择要攻击的随从/英雄:");
             //等待输入信息
             String input = getOrder();
-            if (RegexUtil.isNumberStr(input)){
-                Integer index = Integer.parseInt(input);
-                if (allCanBeAttackMinionsId.contains(index)){
-                    // TODO: 2020/5/7 提示具体非法信息
-                    return index;
+            if (RegexUtil.isNumberStr(input)) {
+                int i = Integer.parseInt(input);
+                if (getInRange(allCanBeAttackMinionsId, i)){
+                    return allCanBeAttackMinionsId.get(i);
                 }
-            }else {
+            } else {
                 return null;
             }
             OutputInfo.info("非法输入！");

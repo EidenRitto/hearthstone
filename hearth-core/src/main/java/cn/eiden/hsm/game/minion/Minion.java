@@ -286,4 +286,9 @@ public interface Minion extends GeneralItem {
      * @param hearthListener 监听
      */
     void setHearthListener(HearthListener hearthListener);
+
+    /**
+     * 调用该方法，接触随从第一回合不能攻击的标志
+     */
+    void setReady();
 }

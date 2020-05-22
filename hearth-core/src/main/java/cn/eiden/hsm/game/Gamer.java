@@ -9,6 +9,7 @@ import cn.eiden.hsm.event.events.AddMinionEvent;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.MinionDeathEvent;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
+import cn.eiden.hsm.exception.GameOverException;
 import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.minion.Weapon;
@@ -104,6 +105,8 @@ public class Gamer extends AbstractGeneralItem {
      * 开始一个新的回合
      */
     public void newTurnStart() {
+        //场中随从解除上场回合不能攻击
+        getMinions().forEach(Minion::setReady);
         //回合开始时英雄获得武器的攻击力
         getHero().turnAtk();
         //恢复英雄技能
@@ -399,7 +402,8 @@ public class Gamer extends AbstractGeneralItem {
      * 游戏结束
      */
     private void gameOver() {
-
+        OutputInfo.info("游戏胜利---结束");
+        throw new GameOverException();
     }
 
 
@@ -428,10 +432,9 @@ public class Gamer extends AbstractGeneralItem {
     public void getState() {
         StringBuilder handInfo = new StringBuilder("玩家当前手牌:\n");
         List<Card> cards = getHand().getCards();
-        for (int i = 0; i < cards.size(); i++) {
-            handInfo.append(cards.get(i).getCardName());
-            handInfo.append("[").append(i).append("]");
-            handInfo.append("(").append(cards.get(i).getCost()).append(")");
+        for (Card card : cards) {
+            handInfo.append(card.getCardName());
+            handInfo.append("(").append(card.getCost()).append(")");
             handInfo.append(" ");
         }
         handInfo.append("\n");
@@ -564,53 +567,24 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 查找全部能够攻击的随从
      */
-    public List<Integer> findAllCanAttackMinionsId() {
-        List<Integer> resultList = new ArrayList<>();
-        for (int i = 0; i < minions.size(); i++) {
-            if (minions.get(i).isAttack()) {
-                resultList.add(i);
+    public List<Minion> findAllCanAttackMinionsId() {
+        List<Minion> resultList = new ArrayList<>();
+        if (hero.isAttack()){
+            resultList.add(hero);
+        }
+        for (Minion minion : minions) {
+            if (minion.isAttack()){
+                resultList.add(minion);
             }
         }
         return resultList;
     }
 
     /**
-     * 打印全部能够攻击的随从信息
-     */
-    public void printAllCanAttackMinionsInfo() {
-        List<Integer> allCanAttackMinionsId = findAllCanAttackMinionsId();
-        StringBuilder info = new StringBuilder();
-        if (allCanAttackMinionsId.size() == 0){
-            info.append("当前没有能攻击的随从");
-        }
-        for (Integer mid : allCanAttackMinionsId) {
-            Minion minion = minions.get(mid);
-            info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");
-        }
-        OutputInfo.info(info.toString());
-    }
-
-    /**
-     * 打印全部能够[被]攻击的随从信息
-     */
-    public void printAllCanBeAttackMinionsInfo() {
-        List<Integer> allCanBeAttackMinionsId = findAllCanBeAttackMinionsId();
-        StringBuilder info = new StringBuilder();
-        if (allCanBeAttackMinionsId.size() == 0){
-            info.append("当前没有能被攻击的随从");
-        }
-        for (Integer mid : allCanBeAttackMinionsId) {
-            Minion minion = getEnemy().getMinions().get(mid);
-            info.append("[").append(mid).append("]").append(minion.getMinionName()).append("\n");
-        }
-        OutputInfo.info(info.toString());
-    }
-
-    /**
      * 打印手牌信息
      */
     public void printHandsInfo() {
-        StringBuilder handInfo = new StringBuilder("玩家当前手牌:\n");
+        StringBuilder handInfo = new StringBuilder("选择需要使用的手牌:\n");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
             handInfo.append("[").append(i).append("]");
@@ -621,6 +595,11 @@ public class Gamer extends AbstractGeneralItem {
         OutputInfo.info(handInfo.toString());
     }
 
+    /**
+     * 获取卡牌的合法目标
+     * @param card 卡牌
+     * @return 合法目标集合
+     */
     public List<Minion> getLegitimateTarget(final Card card) {
         List<Minion> allTarget = getAllTarget();
         allTarget.removeIf(target -> !isRightTarget(card, target));
@@ -653,25 +632,20 @@ public class Gamer extends AbstractGeneralItem {
      * @author : Eiden J.P Zhou
      * @date : 2018/9/21 17:12
      */
-    public List<Integer> findAllCanBeAttackMinionsId() {
-        List<Integer> resultList = new ArrayList<>();
+    public List<Minion> findAllCanBeAttackMinionsId() {
+        List<Minion> resultList = new ArrayList<>();
+        List<Minion> enemyMinions = enemy.getMinions();
         boolean hasTaunt = false;
-        //判断敌方是否拥有嘲讽随从，有则添加嘲讽随从，
-        for (int i = 0; i < enemy.getMinions().size(); i++) {
-            Minion minion = enemy.getMinion(i);
+        for (Minion minion : enemyMinions) {
             if (minion.isTaunt() && !minion.isStealth()) {
-                resultList.add(i);
+                resultList.add(minion);
                 hasTaunt = true;
             }
         }
         //无则添加全部
         if (!hasTaunt) {
-            for (int i = 0; i < enemy.getMinions().size(); i++) {
-                Minion minion = enemy.getMinion(i);
-                if (!minion.isStealth()) {
-                    resultList.add(i);
-                }
-            }
+            resultList.add(enemy.getHero());
+            resultList.addAll(enemyMinions);
         }
         return resultList;
     }

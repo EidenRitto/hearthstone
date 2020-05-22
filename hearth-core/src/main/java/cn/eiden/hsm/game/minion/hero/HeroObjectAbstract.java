@@ -46,7 +46,7 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     }
 
     public HeroObjectAbstract(CardClass cardClass, AbstractHeroPowerCard heroPower) {
-        super(cardClass.name(), HEALTH, 0L, Race.INVALID);
+        super(cardClass.getCnName(), HEALTH, 0L, Race.INVALID);
         this.heroPower = heroPower;
     }
 
@@ -89,6 +89,7 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
         number -= armor;
         armor = Math.max(armor - number, 0L);
         super.beHurt(number);
+        getOwner().checkHero();
     }
 
     @Override
@@ -111,5 +112,10 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     @Override
     public Weapon getWeapon() {
         return weapon;
+    }
+
+    @Override
+    public boolean isAttack() {
+        return getAttackValue() >0 && !isFreeze() && getAttackTime() > 0;
     }
 }

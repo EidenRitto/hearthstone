@@ -26,7 +26,6 @@ public class TemplateController {
     }
 
     public void gameStart(boolean b) {
-
         nowInvoker = b ? gamerInvoker : enemyInvoker;
         while (!finishFlag) {
             runTurn();
@@ -44,6 +43,11 @@ public class TemplateController {
      * 开始一个新回合
      */
     private void runTurn() {
+        if (nowInvoker == enemyInvoker){
+            OutputInfo.info("测试模式下跳过对手回合");
+            this.reverseInvoker();
+            return;
+        }
         nowInvoker.callStartTurn();
         boolean endTurnFlag = false;
         while (!endTurnFlag) {
