@@ -109,6 +109,7 @@ public class Gamer extends AbstractGeneralItem {
         getMinions().forEach(Minion::setReady);
         //回合开始时英雄获得武器的攻击力
         getHero().turnAtk();
+        getHero().newTurnStart();
         //恢复英雄技能
         getHero().getHeroPower().recoveryTimes();
         //抽一张牌
