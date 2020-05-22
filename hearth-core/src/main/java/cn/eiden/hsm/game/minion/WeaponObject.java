@@ -60,4 +60,9 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon{
     public void addDurable(long durableValue) {
         weaponDurable += durableValue;
     }
+
+    @Override
+    public String getName() {
+        return this.weaponName;
+    }
 }

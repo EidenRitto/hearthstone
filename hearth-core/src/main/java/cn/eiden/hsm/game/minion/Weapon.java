@@ -44,4 +44,10 @@ public interface Weapon extends GeneralItem {
      * @param durableValue 耐久度
      */
     void addDurable(long durableValue);
+
+    /**
+     * 获取名字
+     * @return 名字
+     */
+    String getName();
 }

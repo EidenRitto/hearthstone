@@ -59,9 +59,12 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
 
     @Override
     public void equipWeapons(Weapon weapon) {
+        OutputInfo.info("装备%s",weapon.getName());
         if (hasWeapon()){
-            weapon.destroy();
+            this.weapon.destroy();
+            this.reduceAttack(this.weapon.getWeaponAttack());
         }
+        this.addAttack(weapon.getWeaponAttack());
         this.weapon = weapon;
         this.weapon.setOwner(getOwner());
         getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
@@ -76,7 +79,9 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     public void attack(Minion beAttackMinion) {
         super.attack(beAttackMinion);
         //减去武器耐久
-        weapon.durableConsumed();
+        if (hasWeapon()){
+            weapon.durableConsumed();
+        }
         //如果耐久度没了就摧毁武器
         if (!weapon.hasDurable()){
             weapon.destroy();

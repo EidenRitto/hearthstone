@@ -216,7 +216,7 @@ public class Gamer extends AbstractGeneralItem {
         AbstractWeaponCard weaponCard = (AbstractWeaponCard) card;
         getManaCrystal().applyAvailable(weaponCard.getCost());
         Weapon weapon = weaponCard.createWeapon();
-
+        hero.equipWeapons(weapon);
         //从手牌中移除卡牌
         getHand().loss(card);
     }
