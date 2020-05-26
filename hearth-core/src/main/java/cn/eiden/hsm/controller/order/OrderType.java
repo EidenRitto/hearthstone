@@ -15,6 +15,8 @@ public enum OrderType {
     HERO_POWER("2","英雄技能"),
     /**攻击*/
     ATK("3","攻击"),
+    /**查看*/
+    SHOW("4","查看"),
     /**帮助*/
     HELP("99","帮助")
     ;

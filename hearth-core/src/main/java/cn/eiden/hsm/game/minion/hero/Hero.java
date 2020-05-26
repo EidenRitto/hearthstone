@@ -48,4 +48,10 @@ public interface Hero extends Minion {
      * @return 武器
      */
     Weapon getWeapon();
+
+    /**
+     * 获取英雄信息
+     * @return 信息
+     */
+    String getHeroInfo();
 }

@@ -59,8 +59,8 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
 
     @Override
     public void equipWeapons(Weapon weapon) {
-        OutputInfo.info("装备%s",weapon.getName());
-        if (hasWeapon()){
+        OutputInfo.info("装备%s", weapon.getName());
+        if (hasWeapon()) {
             this.weapon.destroy();
             this.reduceAttack(this.weapon.getWeaponAttack());
         }
@@ -79,11 +79,11 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     public void attack(Minion beAttackMinion) {
         super.attack(beAttackMinion);
         //减去武器耐久
-        if (hasWeapon()){
+        if (hasWeapon()) {
             weapon.durableConsumed();
         }
         //如果耐久度没了就摧毁武器
-        if (!weapon.hasDurable()){
+        if (!weapon.hasDurable()) {
             weapon.destroy();
             weapon = null;
         }
@@ -98,14 +98,14 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     }
 
     @Override
-    public void turnAtk(){
-        if (hasWeapon()){
+    public void turnAtk() {
+        if (hasWeapon()) {
             this.setAttackValue(weapon.getWeaponAttack());
         }
     }
 
     @Override
-    public void resetAtk(){
+    public void resetAtk() {
         this.setAttackValue(0L);
     }
 
@@ -120,7 +120,23 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
     }
 
     @Override
+    public String getHeroInfo() {
+        StringBuilder builder = new StringBuilder(getMinionName());
+        builder.append(" 当前生命值:").append(getHealth());
+        if (hasWeapon()) {
+            builder.append(" 当前武器:").append(weapon.getName());
+        }
+        if (getAttackValue() > 0) {
+            builder.append(" 当前攻击力:").append(getAttackValue());
+        }
+        if (isAttack()){
+            builder.append(" (可以攻击)");
+        }
+        return builder.toString();
+    }
+
+    @Override
     public boolean isAttack() {
-        return getAttackValue() >0 && !isFreeze() && getAttackTime() > 0;
+        return getAttackValue() > 0 && !isFreeze() && getAttackTime() > 0;
     }
 }

@@ -451,6 +451,11 @@ public class Gamer extends AbstractGeneralItem {
         handInfo.append("[").append(getManaCrystal().getLocked()).append("]");
         OutputInfo.info(handInfo.toString());
 
+        String minionState = getMinionState();
+        OutputInfo.info(minionState);
+    }
+
+    public String getMinionState(){
         StringBuilder stringBuilder = new StringBuilder("场上随从:");
         for (Minion minionObject : minions) {
             stringBuilder.append(minionObject.getMinionName());
@@ -459,7 +464,7 @@ public class Gamer extends AbstractGeneralItem {
             stringBuilder.append("/");
             stringBuilder.append(minionObject.getHealth());
         }
-        OutputInfo.info(stringBuilder.toString());
+        return stringBuilder.toString();
     }
 
     /**

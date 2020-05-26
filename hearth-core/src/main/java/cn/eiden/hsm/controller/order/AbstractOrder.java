@@ -12,7 +12,7 @@ import java.util.List;
  * @author Eiden J.P Zhou
  * @date 2020/5/7 16:20
  */
-public abstract class AbstractOrder {
+public abstract class AbstractOrder implements Order{
     protected String getOrder() {
         String order = "";
         try {

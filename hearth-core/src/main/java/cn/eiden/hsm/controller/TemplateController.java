@@ -98,6 +98,8 @@ public class TemplateController {
             case HELP:
                 nowInvoker.callHelp();
                 break;
+            case SHOW:
+                nowInvoker.callShow();
             case INVALID:
             default:
         }
