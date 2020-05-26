@@ -195,6 +195,8 @@ public interface Minion extends GeneralItem {
      */
     void freeze();
 
+    boolean isFreeze();
+
     /**
      * 解冻
      */

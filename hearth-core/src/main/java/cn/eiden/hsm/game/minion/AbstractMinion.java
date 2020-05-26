@@ -306,6 +306,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         isFrozen = true;
     }
 
+    @Override
     public boolean isFreeze() {
         return isFrozen;
     }
