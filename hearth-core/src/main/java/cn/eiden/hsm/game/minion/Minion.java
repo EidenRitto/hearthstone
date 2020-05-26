@@ -42,8 +42,9 @@ public interface Minion extends GeneralItem {
 
     /**
      * 设置攻击力
+     *
      * @param attackValue 数值
-     * */
+     */
     void setAttackValue(long attackValue);
 
     /**
@@ -97,14 +98,18 @@ public interface Minion extends GeneralItem {
      */
     void addCharge();
 
-    /**移除冲锋*/
+    /**
+     * 移除冲锋
+     */
     void removeCharge();
 
     /**
      * 是否具有冲锋
+     *
      * @return 有返回true
-     * */
+     */
     boolean hasCharge();
+
     /**
      * 恢复生命值
      *
@@ -202,56 +207,62 @@ public interface Minion extends GeneralItem {
 
     /**
      * 是否沉默
+     *
      * @return 沉默true
      */
     boolean isSilence();
 
     /**
      * 添加隐藏
-     * */
+     */
     void addStealth();
 
     /**
      * 移除隐藏
-     * */
+     */
     void removeStealth();
 
     /**
      * 是否隐藏
+     *
      * @return 隐藏返回true
-     * */
+     */
     boolean isStealth();
 
     /**
      * 添加圣盾
-     * */
+     */
     void addDivineShield();
 
     /**
      * 移除圣盾
-     * */
+     */
     void removeDivineShield();
 
     /**
      * 是否有圣盾
+     *
      * @return 有圣盾返回true
-     * */
+     */
     boolean isDivineShield();
 
     /**
      * 设置战吼
+     *
      * @param battle 战吼
-     * */
+     */
     void setBattle(Battle battle);
 
     /**
      * 战吼
+     *
      * @param target 目标角色
      */
     void doBattle(Minion target);
 
     /**
      * 是否具有战吼
+     *
      * @return 有返回true
      */
     boolean hasBattle();
@@ -259,30 +270,35 @@ public interface Minion extends GeneralItem {
 
     /**
      * 设置光环
+     *
      * @param aura 光环
      */
     void setAura(Aura aura);
 
     /**
      * 获取光环
+     *
      * @return 光环
-     * */
+     */
     Aura getAura();
 
     /**
      * 是否具有光环
+     *
      * @return 有返回true
      */
     boolean hasAura();
 
     /**
      * 获取自带特效监听
+     *
      * @return 监听
      */
     HearthListener getHearthListener();
 
     /**
      * 设置自带特效监听
+     *
      * @param hearthListener 监听
      */
     void setHearthListener(HearthListener hearthListener);
@@ -291,7 +307,10 @@ public interface Minion extends GeneralItem {
      * 调用该方法，接触随从第一回合不能攻击的标志
      */
     void setReady();
-    /**重置光环属性*/
+
+    /**
+     * 重置光环属性
+     */
     void resetBuff();
 
     void addBuffAtk(long val);

@@ -85,6 +85,7 @@ public class TemplateController {
 
         switch (orderType) {
             case END:
+                nowInvoker.callEnd();
                 break;
             case PLAY:
                 nowInvoker.callPlay();

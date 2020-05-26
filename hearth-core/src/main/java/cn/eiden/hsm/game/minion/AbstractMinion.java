@@ -31,7 +31,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private long originHealthLimit;
 
-    /**被buff的生命值上限*/
+    /**
+     * 被buff的生命值上限
+     */
     private long buffedHealthLimit;
     /**
      * 当前生命值
@@ -230,7 +232,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public void recoveryHp(long number) {
         //防止上限溢出
         long newHealth = Math.min(health + number, this.getHealthLimit());
-        OutputInfo.info(minionName + "恢复" + number + "点生命值");
+        OutputInfo.info(minionName + "恢复" + (newHealth - health) + "点生命值");
         health = newHealth;
     }
 

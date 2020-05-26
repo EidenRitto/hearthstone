@@ -47,5 +47,6 @@ public class Invoker {
         playOrder = new PlayOrder(gamer);
         heroPowerOrder = new HeroPowerOrder(gamer);
         showOrder = new ShowOrder(gamer);
+        endOrder = new EndTurnOrder(gamer);
     }
 }

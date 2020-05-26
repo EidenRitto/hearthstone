@@ -5,10 +5,7 @@ import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.AbstractEvent;
 import cn.eiden.hsm.event.EventManager;
-import cn.eiden.hsm.event.events.AddMinionEvent;
-import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
-import cn.eiden.hsm.event.events.MinionDeathEvent;
-import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
+import cn.eiden.hsm.event.events.*;
 import cn.eiden.hsm.exception.GameOverException;
 import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.minion.MinionObject;
@@ -116,6 +113,14 @@ public class Gamer extends AbstractGeneralItem {
         drawCard(1);
         getManaCrystal().newTurnStart();
         getMinions().forEach(Minion::newTurnStart);
+    }
+
+    /**
+     * 回合结束
+     */
+    public void endTurn(){
+        EndTurnEvent endTurnEvent = new EndTurnEvent(this);
+        eventManager.call(endTurnEvent);
     }
 
     /**

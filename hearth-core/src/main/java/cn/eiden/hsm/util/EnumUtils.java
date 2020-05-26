@@ -1,5 +1,6 @@
 package cn.eiden.hsm.util;
 
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.function.Predicate;
  */
 public class EnumUtils {
     private static Map<Class, Object> map = new ConcurrentHashMap<>();
-
+    private static final SecureRandom random = new SecureRandom();
     /**
      * A common method for all enums since they can't have another base class
      * @param <T> Enum type
@@ -54,5 +55,10 @@ public class EnumUtils {
             ts = (T[]) obj;
         }
         return Arrays.stream(ts).filter(predicate).findAny();
+    }
+
+    public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
+        int x = random.nextInt(clazz.getEnumConstants().length);
+        return clazz.getEnumConstants()[x];
     }
 }
