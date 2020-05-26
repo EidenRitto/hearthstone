@@ -1,7 +1,6 @@
 package cn.eiden.hsm.game.keyword;
 
 
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.minion.Minion;
 
 /**

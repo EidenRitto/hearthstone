@@ -21,19 +21,14 @@ public class SouthseaCaptainCard extends SouthseaCaptain{
     }
 
     static class SelfAura implements Aura{
-        /**被buff的随从*/
-        List<Minion> buffedMinions = new ArrayList<>();
+
         @Override
         public void doAura(Minion thisMinion) {
             List<Minion> minions = thisMinion.getOwner().getMinions();
             for (Minion minion : minions) {
-                if (buffedMinions.contains(minion)){
-                    continue;
-                }
                 if (minion.getRace() == Race.PIRATE && !minion.equals(thisMinion) ){
-                    minion.addAttack(1L);
-                    minion.addHealthLimit(1L);
-                    buffedMinions.add(minion);
+                    minion.addBuffAtk(1L);
+                    minion.addBuffHp(1L);
                 }
             }
         }

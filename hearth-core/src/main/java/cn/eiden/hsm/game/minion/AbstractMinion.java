@@ -29,7 +29,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     /**
      * 生命值上限
      */
-    private long healthLimit;
+    private long originHealthLimit;
+
+    /**被buff的生命值上限*/
+    private long buffedHealthLimit;
     /**
      * 当前生命值
      */
@@ -38,6 +41,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      * 攻击力
      */
     private long attackValue;
+
+    /**
+     * 被buff的攻击力
+     */
+    private long buffedAttackValue;
 
     /**
      * 第一回的准备时间
@@ -173,28 +181,28 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void reduceHealthLimit(long reduceHealthLimit) {
         OutputInfo.info(minionName + "减少" + reduceHealthLimit + "点生命上限");
-        healthLimit -= reduceHealthLimit;
+        originHealthLimit -= reduceHealthLimit;
         //如果当前生命值大于生命值上限，一并减少
         checkHealth();
     }
 
     @Override
     public void checkHealth() {
-        if (health > healthLimit) {
-            health = healthLimit;
+        if (health > this.getHealthLimit()) {
+            health = this.getHealthLimit();
         }
     }
 
     @Override
     public void changeHealth(long hp) {
-        healthLimit = hp;
+        originHealthLimit = hp;
         health = hp;
     }
 
     @Override
     public void addHealthLimit(long addHealthLimit) {
         OutputInfo.info(minionName + "增加" + addHealthLimit + "点生命值");
-        healthLimit += addHealthLimit;
+        originHealthLimit += addHealthLimit;
         health += addHealthLimit;
     }
 
@@ -221,7 +229,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void recoveryHp(long number) {
         //防止上限溢出
-        long newHealth = Math.min(health + number, healthLimit);
+        long newHealth = Math.min(health + number, this.getHealthLimit());
         OutputInfo.info(minionName + "恢复" + number + "点生命值");
         health = newHealth;
     }
@@ -248,7 +256,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public long getAttackValue() {
-        return attackValue;
+        return attackValue + buffedAttackValue;
     }
 
     @Override
@@ -258,7 +266,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public boolean isAttack() {
-        return attackValue > 0 && (ready || charge) && !isFrozen && attackTime > 0;
+        return getAttackValue() > 0 && (ready || charge) && !isFrozen && attackTime > 0;
     }
 
     @Override
@@ -278,7 +286,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public long getHealthLimit() {
-        return healthLimit;
+        return originHealthLimit + buffedHealthLimit;
     }
 
     @Override
@@ -312,7 +320,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void silence() {
         health = Math.min(health, originalHealth);
-        healthLimit = originalHealth;
+        originHealthLimit = originalHealth;
         attackValue = originalAttack;
         isSilence = true;
     }
@@ -397,15 +405,33 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         ready = true;
     }
 
+    @Override
+    public void resetBuff() {
+        buffedAttackValue = 0;
+        buffedHealthLimit = 0;
+        checkHealth();
+    }
+
+    @Override
+    public void addBuffAtk(long val) {
+        buffedAttackValue += val;
+    }
+
+    @Override
+    public void addBuffHp(long val) {
+        buffedHealthLimit += val;
+        health += val;
+    }
+
     public AbstractMinion() {
     }
 
-    public AbstractMinion(String minionName, Long healthLimit, Long attackValue, Race race) {
+    public AbstractMinion(String minionName, Long originHealthLimit, Long attackValue, Race race) {
         this.minionName = minionName;
-        this.healthLimit = healthLimit;
-        this.health = healthLimit;
+        this.originHealthLimit = originHealthLimit;
+        this.health = originHealthLimit;
         this.attackValue = attackValue;
-        this.originalHealth = healthLimit;
+        this.originalHealth = originHealthLimit;
         this.originalAttack = attackValue;
         this.race = race;
     }

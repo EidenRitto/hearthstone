@@ -291,4 +291,10 @@ public interface Minion extends GeneralItem {
      * 调用该方法，接触随从第一回合不能攻击的标志
      */
     void setReady();
+    /**重置光环属性*/
+    void resetBuff();
+
+    void addBuffAtk(long val);
+
+    void addBuffHp(long val);
 }

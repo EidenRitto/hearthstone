@@ -21,6 +21,7 @@ public class AuraListener implements HearthListener {
     public void onEvent(BattlefieldChangeEvent event){
         Gamer owner = event.getOwner();
         List<Minion> minions = owner.getMinions();
+        minions.forEach(Minion::resetBuff);
         for (Minion minion : minions) {
             if (minion.hasAura()){
                 Aura aura = minion.getAura();
