@@ -15,7 +15,10 @@ import cn.eiden.hsm.game.minion.Secret;
 public class ExplosiveTrapCard extends ExplosiveTrap {
     @Override
     public void magicEffect(Gamer gamer, Minion target) {
-        gamer.addSecret(new ExplosiveTrapSecret());
+        ExplosiveTrapSecret trapSecret = new ExplosiveTrapSecret();
+        if (!gamer.hasSecret(trapSecret)){
+            gamer.addSecret(trapSecret);
+        }
     }
 
     static class ExplosiveTrapSecret extends AbstractSecret {

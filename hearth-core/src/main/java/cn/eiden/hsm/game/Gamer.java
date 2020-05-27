@@ -356,6 +356,15 @@ public class Gamer extends AbstractGeneralItem {
     public boolean hasSecret() {
         return secretList.size() > 0;
     }
+    
+    public boolean hasSecret(Secret secret){
+        for (Secret secret1 : secretList) {
+            if (secret1.getClass() == secret.getClass()){
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * 是否是友方单位
