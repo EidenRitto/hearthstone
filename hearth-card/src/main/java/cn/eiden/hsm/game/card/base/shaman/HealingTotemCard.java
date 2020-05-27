@@ -17,7 +17,7 @@ public class HealingTotemCard extends HealingTotem {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.getOwner().getEventManager().registerListener(new AfterTurnListener());
+        minion.setHearthListener(new AfterTurnListener());
         return minion;
     }
 

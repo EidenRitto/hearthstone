@@ -8,10 +8,10 @@ import cn.eiden.hsm.event.EventManager;
 import cn.eiden.hsm.event.events.*;
 import cn.eiden.hsm.exception.GameOverException;
 import cn.eiden.hsm.game.card.*;
-import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.game.minion.Secret;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -90,6 +90,8 @@ public class Gamer extends AbstractGeneralItem {
      */
     private int chooseOne;
 
+    private List<Secret> secretList = new ArrayList<>(5);
+
     /**
      * 事件管理器
      */
@@ -118,7 +120,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 回合结束
      */
-    public void endTurn(){
+    public void endTurn() {
         EndTurnEvent endTurnEvent = new EndTurnEvent(this);
         eventManager.call(endTurnEvent);
     }
@@ -163,9 +165,10 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 移除牌堆中的一张牌
+     *
      * @param card 排队中的牌
      */
-    public boolean deckLoss(Card card){
+    public boolean deckLoss(Card card) {
         return cards.remove(card);
     }
 
@@ -332,13 +335,35 @@ public class Gamer extends AbstractGeneralItem {
         return true;
     }
 
+    public void addSecret(Secret secret) {
+        secret.setOwner(this);
+        eventManager.registerSecret(secret);
+        secretList.add(secret);
+    }
+
+    public void onSecret(Secret secret,AbstractEvent event) {
+        if (secretList.contains(secret)) {
+            if (secret.onSecret(event)) {
+                removeSecret(secret);
+            }
+        }
+    }
+
+    public void removeSecret(Secret secret) {
+        secretList.remove(secret);
+    }
+
+    public boolean hasSecret() {
+        return secretList.size() > 0;
+    }
+
     /**
      * 是否是友方单位
      *
      * @param minion 随从或英雄
      * @return 是友方返回true
      */
-    private boolean isFriend(Minion minion) {
+    public boolean isFriend(Minion minion) {
         Hero hero = getHero();
         return minions.contains(minion) || hero == minion;
     }
@@ -361,7 +386,7 @@ public class Gamer extends AbstractGeneralItem {
         //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
-        OutputInfo.info(minion.getMinionName()+"进入战场");
+        OutputInfo.info(minion.getMinionName() + "进入战场");
     }
 
     /**
@@ -460,7 +485,7 @@ public class Gamer extends AbstractGeneralItem {
         OutputInfo.info(minionState);
     }
 
-    public String getMinionState(){
+    public String getMinionState() {
         StringBuilder stringBuilder = new StringBuilder("场上随从:");
         for (Minion minionObject : minions) {
             stringBuilder.append(minionObject.getMinionName());
@@ -580,11 +605,11 @@ public class Gamer extends AbstractGeneralItem {
      */
     public List<Minion> findAllCanAttackMinionsId() {
         List<Minion> resultList = new ArrayList<>();
-        if (hero.isAttack()){
+        if (hero.isAttack()) {
             resultList.add(hero);
         }
         for (Minion minion : minions) {
-            if (minion.isAttack()){
+            if (minion.isAttack()) {
                 resultList.add(minion);
             }
         }
@@ -608,6 +633,7 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 获取卡牌的合法目标
+     *
      * @param card 卡牌
      * @return 合法目标集合
      */

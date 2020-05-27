@@ -7,7 +7,7 @@ import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.CardFactory;
-import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.util.DeckSerializer;
 
 
@@ -27,8 +27,8 @@ public class GameDemo {
 
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
-        Gamer gamer = new Gamer(new HeroObjectAbstract(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
-        Gamer enemy = new Gamer(new HeroObjectAbstract(CardClass.DRUID, (AbstractHeroPowerCard) CardFactory.getCardById(1123)),druidCards);
+        Gamer gamer = new Gamer(new HeroMinion(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
+        Gamer enemy = new Gamer(new HeroMinion(CardClass.DRUID, (AbstractHeroPowerCard) CardFactory.getCardById(1123)),druidCards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 

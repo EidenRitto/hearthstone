@@ -50,6 +50,8 @@ public class CardInfo {
     private int spellPower;
     /**光环*/
     private int aura;
+    /**奥秘*/
+    private int secret;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

@@ -16,11 +16,8 @@ import cn.eiden.hsm.game.Gamer;
  *
  * */
 public abstract class AbstractMagicCard extends AbstractCard {
-    private SpellEffect spellEffect;
 
-    public void magicEffect(Gamer gamer, Minion target){
-        spellEffect.magicEffect(gamer,target);
-    }
+    public abstract void magicEffect(Gamer gamer, Minion target);
 
     public AbstractMagicCard(int cost, String description, String cardName, CardClass cardClass) {
         super(cost, description, cardName ,cardClass);
@@ -28,13 +25,5 @@ public abstract class AbstractMagicCard extends AbstractCard {
 
     public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
-    }
-
-    public SpellEffect getSpellEffect() {
-        return spellEffect;
-    }
-
-    public void setSpellEffect(SpellEffect spellEffect) {
-        this.spellEffect = spellEffect;
     }
 }

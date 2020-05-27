@@ -2,10 +2,12 @@ package cn.eiden.hsm.game.minion;
 
 
 import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.event.events.HeroBeAttackEvent;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
@@ -133,6 +135,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void attack(Minion beAttackMinion) {
+        if (beAttackMinion instanceof HeroMinion){
+            HeroBeAttackEvent heroBeAttackEvent = new HeroBeAttackEvent(getOwner(), this);
+            getOwner().getEventManager().call(heroBeAttackEvent);
+            getOwner().checkMinion();
+            if (!getOwner().getMinions().contains(this)){
+                return;
+            }
+        }
         if (!this.isAttack()) {
             OutputInfo.info("这个随从无法进行攻击");
             return;

@@ -109,6 +109,9 @@ public class CardGeneratorUtils {
                 case AURA:
                     cardCache.setAura(Integer.parseInt(tag.getValue()));
                     break;
+                case SECRET:
+                    cardCache.setSecret(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

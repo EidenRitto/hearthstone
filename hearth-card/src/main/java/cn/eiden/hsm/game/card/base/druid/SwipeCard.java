@@ -5,7 +5,7 @@ import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.game.minion.Minion;
-import cn.eiden.hsm.game.minion.hero.HeroObjectAbstract;
+import cn.eiden.hsm.game.minion.hero.HeroMinion;
 
 import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.Gamer;
@@ -39,8 +39,8 @@ public class SwipeCard extends AbstractMagicCard {
         int gamerSpellDamage = gamer.getGamerSpellDamage();
         int damageMain = MAGIC_DAMAGE_MAIN + gamerSpellDamage;
         int damageOther = MAGIC_DAMAGE_OTHER + gamerSpellDamage;
-        if (target instanceof HeroObjectAbstract){
-            ((HeroObjectAbstract)target).beHurt(damageMain);
+        if (target instanceof HeroMinion){
+            ((HeroMinion)target).beHurt(damageMain);
             gamer.getEnemy().getMinions().forEach(minionObject -> minionObject.beHurt(damageOther));
         }else if (target instanceof MinionObject){
             gamer.getEnemy().getHero().beHurt(damageOther);

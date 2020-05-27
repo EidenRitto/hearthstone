@@ -18,7 +18,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class HeroObjectAbstract extends AbstractMinion implements Hero {
+public class HeroMinion extends AbstractMinion implements Hero {
     /**
      * 生命值上限
      */
@@ -41,11 +41,11 @@ public class HeroObjectAbstract extends AbstractMinion implements Hero {
      */
     private Weapon weapon;
 
-    public HeroObjectAbstract(CardClass cardClass) {
+    public HeroMinion(CardClass cardClass) {
         super(cardClass.name(), HEALTH, 0L, Race.INVALID);
     }
 
-    public HeroObjectAbstract(CardClass cardClass, AbstractHeroPowerCard heroPower) {
+    public HeroMinion(CardClass cardClass, AbstractHeroPowerCard heroPower) {
         super(cardClass.getCnName(), HEALTH, 0L, Race.INVALID);
         this.heroPower = heroPower;
     }
