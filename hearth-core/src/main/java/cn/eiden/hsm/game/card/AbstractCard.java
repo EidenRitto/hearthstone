@@ -9,27 +9,40 @@ import cn.eiden.hsm.game.AbstractGeneralItem;
 
 /**
  * @author : Eiden J.P Zhou
- * @date : 2018/9/12
  * @version : 2.0
- *
- * */
-public abstract class AbstractCard extends AbstractGeneralItem implements Card{
+ * @date : 2018/9/12
+ */
+public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     private String cardName;
     private int cost;
     private String description;
 
-    /**id*/
+    /**
+     * id
+     */
     private String id;
-    /**cardId*/
+    /**
+     * cardId
+     */
     private String cardId;
-    /**版本*/
+    /**
+     * 版本
+     */
     private CardSet cardSet;
-    /**职业*/
+    /**
+     * 职业
+     */
     private CardClass cardClass;
-    /**类型*/
+    /**
+     * 类型
+     */
     private CardType cardType;
-    /**稀有度*/
+    /**
+     * 稀有度
+     */
     private Rarity rarity;
+
+    private Integer forceCost;
 
     public AbstractCard() {
     }
@@ -55,7 +68,7 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card{
 
     @Override
     public int getCost() {
-        return cost;
+        return forceCost == null ? cost : forceCost;
     }
 
     @Override
@@ -71,5 +84,10 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card{
     @Override
     public CardClass getCardClass() {
         return cardClass;
+    }
+
+    @Override
+    public void setForceCost(Integer forceCost) {
+        this.forceCost = forceCost;
     }
 }

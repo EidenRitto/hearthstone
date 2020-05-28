@@ -34,6 +34,8 @@ public interface Card extends GeneralItem {
      */
     CardClass getCardClass();
 
+    void setForceCost(Integer forceCost);
+
     /**
      * 是否不需要目标
      * @return 不需要目标返回true
