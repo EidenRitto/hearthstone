@@ -1,12 +1,11 @@
 package cn.eiden.hsm.game.card.classic.hunter;
 
-import cn.eiden.hsm.event.AbstractEvent;
+import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.event.events.HeroBeAttackEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.expert1.hunter.ExplosiveTrap;
 import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.minion.Minion;
-import cn.eiden.hsm.game.minion.Secret;
 
 /**
  * @author Eiden J.P Zhou
@@ -25,7 +24,7 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
         private static final int dmg = 2;
 
         @Override
-        public boolean onSecret(AbstractEvent event) {
+        public boolean onSecret(Event event) {
             if (event.getClass() == triggerEvent()) {
                 HeroBeAttackEvent heroBeAttackEvent = (HeroBeAttackEvent) event;
                 Minion attacker = heroBeAttackEvent.getAttacker();
@@ -41,7 +40,7 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
         }
 
         @Override
-        public Class<? extends AbstractEvent> triggerEvent() {
+        public Class<? extends Event> triggerEvent() {
             return HeroBeAttackEvent.class;
         }
     }

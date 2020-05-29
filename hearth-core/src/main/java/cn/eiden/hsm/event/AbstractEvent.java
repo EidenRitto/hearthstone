@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @AllArgsConstructor
 @Data
-public abstract class AbstractEvent {
+public abstract class AbstractEvent implements Event{
     protected Gamer owner;
 }

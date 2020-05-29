@@ -42,7 +42,7 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
      */
     private Rarity rarity;
 
-    private Integer forceCost;
+    private Integer ruleForceCost;
 
     public AbstractCard() {
     }
@@ -68,7 +68,7 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
 
     @Override
     public int getCost() {
-        return forceCost == null ? cost : forceCost;
+        return ruleForceCost == null ? cost : ruleForceCost;
     }
 
     @Override
@@ -87,7 +87,12 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     }
 
     @Override
-    public void setForceCost(Integer forceCost) {
-        this.forceCost = forceCost;
+    public void setRuleForceCost(Integer ruleForceCost) {
+        this.ruleForceCost = ruleForceCost;
+    }
+
+    @Override
+    public void resetRuleForceCost() {
+        this.ruleForceCost = null;
     }
 }

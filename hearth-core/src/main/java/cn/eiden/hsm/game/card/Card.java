@@ -34,7 +34,16 @@ public interface Card extends GeneralItem {
      */
     CardClass getCardClass();
 
-    void setForceCost(Integer forceCost);
+    /**
+     * 设置规则强制花费
+     * @param ruleForceCost 规则强制花费
+     */
+    void setRuleForceCost(Integer ruleForceCost);
+
+    /**
+     * 重设强制花费
+     */
+    void resetRuleForceCost();
 
     /**
      * 是否不需要目标

@@ -12,17 +12,10 @@ import cn.eiden.hsm.game.minion.hero.Hero;
 public class BloodsailRaiderCard extends BloodsailRaider {
     @Override
     protected Battle selfBattleCry() {
-        return new BattleCry();
-    }
-
-    public static class BattleCry implements Battle{
-
-        @Override
-        public void doBattle(Minion self, Minion target) {
-            Hero hero = self.getOwner().getHero();
-            if (hero.hasWeapon()){
-                self.addAttack(hero.getWeapon().getWeaponAttack());
+        return (e, t) -> {
+            if (e.getOwner().getHero().hasWeapon()) {
+                e.addAttack(e.getOwner().getHero().getWeapon().getWeaponAttack());
             }
-        }
+        };
     }
 }

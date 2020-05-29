@@ -3,7 +3,7 @@ package cn.eiden.hsm.game;
 
 import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.Race;
-import cn.eiden.hsm.event.AbstractEvent;
+import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.event.EventManager;
 import cn.eiden.hsm.event.events.*;
 import cn.eiden.hsm.exception.GameOverException;
@@ -12,6 +12,7 @@ import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
+import cn.eiden.hsm.game.rule.Rule;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -91,6 +92,8 @@ public class Gamer extends AbstractGeneralItem {
     private int chooseOne;
 
     private List<Secret> secretList = new ArrayList<>(5);
+
+    private List<Rule> rules = new ArrayList<>();
 
     /**
      * 事件管理器
@@ -240,7 +243,7 @@ public class Gamer extends AbstractGeneralItem {
         Minion minion = minionCard.createMinion();
         minion.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
-        AbstractEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
+        Event abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
         eventManager.call(abstractEvent);
 
         addMinion(minion);
@@ -299,6 +302,12 @@ public class Gamer extends AbstractGeneralItem {
         AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值
         getManaCrystal().applyAvailable(magicCard.getCost());
+        //发出事件
+        eventManager.call(new UseSpellCardFromHandEvent(this, magicCard, target));
+        if (magicCard instanceof AbstractSecretCard) {
+            AbstractSecretCard secretCard = (AbstractSecretCard) magicCard;
+            eventManager.call(new UseSecretCardFromHandEvent(this, secretCard));
+        }
         //魔法效果
         magicCard.magicEffect(this, target);
         //从手牌中移除随从卡牌
@@ -341,7 +350,7 @@ public class Gamer extends AbstractGeneralItem {
         secretList.add(secret);
     }
 
-    public void onSecret(Secret secret,AbstractEvent event) {
+    public void onSecret(Secret secret, Event event) {
         if (secretList.contains(secret)) {
             if (secret.onSecret(event)) {
                 removeSecret(secret);
@@ -356,10 +365,10 @@ public class Gamer extends AbstractGeneralItem {
     public boolean hasSecret() {
         return secretList.size() > 0;
     }
-    
-    public boolean hasSecret(Secret secret){
+
+    public boolean hasSecret(Secret secret) {
         for (Secret secret1 : secretList) {
-            if (secret1.getClass() == secret.getClass()){
+            if (secret1.getClass() == secret.getClass()) {
                 return true;
             }
         }
@@ -422,7 +431,7 @@ public class Gamer extends AbstractGeneralItem {
     public void deathMinion(int index) {
         Minion minion = minions.get(index);
         OutputInfo.info(minion.getMinionName() + "死亡");
-        AbstractEvent minionDeathEvent = new MinionDeathEvent(this, minion);
+        Event minionDeathEvent = new MinionDeathEvent(this, minion);
         eventManager.call(minionDeathEvent);
         //移除随从
         this.removeMinion(minion);
@@ -694,6 +703,24 @@ public class Gamer extends AbstractGeneralItem {
             resultList.addAll(enemyMinions);
         }
         return resultList;
+    }
+
+    /**
+     * 添加规则
+     *
+     * @param rule 具体规则
+     */
+    public void addRule(Rule rule) {
+        rules.add(rule);
+        this.refreshRuleEffect();
+    }
+
+    public List<Rule> getRules() {
+        return rules;
+    }
+
+    public void refreshRuleEffect(){
+        rules.forEach(e -> e.effective(this));
     }
 
     /**

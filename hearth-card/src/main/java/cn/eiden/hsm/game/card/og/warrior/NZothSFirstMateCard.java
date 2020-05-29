@@ -16,17 +16,11 @@ public class NZothSFirstMateCard extends NZothSFirstMate {
     private static final int REF_ID = 38363;
     @Override
     protected Battle selfBattleCry() {
-        return new BattleCry();
-    }
-
-    public static class BattleCry implements Battle{
-
-        @Override
-        public void doBattle(Minion self, Minion target) {
+        return (e,t) -> {
             AbstractWeaponCard weaponCard = (AbstractWeaponCard) CardFactory.getCardById(REF_ID);
-            Hero hero = self.getOwner().getHero();
+            Hero hero = e.getOwner().getHero();
             assert weaponCard != null;
             hero.equipWeapons(weaponCard.createWeapon());
-        }
+        };
     }
 }

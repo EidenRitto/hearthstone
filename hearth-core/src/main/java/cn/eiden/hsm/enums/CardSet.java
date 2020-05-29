@@ -21,8 +21,10 @@ public enum CardSet {
     BLANK (9),
     DEBUG_SP (10),
     PROMO (11),
+    /**纳克萨玛斯*/
     NAXX (12),
     FP1 (12),
+    /**地精大战侏儒*/
     GVG (13),
     PE1 (13),
     BRM (14),
@@ -39,6 +41,7 @@ public enum CardSet {
     OG_RESERVE (22),
     KARA (23),
     KARA_RESERVE (24),
+    /**龙争虎斗加基森*/
     GANGS (25),
     GANGS_RESERVE (26),
     UNGORO (27),

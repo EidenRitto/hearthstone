@@ -7,6 +7,7 @@ import cn.eiden.hsm.game.minion.Minion;
  * @author Eiden J.P Zhou
  * @date 2019/10/29 10:10
  */
+@FunctionalInterface
 public interface Battle {
     /**
      * 执行战吼

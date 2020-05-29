@@ -1,6 +1,6 @@
 package cn.eiden.hsm.game.minion;
 
-import cn.eiden.hsm.event.AbstractEvent;
+import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.game.Gamer;
 
 /**
@@ -13,13 +13,13 @@ public interface Secret {
      * 触发效果
      * @return 成功返回true
      * */
-    boolean onSecret(AbstractEvent event);
+    boolean onSecret(Event event);
 
     /**
      * 触发事件
      * @return 触发事件
      */
-    Class<? extends AbstractEvent> triggerEvent();
+    Class<? extends Event> triggerEvent();
 
     /**
      * 获取所有者

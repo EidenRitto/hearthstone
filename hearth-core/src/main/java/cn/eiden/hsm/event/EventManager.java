@@ -1,16 +1,16 @@
 package cn.eiden.hsm.event;
 
 import cn.eiden.hsm.annotation.EventHandler;
+import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.minion.Secret;
+import cn.eiden.hsm.game.rule.Rule;
 import cn.eiden.hsm.listener.HearthListener;
 import lombok.Getter;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 事件管理器
@@ -42,13 +42,13 @@ public class EventManager {
     /**
      * 事件集合
      */
-    private Set<Class<? extends AbstractEvent>> eventClasses;
+    private Set<Class<? extends Event>> eventClasses;
 
 
     private EventManager() {
         Reflections reflections = new Reflections("cn.eiden.hsm");
         //反射获取全部事件
-        eventClasses = reflections.getSubTypesOf(AbstractEvent.class);
+        eventClasses = reflections.getSubTypesOf(Event.class);
         //反射获取并注册监听
         Set<Class<? extends HearthListener>> listeners = reflections.getSubTypesOf(HearthListener.class);
         for (Class<? extends HearthListener> listener : listeners) {
@@ -83,7 +83,7 @@ public class EventManager {
             Class<?> event = method.getParameterTypes()[0];
 
             //判断传入的event是否是Event的子类
-            if (!AbstractEvent.class.isAssignableFrom(event)) {
+            if (!Event.class.isAssignableFrom(event)) {
                 continue;
             }
             //判断当前方法是否加了EventHandler注解
@@ -93,7 +93,7 @@ public class EventManager {
 
             // 循环全部的事件类
             // 向下注册所有子类
-            for (Class<? extends AbstractEvent> eventClass : eventClasses) {
+            for (Class<? extends Event> eventClass : eventClasses) {
                 //注解方法的参数事件是否是扫描包中的事件(或其子类)
                 if (!event.isAssignableFrom(eventClass)) {
                     continue;
@@ -111,7 +111,7 @@ public class EventManager {
     }
 
     public void registerSecret(Secret secret) {
-        Class<? extends AbstractEvent> triggerEvent = secret.triggerEvent();
+        Class<? extends Event> triggerEvent = secret.triggerEvent();
         String mapKey = triggerEvent.getName();
         if (secretListeners.containsKey(mapKey)) {
             secretListeners.get(mapKey).add(secret);
@@ -132,10 +132,10 @@ public class EventManager {
         for (Method method : listener.getClass().getMethods()) {
             Class<?> event = method.getParameterTypes()[0];
             //判断传入的event是否是Event的子类
-            if (!AbstractEvent.class.isAssignableFrom(event)) {
+            if (!Event.class.isAssignableFrom(event)) {
                 continue;
             }
-            for (Class<? extends AbstractEvent> eventClass : eventClasses) {
+            for (Class<? extends Event> eventClass : eventClasses) {
                 //注解方法的参数事件是否是扫描包中的事件(或其子类)
                 if (!event.isAssignableFrom(eventClass)) {
                     continue;
@@ -149,26 +149,35 @@ public class EventManager {
     /**
      * 执行事件
      *
-     * @param abstractEvent 事件对象
+     * @param event 事件对象
      */
-    public void call(AbstractEvent abstractEvent) {
+    public void call(final Event event) {
+        if (event instanceof AbstractEvent) {
+            AbstractEvent abstractEvent = (AbstractEvent) event;
+            final Gamer owner = abstractEvent.getOwner();
+            //重置规则cost
+            owner.getHand().getCards().forEach(Card::resetRuleForceCost);
+            List<Rule> rules = owner.getRules();
+            rules.removeIf(e -> e.leave(event.getClass()));
+            owner.refreshRuleEffect();
+        }
 
-        String mapKey = abstractEvent.getClass().getName();
+        String mapKey = event.getClass().getName();
 
         if (registeredListenerMethods.containsKey(mapKey)) {
             registeredListenerMethods.get(mapKey).forEach(registeredListenerMethod -> {
                 try {
-                    registeredListenerMethod.call(abstractEvent);
+                    registeredListenerMethod.call(event);
                 } catch (Throwable e) {
                     e.printStackTrace();
                 }
             });
         }
 
-        if (secretListeners.containsKey(mapKey)){
+        if (secretListeners.containsKey(mapKey)) {
             ArrayList<Secret> secrets = this.secretListeners.get(mapKey);
             for (Secret secret : secrets) {
-                secret.getOwner().onSecret(secret,abstractEvent);
+                secret.getOwner().onSecret(secret, event);
             }
         }
     }
