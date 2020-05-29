@@ -6,6 +6,7 @@ import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.expert1.hunter.ExplosiveTrap;
 import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.output.OutputInfo;
 
 /**
  * @author Eiden J.P Zhou
@@ -31,9 +32,12 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
                 if (getOwner().isFriend(attacker)) {
                     return false;
                 }
+                OutputInfo.info("猎人奥秘触发：爆炸陷阱！");
+                int damage = dmg + getOwner().getGamerSpellDamage();
                 for (Minion minion : getOwner().getEnemy().getMinions()) {
-                    minion.beHurt(dmg + getOwner().getGamerSpellDamage());
+                    minion.beHurt(damage);
                 }
+                getOwner().getEnemy().getHero().beHurt(damage);
                 return true;
             }
             return false;

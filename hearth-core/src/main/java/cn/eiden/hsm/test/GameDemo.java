@@ -22,13 +22,13 @@ public class GameDemo {
     public void start(String deckStr)throws Exception{
         List<Card> druidCards = new ArrayList<>(30);
         for (int i = 0;i<30;i++){
-            druidCards.add(CardFactory.getInstance().getRandomCard(CardClass.DRUID));
+            druidCards.add(CardFactory.getInstance().buildCardById(585));
         }
 
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
         Gamer gamer = new Gamer(new HeroMinion(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
-        Gamer enemy = new Gamer(new HeroMinion(CardClass.DRUID, (AbstractHeroPowerCard) CardFactory.getCardById(1123)),druidCards);
+        Gamer enemy = new Gamer(new HeroMinion(CardClass.MAGE, (AbstractHeroPowerCard) CardFactory.getCardById(807)),druidCards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 
