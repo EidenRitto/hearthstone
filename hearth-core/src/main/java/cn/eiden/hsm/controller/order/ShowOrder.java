@@ -48,7 +48,7 @@ public class ShowOrder extends AbstractOrder{
                 }
                 break;
             case DECK:
-                OutputInfo.info("牌库还有%s张牌",gamer.getCards().size());
+                OutputInfo.info("牌库还有%s张牌",gamer.getDeckCards().size());
                 break;
             default:
         }

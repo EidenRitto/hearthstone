@@ -2,6 +2,7 @@ package cn.eiden.hsm.game;
 
 
 import cn.eiden.hsm.annotation.TargetScope;
+import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.event.EventManager;
@@ -58,7 +59,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 牌堆
      */
-    private List<Card> cards;
+    private List<Card> deckCards;
     /**
      * 场面上的随从
      */
@@ -163,7 +164,7 @@ public class Gamer extends AbstractGeneralItem {
      * 移除牌堆顶部一张牌
      */
     public void lossLastCards() {
-        cards.remove(cards.size() - 1);
+        deckCards.remove(deckCards.size() - 1);
     }
 
     /**
@@ -172,7 +173,7 @@ public class Gamer extends AbstractGeneralItem {
      * @param card 排队中的牌
      */
     public boolean deckLoss(Card card) {
-        return cards.remove(card);
+        return deckCards.remove(card);
     }
 
     /**
@@ -181,7 +182,7 @@ public class Gamer extends AbstractGeneralItem {
      * 获取牌堆顶部一张牌
      */
     public Card getLastCards() {
-        return cards.get(cards.size() - 1);
+        return deckCards.get(deckCards.size() - 1);
     }
 
     /**
@@ -193,14 +194,50 @@ public class Gamer extends AbstractGeneralItem {
         for (int i = 0; i < number; i++) {
             //获取牌堆顶那一张牌
             Card lastCard = getLastCards();
-            lastCard.setOwner(this);
-            //移除牌堆顶的牌
-            lossLastCards();
-            //添加到手牌中
-            getHand().addHandsCard(lastCard);
-            OutputInfo.info("--你抽到了" + lastCard.getCardName());
+            drawCard(lastCard);
         }
     }
+
+    /**
+     * 从牌堆中抽牌
+     * @param card 被抽的牌
+     */
+    public void drawCard(Card card) {
+        card.setOwner(this);
+        //移除牌堆顶的牌
+        lossLastCards();
+        //添加到手牌中
+        getHand().addHandsCard(card);
+        OutputInfo.info("--你抽到了" + card.getCardName());
+    }
+
+    /**
+     * 从牌堆中指定卡牌的类型的牌
+     * @param cardType 卡牌类型
+     */
+    public void drawCardOfCardType(CardType cardType){
+        for (Card deckCard : deckCards) {
+            if (deckCard.getCardType() == cardType){
+                drawCard(deckCard);
+                break;
+            }
+        }
+    }
+
+    /**
+     * 从牌堆中指定类型的牌
+     * @param clazz 卡牌类型
+     */
+    public void drawCardOfType(Class<? extends Card> clazz){
+        for (Card deckCard : deckCards) {
+            if (clazz.isInstance(deckCard)){
+                drawCard(deckCard);
+                break;
+            }
+        }
+    }
+
+
 
     public void useThisCard(Card card, Minion target) {
         if (card instanceof AbstractMagicCard) {
@@ -243,10 +280,10 @@ public class Gamer extends AbstractGeneralItem {
         Minion minion = minionCard.createMinion();
         minion.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
-        Event abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
+        UseMinionCardFromHandEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
         eventManager.call(abstractEvent);
 
-        addMinion(minion);
+        addMinion(abstractEvent.getMinionObject());
         //从手牌中移除随从卡牌
         getHand().loss(card);
     }
@@ -345,9 +382,11 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     public void addSecret(Secret secret) {
-        secret.setOwner(this);
-        eventManager.registerSecret(secret);
-        secretList.add(secret);
+        if (!this.hasSecret(secret)){
+            secret.setOwner(this);
+            eventManager.registerSecret(secret);
+            secretList.add(secret);
+        }
     }
 
     public void onSecret(Secret secret, Event event) {
@@ -523,7 +562,7 @@ public class Gamer extends AbstractGeneralItem {
         this.hero = heroObject;
         this.hero.setOwner(this);
         this.hand = new Hand();
-        this.cards = initRandomCards(cards);
+        this.deckCards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
         this.manaCrystal = new ManaCrystal();
         this.minions = new ArrayList<>(7);
@@ -740,8 +779,8 @@ public class Gamer extends AbstractGeneralItem {
         return hand;
     }
 
-    public Gamer(Hero heroObject, List<Card> cards) {
-        init(heroObject, cards);
+    public Gamer(Hero heroObject, List<Card> deckCards) {
+        init(heroObject, deckCards);
         this.hero.setOwner(this);
     }
 }

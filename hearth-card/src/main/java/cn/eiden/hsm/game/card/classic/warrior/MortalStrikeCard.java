@@ -25,5 +25,6 @@ public class MortalStrikeCard extends MortalStrike {
         }
         damage = damage + gamer.getGamerSpellDamage();
         target.beHurt(damage);
+        target.getOwner().checkMinion();
     }
 }

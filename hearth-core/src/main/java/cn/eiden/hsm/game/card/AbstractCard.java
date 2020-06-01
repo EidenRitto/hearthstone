@@ -95,4 +95,9 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     public void resetRuleForceCost() {
         this.ruleForceCost = null;
     }
+
+    @Override
+    public CardType getCardType() {
+        return cardType;
+    }
 }

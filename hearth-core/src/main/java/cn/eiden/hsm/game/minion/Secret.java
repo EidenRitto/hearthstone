@@ -11,6 +11,7 @@ import cn.eiden.hsm.game.Gamer;
 public interface Secret {
     /**
      * 触发效果
+     * @param event 触发的事件
      * @return 成功返回true
      * */
     boolean onSecret(Event event);

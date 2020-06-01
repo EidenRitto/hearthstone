@@ -34,7 +34,7 @@ public class PatchesThePirateCard extends PatchesThePirate {
             //判断使用的是不是海盗
             if (minion.getRace() == Race.PIRATE){
                 //获取牌库的所有牌
-                List<Card> cards = owner.getCards();
+                List<Card> cards = owner.getDeckCards();
                 //拿到所有的帕奇斯
                 List<Card> patches = cards.stream()
                         .filter(e -> e instanceof PatchesThePirateCard)

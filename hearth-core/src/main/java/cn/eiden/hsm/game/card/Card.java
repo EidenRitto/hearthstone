@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.game.GeneralItem;
 
 /**
@@ -44,6 +45,12 @@ public interface Card extends GeneralItem {
      * 重设强制花费
      */
     void resetRuleForceCost();
+
+    /**
+     * 获取卡牌类型
+     * @return 卡牌类型
+     */
+    CardType getCardType();
 
     /**
      * 是否不需要目标

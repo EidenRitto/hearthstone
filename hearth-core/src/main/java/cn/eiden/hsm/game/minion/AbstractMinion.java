@@ -166,7 +166,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
                 OutputInfo.info(minionName + "受到" + number + "点伤害");
                 health -= number;
                 getOwner().getEventManager().call(minionBeHurtEvent);
-                getOwner().checkMinion();
             }
         }
     }

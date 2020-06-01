@@ -27,6 +27,7 @@ public class RayOfFrostCard extends RayOfFrost {
         if (target.isFreeze()) {
             //对其造成$2点伤害
             target.beHurt(demage + gamer.getGamerSpellDamage());
+            target.getOwner().checkMinion();
         } else {
             //冻结一个随从
             target.freeze();

@@ -4,8 +4,8 @@ import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.event.events.EndTurnEvent;
 import cn.eiden.hsm.event.events.UseSecretCardFromHandEvent;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.AbstractSecretCard;
 import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.rule.Rule;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class NextSecretCostZeroRule implements Rule {
     public void effective(Gamer gamer) {
         List<Card> cards = gamer.getHand().getCards();
         cards.stream()
-                .filter(e->e instanceof AbstractSecret)
+                .filter(e->e instanceof AbstractSecretCard)
                 .forEach(e->e.setRuleForceCost(0));
     }
 

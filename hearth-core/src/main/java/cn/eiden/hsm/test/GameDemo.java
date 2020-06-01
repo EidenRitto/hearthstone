@@ -21,8 +21,9 @@ import java.util.List;
 public class GameDemo {
     public void start(String deckStr)throws Exception{
         List<Card> druidCards = new ArrayList<>(30);
-        for (int i = 0;i<30;i++){
+        for (int i = 0;i<15;i++){
             druidCards.add(CardFactory.getInstance().buildCardById(585));
+            druidCards.add(CardFactory.getInstance().buildCardById(748));
         }
 
         DeckSerializer deckSerializer = new DeckSerializer();

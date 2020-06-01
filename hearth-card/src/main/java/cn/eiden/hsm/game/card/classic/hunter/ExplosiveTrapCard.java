@@ -16,9 +16,7 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
     @Override
     public void magicEffect(Gamer gamer, Minion target) {
         ExplosiveTrapSecret trapSecret = new ExplosiveTrapSecret();
-        if (!gamer.hasSecret(trapSecret)){
-            gamer.addSecret(trapSecret);
-        }
+        gamer.addSecret(trapSecret);
     }
 
     static class ExplosiveTrapSecret extends AbstractSecret {
@@ -38,6 +36,7 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
                     minion.beHurt(damage);
                 }
                 getOwner().getEnemy().getHero().beHurt(damage);
+                getOwner().getEnemy().checkMinion();
                 return true;
             }
             return false;
