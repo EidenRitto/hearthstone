@@ -144,7 +144,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             HeroBeAttackEvent heroBeAttackEvent = new HeroBeAttackEvent(getOwner(), this);
             getOwner().getEventManager().call(heroBeAttackEvent);
             getOwner().checkMinion();
-            if (!getOwner().getMinions().contains(this)) {
+            if (!getOwner().getMinions().contains(this) && !(this instanceof HeroMinion)) {
                 return;
             }
         }
