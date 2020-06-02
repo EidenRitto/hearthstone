@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
 public abstract class AbstractMinion extends AbstractGeneralItem implements Minion {
+    /**随从对应的卡牌id*/
+    private String cardId;
     /**
      * 随从名称
      */
@@ -89,6 +91,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      * 是否具有圣盾
      */
     private boolean divineShield = false;
+
+    /**是否具有免疫*/
+    private boolean immune = false;
     /**
      * 法术强度
      */
@@ -162,10 +167,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
                 OutputInfo.info(minionName + "圣盾抵消伤害");
                 removeDivineShield();
             } else {
-                MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this);
+                MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this,number);
                 OutputInfo.info(minionName + "受到" + number + "点伤害");
-                health -= number;
                 getOwner().getEventManager().call(minionBeHurtEvent);
+                reduceHealth(number);
             }
         }
     }
@@ -187,6 +192,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public void reduceAttack(long reduceAttack) {
         OutputInfo.info(minionName + "减少" + reduceAttack + "点攻击");
         attackValue -= reduceAttack;
+    }
+
+    @Override
+    public void reduceHealth(long reduceHealth) {
+        if (immune){
+            return;
+        }
+        health -= reduceHealth;
     }
 
     @Override
@@ -438,7 +451,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public AbstractMinion() {
     }
 
-    public AbstractMinion(String minionName, Long originHealthLimit, Long attackValue, Race race) {
+    public AbstractMinion(String minionName, Long originHealthLimit, Long attackValue, Race race, String cardId) {
         this.minionName = minionName;
         this.originHealthLimit = originHealthLimit;
         this.health = originHealthLimit;
@@ -446,5 +459,21 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         this.originalHealth = originHealthLimit;
         this.originalAttack = attackValue;
         this.race = race;
+        this.cardId = cardId;
+    }
+
+    @Override
+    public String getCardId() {
+        return cardId;
+    }
+
+    @Override
+    public boolean isImmune() {
+        return immune;
+    }
+
+    @Override
+    public void setImmune(boolean immune) {
+        this.immune = immune;
     }
 }

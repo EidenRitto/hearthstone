@@ -54,4 +54,11 @@ public interface Hero extends Minion {
      * @return 信息
      */
     String getHeroInfo();
+
+    /**
+     * 伤害是否致命
+     * @param dmg 伤害值
+     * @return 致命返回true
+     */
+    boolean isLethalDose(long dmg);
 }

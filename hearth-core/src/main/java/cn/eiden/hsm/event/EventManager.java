@@ -177,7 +177,9 @@ public class EventManager {
         if (secretListeners.containsKey(mapKey)) {
             ArrayList<Secret> secrets = this.secretListeners.get(mapKey);
             for (Secret secret : secrets) {
-                secret.getOwner().onSecret(secret, event);
+                if (event.getOwner().getEnemy() == secret.getOwner()){
+                    secret.getOwner().onSecret(secret, event);
+                }
             }
         }
     }

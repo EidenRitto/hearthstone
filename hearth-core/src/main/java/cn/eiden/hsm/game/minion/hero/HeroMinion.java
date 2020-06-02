@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.minion.hero;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
+import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.AbstractMinion;
 
@@ -42,11 +43,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
     private Weapon weapon;
 
     public HeroMinion(CardClass cardClass) {
-        super(cardClass.name(), HEALTH, 0L, Race.INVALID);
+        super(cardClass.name(), HEALTH, 0L, Race.INVALID, null);
     }
 
     public HeroMinion(CardClass cardClass, AbstractHeroPowerCard heroPower) {
-        super(cardClass.getCnName(), HEALTH, 0L, Race.INVALID);
+        super(cardClass.getCnName(), HEALTH, 0L, Race.INVALID, null);
         this.heroPower = heroPower;
     }
 
@@ -91,10 +92,18 @@ public class HeroMinion extends AbstractMinion implements Hero {
 
     @Override
     public void beHurt(Minion source, long number) {
-        number -= armor;
-        armor = Math.max(armor - number, 0L);
         super.beHurt(source, number);
         getOwner().checkHero();
+    }
+
+    @Override
+    public void reduceHealth(long reduceHealth) {
+        if (isImmune()) {
+            return;
+        }
+        reduceHealth -= armor;
+        armor = Math.max(armor - reduceHealth, 0L);
+        super.reduceHealth(Math.max(reduceHealth, 0L));
     }
 
     @Override
@@ -133,6 +142,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
             builder.append(" (可以攻击)");
         }
         return builder.toString();
+    }
+
+    @Override
+    public boolean isLethalDose(long dmg) {
+        return dmg > (getHealth() + armor);
     }
 
     @Override

@@ -14,9 +14,11 @@ import lombok.Setter;
 @Getter
 public class MinionBeHurtEvent extends AbstractEvent {
     private Minion minion;
+    private long dmg;
 
-    public MinionBeHurtEvent(Minion minion) {
+    public MinionBeHurtEvent(Minion minion, long dmg) {
         super(minion.getOwner());
         this.minion = minion;
+        this.dmg = dmg;
     }
 }

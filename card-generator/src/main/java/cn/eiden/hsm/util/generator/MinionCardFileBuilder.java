@@ -92,7 +92,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
     }
 
     private CodeBlock addAdditionalField() {
-        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N)", Minion.class, MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE").build();
+        CodeBlock core = CodeBlock.builder().addStatement("$T minionObject = new $T($N, $N, $N, $N, $N)", Minion.class, MinionObject.class, "CARD_NAME", "HEALTH", "ATK", "RACE", "ID").build();
         if (cardInfo.getTaunt() == 1) {
             CodeBlock taunt = CodeBlock.builder().addStatement("minionObject.addTaunt()").build();
             core = core.toBuilder().add(taunt).build();

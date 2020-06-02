@@ -1,6 +1,5 @@
 package cn.eiden.hsm.game.card.hof.warrior;
 
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.card.defs.hof.neutral.LeeroyJenkins;

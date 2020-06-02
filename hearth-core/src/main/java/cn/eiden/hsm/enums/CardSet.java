@@ -12,6 +12,7 @@ public enum CardSet {
     CORE (2),
     /**经典*/
     EXPERT1 (3),
+    /**荣誉室*/
     HOF (4),
     REWARD (4),
     MISSIONS (5),

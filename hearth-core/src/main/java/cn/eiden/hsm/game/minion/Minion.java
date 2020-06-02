@@ -72,6 +72,13 @@ public interface Minion extends GeneralItem {
     void reduceAttack(long reduceAttack);
 
     /**
+     * 减少生命值
+     *
+     * @param reduceHealth 数量
+     */
+    void reduceHealth(long reduceHealth);
+
+    /**
      * 减少生命值上限
      *
      * @param reduceHealthLimit 数量
@@ -328,4 +335,36 @@ public interface Minion extends GeneralItem {
     void addBuffAtk(long val);
 
     void addBuffHp(long val);
+
+    /**
+     * 获取随从对应的卡牌id
+     * @return 卡牌id
+     */
+    String getCardId();
+
+    /**
+     * 是否具有免疫
+     * @return 有免疫返回true
+     */
+    boolean isImmune();
+
+    /**
+     * 设置免疫
+     * @param immune 是否免疫
+     */
+    void setImmune(boolean immune);
+
+    /**
+     * 获得免疫
+     */
+    default void addImmune(){
+        setImmune(true);
+    }
+
+    /**
+     * 移除免疫
+     */
+    default void removeImmune(){
+        setImmune(false);
+    }
 }
