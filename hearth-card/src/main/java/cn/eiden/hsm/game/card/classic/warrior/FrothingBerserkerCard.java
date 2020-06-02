@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.card.defs.expert1.warrior.FrothingBerserker;
 import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.HearthListener;
 import lombok.Setter;
 
@@ -30,6 +31,9 @@ public class FrothingBerserkerCard extends FrothingBerserker {
 
         @EventHandler
         public void onEvent(MinionBeHurtEvent event){
+            if (event.getMinion() instanceof HeroMinion){
+                return;
+            }
             frothingBerserker.addAttack(1L);
         }
     }
