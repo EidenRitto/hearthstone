@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * 对空奥术法师
+ *
  * @author Eiden J.P Zhou
  * @date 2020/6/1 14:07
  */
@@ -18,17 +19,23 @@ public class ArcaneFlakmageCard extends ArcaneFlakmage {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setHearthListener(new FlakListener());
+        minion.setHearthListener(new FlakListener(minion));
         return minion;
     }
 
-    static class FlakListener implements HearthListener{
+    static class FlakListener implements HearthListener {
+        private Minion thisMinion;
+
         @EventHandler
-        public void onEvent(UseSecretCardFromHandEvent event){
+        public void onEvent(UseSecretCardFromHandEvent event) {
             Gamer enemy = event.getOwner().getEnemy();
             List<Minion> minions = enemy.getMinions();
-            minions.forEach(e->e.beHurt(2));
+            minions.forEach(e -> e.beHurt(thisMinion, 2));
             enemy.checkMinion();
+        }
+
+        public FlakListener(Minion thisMinion) {
+            this.thisMinion = thisMinion;
         }
     }
 }

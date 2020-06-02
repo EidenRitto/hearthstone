@@ -22,9 +22,19 @@ public interface Minion extends GeneralItem {
     /**
      * 受伤害
      *
+     * @param source 伤害来源
      * @param number 数量
      */
-    void beHurt(long number);
+    void beHurt(Minion source, long number);
+
+    /**
+     * 受英雄伤害
+     *
+     * @param number 数量
+     */
+    default void beHurt(long number) {
+        this.beHurt(this.getOwner().getHero(), number);
+    }
 
     /**
      * 增加攻击力

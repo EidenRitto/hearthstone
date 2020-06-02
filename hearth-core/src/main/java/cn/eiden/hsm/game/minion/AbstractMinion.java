@@ -135,11 +135,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void attack(Minion beAttackMinion) {
-        if (beAttackMinion instanceof HeroMinion){
+        if (beAttackMinion instanceof HeroMinion) {
             HeroBeAttackEvent heroBeAttackEvent = new HeroBeAttackEvent(getOwner(), this);
             getOwner().getEventManager().call(heroBeAttackEvent);
             getOwner().checkMinion();
-            if (!getOwner().getMinions().contains(this)){
+            if (!getOwner().getMinions().contains(this)) {
                 return;
             }
         }
@@ -150,13 +150,13 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         //攻击次数减少1
         attackTime--;
         //敌人掉血
-        beAttackMinion.beHurt(this.getAttackValue());
+        beAttackMinion.beHurt(this, this.getAttackValue());
         //自己掉血
-        this.beHurt(beAttackMinion.getAttackValue());
+        this.beHurt(beAttackMinion, beAttackMinion.getAttackValue());
     }
 
     @Override
-    public void beHurt(long number) {
+    public void beHurt(Minion source, long number) {
         if (number > 0) {
             if (divineShield) {
                 OutputInfo.info(minionName + "圣盾抵消伤害");

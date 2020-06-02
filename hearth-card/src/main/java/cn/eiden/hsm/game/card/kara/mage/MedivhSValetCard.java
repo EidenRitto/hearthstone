@@ -16,7 +16,7 @@ public class MedivhSValetCard extends MedivhSValet {
     @Override
     protected Battle selfBattleCry() {
         return (s,t) -> {
-            if (t!=null) {t.beHurt(DMG);}
+            if (t!=null) {t.beHurt(s,DMG);}
         };
     }
 

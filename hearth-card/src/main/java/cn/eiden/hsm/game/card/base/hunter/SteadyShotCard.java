@@ -18,6 +18,6 @@ public class SteadyShotCard extends SteadyShot {
      */
     @Override
     public void powerEffect(Gamer gamer, Minion target) {
-        gamer.getEnemy().getHero().beHurt(2);
+        gamer.getEnemy().getHero().beHurt(gamer.getHero(), 2);
     }
 }

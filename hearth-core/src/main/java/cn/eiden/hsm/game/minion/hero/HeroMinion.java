@@ -90,10 +90,10 @@ public class HeroMinion extends AbstractMinion implements Hero {
     }
 
     @Override
-    public void beHurt(long number) {
+    public void beHurt(Minion source, long number) {
         number -= armor;
         armor = Math.max(armor - number, 0L);
-        super.beHurt(number);
+        super.beHurt(source, number);
         getOwner().checkHero();
     }
 
@@ -129,7 +129,7 @@ public class HeroMinion extends AbstractMinion implements Hero {
         if (getAttackValue() > 0) {
             builder.append(" 当前攻击力:").append(getAttackValue());
         }
-        if (isAttack()){
+        if (isAttack()) {
             builder.append(" (可以攻击)");
         }
         return builder.toString();
