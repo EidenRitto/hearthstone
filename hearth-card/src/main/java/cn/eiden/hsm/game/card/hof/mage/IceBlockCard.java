@@ -7,6 +7,8 @@ import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
+import cn.eiden.hsm.game.rule.rules.ImmuneUntilEndTurnRule;
+import cn.eiden.hsm.output.OutputInfo;
 
 /**
  * 寒冰屏障
@@ -28,7 +30,8 @@ public class IceBlockCard extends IceBlock {
                 Minion minion = minionBeHurtEvent.getMinion();
                 long dmg = minionBeHurtEvent.getDmg();
                 if (minion instanceof HeroMinion && ((HeroMinion) minion).isLethalDose(dmg)){
-                    minion.addImmune();
+                    event.getOwner().addRule(new ImmuneUntilEndTurnRule());
+                    OutputInfo.info("法师奥秘触发:寒冰屏障");
                     return true;
                 }
             }
