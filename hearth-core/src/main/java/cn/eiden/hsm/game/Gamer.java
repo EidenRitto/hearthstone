@@ -763,10 +763,19 @@ public class Gamer extends AbstractGeneralItem {
         this.refreshRuleEffect();
     }
 
+
+
+    /**
+     * 获取规则
+     * @return 全部规则
+     */
     public List<Rule> getRules() {
         return rules;
     }
 
+    /**
+     * 刷新规则
+     */
     public void refreshRuleEffect(){
         rules.forEach(e -> e.effective(this));
     }

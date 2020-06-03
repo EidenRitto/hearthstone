@@ -14,6 +14,8 @@ import cn.eiden.hsm.game.minion.hero.Hero;
 public class NZothSFirstMateCard extends NZothSFirstMate {
     /**关联id*/
     private static final int REF_ID = 38363;
+
+    /**<b>战吼：</b>装备一把1/3的锈蚀铁钩。*/
     @Override
     protected Battle selfBattleCry() {
         return (e,t) -> {
