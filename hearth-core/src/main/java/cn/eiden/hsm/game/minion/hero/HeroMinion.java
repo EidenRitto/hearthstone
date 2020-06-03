@@ -89,7 +89,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
 
     @Override
     public long getAttackValue() {
-        return super.getAttackValue() + weapon.getWeaponAttack();
+        if (hasWeapon()){
+            return super.getAttackValue() + weapon.getWeaponAttack();
+        }else {
+            return super.getAttackValue();
+        }
     }
 
     @Override
@@ -148,7 +152,7 @@ public class HeroMinion extends AbstractMinion implements Hero {
 
     @Override
     public boolean isLethalDose(long dmg) {
-        return dmg > (getHealth() + armor);
+        return dmg >= (getHealth() + armor);
     }
 
     @Override

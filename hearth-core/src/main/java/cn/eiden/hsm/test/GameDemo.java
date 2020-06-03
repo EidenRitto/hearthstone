@@ -27,11 +27,13 @@ public class GameDemo {
             //肯瑞托法师
             mageCards.add(CardFactory.getInstance().buildCardById(748));
         }
+        HeroMinion mageHero = new HeroMinion(CardClass.MAGE, (AbstractHeroPowerCard) CardFactory.getCardById(807));
+        mageHero.changeHealth(1);
 
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
         Gamer gamer = new Gamer(new HeroMinion(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
-        Gamer enemy = new Gamer(new HeroMinion(CardClass.MAGE, (AbstractHeroPowerCard) CardFactory.getCardById(807)),mageCards);
+        Gamer enemy = new Gamer(mageHero,mageCards);
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 

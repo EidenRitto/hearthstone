@@ -168,7 +168,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
                 removeDivineShield();
             } else {
                 MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this,number);
-                OutputInfo.info(minionName + "受到" + number + "点伤害");
                 getOwner().getEventManager().call(minionBeHurtEvent);
                 reduceHealth(number);
             }
@@ -197,8 +196,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void reduceHealth(long reduceHealth) {
         if (immune){
+            OutputInfo.info(minionName + "免疫！");
             return;
         }
+        OutputInfo.info(minionName + "受到" + reduceHealth + "点伤害");
         health -= reduceHealth;
     }
 

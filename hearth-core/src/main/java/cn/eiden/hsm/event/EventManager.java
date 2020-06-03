@@ -157,6 +157,8 @@ public class EventManager {
             final Gamer owner = abstractEvent.getOwner();
             //重置规则cost
             owner.getHand().getCards().forEach(Card::resetRuleForceCost);
+            //重置规则免疫
+            owner.getHero().removeImmune();
             List<Rule> rules = owner.getRules();
             rules.removeIf(e -> e.leave(event.getClass()));
             owner.refreshRuleEffect();
@@ -177,7 +179,7 @@ public class EventManager {
         if (secretListeners.containsKey(mapKey)) {
             ArrayList<Secret> secrets = this.secretListeners.get(mapKey);
             for (Secret secret : secrets) {
-                if (event.getOwner().getEnemy() == secret.getOwner()){
+                if (!secret.getOwner().isActive()){
                     secret.getOwner().onSecret(secret, event);
                 }
             }
