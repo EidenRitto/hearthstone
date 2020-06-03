@@ -6,6 +6,7 @@ import cn.eiden.hsm.game.GeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.output.OutputInfo;
 
 /**
  * @author Eiden J.P Zhou
@@ -33,7 +34,7 @@ public interface Minion extends GeneralItem {
      * @param number 数量
      */
     default void beHurt(long number) {
-        this.beHurt(this.getOwner().getHero(), number);
+        this.beHurt(this.getOwner().getEnemy().getHero(), number);
     }
 
     /**
@@ -367,4 +368,6 @@ public interface Minion extends GeneralItem {
     default void removeImmune(){
         setImmune(false);
     }
+
+    Minion clone();
 }

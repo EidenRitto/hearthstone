@@ -16,6 +16,8 @@ import cn.eiden.hsm.game.Gamer;
  *
  * */
 public abstract class AbstractMagicCard extends AbstractCard {
+    /**是否被反制*/
+    boolean isCounter = false;
 
     public abstract void magicEffect(Gamer gamer, Minion target);
 
@@ -25,5 +27,13 @@ public abstract class AbstractMagicCard extends AbstractCard {
 
     public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
+    }
+
+    public boolean isCounter() {
+        return isCounter;
+    }
+
+    public void setCounter(boolean counter) {
+        isCounter = counter;
     }
 }

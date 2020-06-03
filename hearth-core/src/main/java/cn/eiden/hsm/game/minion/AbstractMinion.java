@@ -2,6 +2,7 @@ package cn.eiden.hsm.game.minion;
 
 
 import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.event.events.AfterHeroBeAttackEvent;
 import cn.eiden.hsm.event.events.HeroBeAttackEvent;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
@@ -23,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
-public abstract class AbstractMinion extends AbstractGeneralItem implements Minion {
+public abstract class AbstractMinion extends AbstractGeneralItem implements Minion,Cloneable {
     /**随从对应的卡牌id*/
     private String cardId;
     /**
@@ -143,7 +144,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         if (beAttackMinion instanceof HeroMinion) {
             HeroBeAttackEvent heroBeAttackEvent = new HeroBeAttackEvent(getOwner(), this);
             getOwner().getEventManager().call(heroBeAttackEvent);
-            getOwner().checkMinion();
             if (!getOwner().getMinions().contains(this) && !(this instanceof HeroMinion)) {
                 return;
             }
@@ -158,6 +158,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         beAttackMinion.beHurt(this, this.getAttackValue());
         //自己掉血
         this.beHurt(beAttackMinion, beAttackMinion.getAttackValue());
+        if (beAttackMinion instanceof HeroMinion) {
+            AfterHeroBeAttackEvent attackEvent = new AfterHeroBeAttackEvent(getOwner(), this);
+            getOwner().getEventManager().call(attackEvent);
+        }
     }
 
     @Override
@@ -476,5 +480,17 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void setImmune(boolean immune) {
         this.immune = immune;
+    }
+
+    @Override
+    public Minion clone() {
+        // TODO: 2020/6/3 自带监听没有完成深复制
+        try {
+            Minion clone = (Minion) super.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

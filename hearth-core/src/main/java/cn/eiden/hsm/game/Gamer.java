@@ -350,8 +350,10 @@ public class Gamer extends AbstractGeneralItem {
             AbstractSecretCard secretCard = (AbstractSecretCard) magicCard;
             eventManager.call(new UseSecretCardFromHandEvent(this, secretCard));
         }
-        //魔法效果
-        magicCard.magicEffect(this, target);
+        //没有被反制则执行魔法效果
+        if (!magicCard.isCounter()){
+            magicCard.magicEffect(this, target);
+        }
         //从手牌中移除随从卡牌
         getHand().loss(card);
     }

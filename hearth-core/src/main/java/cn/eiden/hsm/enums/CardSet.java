@@ -47,6 +47,7 @@ public enum CardSet {
     GANGS_RESERVE (26),
     UNGORO (27),
     ICECROWN (1001),
+    /**狗头人与地下世界*/
     LOOTAPALOOZA (1004),
     GILNEAS (1125),
     BOOMSDAY (1127),

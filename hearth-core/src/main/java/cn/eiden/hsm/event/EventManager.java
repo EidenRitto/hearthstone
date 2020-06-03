@@ -155,10 +155,12 @@ public class EventManager {
         if (event instanceof AbstractEvent) {
             AbstractEvent abstractEvent = (AbstractEvent) event;
             final Gamer owner = abstractEvent.getOwner();
+            // TODO: 2020/6/3 所有的规则变动应提取到接口中
             //重置规则cost
             owner.getHand().getCards().forEach(Card::resetRuleForceCost);
             //重置规则免疫
             owner.getHero().removeImmune();
+
             List<Rule> rules = owner.getRules();
             rules.removeIf(e -> e.leave(event.getClass()));
             owner.refreshRuleEffect();
