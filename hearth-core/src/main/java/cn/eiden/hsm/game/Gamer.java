@@ -92,6 +92,11 @@ public class Gamer extends AbstractGeneralItem {
      */
     private int chooseOne;
 
+    /**
+     * 是否活动（当前回合中）
+     */
+    private boolean active;
+
     private List<Secret> secretList = new ArrayList<>(5);
 
     private List<Rule> rules = new ArrayList<>();
@@ -108,10 +113,9 @@ public class Gamer extends AbstractGeneralItem {
      * 开始一个新的回合
      */
     public void newTurnStart() {
+        active = true;
         //场中随从解除上场回合不能攻击
         getMinions().forEach(Minion::setReady);
-        //回合开始时英雄获得武器的攻击力
-        getHero().turnAtk();
         getHero().newTurnStart();
         //恢复英雄技能
         getHero().getHeroPower().recoveryTimes();
@@ -125,6 +129,7 @@ public class Gamer extends AbstractGeneralItem {
      * 回合结束
      */
     public void endTurn() {
+        active = false;
         EndTurnEvent endTurnEvent = new EndTurnEvent(this);
         eventManager.call(endTurnEvent);
     }
@@ -706,6 +711,8 @@ public class Gamer extends AbstractGeneralItem {
             sb.append("\n");
             sb.append("[").append(i).append("]");
             sb.append(minionList.get(i).getMinionName());
+            sb.append(" atk:").append(minionList.get(i).getAttackValue());
+            sb.append(" hp:").append(minionList.get(i).getHealth());
         }
         OutputInfo.info(sb.toString());
     }
@@ -777,6 +784,10 @@ public class Gamer extends AbstractGeneralItem {
 
     public Hand getHand() {
         return hand;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public Gamer(Hero heroObject, List<Card> deckCards) {

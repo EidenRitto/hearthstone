@@ -24,7 +24,7 @@ public class BloodsailCultistCard extends BloodsailCultist {
             Hero hero = self.getOwner().getHero();
             List<Minion> minions = self.getOwner().getMinions();
             for (Minion minion : minions) {
-                if (minion.getRace() == Race.PIRATE && !minion.equals(self)){
+                if (minion.getRace() == Race.PIRATE && minion != self){
                     if (hero.hasWeapon()){
                         Weapon weapon = hero.getWeapon();
                         weapon.addAttackValue(1L);

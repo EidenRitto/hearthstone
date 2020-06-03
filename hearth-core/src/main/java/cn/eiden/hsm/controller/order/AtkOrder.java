@@ -27,6 +27,8 @@ public class AtkOrder extends AbstractOrder implements Order {
             return;
         }
         sourceMinion.attack(targetMinion);
+        sourceMinion.getOwner().checkMinion();
+        sourceMinion.getOwner().getEnemy().checkMinion();
     }
 
     public Minion getSourceMinion() {

@@ -13,7 +13,7 @@ public class DreadCorsairCard extends DreadCorsair {
         int cost = super.getCost();
         if (getOwner().getHero().hasWeapon()){
             cost = (int) (cost - getOwner().getHero().getWeapon().getWeaponAttack());
-            return Math.min(0,cost);
+            return Math.max(0,cost);
         }else {
             return cost;
         }

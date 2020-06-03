@@ -3,7 +3,6 @@ package cn.eiden.hsm.game.minion.hero;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
-import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.AbstractMinion;
 
@@ -63,9 +62,7 @@ public class HeroMinion extends AbstractMinion implements Hero {
         OutputInfo.info("装备%s", weapon.getName());
         if (hasWeapon()) {
             this.weapon.destroy();
-            this.reduceAttack(this.weapon.getWeaponAttack());
         }
-        this.addAttack(weapon.getWeaponAttack());
         this.weapon = weapon;
         this.weapon.setOwner(getOwner());
         getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
@@ -88,6 +85,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
             weapon.destroy();
             weapon = null;
         }
+    }
+
+    @Override
+    public long getAttackValue() {
+        return super.getAttackValue() + weapon.getWeaponAttack();
     }
 
     @Override

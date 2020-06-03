@@ -50,4 +50,10 @@ public interface Weapon extends GeneralItem {
      * @return 名字
      */
     String getName();
+
+    /**
+     * 是否打开
+     * @return 打开返回true
+     */
+    boolean isOpen();
 }
