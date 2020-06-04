@@ -22,6 +22,11 @@ public interface Hero extends Minion {
     void equipWeapons(Weapon weapon);
 
     /**
+     * 卸下武器
+     */
+    void unloadWeapon();
+
+    /**
      * 是否具有武器
      * @return 有武器返回true
      */

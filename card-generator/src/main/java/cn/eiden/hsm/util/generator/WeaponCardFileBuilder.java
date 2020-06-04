@@ -3,6 +3,7 @@ package cn.eiden.hsm.util.generator;
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
 import cn.eiden.hsm.game.keyword.DeathRattle;
+import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.WeaponObject;
 import com.squareup.javapoet.CodeBlock;
 import com.squareup.javapoet.MethodSpec;
@@ -51,7 +52,7 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                 .addMethod(MethodSpec.methodBuilder("createWeapon")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
-                        .returns(WeaponObject.class)
+                        .returns(Weapon.class)
                         .addCode(this.addAdditionalField())
                         .addStatement("return new $T($N, $N, $N)", WeaponObject.class, "CARD_NAME", "ATK", "DURABILITY")
                         .addJavadoc("$S\n", cardInfo.getCardText())

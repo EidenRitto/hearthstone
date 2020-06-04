@@ -205,6 +205,7 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 从牌堆中抽牌
+     *
      * @param card 被抽的牌
      */
     public void drawCard(Card card) {
@@ -218,11 +219,12 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 从牌堆中指定卡牌的类型的牌
+     *
      * @param cardType 卡牌类型
      */
-    public void drawCardOfCardType(CardType cardType){
+    public void drawCardOfCardType(CardType cardType) {
         for (Card deckCard : deckCards) {
-            if (deckCard.getCardType() == cardType){
+            if (deckCard.getCardType() == cardType) {
                 drawCard(deckCard);
                 break;
             }
@@ -231,11 +233,12 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 从牌堆中指定类型的牌
+     *
      * @param clazz 卡牌类型
      */
-    public void drawCardOfType(Class<? extends Card> clazz){
+    public void drawCardOfType(Class<? extends Card> clazz) {
         for (Card deckCard : deckCards) {
-            if (clazz.isInstance(deckCard)){
+            if (clazz.isInstance(deckCard)) {
                 drawCard(deckCard);
                 break;
             }
@@ -243,8 +246,8 @@ public class Gamer extends AbstractGeneralItem {
     }
 
 
-
     public void useThisCard(Card card, Minion target) {
+        eventManager.call(new UseCardFromHandEvent(this, card));
         if (card instanceof AbstractMagicCard) {
             this.useThisMagicCard(card, target);
         } else if (card instanceof AbstractMinionCard) {
@@ -351,7 +354,7 @@ public class Gamer extends AbstractGeneralItem {
             eventManager.call(new UseSecretCardFromHandEvent(this, secretCard));
         }
         //没有被反制则执行魔法效果
-        if (!magicCard.isCounter()){
+        if (!magicCard.isCounter()) {
             magicCard.magicEffect(this, target);
         }
         //从手牌中移除随从卡牌
@@ -389,7 +392,7 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     public void addSecret(Secret secret) {
-        if (!this.hasSecret(secret)){
+        if (!this.hasSecret(secret)) {
             secret.setOwner(this);
             eventManager.registerSecret(secret);
             secretList.add(secret);
@@ -764,9 +767,9 @@ public class Gamer extends AbstractGeneralItem {
     }
 
 
-
     /**
      * 获取规则
+     *
      * @return 全部规则
      */
     public List<Rule> getRules() {
@@ -776,7 +779,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 刷新规则
      */
-    public void refreshRuleEffect(){
+    public void refreshRuleEffect() {
         rules.forEach(e -> e.effective(this));
     }
 
@@ -803,11 +806,12 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 将一张牌吸入牌库，范围是第一张到最后一张
+     *
      * @param card 被洗牌
      */
-    public void shuffleCard(Card card){
-        int index = randomSeed.nextInt(deckCards.size()+1);
-        deckCards.add(index,card);
+    public void shuffleCard(Card card) {
+        int index = randomSeed.nextInt(deckCards.size() + 1);
+        deckCards.add(index, card);
     }
 
     public Gamer(Hero heroObject, List<Card> deckCards) {

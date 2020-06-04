@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.minion;
 
 import cn.eiden.hsm.game.GeneralItem;
+import cn.eiden.hsm.listener.WeaponListener;
 
 /**
  * @author Eiden J.P Zhou
@@ -56,4 +57,17 @@ public interface Weapon extends GeneralItem {
      * @return 打开返回true
      */
     boolean isOpen();
+
+    /**
+     * 获取自带监听
+     * @return 武器监听
+     */
+    WeaponListener getWeaponListener();
+
+    /**
+     * 设置武器监听
+     * @param weaponListener 武器监听
+     */
+    void setWeaponListener(WeaponListener weaponListener);
+
 }

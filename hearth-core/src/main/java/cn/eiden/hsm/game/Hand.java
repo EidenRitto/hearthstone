@@ -62,4 +62,13 @@ public class Hand extends AbstractGeneralItem {
     public List<Card> getCards() {
         return cards;
     }
+
+    /**
+     * 卡牌是否是右手第一张
+     * @param card 卡牌
+     * @return 右手第一张返回true
+     */
+    public boolean isLastCard(Card card){
+        return cards.get(cards.size()-1) == card;
+    }
 }

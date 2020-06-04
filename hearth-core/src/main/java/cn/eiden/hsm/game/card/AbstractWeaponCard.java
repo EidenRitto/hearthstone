@@ -5,6 +5,7 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardSet;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
+import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.WeaponObject;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +33,5 @@ public abstract class AbstractWeaponCard extends AbstractCard {
      * 创建卡牌对应的武器
      * @return 卡牌对应的武器
      * */
-    public abstract WeaponObject createWeapon();
+    public abstract Weapon createWeapon();
 }

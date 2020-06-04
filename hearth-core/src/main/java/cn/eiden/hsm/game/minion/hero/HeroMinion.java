@@ -61,11 +61,23 @@ public class HeroMinion extends AbstractMinion implements Hero {
     public void equipWeapons(Weapon weapon) {
         OutputInfo.info("装备%s", weapon.getName());
         if (hasWeapon()) {
-            this.weapon.destroy();
+            this.unloadWeapon();
         }
         this.weapon = weapon;
+        //添加武器前注册特效监听
+        if (weapon.getWeaponListener() != null) {
+            getOwner().getEventManager().registerListener(weapon.getWeaponListener());
+        }
         this.weapon.setOwner(getOwner());
         getOwner().getEventManager().call(new BattlefieldChangeEvent(getOwner()));
+    }
+
+    @Override
+    public void unloadWeapon() {
+        if (weapon.getWeaponListener() != null) {
+            getOwner().getEventManager().removeListener(weapon.getWeaponListener());
+        }
+        this.weapon.destroy();
     }
 
     @Override
