@@ -12,7 +12,7 @@ import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/1 15:52
  */
 public class PotionOfPolymorphCard extends PotionOfPolymorph {

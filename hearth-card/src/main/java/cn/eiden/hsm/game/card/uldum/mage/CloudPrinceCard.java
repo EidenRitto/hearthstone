@@ -6,7 +6,7 @@ import cn.eiden.hsm.game.keyword.Battle;
 
 /**
  * 云雾王子
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/4 10:42
  */
 @TargetScope

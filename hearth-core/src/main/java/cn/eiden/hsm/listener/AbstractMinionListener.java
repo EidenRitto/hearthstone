@@ -3,7 +3,7 @@ package cn.eiden.hsm.listener;
 import cn.eiden.hsm.game.minion.Minion;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/4 9:48
  */
 public abstract class AbstractMinionListener implements MinionListener, Cloneable {

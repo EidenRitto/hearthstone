@@ -9,6 +9,8 @@ import cn.eiden.hsm.event.EventManager;
 import cn.eiden.hsm.event.events.*;
 import cn.eiden.hsm.exception.GameOverException;
 import cn.eiden.hsm.game.card.*;
+import cn.eiden.hsm.game.history.History;
+import cn.eiden.hsm.game.history.HistoryImpl;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
@@ -96,6 +98,9 @@ public class Gamer extends AbstractGeneralItem {
      * 是否活动（当前回合中）
      */
     private boolean active;
+
+    @Getter
+    private History history = new HistoryImpl();
 
     private List<Secret> secretList = new ArrayList<>(5);
 

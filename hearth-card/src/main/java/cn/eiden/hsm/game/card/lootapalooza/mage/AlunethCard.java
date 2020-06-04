@@ -8,7 +8,7 @@ import cn.eiden.hsm.listener.AbstractWeaponListener;
 import cn.eiden.hsm.listener.WeaponListener;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/4 10:55
  */
 public class AlunethCard extends Aluneth {
