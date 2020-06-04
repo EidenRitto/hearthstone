@@ -17,10 +17,13 @@ public abstract class AbstractHeroCard extends AbstractCard{
     /**种族*/
     private Race race;
 
-    public AbstractHeroCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Race race) {
+    private int heroPowerCardId;
+
+    public AbstractHeroCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, Long health, Race race ,int heroPowerCardId) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
         this.health = health;
         this.race = race;
+        this.heroPowerCardId = heroPowerCardId;
     }
 
     /**

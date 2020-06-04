@@ -2,6 +2,9 @@ package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractHeroCard;
+import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
+import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;
 import cn.eiden.hsm.game.minion.hero.Hero;
@@ -45,26 +48,30 @@ public class HeroFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldHeroPower())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
                                 , "CARD_NAME", "COST", "DESCRIPTION", "ID",
                                 "CARD_ID", "CARD_SET", "CARD_CLASS", "CARD_TYPE",
-                                "RARITY", "HEALTH", "RACE" ,"HERO_POWER_ID")
+                                "RARITY", "HEALTH", "RACE", "HERO_POWER_ID")
                         .build())
                 .addMethod(MethodSpec.methodBuilder("createHero")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
-                        .returns(Minion.class)
+                        .returns(Hero.class)
                         .addCode(addAdditionalField())
-                        .addStatement("return heroObject")
+                        .addStatement("return HeroMinion")
                         .addJavadoc("$S\n", cardInfo.getCardText())
                         .build())
                 .build();
 
         writeToSourceFile(myClass);
     }
+
     private CodeBlock addAdditionalField() {
-        CodeBlock core = CodeBlock.builder().addStatement("$T heroObject = new $T($N, $N, $N, $N, $N)"
-                , Hero.class, HeroMinion.class, "CARD_NAME", "HEALTH", "RACE", "ID","CARD_CLASS").build();
+        CodeBlock core = CodeBlock.builder().addStatement("$T HeroMinion = new $T($N, $N, $N, $N, $N)"
+                , HeroMinion.class, HeroMinion.class, "CARD_NAME", "HEALTH", "RACE", "ID", "CARD_CLASS").build();
+        core = core.toBuilder().addStatement("$T powerCard = ($T)$T.getCardById($N)", AbstractHeroPowerCard.class, AbstractHeroPowerCard.class, CardFactory.class, "HERO_POWER_ID")
+                .addStatement("HeroMinion.setHeroPower(powerCard)")
+                .build();
         return core;
     }
 }
