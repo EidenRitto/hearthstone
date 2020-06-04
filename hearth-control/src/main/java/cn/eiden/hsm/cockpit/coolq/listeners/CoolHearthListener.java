@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/4 14:42
  */
 public class CoolHearthListener extends IcqListener {
