@@ -52,6 +52,8 @@ public class CardInfo {
     private int aura;
     /**奥秘*/
     private int secret;
+    /**英雄技能*/
+    private int heroPower;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

@@ -9,6 +9,7 @@ public enum CardType {
     INVALID (0),
     GAME (1),
     PLAYER (2),
+    /**英雄*/
     HERO (3),
     /**随从牌*/
     MINION (4),

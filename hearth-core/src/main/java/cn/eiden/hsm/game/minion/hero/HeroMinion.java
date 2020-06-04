@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game.minion.hero;
 
 import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.Faction;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
@@ -20,10 +22,6 @@ import lombok.Setter;
 @Setter
 public class HeroMinion extends AbstractMinion implements Hero {
     /**
-     * 生命值上限
-     */
-    private static final Long HEALTH = 30L;
-    /**
      * 职业
      */
     private CardClass cardClass;
@@ -41,15 +39,19 @@ public class HeroMinion extends AbstractMinion implements Hero {
      */
     private Weapon weapon;
 
-    public HeroMinion(CardClass cardClass) {
-        super(cardClass.name(), HEALTH, 0L, Race.INVALID, null);
+    public HeroMinion(CardClass cardClass,long health) {
+        super(cardClass.name(), health, 0L, Race.INVALID, null);
     }
 
-    public HeroMinion(CardClass cardClass, AbstractHeroPowerCard heroPower) {
-        super(cardClass.getCnName(), HEALTH, 0L, Race.INVALID, null);
+    public HeroMinion(CardClass cardClass, long health, AbstractHeroPowerCard heroPower) {
+        super(cardClass.getCnName(), health, 0L, Race.INVALID, null);
         this.heroPower = heroPower;
     }
 
+    public HeroMinion(String minionName, Long originHealthLimit, Race race, String cardId, CardClass cardClass) {
+        super(minionName, originHealthLimit, 0L, race, cardId);
+        this.cardClass = cardClass;
+    }
 
     @Override
     public void addArmor(long armorNumber) {

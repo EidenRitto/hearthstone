@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 public class Deck {
     List<Card> deck = new ArrayList<>();
-
+    int heroDbfId;
     public void addCard(Card card){
         deck.add(card);
     }

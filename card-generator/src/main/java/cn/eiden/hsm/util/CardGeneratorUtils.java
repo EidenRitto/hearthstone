@@ -112,6 +112,9 @@ public class CardGeneratorUtils {
                 case SECRET:
                     cardCache.setSecret(Integer.parseInt(tag.getValue()));
                     break;
+                case HERO_POWER:
+                    cardCache.setHeroPower(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

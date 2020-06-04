@@ -196,6 +196,13 @@ public abstract class AbstractCardFileBuilder {
                 .build();
     }
 
+    protected FieldSpec buildFieldHeroPower() {
+        return FieldSpec.builder(int.class, "HERO_POWER_ID")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getHeroPower())))
+                .build();
+    }
+
     protected AnnotationSpec buildClassAnnotation(){
         return AnnotationSpec.builder(Id.class)
                 .addMember("value","$L",Integer.parseInt(cardInfo.getId()))

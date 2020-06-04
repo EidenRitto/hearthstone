@@ -72,6 +72,7 @@ public class DeckSerializer {
         read(bytes);
 
         int heroDbfId = (int) read(bytes);
+        deck.setHeroDbfId(heroDbfId);
 
         int numSingleCards = (int) read(bytes);
         for (int i = 0; i < numSingleCards; i++) {
