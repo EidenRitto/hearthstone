@@ -15,7 +15,6 @@ import java.util.List;
  * @date 2020/5/9 11:39
  */
 public class PlayOrder extends AbstractOrder implements Order {
-    private Gamer gamer;
 
     @Override
     public void execute() {
@@ -50,11 +49,11 @@ public class PlayOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info("非法输入！");
+            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
         }
     }
 
     public PlayOrder(Gamer gamer) {
-        this.gamer = gamer;
+        super(gamer);
     }
 }

@@ -1,7 +1,10 @@
 package cn.eiden.hsm.controller.order;
 
 import cn.eiden.hsm.game.Gamer;
+import lombok.Getter;
 import lombok.Setter;
+
+import java.util.concurrent.BlockingQueue;
 
 /**
  * 命令模式-执行者
@@ -10,13 +13,15 @@ import lombok.Setter;
  */
 @Setter
 public class Invoker {
-    private Order helpOrder;
-    private Order endOrder;
-    private Order atkOrder;
-    private Order playOrder;
-    private Order heroPowerOrder;
-    private Order startTurnOrder;
-    private Order showOrder;
+    @Getter
+    private Gamer gamer;
+    private HelpOrder helpOrder;
+    private EndTurnOrder endOrder;
+    private AtkOrder atkOrder;
+    private PlayOrder playOrder;
+    private HeroPowerOrder heroPowerOrder;
+    private StartTurnOrder startTurnOrder;
+    private ShowOrder showOrder;
 
     public void callHelp(){
         helpOrder.execute();
@@ -41,7 +46,8 @@ public class Invoker {
     }
 
     public Invoker(Gamer gamer) {
-        helpOrder = new HelpOrder();
+        this.gamer = gamer;
+        helpOrder = new HelpOrder(gamer);
         atkOrder = new AtkOrder(gamer);
         startTurnOrder = new StartTurnOrder(gamer);
         playOrder = new PlayOrder(gamer);

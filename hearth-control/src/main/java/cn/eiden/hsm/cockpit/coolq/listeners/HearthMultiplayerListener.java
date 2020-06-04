@@ -7,6 +7,10 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.event.events.message.EventPrivateMessage;
 import cn.eiden.hsm.cockpit.coolq.HearthOrderConstant;
 import cn.eiden.hsm.GameDemo;
+import cn.eiden.hsm.cockpit.coolq.MultiConfig;
+import cn.eiden.hsm.cockpit.coolq.User;
+
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Eiden J.P Zhou
@@ -23,6 +27,8 @@ public class HearthMultiplayerListener extends IcqListener {
 
     private String organizerDeckStr;
     private String responderDeckStr;
+
+    private MultiConfig multiConfig;
 
     @EventHandler
     public void onEvent(EventGroupMessage groupMessage) {
@@ -50,13 +56,20 @@ public class HearthMultiplayerListener extends IcqListener {
         String message = privateMessage.getMessage();
         if (organizerId.equals(privateMessage.getSenderId())){
             if (organizerDeckStr != null){
-
+                if (isGameStart){
+                    try {
+                        multiConfig.getUser1().getInputQueue().put(message);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else {
                 if ("0".equals(message)){
                     organizerDeckStr = HearthOrderConstant.DECK_WARRIOR;
                 } else if ("1".equals(message)) {
                     organizerDeckStr = HearthOrderConstant.DECK_MAGE;
                 }
+                checkBegin(privateMessage);
             }
         }
     }
@@ -66,13 +79,20 @@ public class HearthMultiplayerListener extends IcqListener {
         String message = privateMessage.getMessage();
         if (responderId.equals(privateMessage.getSenderId())){
             if (responderDeckStr != null){
-
+                if (isGameStart){
+                    try {
+                        multiConfig.getUser2().getInputQueue().put(message);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }else {
                 if ("0".equals(message)){
                     responderDeckStr = HearthOrderConstant.DECK_WARRIOR;
                 } else if ("1".equals(message)) {
                     responderDeckStr = HearthOrderConstant.DECK_MAGE;
                 }
+                checkBegin(privateMessage);
             }
         }
     }
@@ -80,14 +100,33 @@ public class HearthMultiplayerListener extends IcqListener {
     private void checkBegin(EventMessage eventMessage){
         if (responderDeckStr!=null && organizerDeckStr!=null){
             eventMessage.getHttpApi().sendGroupMsg(groupId,HearthOrderConstant.HEARTH_MULTIPLE_STEP_3);
+            multiConfig = MultiConfig.builder()
+                    .groupId(groupId)
+                    .user1(User.builder()
+                            .id(organizerId)
+                            .deckStr(organizerDeckStr)
+                            .messageQueue(new LinkedBlockingQueue<>())
+                            .inputQueue(new LinkedBlockingQueue<>())
+                            .build())
+                    .user2(User.builder()
+                            .id(responderId)
+                            .deckStr(responderDeckStr)
+                            .messageQueue(new LinkedBlockingQueue<>())
+                            .inputQueue(new LinkedBlockingQueue<>())
+                            .build())
+                    .build();
             CoolHearthListener.cachedThreadPool.execute(() ->{
                 GameDemo gameDemo = new GameDemo();
                 try {
-                    gameDemo.multiStart(organizerDeckStr,responderDeckStr);
+                    gameDemo.multiStart(organizerDeckStr,responderDeckStr,multiConfig);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
+            CoolHearthListener.cachedThreadPool.execute(() ->{
+
+            });
+            isGameStart = true;
         }
     }
 }

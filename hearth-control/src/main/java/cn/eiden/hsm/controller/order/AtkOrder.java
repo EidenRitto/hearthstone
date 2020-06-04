@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Setter
 public class AtkOrder extends AbstractOrder implements Order {
-    private Gamer gamer;
+
 
     @Override
     public void execute() {
@@ -35,7 +35,7 @@ public class AtkOrder extends AbstractOrder implements Order {
         while (true) {
             List<Minion> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
             if (allCanAttackMinionsId.size() == 0) {
-                OutputInfo.info("当前没有能攻击的随从");
+                OutputInfo.info(gamer.getPrivateMessageQueue(), "当前没有能攻击的随从");
                 return null;
             }
             //打印提示信息
@@ -50,7 +50,7 @@ public class AtkOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info("非法输入！");
+            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
         }
     }
 
@@ -62,7 +62,7 @@ public class AtkOrder extends AbstractOrder implements Order {
         while (true) {
             List<Minion> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
             if (allCanBeAttackMinionsId.size() == 0) {
-                OutputInfo.info("当前没有能被攻击的随从/英雄，这是不可能的，看见这句话请反馈BUG");
+                OutputInfo.info(gamer.getPrivateMessageQueue(),"当前没有能被攻击的随从/英雄，这是不可能的，看见这句话请反馈BUG");
                 return null;
             }
             //打印提示信息
@@ -71,17 +71,17 @@ public class AtkOrder extends AbstractOrder implements Order {
             String input = getOrder();
             if (RegexUtil.isNumberStr(input)) {
                 int i = Integer.parseInt(input);
-                if (getInRange(allCanBeAttackMinionsId, i)){
+                if (getInRange(allCanBeAttackMinionsId, i)) {
                     return allCanBeAttackMinionsId.get(i);
                 }
             } else {
                 return null;
             }
-            OutputInfo.info("非法输入！");
+            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
         }
     }
 
     public AtkOrder(Gamer gamer) {
-        this.gamer = gamer;
+        super(gamer);
     }
 }

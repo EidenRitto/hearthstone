@@ -1,5 +1,6 @@
 package cn.eiden.hsm;
 
+import cn.eiden.hsm.cockpit.coolq.MultiConfig;
 import cn.eiden.hsm.controller.TemplateController;
 import cn.eiden.hsm.controller.order.Invoker;
 import cn.eiden.hsm.enums.CardClass;
@@ -49,14 +50,18 @@ public class GameDemo {
         templateController.gameStart(b);
     }
 
-    public void multiStart(String deckStr, String deckStr2) throws Exception {
+    public void multiStart(String deckStr, String deckStr2, MultiConfig multiConfig) throws Exception {
         DeckSerializer deckSerializer = new DeckSerializer();
         Deck deck = deckSerializer.deserializeDeckString(deckStr);
         Gamer gamer = Gamer.createGamer(deck);
+        gamer.setPrivateMessageQueue(multiConfig.getUser1().getMessageQueue());
+        gamer.setInputMessageQueue(multiConfig.getUser1().getInputQueue());
 
         deckSerializer = new DeckSerializer();
         Deck deck2 = deckSerializer.deserializeDeckString(deckStr2);
         Gamer gamer2 = Gamer.createGamer(deck2);
+        gamer2.setPrivateMessageQueue(multiConfig.getUser2().getMessageQueue());
+        gamer2.setInputMessageQueue(multiConfig.getUser2().getInputQueue());
 
         gameStart(gamer,gamer2);
     }

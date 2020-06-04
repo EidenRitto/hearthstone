@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2020/5/16 20:12
  */
 public class HeroPowerOrder extends AbstractOrder implements Order {
-    private Gamer gamer;
+
 
     @Override
     public void execute() {
@@ -25,6 +25,6 @@ public class HeroPowerOrder extends AbstractOrder implements Order {
     }
 
     public HeroPowerOrder(Gamer gamer) {
-        this.gamer = gamer;
+        super(gamer);
     }
 }

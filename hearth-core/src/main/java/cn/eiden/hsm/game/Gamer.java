@@ -20,9 +20,11 @@ import cn.eiden.hsm.output.OutputInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * 玩家类
@@ -105,6 +107,13 @@ public class Gamer extends AbstractGeneralItem {
     private List<Secret> secretList = new ArrayList<>(5);
 
     private List<Rule> rules = new ArrayList<>();
+
+    @Setter
+    private BlockingQueue<String> privateMessageQueue;
+
+    @Setter
+    @Getter
+    private BlockingQueue<String> inputMessageQueue;
 
     /**
      * 事件管理器
@@ -534,6 +543,14 @@ public class Gamer extends AbstractGeneralItem {
      * 获取当前状态
      */
     public void getState() {
+        String handInfoStr = getHandInfoStr();
+        OutputInfo.info(privateMessageQueue,handInfoStr);
+
+        String minionState = getMinionState();
+        OutputInfo.info(privateMessageQueue,minionState);
+    }
+
+    private String getHandInfoStr() {
         StringBuilder handInfo = new StringBuilder("玩家当前手牌:\n");
         List<Card> cards = getHand().getCards();
         for (Card card : cards) {
@@ -552,10 +569,7 @@ public class Gamer extends AbstractGeneralItem {
         handInfo.append("/");
         handInfo.append(getManaCrystal().getManaCrystal());
         handInfo.append("[").append(getManaCrystal().getLocked()).append("]");
-        OutputInfo.info(handInfo.toString());
-
-        String minionState = getMinionState();
-        OutputInfo.info(minionState);
+        return handInfo.toString();
     }
 
     public String getMinionState() {
@@ -717,6 +731,10 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     public void printMinion(List<Minion> minionList, String title) {
+        OutputInfo.info(getMinionInfo(minionList, title));
+    }
+
+    private String getMinionInfo(List<Minion> minionList, String title) {
         StringBuilder sb = new StringBuilder(title);
         for (int i = 0; i < minionList.size(); i++) {
             sb.append("\n");
@@ -725,8 +743,9 @@ public class Gamer extends AbstractGeneralItem {
             sb.append(" atk:").append(minionList.get(i).getAttackValue());
             sb.append(" hp:").append(minionList.get(i).getHealth());
         }
-        OutputInfo.info(sb.toString());
+        return sb.toString();
     }
+
 
     public List<Minion> getAllTarget() {
         List<Minion> allTarget = new ArrayList<>();
@@ -830,7 +849,7 @@ public class Gamer extends AbstractGeneralItem {
         AbstractHeroCard heroCard = (AbstractHeroCard) CardFactory.getCardById(heroDbfId);
         assert heroCard != null;
         Hero hero = heroCard.createHero();
-        return new Gamer(hero,deck.getDeck());
+        return new Gamer(hero, deck.getDeck());
     }
 
 }

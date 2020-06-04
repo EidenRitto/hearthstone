@@ -48,6 +48,9 @@ public class TemplateController {
 //            this.reverseInvoker();
 //            return;
 //        }
+        if (nowInvoker.getGamer().getInputMessageQueue() != null){
+            nowInvoker.getGamer().getInputMessageQueue().clear();
+        }
         nowInvoker.callStartTurn();
         boolean endTurnFlag = false;
         while (!endTurnFlag) {
@@ -71,7 +74,11 @@ public class TemplateController {
     private String waitOrder() {
         String order = "";
         try {
-            order = HearthLinkContext.inputMessage.take();
+            if (nowInvoker.getGamer().getInputMessageQueue() != null){
+                order = nowInvoker.getGamer().getInputMessageQueue().take();
+            }else {
+                order = HearthLinkContext.inputMessage.take();
+            }
         } catch (InterruptedException e) {
             OutputInfo.info(e.getMessage());
         }

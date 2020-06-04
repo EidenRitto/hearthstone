@@ -9,8 +9,7 @@ import cn.eiden.hsm.util.RegexUtil;
  * @author Eiden J.P Zhou
  * @date 2020/5/26 14:24
  */
-public class ShowOrder extends AbstractOrder{
-    private Gamer gamer;
+public class ShowOrder extends AbstractOrder {
 
     @Override
     public void execute() {
@@ -21,15 +20,15 @@ public class ShowOrder extends AbstractOrder{
                     .append(value.getExplanation()).append("\n");
         }
         info.delete(info.length() - 1, info.length());
-        OutputInfo.info(info.toString());
+        OutputInfo.info(gamer.getPrivateMessageQueue(), info.toString());
         //等待输入信息
         String input = getOrder();
-        ShowType showType = EnumUtils.getEnumObject(ShowType.class, e->e.getCode().equals(input)).orElse(null);
-        if (showType == null){
-            OutputInfo.info("非法输入！");
+        ShowType showType = EnumUtils.getEnumObject(ShowType.class, e -> e.getCode().equals(input)).orElse(null);
+        if (showType == null) {
+            OutputInfo.info(gamer.getPrivateMessageQueue(), "非法输入！");
             return;
         }
-        switch (showType){
+        switch (showType) {
             case CHECKERBOARD:
                 showMinionDetail();
                 break;
@@ -43,12 +42,12 @@ public class ShowOrder extends AbstractOrder{
                 if (RegexUtil.isNumberStr(input2)) {
                     int index = Integer.parseInt(input);
                     if (index < gamer.getHand().getCards().size() && index >= 0) {
-                        OutputInfo.info(gamer.getHand().getCard(index).getDescription());
+                        OutputInfo.info(gamer.getPrivateMessageQueue(), gamer.getHand().getCard(index).getDescription());
                     }
                 }
                 break;
             case DECK:
-                OutputInfo.info("牌库还有%s张牌",gamer.getDeckCards().size());
+                OutputInfo.info(gamer.getPrivateMessageQueue(), "牌库还有%s张牌", gamer.getDeckCards().size());
                 break;
             default:
         }
@@ -58,17 +57,17 @@ public class ShowOrder extends AbstractOrder{
         StringBuilder builder = new StringBuilder();
         builder.append("敌方").append(gamer.getEnemy().getHero().getHeroInfo()).append("\n");
         builder.append("我方").append(gamer.getHero().getHeroInfo());
-        OutputInfo.info(builder.toString());
+        OutputInfo.info(gamer.getPrivateMessageQueue(), builder.toString());
     }
 
     private void showMinionDetail() {
         StringBuilder builder = new StringBuilder();
         builder.append("敌方").append(gamer.getEnemy().getMinionState()).append("\n");
         builder.append("我方").append(gamer.getMinionState());
-        OutputInfo.info(builder.toString());
+        OutputInfo.info(gamer.getPrivateMessageQueue(), builder.toString());
     }
 
     public ShowOrder(Gamer gamer) {
-        this.gamer = gamer;
+        super(gamer);
     }
 }

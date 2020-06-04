@@ -13,10 +13,16 @@ import java.util.List;
  * @date 2020/5/7 16:20
  */
 public abstract class AbstractOrder implements Order{
+    protected Gamer gamer;
+
     protected String getOrder() {
         String order = "";
         try {
-            order = HearthLinkContext.inputMessage.take();
+            if (gamer.getInputMessageQueue() != null){
+                order = gamer.getInputMessageQueue().take();
+            }else {
+                order = HearthLinkContext.inputMessage.take();
+            }
         } catch (InterruptedException e) {
             OutputInfo.info(e.getMessage());
         }
@@ -39,5 +45,9 @@ public abstract class AbstractOrder implements Order{
             }
             OutputInfo.info("非法输入！");
         }
+    }
+
+    public AbstractOrder(Gamer gamer) {
+        this.gamer = gamer;
     }
 }

@@ -8,12 +8,15 @@ import lombok.AllArgsConstructor;
  * @date 2020/5/8 9:16
  */
 @AllArgsConstructor
-public class StartTurnOrder implements Order{
-    private Gamer gamer;
+public class StartTurnOrder extends AbstractOrder implements Order{
 
     @Override
     public void execute() {
         gamer.newTurnStart();
         gamer.getState();
+    }
+
+    public StartTurnOrder(Gamer gamer) {
+        super(gamer);
     }
 }

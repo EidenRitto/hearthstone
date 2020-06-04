@@ -1,5 +1,6 @@
 package cn.eiden.hsm.controller.order;
 
+import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -8,7 +9,8 @@ import cn.eiden.hsm.output.OutputInfo;
  * @author Eiden J.P Zhou
  * @date 2020/5/9 14:28
  */
-public class HelpOrder implements Order {
+public class HelpOrder extends AbstractOrder implements Order {
+
     @Override
     public void execute() {
         StringBuilder useInfo = new StringBuilder();
@@ -21,6 +23,10 @@ public class HelpOrder implements Order {
                     .append(orderType.getExplanation()).append("\n");
         }
         useInfo.delete(useInfo.length() - 1, useInfo.length());
-        OutputInfo.info(useInfo.toString());
+        OutputInfo.info(gamer.getPrivateMessageQueue(),useInfo.toString());
+    }
+
+    public HelpOrder(Gamer gamer) {
+        super(gamer);
     }
 }
