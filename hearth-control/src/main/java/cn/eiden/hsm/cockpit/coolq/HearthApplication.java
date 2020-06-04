@@ -3,6 +3,7 @@ package cn.eiden.hsm.cockpit.coolq;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import cn.eiden.hsm.cockpit.coolq.listeners.CoolHearthListener;
+import cn.eiden.hsm.cockpit.coolq.listeners.HearthMultiplayerListener;
 
 /**
  * @author Eiden J.P Zhou
@@ -18,7 +19,7 @@ public class HearthApplication {
         bot.addAccount("hearth-bot", "127.0.0.1", 31091);
 
         // 注册事件监听器, 可以注册多个监听器
-        bot.getEventManager().registerListeners(new CoolHearthListener());
+        bot.getEventManager().registerListeners(new CoolHearthListener(),new HearthMultiplayerListener());
         bot.startBot();
     }
 }

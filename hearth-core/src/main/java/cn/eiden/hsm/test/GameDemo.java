@@ -34,6 +34,10 @@ public class GameDemo {
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
         Gamer gamer = new Gamer(new HeroMinion(CardClass.WARRIOR, (AbstractHeroPowerCard) CardFactory.getCardById(58799)),deck);
         Gamer enemy = new Gamer(mageHero,mageCards);
+        gameStart(gamer, enemy);
+    }
+
+    private void gameStart(Gamer gamer, Gamer enemy) {
         enemy.setEnemy(gamer);
         gamer.setEnemy(enemy);
 
@@ -43,4 +47,12 @@ public class GameDemo {
         TemplateController templateController = new TemplateController(gamerInvoker,enemyInvoker);
         templateController.gameStart(b);
     }
+
+    public void multiStart(String deckStr,String deckStr2) throws Exception {
+         DeckSerializer deckSerializer = new DeckSerializer();
+         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
+
+         deckSerializer = new DeckSerializer();
+         List<Card> deck2 = deckSerializer.deserializeDeckString(deckStr2).getDeck();
+     }
 }

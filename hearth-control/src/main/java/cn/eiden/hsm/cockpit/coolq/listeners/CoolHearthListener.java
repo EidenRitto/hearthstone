@@ -22,8 +22,7 @@ public class CoolHearthListener extends IcqListener {
 
     private boolean isStart = false;
 
-    @Getter
-    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+    public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     @EventHandler
     public void onEvent(EventPrivateMessage privateMessage) {
