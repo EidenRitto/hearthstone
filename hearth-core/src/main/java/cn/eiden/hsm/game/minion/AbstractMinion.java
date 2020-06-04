@@ -10,6 +10,7 @@ import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -137,7 +138,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     /**
      * 自带监听
      */
-    private HearthListener hearthListener;
+    private MinionListener minionListener;
 
     @Override
     public void attack(Minion beAttackMinion) {
@@ -421,13 +422,13 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
-    public HearthListener getHearthListener() {
-        return hearthListener;
+    public MinionListener getMinionListener() {
+        return minionListener;
     }
 
     @Override
-    public void setHearthListener(HearthListener hearthListener) {
-        this.hearthListener = hearthListener;
+    public void setMinionListener(MinionListener minionListener) {
+        this.minionListener = minionListener;
     }
 
     @Override
@@ -484,10 +485,12 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public Minion clone() {
-        // TODO: 2020/6/3 自带监听没有完成深复制
         try {
-            Minion clone = (Minion) super.clone();
-            return clone;
+            Minion minionClone = (Minion) super.clone();
+            MinionListener minionListenerClone = this.minionListener.clone();
+            minionListenerClone.setMinion(minionClone);
+            minionClone.setMinionListener(minionListenerClone);
+            return minionClone;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

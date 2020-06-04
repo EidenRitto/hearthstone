@@ -5,7 +5,8 @@ import cn.eiden.hsm.event.events.EndTurnEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.core.shaman.HealingTotem;
 import cn.eiden.hsm.game.minion.Minion;
-import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.listener.AbstractMinionListener;
+import cn.eiden.hsm.listener.MinionListener;
 
 import java.util.List;
 
@@ -17,16 +18,18 @@ public class HealingTotemCard extends HealingTotem {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setHearthListener(new AfterTurnListener());
+        minion.setMinionListener(new AfterTurnListener());
         return minion;
     }
 
-    static class AfterTurnListener implements HearthListener {
+    static class AfterTurnListener extends AbstractMinionListener implements MinionListener {
         @EventHandler
         public void onEvent(EndTurnEvent endTurnEvent){
-            Gamer owner = endTurnEvent.getOwner();
-            List<Minion> minions = owner.getMinions();
-            minions.forEach(e->e.recoveryHp(1));
+            Gamer eventOwner = endTurnEvent.getOwner();
+            if (eventOwner == getMinion().getOwner()){
+                List<Minion> minions = eventOwner.getMinions();
+                minions.forEach(e->e.recoveryHp(1));
+            }
         }
     }
 }

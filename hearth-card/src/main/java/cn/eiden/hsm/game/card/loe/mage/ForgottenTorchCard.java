@@ -8,6 +8,7 @@ import cn.eiden.hsm.game.card.defs.loe.mage.ForgottenTorch;
 import cn.eiden.hsm.game.minion.Minion;
 
 /**
+ * 老旧的火把
  * @author Eiden J.P Zhou
  * @date 2020/6/3 19:32
  */
@@ -27,5 +28,6 @@ public class ForgottenTorchCard extends ForgottenTorch {
         int damage = DMG + gamer.getGamerSpellDamage();
         target.beHurt(damage);
         Card refCard = CardFactory.getCardById(REF_CARD_ID);
+        gamer.shuffleCard(refCard);
     }
 }

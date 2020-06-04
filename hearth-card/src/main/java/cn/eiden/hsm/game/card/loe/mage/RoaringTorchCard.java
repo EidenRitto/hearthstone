@@ -6,6 +6,7 @@ import cn.eiden.hsm.game.card.defs.loe.mage.RoaringTorch;
 import cn.eiden.hsm.game.minion.Minion;
 
 /**
+ * 炽烈的火把
  * @author Eiden J.P Zhou
  * @date 2020/6/3 19:42
  */

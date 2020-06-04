@@ -5,7 +5,8 @@ import cn.eiden.hsm.event.events.UseSecretCardFromHandEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.uldum.mage.ArcaneFlakmage;
 import cn.eiden.hsm.game.minion.Minion;
-import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.listener.AbstractMinionListener;
+import cn.eiden.hsm.listener.MinionListener;
 
 import java.util.List;
 
@@ -19,23 +20,21 @@ public class ArcaneFlakmageCard extends ArcaneFlakmage {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setHearthListener(new FlakListener(minion));
+        minion.setMinionListener(new FlakListener(minion));
         return minion;
     }
 
-    static class FlakListener implements HearthListener {
-        private Minion thisMinion;
-
+    static class FlakListener extends AbstractMinionListener implements MinionListener {
         @EventHandler
         public void onEvent(UseSecretCardFromHandEvent event) {
             Gamer enemy = event.getOwner().getEnemy();
             List<Minion> minions = enemy.getMinions();
-            minions.forEach(e -> e.beHurt(thisMinion, 2));
+            minions.forEach(e -> e.beHurt(getMinion(), 2));
             enemy.checkMinion();
         }
 
-        public FlakListener(Minion thisMinion) {
-            this.thisMinion = thisMinion;
+        public FlakListener(Minion minion) {
+            super(minion);
         }
     }
 }

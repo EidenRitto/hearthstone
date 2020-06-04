@@ -439,8 +439,8 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void addMinion(Minion minion) {
         //添加随从前注册特效监听
-        if (minion.getHearthListener() != null) {
-            eventManager.registerListener(minion.getHearthListener());
+        if (minion.getMinionListener() != null) {
+            eventManager.registerListener(minion.getMinionListener());
         }
         minion.setOwner(this);
         minions.add(minion);
@@ -460,8 +460,8 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void removeMinion(Minion minion) {
         //移除随从前注销特效监听
-        if (minion.getHearthListener() != null) {
-            eventManager.removeListener(minion.getHearthListener());
+        if (minion.getMinionListener() != null) {
+            eventManager.removeListener(minion.getMinionListener());
         }
         BattlefieldChangeEvent battlefieldChangeEvent = new BattlefieldChangeEvent(this);
         minions.remove(minion);
@@ -799,6 +799,15 @@ public class Gamer extends AbstractGeneralItem {
 
     public boolean isActive() {
         return active;
+    }
+
+    /**
+     * 将一张牌吸入牌库，范围是第一张到最后一张
+     * @param card 被洗牌
+     */
+    public void shuffleCard(Card card){
+        int index = randomSeed.nextInt(deckCards.size()+1);
+        deckCards.add(index,card);
     }
 
     public Gamer(Hero heroObject, List<Card> deckCards) {

@@ -6,6 +6,7 @@ import cn.eiden.hsm.game.GeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.HearthListener;
+import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
 
 /**
@@ -314,14 +315,14 @@ public interface Minion extends GeneralItem {
      *
      * @return 监听
      */
-    HearthListener getHearthListener();
+    HearthListener getMinionListener();
 
     /**
      * 设置自带特效监听
      *
-     * @param hearthListener 监听
+     * @param minionListener 监听
      */
-    void setHearthListener(HearthListener hearthListener);
+    void setMinionListener(MinionListener minionListener);
 
     /**
      * 调用该方法，接触随从第一回合不能攻击的标志

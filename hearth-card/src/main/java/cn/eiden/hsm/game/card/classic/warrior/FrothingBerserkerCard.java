@@ -5,8 +5,8 @@ import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.card.defs.expert1.warrior.FrothingBerserker;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;
-import cn.eiden.hsm.listener.HearthListener;
-import lombok.Setter;
+import cn.eiden.hsm.listener.AbstractMinionListener;
+import cn.eiden.hsm.listener.MinionListener;
 
 /**
  * demo</br>
@@ -20,19 +20,16 @@ public class FrothingBerserkerCard extends FrothingBerserker {
     public Minion createMinion() {
         Minion minion = super.createMinion();
         EffectListener effectListener = new EffectListener();
-        effectListener.setFrothingBerserker(minion);
-        minion.setHearthListener(effectListener);
+        effectListener.setMinion(minion);
+        minion.setMinionListener(effectListener);
         return minion;
     }
 
-    static class EffectListener implements HearthListener{
-        @Setter
-        private Minion frothingBerserker;
-
+    static class EffectListener extends AbstractMinionListener implements MinionListener {
         @EventHandler
         public void onEvent(MinionBeHurtEvent event){
             if (event.getMinion() instanceof MinionObject){
-                frothingBerserker.addAttack(1L);
+                getMinion().addAttack(1L);
             }
         }
     }
