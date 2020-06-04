@@ -6,7 +6,7 @@ import cc.moecraft.icq.event.events.message.EventGroupMessage;
 import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.event.events.message.EventPrivateMessage;
 import cn.eiden.hsm.cockpit.coolq.HearthOrderConstant;
-import cn.eiden.hsm.test.GameDemo;
+import cn.eiden.hsm.GameDemo;
 
 /**
  * @author Eiden J.P Zhou

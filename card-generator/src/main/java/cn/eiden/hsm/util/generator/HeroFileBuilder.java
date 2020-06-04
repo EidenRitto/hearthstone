@@ -58,7 +58,7 @@ public class HeroFileBuilder extends AbstractCardFileBuilder {
                         .addAnnotation(Override.class)
                         .returns(Hero.class)
                         .addCode(addAdditionalField())
-                        .addStatement("return HeroMinion")
+                        .addStatement("return heroMinion")
                         .addJavadoc("$S\n", cardInfo.getCardText())
                         .build())
                 .build();
@@ -67,10 +67,10 @@ public class HeroFileBuilder extends AbstractCardFileBuilder {
     }
 
     private CodeBlock addAdditionalField() {
-        CodeBlock core = CodeBlock.builder().addStatement("$T HeroMinion = new $T($N, $N, $N, $N, $N)"
+        CodeBlock core = CodeBlock.builder().addStatement("$T heroMinion = new $T($N, $N, $N, $N, $N)"
                 , HeroMinion.class, HeroMinion.class, "CARD_NAME", "HEALTH", "RACE", "ID", "CARD_CLASS").build();
         core = core.toBuilder().addStatement("$T powerCard = ($T)$T.getCardById($N)", AbstractHeroPowerCard.class, AbstractHeroPowerCard.class, CardFactory.class, "HERO_POWER_ID")
-                .addStatement("HeroMinion.setHeroPower(powerCard)")
+                .addStatement("heroMinion.setHeroPower(powerCard)")
                 .build();
         return core;
     }

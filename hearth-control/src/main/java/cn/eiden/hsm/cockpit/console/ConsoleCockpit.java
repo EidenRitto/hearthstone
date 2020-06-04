@@ -1,7 +1,7 @@
 package cn.eiden.hsm.cockpit.console;
 
 import cn.eiden.hsm.output.HearthLinkContext;
-import cn.eiden.hsm.test.GameDemo;
+import cn.eiden.hsm.GameDemo;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;

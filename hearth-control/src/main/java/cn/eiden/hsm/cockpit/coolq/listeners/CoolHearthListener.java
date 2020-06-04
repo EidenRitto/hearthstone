@@ -6,8 +6,7 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.event.events.message.EventPrivateMessage;
 import cn.eiden.hsm.output.HearthLinkContext;
 import cn.eiden.hsm.output.OutputInfo;
-import cn.eiden.hsm.test.GameDemo;
-import lombok.Getter;
+import cn.eiden.hsm.GameDemo;
 import lombok.SneakyThrows;
 
 import java.util.concurrent.ExecutorService;

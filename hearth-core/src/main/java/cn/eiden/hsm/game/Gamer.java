@@ -824,4 +824,13 @@ public class Gamer extends AbstractGeneralItem {
         init(heroObject, deckCards);
         this.hero.setOwner(this);
     }
+
+    public static Gamer createGamer(Deck deck) {
+        int heroDbfId = deck.getHeroDbfId();
+        AbstractHeroCard heroCard = (AbstractHeroCard) CardFactory.getCardById(heroDbfId);
+        assert heroCard != null;
+        Hero hero = heroCard.createHero();
+        return new Gamer(hero,deck.getDeck());
+    }
+
 }
