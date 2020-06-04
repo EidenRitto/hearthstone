@@ -260,6 +260,7 @@ public class Gamer extends AbstractGeneralItem {
         } else if (card instanceof AbstractWeaponCard) {
             this.useThisWeaponCard(card, target);
         }
+        history.addUsedCard(card);
     }
 
     /**
