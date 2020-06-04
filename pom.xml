@@ -12,6 +12,7 @@
         <module>card-generator</module>
         <module>hearth-core</module>
         <module>hearth-card</module>
+        <module>hearth-control</module>
     </modules>
     <dependencies>
         <dependency>

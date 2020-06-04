@@ -10,6 +10,7 @@ import lombok.Getter;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 
 /**
@@ -52,7 +53,9 @@ public class EventManager {
         //反射获取并注册监听
         Set<Class<? extends HearthListener>> listeners = reflections.getSubTypesOf(HearthListener.class);
         for (Class<? extends HearthListener> listener : listeners) {
-            if (listener.isMemberClass()) {
+            if (listener.isMemberClass()
+                    || listener.isInterface()
+                    || Modifier.isAbstract(listener.getModifiers())) {
                 continue;
             }
             try {
