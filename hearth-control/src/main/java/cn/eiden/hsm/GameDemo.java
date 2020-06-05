@@ -54,16 +54,16 @@ public class GameDemo {
         DeckSerializer deckSerializer = new DeckSerializer();
         Deck deck = deckSerializer.deserializeDeckString(deckStr);
         Gamer gamer = Gamer.createGamer(deck);
-        gamer.setPrivateMessageQueue(multiConfig.getUser1().getMessageQueue());
-        gamer.setInputMessageQueue(multiConfig.getUser1().getInputQueue());
-        gamer.setUserName(multiConfig.getUser1().getName());
+        gamer.setPrivateMessageQueue(multiConfig.getOrganizer().getMessageQueue());
+        gamer.setInputMessageQueue(multiConfig.getOrganizer().getInputQueue());
+        gamer.setUserName(multiConfig.getOrganizer().getName());
 
         deckSerializer = new DeckSerializer();
         Deck deck2 = deckSerializer.deserializeDeckString(deckStr2);
         Gamer gamer2 = Gamer.createGamer(deck2);
-        gamer2.setPrivateMessageQueue(multiConfig.getUser2().getMessageQueue());
-        gamer2.setInputMessageQueue(multiConfig.getUser2().getInputQueue());
-        gamer2.setUserName(multiConfig.getUser2().getName());
+        gamer2.setPrivateMessageQueue(multiConfig.getResponder().getMessageQueue());
+        gamer2.setInputMessageQueue(multiConfig.getResponder().getInputQueue());
+        gamer2.setUserName(multiConfig.getResponder().getName());
 
         gameStart(gamer,gamer2);
     }

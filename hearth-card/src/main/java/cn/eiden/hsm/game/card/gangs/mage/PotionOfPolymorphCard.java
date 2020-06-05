@@ -10,8 +10,10 @@ import cn.eiden.hsm.game.card.defs.gangs.mage.PotionOfPolymorph;
 import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
+import cn.eiden.hsm.output.OutputInfo;
 
 /**
+ * 变形药水
  * @author Eiden J.P Zhou
  * @date 2020/6/1 15:52
  */
@@ -29,6 +31,7 @@ public class PotionOfPolymorphCard extends PotionOfPolymorph {
         public boolean onSecret(Event event) {
             if (event.getClass() == triggerEvent()) {
                 UseMinionCardFromHandEvent useMinionCardFromHandEvent = (UseMinionCardFromHandEvent) event;
+                OutputInfo.info("法师奥秘触发：变形药水");
                 AbstractMinionCard sheepCard = (AbstractMinionCard) CardFactory.getCardById(SHEEP_ID);
                 assert sheepCard != null;
                 useMinionCardFromHandEvent.setMinionObject(sheepCard.createMinion());

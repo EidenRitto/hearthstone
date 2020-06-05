@@ -429,6 +429,8 @@ public class Gamer extends AbstractGeneralItem {
 
     public void addSecret(Secret secret) {
         if (!this.hasSecret(secret)) {
+            String format = String.format("%s挂上了一个奥秘", userName);
+            printPublicQueue(format);
             secret.setOwner(this);
             eventManager.registerSecret(secret);
             secretList.add(secret);

@@ -174,6 +174,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             } else {
                 MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this,number);
                 getOwner().getEventManager().call(minionBeHurtEvent);
+                OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + number + "点伤害");
                 reduceHealth(number);
             }
         }
@@ -201,10 +202,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void reduceHealth(long reduceHealth) {
         if (immune){
-            OutputInfo.info(minionName + "免疫！");
+            OutputInfo.info(minionName + "免疫了本次伤害！");
             return;
         }
-        OutputInfo.info(minionName + "受到" + reduceHealth + "点伤害");
+//        OutputInfo.info(minionName + "受到" + reduceHealth + "点伤害");
         health -= reduceHealth;
     }
 
@@ -487,8 +488,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public Minion clone() {
         try {
             Minion minionClone = (Minion) super.clone();
-            MinionListener minionListenerClone = this.minionListener.clone();
-            minionListenerClone.setMinion(minionClone);
+            MinionListener minionListenerClone = null;
+            if (this.minionListener != null){
+                minionListenerClone = this.minionListener.clone();
+                minionListenerClone.setMinion(minionClone);
+            }
             minionClone.setMinionListener(minionListenerClone);
             return minionClone;
         } catch (CloneNotSupportedException e) {

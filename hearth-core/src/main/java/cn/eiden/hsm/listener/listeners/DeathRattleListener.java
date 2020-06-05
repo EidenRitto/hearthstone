@@ -16,6 +16,7 @@ public class DeathRattleListener implements HearthListener {
     public void onEvent(MinionDeathEvent event){
         Minion deathMinion = event.getDeathMinion();
         if (deathMinion.hasDeathRattle()){
+            event.getOwner().printPublicQueue(String.format("%s触发亡语",deathMinion.getMinionName()));
             deathMinion.doDeathRattle();
         }
     }

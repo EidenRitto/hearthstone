@@ -36,6 +36,7 @@ public class MadScientistCard extends MadScientist {
                     if (!owner.hasSecret(secret)){
                         owner.addSecret(secret);
                         iterator.remove();
+                        break;
                     }
                 }
             }

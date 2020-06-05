@@ -13,48 +13,48 @@ import cn.eiden.hsm.cockpit.coolq.mutiplay.SendGroupMessageTask;
 import cn.eiden.hsm.cockpit.coolq.mutiplay.SendMessageTask;
 import cn.eiden.hsm.output.OutputInfo;
 
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
  * @author Eiden J.P Zhou
  * @date 2020/6/4 15:45
  */
 public class HearthMultiplayerListener extends IcqListener {
-
-    private Long organizerId ;
-    private Long responderId ;
-
-    private String orgName;
-    private String resName;
-
-    private Long groupId;
+    /**发起者*/
+    private User organizerUser;
+    /**响应者*/
+    private User responderUser;
 
     private boolean isGameStart = false;
-
-    private String organizerDeckStr;
-    private String responderDeckStr;
-
+    /**多人配置*/
     private MultiConfig multiConfig;
 
     @EventHandler
     public void onEvent(EventGroupMessage groupMessage) {
         String message = groupMessage.getMessage();
-        if (message.equals(HearthOrderConstant.HEARTH_MULTIPLE) && organizerId == null){
+        if (message.equals(HearthOrderConstant.HEARTH_MULTIPLE) && organizerUser == null){
             groupMessage.respondPrivateMessage(HearthOrderConstant.HEARTH_MULTIPLE_STEP_1_1);
             groupMessage.respond(String.format(HearthOrderConstant.HEARTH_MULTIPLE_STEP_1,groupMessage.getSender().getInfo().getNickname()));
-            organizerId = groupMessage.getSenderId();
-            orgName = groupMessage.getSender().getInfo().getNickname();
-            groupId = groupMessage.getGroupId();
+            organizerUser = new User();
+            organizerUser.setId(groupMessage.getSenderId());
+            organizerUser.setName(groupMessage.getSender().getInfo().getNickname());
+            multiConfig = new MultiConfig();
+            multiConfig.setGroupId(groupMessage.getGroupId());
+            multiConfig.setOrganizer(organizerUser);
+            multiConfig.setGroupMessageQueue(OutputInfo.messageQueue);
         }
     }
 
     @EventHandler
     public void onEvent2(EventGroupMessage groupMessage) {
         String message = groupMessage.getMessage();
-        if (organizerId != null && responderId == null && !groupMessage.getSenderId().equals(organizerId) && message.equals(HearthOrderConstant.AGREE)){
+        if (organizerUser != null &&
+                responderUser == null &&
+//                !groupMessage.getSenderId().equals(organizerUser.getId()) &&
+                message.equals(HearthOrderConstant.AGREE)){
             groupMessage.respondPrivateMessage(HearthOrderConstant.HEARTH_MULTIPLE_STEP_1_1);
-            responderId = groupMessage.getSenderId();
-            resName = groupMessage.getSender().getInfo().getNickname();
+            responderUser = new User();
+            responderUser.setId(groupMessage.getSenderId());
+            responderUser.setName(groupMessage.getSender().getInfo().getNickname());
+            multiConfig.setResponder(responderUser);
             groupMessage.respond(String.format(HearthOrderConstant.HEARTH_MULTIPLE_STEP_2,groupMessage.getSender().getInfo().getNickname()));
         }
     }
@@ -62,20 +62,20 @@ public class HearthMultiplayerListener extends IcqListener {
     @EventHandler
     public void onOrganizer(EventPrivateMessage privateMessage){
         String message = privateMessage.getMessage();
-        if (organizerId.equals(privateMessage.getSenderId())){
-            if (organizerDeckStr != null){
+        if (organizerUser != null && organizerUser.getId().equals(privateMessage.getSenderId())){
+            if (organizerUser.getDeckStr() != null){
                 if (isGameStart){
                     try {
-                        multiConfig.getUser1().getInputQueue().put(message);
+                        multiConfig.getOrganizer().getInputQueue().put(message);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }else {
                 if ("0".equals(message)){
-                    organizerDeckStr = HearthOrderConstant.DECK_WARRIOR;
+                    organizerUser.setDeckStr(HearthOrderConstant.DECK_WARRIOR);
                 } else if ("1".equals(message)) {
-                    organizerDeckStr = HearthOrderConstant.DECK_MAGE;
+                    organizerUser.setDeckStr(HearthOrderConstant.DECK_MAGE);
                 }
                 checkBegin(privateMessage);
             }
@@ -85,20 +85,20 @@ public class HearthMultiplayerListener extends IcqListener {
     @EventHandler
     public void onResponder(EventPrivateMessage privateMessage){
         String message = privateMessage.getMessage();
-        if (responderId.equals(privateMessage.getSenderId())){
-            if (responderDeckStr != null){
+        if (responderUser != null && responderUser.getId().equals(privateMessage.getSenderId())){
+            if (responderUser.getDeckStr() != null){
                 if (isGameStart){
                     try {
-                        multiConfig.getUser2().getInputQueue().put(message);
+                        multiConfig.getResponder().getInputQueue().put(message);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }else {
                 if ("0".equals(message)){
-                    responderDeckStr = HearthOrderConstant.DECK_WARRIOR;
+                    responderUser.setDeckStr(HearthOrderConstant.DECK_WARRIOR);
                 } else if ("1".equals(message)) {
-                    responderDeckStr = HearthOrderConstant.DECK_MAGE;
+                    responderUser.setDeckStr(HearthOrderConstant.DECK_MAGE);
                 }
                 checkBegin(privateMessage);
             }
@@ -106,37 +106,22 @@ public class HearthMultiplayerListener extends IcqListener {
     }
 
     private void checkBegin(EventMessage eventMessage){
-        if (responderDeckStr!=null && organizerDeckStr!=null){
-            eventMessage.getHttpApi().sendGroupMsg(groupId,HearthOrderConstant.HEARTH_MULTIPLE_STEP_3);
-            multiConfig = MultiConfig.builder()
-                    .groupId(groupId)
-                    .user1(User.builder()
-                            .id(organizerId)
-                            .name(orgName)
-                            .deckStr(organizerDeckStr)
-                            .messageQueue(new LinkedBlockingQueue<>())
-                            .inputQueue(new LinkedBlockingQueue<>())
-                            .build())
-                    .user2(User.builder()
-                            .id(responderId)
-                            .name(resName)
-                            .deckStr(responderDeckStr)
-                            .messageQueue(new LinkedBlockingQueue<>())
-                            .inputQueue(new LinkedBlockingQueue<>())
-                            .build())
-                    .groupMessageQueue(OutputInfo.messageQueue)
-                    .build();
+        if (responderUser.isReady() && organizerUser.isReady()){
+            eventMessage.getHttpApi().sendGroupMsg(multiConfig.getGroupId(),HearthOrderConstant.HEARTH_MULTIPLE_STEP_3);
             CoolHearthListener.cachedThreadPool.execute(() ->{
                 GameDemo gameDemo = new GameDemo();
                 try {
-                    gameDemo.multiStart(organizerDeckStr,responderDeckStr,multiConfig);
+                    gameDemo.multiStart(organizerUser.getDeckStr(),responderUser.getDeckStr(),multiConfig);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
-            CoolHearthListener.cachedThreadPool.execute(new SendMessageTask(multiConfig.getUser1(),eventMessage.getHttpApi()));
-            CoolHearthListener.cachedThreadPool.execute(new SendMessageTask(multiConfig.getUser2(),eventMessage.getHttpApi()));
-            CoolHearthListener.cachedThreadPool.execute(new SendGroupMessageTask(multiConfig,eventMessage.getHttpApi()));
+            CoolHearthListener.cachedThreadPool.execute(
+                    new SendMessageTask(multiConfig.getOrganizer(),eventMessage.getHttpApi()));
+            CoolHearthListener.cachedThreadPool.execute(
+                    new SendMessageTask(multiConfig.getResponder(),eventMessage.getHttpApi()));
+            CoolHearthListener.cachedThreadPool.execute(
+                    new SendGroupMessageTask(multiConfig,eventMessage.getHttpApi()));
             isGameStart = true;
         }
     }

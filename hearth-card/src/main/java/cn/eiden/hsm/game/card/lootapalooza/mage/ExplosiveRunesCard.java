@@ -36,7 +36,7 @@ public class ExplosiveRunesCard extends ExplosiveRunes {
             //随从伤害最多为总伤害,最少为随从生命值
             int minionDmg = (int) Math.min(minionHealth,damage);
             minion.beHurt(minionDmg);
-            useMinionEvent.getOwner().checkMinion();
+            minion.getOwner().checkMinion();
             int heroDmg = (int) (damage - minionHealth);
             //如果还有溢出的伤害则给英雄
             if (heroDmg > 0){
