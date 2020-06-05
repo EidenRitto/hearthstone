@@ -9,7 +9,6 @@ import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
-import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
@@ -150,9 +149,10 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             }
         }
         if (!this.isAttack()) {
-            OutputInfo.info("这个随从无法进行攻击");
+            getOwner().printPrivateQueue("这个随从无法进行攻击");
             return;
         }
+        OutputInfo.info(String.format("%s攻击%s",this.getMinionName(),beAttackMinion.getMinionName()));
         //攻击次数减少1
         attackTime--;
         //敌人掉血

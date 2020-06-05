@@ -15,6 +15,7 @@ import java.util.concurrent.BlockingQueue;
 public class User {
     /**qq号*/
     private Long id;
+    private String name;
     /**卡组代码*/
     private String deckStr;
     /**私人消息队列*/

@@ -115,6 +115,8 @@ public class Gamer extends AbstractGeneralItem {
     @Getter
     private BlockingQueue<String> inputMessageQueue;
 
+    private String userName;
+
     /**
      * 事件管理器
      */
@@ -127,6 +129,8 @@ public class Gamer extends AbstractGeneralItem {
      * 开始一个新的回合
      */
     public void newTurnStart() {
+        OutputInfo.info("%s的回合开始=====等待指令中====",userName);
+        printPrivateQueue("=======你的回合======");
         active = true;
         //场中随从解除上场回合不能攻击
         getMinions().forEach(Minion::setReady);
@@ -146,6 +150,7 @@ public class Gamer extends AbstractGeneralItem {
         active = false;
         EndTurnEvent endTurnEvent = new EndTurnEvent(this);
         eventManager.call(endTurnEvent);
+        printPublicQueue(String.format("%s的回合结束",userName));
     }
 
     /**
@@ -157,9 +162,9 @@ public class Gamer extends AbstractGeneralItem {
         //分配先后手
         boolean isFirstTurn = randomSeed.nextBoolean();
         if (isFirstTurn) {
-            OutputInfo.info("你随机分配到了先手");
+            printPrivateQueue("你随机分配到了先手");
         } else {
-            OutputInfo.info("你随机分配到了后手，你可以多一张手牌并获得幸运币");
+            printPrivateQueue("你随机分配到了后手，你可以多一张手牌并获得幸运币");
         }
         //抽初始手牌阶段
         if (isFirstTurn) {
@@ -228,7 +233,7 @@ public class Gamer extends AbstractGeneralItem {
         lossLastCards();
         //添加到手牌中
         getHand().addHandsCard(card);
-        OutputInfo.info("--你抽到了" + card.getCardName());
+        printPrivateQueue("--你抽到了" + card.getCardName());
     }
 
     /**
@@ -322,11 +327,11 @@ public class Gamer extends AbstractGeneralItem {
             return;
         }
         if (heroPower.getTimesOfUse() < 1) {
-            OutputInfo.info("本回合已经使用过技能");
+            printPrivateQueue("本回合已经使用过技能");
             return;
         }
         if (!isRightTarget(heroPower, target)) {
-            OutputInfo.info("这不是一个有效的目标");
+            printPrivateQueue("这不是一个有效的目标");
             return;
         }
         //消耗对应的法力值
@@ -355,7 +360,7 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void useThisMagicCard(Card card, Minion target) {
         if (!isRightTarget(card, target)) {
-            OutputInfo.info("这不是一个有效的目标");
+            printPrivateQueue("这不是一个有效的目标");
             return;
         }
         //获得法术卡
@@ -468,7 +473,7 @@ public class Gamer extends AbstractGeneralItem {
         //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
-        OutputInfo.info(minion.getMinionName() + "进入战场");
+        printPublicQueue(minion.getMinionName() + "进入战场");
     }
 
     /**
@@ -494,7 +499,7 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void deathMinion(int index) {
         Minion minion = minions.get(index);
-        OutputInfo.info(minion.getMinionName() + "死亡");
+        printPublicQueue(minion.getMinionName() + "死亡");
         Event minionDeathEvent = new MinionDeathEvent(this, minion);
         eventManager.call(minionDeathEvent);
         //移除随从
@@ -515,7 +520,7 @@ public class Gamer extends AbstractGeneralItem {
      * 游戏结束
      */
     private void gameOver() {
-        OutputInfo.info("游戏胜利---结束");
+        printPublicQueue("游戏胜利---结束");
         throw new GameOverException();
     }
 
@@ -544,10 +549,10 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void getState() {
         String handInfoStr = getHandInfoStr();
-        OutputInfo.info(privateMessageQueue,handInfoStr);
+        printPrivateQueue(handInfoStr);
 
         String minionState = getMinionState();
-        OutputInfo.info(privateMessageQueue,minionState);
+        printPrivateQueue(minionState);
     }
 
     private String getHandInfoStr() {
@@ -627,7 +632,7 @@ public class Gamer extends AbstractGeneralItem {
     public boolean checkUse(Card card) {
         boolean result = true;
         if (!checkCardMagic(card)) {
-            OutputInfo.info("你没有足够的法力值!");
+            printPrivateQueue("你没有足够的法力值!");
             result = false;
         }
         return result;
@@ -708,6 +713,7 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void printHandsInfo() {
         StringBuilder handInfo = new StringBuilder("选择需要使用的手牌:\n");
+        handInfo.append("(可用的法力水晶：").append(manaCrystal.getAvailable()).append(")\n");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
             handInfo.append("[").append(i).append("]");
@@ -715,7 +721,7 @@ public class Gamer extends AbstractGeneralItem {
             handInfo.append("(").append(cards.get(i).getCost()).append(")");
             handInfo.append("\n");
         }
-        OutputInfo.info(handInfo.toString());
+        printPrivateQueue(handInfo.toString());
     }
 
     /**
@@ -731,7 +737,7 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     public void printMinion(List<Minion> minionList, String title) {
-        OutputInfo.info(getMinionInfo(minionList, title));
+        printPrivateQueue(getMinionInfo(minionList, title));
     }
 
     private String getMinionInfo(List<Minion> minionList, String title) {
@@ -837,6 +843,15 @@ public class Gamer extends AbstractGeneralItem {
     public void shuffleCard(Card card) {
         int index = randomSeed.nextInt(deckCards.size() + 1);
         deckCards.add(index, card);
+    }
+
+    public void printPrivateQueue(String msg){
+        OutputInfo.info(privateMessageQueue,msg);
+    }
+
+    public void printPublicQueue(String msg){
+        printPrivateQueue(msg);
+        OutputInfo.info(msg);
     }
 
     public Gamer(Hero heroObject, List<Card> deckCards) {

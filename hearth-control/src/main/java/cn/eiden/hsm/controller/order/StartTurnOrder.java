@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
  * @author Eiden J.P Zhou
  * @date 2020/5/8 9:16
  */
-@AllArgsConstructor
 public class StartTurnOrder extends AbstractOrder implements Order{
 
     @Override

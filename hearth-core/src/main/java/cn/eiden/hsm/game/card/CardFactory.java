@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.card;
 import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.enums.CardClass;
+import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
 import java.util.*;
@@ -11,6 +12,7 @@ import java.util.*;
  * @author Eiden J.P Zhou
  * @date 2020/4/3 14:56
  */
+@Slf4j
 public class CardFactory {
     private static final String BASE_PACKAGE_PATH = "cn.eiden.hsm.game.card";
     /**
@@ -103,6 +105,10 @@ public class CardFactory {
 
     public Card buildCardById(Integer id) throws Exception {
         Class<? extends Card> aClass = cardPool.get(id);
+        if (aClass == null){
+            String format = String.format("找不到id为%s的卡牌", id);
+            throw new NullPointerException(format);
+        }
         return aClass.newInstance();
     }
 
