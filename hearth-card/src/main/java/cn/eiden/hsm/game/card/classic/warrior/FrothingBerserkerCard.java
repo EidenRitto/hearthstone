@@ -20,9 +20,7 @@ public class FrothingBerserkerCard extends FrothingBerserker {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        EffectListener effectListener = new EffectListener();
-        effectListener.setMinion(minion);
-        minion.setMinionListener(effectListener);
+        minion.setMinionListener(new EffectListener());
         return minion;
     }
 

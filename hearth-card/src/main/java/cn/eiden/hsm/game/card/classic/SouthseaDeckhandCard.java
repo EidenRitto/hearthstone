@@ -18,7 +18,7 @@ public class SouthseaDeckhandCard extends SouthseaDeckhand {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setMinionListener(new RushListener(minion));
+        minion.setMinionListener(new RushListener());
         return minion;
     }
 
@@ -36,10 +36,6 @@ public class SouthseaDeckhandCard extends SouthseaDeckhand {
                     OutputInfo.info("%s失去冲锋",getMinion().getMinionName());
                 }
             }
-        }
-
-        public RushListener(Minion minion) {
-            super(minion);
         }
     }
 }

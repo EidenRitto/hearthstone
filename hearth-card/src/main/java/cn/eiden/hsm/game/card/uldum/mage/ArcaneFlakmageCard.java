@@ -20,7 +20,7 @@ public class ArcaneFlakmageCard extends ArcaneFlakmage {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setMinionListener(new FlakListener(minion));
+        minion.setMinionListener(new FlakListener());
         return minion;
     }
 
@@ -31,10 +31,6 @@ public class ArcaneFlakmageCard extends ArcaneFlakmage {
             List<Minion> minions = enemy.getMinions();
             minions.forEach(e -> e.beHurt(getMinion(), 2));
             enemy.checkMinion();
-        }
-
-        public FlakListener(Minion minion) {
-            super(minion);
         }
     }
 }
