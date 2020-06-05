@@ -345,7 +345,7 @@ public class Gamer extends AbstractGeneralItem {
             printPrivateQueue("这不是一个有效的目标");
             return;
         }
-        String info = String.format("%s使用英雄技能%s",userName,heroPower);
+        String info = String.format("%s使用英雄技能%s",userName,heroPower.getCardName());
         if (target != null){
             info += String.format(",目标%s",target.getMinionName());
         }

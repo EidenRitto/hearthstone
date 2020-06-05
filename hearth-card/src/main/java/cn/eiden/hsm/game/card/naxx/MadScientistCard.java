@@ -19,7 +19,7 @@ import java.util.List;
 public class MadScientistCard extends MadScientist {
     @Override
     protected DeathRattle selfDeathRattle() {
-        return super.selfDeathRattle();
+        return new MyDeathRattle();
     }
 
     static class MyDeathRattle implements DeathRattle{
