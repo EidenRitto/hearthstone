@@ -35,6 +35,8 @@ public class RegexUtil {
 
     private static Pattern YJJH_CDM = Pattern.compile("(CJXDM[0-9]+)");
 
+    private static final String REGEX_HTML = "<[^>]+>";
+
     private RegexUtil() {
     }
 
@@ -105,5 +107,13 @@ public class RegexUtil {
             result.add(matcher.group());
         }
         return result;
+    }
+
+    public static String removeHtmlTag(String str){
+        if (str == null){
+            return "";
+        }
+        str = str.replaceAll(" +","");
+        return str.replaceAll(REGEX_HTML,"");
     }
 }

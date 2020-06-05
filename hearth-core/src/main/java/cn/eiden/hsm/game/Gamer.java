@@ -17,6 +17,7 @@ import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
 import cn.eiden.hsm.game.rule.Rule;
 import cn.eiden.hsm.output.OutputInfo;
+import cn.eiden.hsm.util.RegexUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -266,6 +267,16 @@ public class Gamer extends AbstractGeneralItem {
 
 
     public void useThisCard(Card card, Minion target) {
+        String info;
+        if ((card instanceof AbstractSecretCard)){
+            info = String.format("%s打出了%s奥秘",userName,card.getCardClass().getCnName());
+        }else {
+            info = String.format("%s打出了%s",userName,card.getCardName());
+            if (target != null){
+                info += String.format(",目标%s",target.getMinionName());
+            }
+        }
+        printPublicQueue(info);
         eventManager.call(new UseCardFromHandEvent(this, card));
         if (card instanceof AbstractMagicCard) {
             this.useThisMagicCard(card, target);
@@ -334,6 +345,11 @@ public class Gamer extends AbstractGeneralItem {
             printPrivateQueue("这不是一个有效的目标");
             return;
         }
+        String info = String.format("%s使用英雄技能%s",userName,heroPower);
+        if (target != null){
+            info += String.format(",目标%s",target.getMinionName());
+        }
+        printPublicQueue(info);
         //消耗对应的法力值
         getManaCrystal().applyAvailable(heroPower.getCost());
         //技能效果
@@ -716,9 +732,16 @@ public class Gamer extends AbstractGeneralItem {
         handInfo.append("(可用的法力水晶：").append(manaCrystal.getAvailable()).append(")\n");
         List<Card> cards = getHand().getCards();
         for (int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
             handInfo.append("[").append(i).append("]");
-            handInfo.append(cards.get(i).getCardName());
-            handInfo.append("(").append(cards.get(i).getCost()).append(")");
+            handInfo.append(card.getCardName());
+            handInfo.append("(cost:").append(card.getCost());
+            if (card instanceof AbstractMinionCard){
+                handInfo.append(" atk:").append(((AbstractMinionCard) card).getAtk());
+                handInfo.append(" hp:").append(((AbstractMinionCard) card).getHealth());
+            }
+            handInfo.append(" ").append(RegexUtil.removeHtmlTag(card.getDescription()));
+            handInfo.append(")");
             handInfo.append("\n");
         }
         printPrivateQueue(handInfo.toString());
