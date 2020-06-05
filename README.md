@@ -1,18 +1,83 @@
-# hearthstone
-炉石传说，JAVA模拟器<Br/>
-想给炉石传说做一个AI，不过需要先把炉石传说给模拟出来，JAVA实现<Br/>
-2018/09/19<Br/>
-基础功能实现了一部分，不过卡牌效果太多，还需要一张张的实现和测试。<Br/>
-PS：业余时间做，进度缓慢，AI的机器学习还得拖到N个版本后<Br/>
-2018/09/20<Br/>
-明天有新项目做了，正好停一下，把设计模式重新规划一下,还有很多地方需要改进。<Br/>
-2018/09/22<Br/>
-对于抉择的机制不太满意,先选择再执行，感觉有点缺陷<Br/>
-工作量太大了，后面的卡牌暂时不写单元测试了，到时候再一起测
-2020/3/17<Br/>
-防止弃坑，每种特效卡牌制作一张演示
-2020/4/16<Br/>
-每天重构一次，卡牌自动生成，最全卡牌数据库
+# eiden - hearthstone
+## 这是什么
+
+## 包含组件
+| 模块             | 介绍        |
+| -------------    | -------    |
+| hearth-core      | 核心模块    |
+| hearth-card      | 卡牌模块    |
+| hearth-control   | 控制器模块  |
+| card-generator   | 卡牌生成器  |
+
+## 快速开始
+- 克隆项目
+- 编译
+  - 使用maven工具 install核心模块【hearth-core】
+  - 在【card-generator】模块中运行cn/eiden/hsm/util/XmlUtil.java
+  - 使用maven工具 install全部模块【hearth】
+- 运行
+  - 项目的测试运行全部都在【hearth-control】模块中
+  - java控制台运行
+    - 运行cn/eiden/hsm/cockpit/console/ConsoleCockpit.java
+  - QQ运行
+    - qq模块使用http插件，系统中使用的是酷Q
+    - <a href="#coolq">Maven 安装配置酷Q</a>
+    - 运行cn/eiden/hsm/cockpit/coolq/HearthApplication.java
+  - 微信运行（未实装）
+  
+<a name="coolq"></a>
+#### 1. 下载 [酷Q](https://cqp.cc/)... (如果有 酷Q Pro 的话效果更好哦!)
+下载完后解压到你想安装的目录下<br>
+首次启动请运行 `cqa.exe` 或 `cqp.exe`, 并登陆机器人的 QQ 号<br>
+然后退出 酷Q (右键悬浮窗点退出)<br>
+
+#### 2. 添加 [酷Q HTTP 插件](https://cqp.cc/t/30748):
+把 `.cpk` 文件下载下来, 放进 `酷Q安装目录\app` 文件夹里<br>
+启动 酷Q<br>
+右键悬浮窗, 然后点击 `应用 -> 应用管理`<br>
+列表里现在应该有 `[未启用] HTTP API`, 点击它, 点击启用<br>
+启用的时候会提示需要一些敏感权限, 选择继续<br>
+启用之后在 `酷Q安装目录\app` 文件夹里会出现 `io.github.richardchien.coolqhttpapi` 文件夹<br>
+退出 酷Q<br>
+
+#### 3. 配置 酷Q HTTP 插件:
+在 `io.github.richardchien.coolqhttpapi` 文件夹里创建一个文件名为 `config.cfg` 的配置文件<br>
+并在其中写入以下代码<br>
+
+```
+[general]
+host=0.0.0.0
+port=接收端口
+post_url=http://127.0.0.1:发送端口
+enable_backward_compatibility=false
+```
+
+把发送端口和接收端口改成你的机器人程序里用的端口 (测试机器人的接收为`31091`, 发送`31092`)<br>
+注意: 酷Q 配置里的`发送端口`要和传进 Picq 的`接收端口`一样, 然后 Picq 的`发送端口`也要和 酷Q 的`接收端口`一样!<br>
+( 这是因为 酷Q 需要发送到 Picq 的接收端口去, 而不是发送到对方的发送端口ww )<br>
+如果 酷Q 要和你的机器人程序分开运行的话, 请把`127.0.0.1`改成你的机器人部署的服务器的地址<br>
+保存配置文件<br>
+
+#### 4. 配置完成! 启动 酷Q!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 尚未实装的功能：
 
