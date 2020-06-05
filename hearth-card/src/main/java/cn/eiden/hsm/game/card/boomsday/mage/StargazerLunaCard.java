@@ -17,7 +17,7 @@ public class StargazerLunaCard extends StargazerLuna {
     @Override
     public Minion createMinion() {
         Minion minion = super.createMinion();
-        minion.setMinionListener(new EffectListener());
+        minion.setMinionListener(new EffectListener(minion));
         return minion;
     }
     static class EffectListener extends AbstractMinionListener implements MinionListener{
@@ -28,6 +28,10 @@ public class StargazerLunaCard extends StargazerLuna {
                     event.getOwner().drawCard(1);
                 }
             }
+        }
+
+        public EffectListener(Minion minion) {
+            super(minion);
         }
     }
 }
