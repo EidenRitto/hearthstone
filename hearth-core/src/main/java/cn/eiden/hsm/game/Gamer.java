@@ -492,6 +492,7 @@ public class Gamer extends AbstractGeneralItem {
         AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
         printPublicQueue(minion.getMinionName() + "进入战场");
+        checkMinion();
     }
 
     /**

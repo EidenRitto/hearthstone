@@ -16,5 +16,6 @@ public class FireblastCard extends Fireblast {
     @Override
     public void powerEffect(Gamer gamer, Minion target) {
         target.beHurt(gamer.getHero(),DMG);
+        target.getOwner().checkMinion();
     }
 }

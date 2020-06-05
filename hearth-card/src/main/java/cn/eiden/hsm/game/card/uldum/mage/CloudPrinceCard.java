@@ -16,7 +16,7 @@ public class CloudPrinceCard extends CloudPrince {
     @Override
     protected Battle selfBattleCry() {
         return (s,t) -> {
-            if (t!=null) {t.beHurt(s,DMG);}
+            if (t!=null) {t.beHurt(s,DMG);t.getOwner().checkMinion();}
         };
     }
 

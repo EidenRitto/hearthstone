@@ -7,6 +7,7 @@ import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.card.defs.naxx.mage.Duplicate;
 import cn.eiden.hsm.game.minion.AbstractSecret;
 import cn.eiden.hsm.game.minion.Secret;
+import cn.eiden.hsm.output.OutputInfo;
 
 /**
  * 复制
@@ -25,12 +26,15 @@ public class DuplicateCard extends Duplicate {
         public boolean onSecret(Event event) {
             if (event.getClass() == triggerEvent()){
                 MinionDeathEvent minionDeathEvent = (MinionDeathEvent) event;
-                String cardId = minionDeathEvent.getDeathMinion().getCardId();
-                Card card1 = CardFactory.getCardById(Integer.parseInt(cardId));
-                Card card2 = CardFactory.getCardById(Integer.parseInt(cardId));
-                getOwner().getHand().addHandsCard(card1);
-                getOwner().getHand().addHandsCard(card2);
-                return true;
+                if (getOwner() == minionDeathEvent.getOwner()){
+                    OutputInfo.info("法师奥秘触发:复制");
+                    String cardId = minionDeathEvent.getDeathMinion().getCardId();
+                    Card card1 = CardFactory.getCardById(Integer.parseInt(cardId));
+                    Card card2 = CardFactory.getCardById(Integer.parseInt(cardId));
+                    getOwner().getHand().addHandsCard(card1);
+                    getOwner().getHand().addHandsCard(card2);
+                    return true;
+                }
             }
             return false;
         }
