@@ -172,7 +172,9 @@ public class EventManager {
         String mapKey = event.getClass().getName();
 
         if (registeredListenerMethods.containsKey(mapKey)) {
-            registeredListenerMethods.get(mapKey).forEach(registeredListenerMethod -> {
+            //创建一个副本，避免ConcurrentModificationException异常
+            ArrayList<RegisteredListenerMethod> listenerMethods = new ArrayList<>(this.registeredListenerMethods.get(mapKey));
+            listenerMethods.forEach(registeredListenerMethod -> {
                 try {
                     registeredListenerMethod.call(event);
                 } catch (Throwable e) {

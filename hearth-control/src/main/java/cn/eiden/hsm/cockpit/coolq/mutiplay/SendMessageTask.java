@@ -8,7 +8,7 @@ import java.util.concurrent.BlockingQueue;
 
 /**
  * 发送消息线程
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/5 8:54
  */
 public class SendMessageTask implements Runnable {

@@ -28,6 +28,7 @@ public enum CardSet {
     /**地精大战侏儒*/
     GVG (13),
     PE1 (13),
+    /**黑石山的火焰*/
     BRM (14),
     FP2 (14),
     TGT (15),
