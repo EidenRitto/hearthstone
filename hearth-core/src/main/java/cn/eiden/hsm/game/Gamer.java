@@ -173,9 +173,11 @@ public class Gamer extends AbstractGeneralItem {
             getEnemy().drawCard(LAST_HANDS_INIT);
             //后手加入幸运币
             getEnemy().getHand().addHandsCard(CardFactory.getCardById(1746));
+            getEnemy().getHand().addHandsCard(CardFactory.getCardById(2279));
         } else {
             drawCard(LAST_HANDS_INIT);
             getHand().addHandsCard(CardFactory.getCardById(1746));
+            getEnemy().getHand().addHandsCard(CardFactory.getCardById(2279));
             getEnemy().drawCard(FIRST_HANDS_INIT);
         }
         //换牌阶段(==暂无==)
@@ -491,7 +493,7 @@ public class Gamer extends AbstractGeneralItem {
         //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
-        printPublicQueue(minion.getMinionName() + "进入战场");
+        printPublicQueue(String.format("%s(atk: %s hp:%s)进入战场",minion.getMinionName(),minion.getAttackValue(),minion.getHealth()));
         checkMinion();
     }
 
