@@ -29,7 +29,9 @@ public class FrothingBerserkerCard extends FrothingBerserker {
     static class EffectListener extends AbstractMinionListener implements MinionListener {
         @EventHandler
         public void onEvent(MinionBeHurtEvent event){
-            getMinion().addAttack(1L);
+            if (event.getMinion() instanceof MinionObject){
+                getMinion().addAttack(1L);
+            }
         }
     }
 }
