@@ -88,20 +88,29 @@ enable_backward_compatibility=false
 #### 附录
 
 <a name="otherCard"></a>
-- [ ] 卡牌关键效果及其demo示例
-  - [x] 随从特效 <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/warrior/FrothingBerserkerCard.java">暴乱狂战士</a>
+- [ ] 卡牌关键效果及其部分demo示例（已经实现但没有示例的为自动生成，无需重写）
+  - [x] 随从特效 
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/warrior/FrothingBerserkerCard.java">暴乱狂战士</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/brm/neutral/GrimPatronCard.java">恐怖的奴隶主</a>
   - [x] 战吼
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/ungoro/mage/ArcanologistCard.java">秘法学家</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/kara/mage/MedivhSValetCard.java">麦迪文的男仆</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/mage/KirinTorMageCard.java">肯瑞托法师</a>
   - [x] 亡语
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/naxx/MadScientistCard.java">疯狂的科学家</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/base/LeperGnomeCard.java">麻风侏儒</a>
   - [x] 嘲讽
   - [x] 冲锋
   - [x] 法强
   - [x] 光环
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/SouthseaCaptainCard.java">南海船长</a>
   - [ ] 风怒
   - [x] 圣盾
   - [x] 潜行
   - [ ] 剧毒
   - [ ] 沉默
   - [x] 冻结
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/mage/RayOfFrostCard.java">霜冻射线</a>
   - [ ] 抉择
   - [ ] 连击
   - [x] 过载
