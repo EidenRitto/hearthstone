@@ -25,15 +25,15 @@
 
 - 效果图
 
-[开始][1]
+![alt 开始](https://gitee.com/EidenRitto/hearthstone/tree/master/img/开始.png)
 
-[选择套牌][2]
+![alt 选择套牌](https://gitee.com/EidenRitto/hearthstone/tree/master/img/选择套牌.png)
 
-[出牌][3]
+![alt 出牌](https://gitee.com/EidenRitto/hearthstone/tree/master/img/出牌.png)
 
-[战场][4]
+![alt 战场](https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场.png)
 
-[战场2][5]
+![alt 战场2](img/战场2.png)
 
 ## 包含组件
 | 模块             | 介绍        | 功能描述                                      |
@@ -165,10 +165,3 @@ enable_backward_compatibility=false
   - [ ] 迦拉克隆的觉醒 YOD
   - [ ] 外域的灰烬 BT
   
-  
-  
-[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/开始.png
-[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/选择套牌.png
-[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/出牌.png
-[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场.png
-[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场2.png
