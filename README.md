@@ -1,13 +1,34 @@
-# eiden - hearthstone
+# Java - 炉石传说
 ## 这是什么
-
+这是用Java语言实现的游戏--炉石传说
+- 实现了什么功能
+  - [ ] 炉石传说
+    - [ ] 主要组件
+      - [x] 随从
+      - [x] 英雄
+      - [x] 武器
+      - [x] 奥秘
+      - [ ] 任务
+    - [ ] 卡牌关键效果
+      - [x] 随从特效
+      - [x] 战吼
+      - [x] 亡语
+      - [ ] <a href="#otherCard">其他卡牌效果</a>
+    - [ ] 卡牌
+      - [ ] 基础包
+      - [ ] 经典包
+      - [ ] 荣誉室
+      - [ ] <a href="#otherClass">其他扩展包</a>
+    - [ ] AI
+    - [x] QQ群对战
+  - [ ] 酒馆战棋
 ## 包含组件
-| 模块             | 介绍        |
-| -------------    | -------    |
-| hearth-core      | 核心模块    |
-| hearth-card      | 卡牌模块    |
-| hearth-control   | 控制器模块  |
-| card-generator   | 卡牌生成器  |
+| 模块             | 介绍        | 功能描述                                      |
+| -------------    | -------    | ---------------------                        |
+| hearth-core      | 核心模块    | 整个游戏的架构，接口                            |
+| hearth-card      | 卡牌模块    | 游戏的卡牌各种具体实现                          |
+| hearth-control   | 控制器模块  | 游戏的测试启动和控制器,目前只能以文字的交互形式启动  |
+| card-generator   | 卡牌生成器  | 从暴雪的卡牌数据库中生成对应的java类              |
 
 ## 快速开始
 - 克隆项目
@@ -21,11 +42,12 @@
     - 运行cn/eiden/hsm/cockpit/console/ConsoleCockpit.java
   - QQ运行
     - qq模块使用http插件，系统中使用的是酷Q
-    - <a href="#coolq">Maven 安装配置酷Q</a>
+    - <a href="#coolq">安装配置酷Q</a>
     - 运行cn/eiden/hsm/cockpit/coolq/HearthApplication.java
   - 微信运行（未实装）
   
 <a name="coolq"></a>
+###安装和配置酷Q
 #### 1. 下载 [酷Q](https://cqp.cc/)... (如果有 酷Q Pro 的话效果更好哦!)
 下载完后解压到你想安装的目录下<br>
 首次启动请运行 `cqa.exe` 或 `cqp.exe`, 并登陆机器人的 QQ 号<br>
@@ -61,162 +83,59 @@ enable_backward_compatibility=false
 #### 4. 配置完成! 启动 酷Q!
 
 
+## 如何扩展添加新的卡牌
 
+#### 附录
 
+<a name="otherCard"></a>
+- [ ] 卡牌关键效果及其demo示例
+  - [x] 随从特效 <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/warrior/FrothingBerserkerCard.java">暴乱狂战士</a>
+  - [x] 战吼
+  - [x] 亡语
+  - [x] 嘲讽
+  - [x] 冲锋
+  - [x] 法强
+  - [x] 光环
+  - [ ] 风怒
+  - [x] 圣盾
+  - [x] 潜行
+  - [ ] 剧毒
+  - [ ] 沉默
+  - [x] 冻结
+  - [ ] 抉择
+  - [ ] 连击
+  - [x] 过载
+  - [ ] 吸血
+  - [ ] 进化
+  - [ ] 突袭
+  - [ ] 招募
+  - [ ] 回响
+  - [ ] 发现
+  - [ ] 磁力
+  - [ ] 超杀
+  - [x] 免疫
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-尚未实装的功能：
-
-1186---TWINSPELL_COPY--双生法术
-470---FINISH_ATTACK_SPELL_ON_DAMAGE--攻击后的特效，只有金手指和超级对撞器有
-350---ADJACENT_BUFF--相邻的buff
-351---FLAVORTEXT
-1456---IS_BACON_POOL_MINION
-476---MULTIPLE_CLASSES
-114---ELITE
-994---MARK_OF_EVIL
-1333---OUTCAST
-1057---SHRINE
-997---DECK_RULE_MOD_DECK_SIZE
-1452---COLLECTION_RELATED_CARD_DATABASE_ID
-1298---UI_BUFF_COST_UP
-998---FAST_BATTLECRY
-917---HEALTH_DISPLAY
-12---PREMIUM
-480---MULTI_CLASS_GROUP
-1193---TWINSPELL
-482---GRIMY_GOONS
-1192---SIDEQUEST
-240---IMMUNE
-362---AURA
-483---JADE_LOTUS
-1107---HIDE_WATERMARK
-363---POISONOUS
-484---KABAL
-364---HOW_TO_EARN
-2---TAG_SCRIPT_DATA_NUM_1
-365---HOW_TO_EARN_GOLDEN
-3---TAG_SCRIPT_DATA_NUM_2
-367---AI_MUST_PLAY
-401---EVIL_GLOW
-247---CANT_BE_DESTROYED
-402---HIDE_STATS
-1464---MOVE_MINION_HOVER_TARGET_SLOT
-403---INSPIRE
-1342---USE_DISCOVER_VISUALS
-920---ENABLE_HEALTH_DISPLAY
-404---RECEIVES_DOUBLE_SPELLDAMAGE_BONUS
-923---OVERKILL
-1085---REBORN
-370---AFFECTED_BY_SPELL_POWER
-251---AttackVisualType
-890---DISCARD_CARDS
-1118---AFFECTED_BY_HEALING_DOES_DAMAGE
-375---MULTIPLY_BUFF_VALUE
-1116---PLAYER_TAG_THRESHOLD_VALUE
-377---TOPDECK
-1115---PLAYER_TAG_THRESHOLD_TAG_ID
-1114---NON_KEYWORD_ECHO
-535---QUEST_PROGRESS_TOTAL
-1199---COIN_MANA_GEM
-415---DISCOVER
-1517---WATERMARK_OVERRIDE_CARD_SET
-32---TRIGGER_VISUAL
-1090---DORMANT_VISUAL
-1132---ALTERNATE_MOUSE_OVER_CARD
-1099---PLAYER_BASE_SHRINE_DECK_ID
-380---HERO_POWER
-1491---BACON_HERO_CAN_BE_DRAFTED
-783---DUNGEON_PASSIVE_BUFF
-388---SPARE_PART
-389---FORGETFUL
-268---DevState
-1125---DECK_LIST_SORT_ORDER
-785---GHOSTLY
-1365---GALAKROND_HERO_CARD
-424---RITUAL
-1089---QUEST_REWARD_DATABASE_ID
-426---APPEAR_FUNCTIONALLY_DEAD
-1142---MOUSE_OVER_CARD_APPEARANCE
-1263---EMPOWER
-791---RUSH
-396---HEROPOWER_DAMAGE
-793---HERO_DECK_ID
-1413---DECK_RULE_COUNT_AS_COPY_OF_CARD_ID
-311---CANT_BE_TARGETED_BY_SPELLS
-554---DEATH_KNIGHT
-1531---START_OF_COMBAT
-1135---ENCHANTMENT_BANNER_TEXT
-314---CANT_BE_SILENCED
-556---BOSS
-956---COLLECTIONMANAGER_FILTER_MANA_EVEN
-957---COLLECTIONMANAGER_FILTER_MANA_ODD
-682---HIDE_HEALTH
-441---JADE_GOLEM
-683---HIDE_ATTACK
-321---COLLECTIBLE
-200---CARDRACE
-684---HIDE_COST
-201---FACTION
-443---CHOOSE_ONE
-685---LIFESTEAL
-1423---BACON_IS_KEL_THUZAD
-1421---BACON_MINION_IS_LEVEL_TWO
-325---TARGETING_ARROW_TEXT
-205---SUMMONED
-448---UNTOUCHABLE
-846---ECHO
-208---FREEZE
-968---START_OF_GAME
-849---MODULAR
-1440---TECH_LEVEL
-292---ARMOR
-293---MORPH
-1282---HEROIC_HERO_POWER
-330---ENCHANTMENT_BIRTH_VISUAL
-451---SCORE_VALUE_1
-1437---BACON_ACTION_CARD
-331---ENCHANTMENT_IDLE_VISUAL
-332---CANT_BE_TARGETED_BY_HERO_POWERS
-453---SCORE_VALUE_2
-212---ENRAGED
-335---InvisibleDeathrattle
-456---CANT_BE_FATIGUED
-215---OVERLOAD
-457---AUTOATTACK
-217---DEATHRATTLE
-338---TAG_ONE_TURN_EFFECT
-976---ENCHANTMENT_INVISIBLE
-218---BATTLECRY
-339---SILENCE
-219---SECRET
-857---IGNORE_HIDE_STATS_FOR_BIG_CARD
-979---PUZZLE
-1438---GAME_MODE_BUTTON_SLOT
-1297---UI_BUFF_ATK_UP
-1296---UI_BUFF_COST_DOWN
-1295---UI_BUFF_SET_COST_ZERO
-1052---GEARS
-1294---UI_BUFF_HEALTH_UP
-220---COMBO
-462---QUEST
-342---ARTISTNAME
-189---WINDFURY
-982---PUZZLE_TYPE
-1443---UI_BUFF_DURABILITY_UP
-227---CANT_ATTACK
-349---ImmuneToSpellpower
+<a name="otherClass"></a>
+- [ ] 卡牌包
+  - [ ] 基础包 CORE
+  - [ ] 经典包 CLASSIC
+  - [ ] 荣誉室 HOF
+  - [ ] 纳克萨玛斯 NAXX
+  - [ ] 地精大战侏儒 GVG 
+  - [ ] 黑石山的火焰 BRM 
+  - [ ] 冠军的试炼 AT
+  - [ ] 探险者协会 LOE
+  - [ ] 上古之神的低语 OG
+  - [ ] 卡拉赞之夜 KAR
+  - [ ] 龙争虎斗加基森 CFM
+  - [ ] 勇闯安戈洛 UNG 
+  - [ ] 冰封王座的骑士 ICC
+  - [ ] 狗头人与地下世界 LOOT
+  - [ ] 女巫森林 GIL
+  - [ ] 砰砰计划 BOT
+  - [ ] 拉斯塔哈的大乱斗 TRL
+  - [ ] 暗影崛起 DAL
+  - [ ] 奥丹姆奇兵 ULD
+  - [ ] 巨龙降临 DRG
+  - [ ] 迦拉克隆的觉醒 YOD
+  - [ ] 外域的灰烬 BT
