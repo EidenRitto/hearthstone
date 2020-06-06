@@ -25,13 +25,13 @@
 
 - 效果图
 
-![alt 开始](https://gitee.com/EidenRitto/hearthstone/tree/master/img/开始.png)
+![alt 开始](img/开始.png)
 
-![alt 选择套牌](https://gitee.com/EidenRitto/hearthstone/tree/master/img/选择套牌.png)
+![alt 选择套牌](img/选择套牌.png)
 
-![alt 出牌](https://gitee.com/EidenRitto/hearthstone/tree/master/img/出牌.png)
+![alt 出牌](img/出牌.png)
 
-![alt 战场](https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场.png)
+![alt 战场](img/战场.png)
 
 ![alt 战场2](img/战场2.png)
 
