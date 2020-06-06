@@ -22,6 +22,19 @@
     - [ ] AI
     - [x] QQ群对战
   - [ ] 酒馆战棋
+
+- 效果图
+
+[开始][1]
+
+[选择套牌][2]
+
+[出牌][3]
+
+[战场][4]
+
+[战场2][5]
+
 ## 包含组件
 | 模块             | 介绍        | 功能描述                                      |
 | -------------    | -------    | ---------------------                        |
@@ -47,7 +60,10 @@
   - 微信运行（未实装）
   
 <a name="coolq"></a>
+
+
 ###安装和配置酷Q
+
 #### 1. 下载 [酷Q](https://cqp.cc/)... (如果有 酷Q Pro 的话效果更好哦!)
 下载完后解压到你想安装的目录下<br>
 首次启动请运行 `cqa.exe` 或 `cqp.exe`, 并登陆机器人的 QQ 号<br>
@@ -148,3 +164,11 @@ enable_backward_compatibility=false
   - [ ] 巨龙降临 DRG
   - [ ] 迦拉克隆的觉醒 YOD
   - [ ] 外域的灰烬 BT
+  
+  
+  
+[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/开始.png
+[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/选择套牌.png
+[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/出牌.png
+[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场.png
+[1]: https://gitee.com/EidenRitto/hearthstone/tree/master/img/战场2.png
