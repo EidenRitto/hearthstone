@@ -66,4 +66,9 @@ public interface Hero extends Minion {
      * @return 致命返回true
      */
     boolean isLethalDose(long dmg);
+
+    /**
+     * 回合结束
+     */
+    void endTurn();
 }

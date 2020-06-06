@@ -170,6 +170,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
     }
 
     @Override
+    public void endTurn() {
+        this.setAttackValue(0);
+    }
+
+    @Override
     public boolean isAttack() {
         return getAttackValue() > 0 && !isFreeze() && getAttackTime() > 0;
     }

@@ -105,11 +105,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     private Race race;
 
     /**
-     * 本回合增加的攻击力
-     */
-    private long attackValueThisTurn = 0;
-
-    /**
      * 是否被沉默
      */
     private boolean isSilence = false;
@@ -183,13 +178,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public void addAttack(long addAttack) {
         OutputInfo.info(minionName + "增加" + addAttack + "点攻击");
         attackValue += addAttack;
-    }
-
-    @Override
-    public void addAttackThisTurn(long addAttack) {
-        OutputInfo.info(minionName + "本回合增加" + addAttack + "点攻击");
-        attackValue += addAttack;
-        attackValueThisTurn += addAttack;
     }
 
     @Override

@@ -59,12 +59,6 @@ public interface Minion extends GeneralItem {
      */
     void setAttackValue(long attackValue);
 
-    /**
-     * 本回合增加攻击力
-     *
-     * @param addAttack 数量
-     */
-    void addAttackThisTurn(long addAttack);
 
     /**
      * 减少攻击力，攻击力可以为负数，但显示为0
