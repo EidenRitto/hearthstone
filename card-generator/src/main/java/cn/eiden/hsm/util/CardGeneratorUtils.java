@@ -129,6 +129,9 @@ public class CardGeneratorUtils {
                     final int overload = Integer.parseInt(tag.getValue());
                     cardCache.setOverload(overload);
                     break;
+                case LIFESTEAL:
+                    cardCache.setLifeSteal(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

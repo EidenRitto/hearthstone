@@ -120,11 +120,11 @@ enable_backward_compatibility=false
   - [x] 法强
   - [x] 光环
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/SouthseaCaptainCard.java">南海船长</a>
-  - [ ] 风怒
+  - [x] 风怒
   - [x] 圣盾
   - [x] 潜行
   - [x] 剧毒
-  - [ ] 沉默
+  - [x] 沉默
   - [x] 冻结
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/mage/RayOfFrostCard.java">霜冻射线</a>
   - [ ] 抉择
@@ -132,9 +132,9 @@ enable_backward_compatibility=false
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/Si7AgentCard.java">军情七处特工</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/EviscerateCard.java">刺骨</a>
   - [x] 过载
-  - [ ] 吸血
+  - [x] 吸血
   - [ ] 进化
-  - [ ] 突袭
+  - [x] 突袭
   - [ ] 招募
   - [ ] 回响
   - [ ] 发现

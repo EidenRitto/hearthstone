@@ -148,6 +148,14 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
             CodeBlock windFury = CodeBlock.builder().addStatement("minionObject.addWindFury()").build();
             core = core.toBuilder().add(windFury).build();
         }
+        if (cardInfo.getLifeSteal() == 1) {
+            CodeBlock lifeSteel = CodeBlock.builder().addStatement("minionObject.addLifeSteal()").build();
+            core = core.toBuilder().add(lifeSteel).build();
+        }
+        if (cardInfo.getRush() == 1) {
+            CodeBlock rush = CodeBlock.builder().addStatement("minionObject.addRush()").build();
+            core = core.toBuilder().add(rush).build();
+        }
         return core;
     }
 }

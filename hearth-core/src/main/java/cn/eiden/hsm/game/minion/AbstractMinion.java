@@ -107,6 +107,16 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     private boolean windFury = false;
 
     /**
+     * 吸血
+     */
+    private boolean lifeSteal = false;
+
+    /**
+     * 突袭
+     */
+    private boolean rush = false;
+
+    /**
      * 是否具有免疫
      */
     private boolean immune = false;
@@ -218,6 +228,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this, reduceHealth);
         getOwner().getEventManager().call(minionBeHurtEvent);
         OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
+        if (source.hasLifeSteal()){
+            source.getOwner().getHero().recoveryHp(reduceHealth);
+        }
         health -= reduceHealth;
     }
 
@@ -309,7 +322,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public boolean isAttack() {
-        return getAttackValue() > 0 && (ready || charge) && !isFrozen && attackTime > 0;
+        return getAttackValue() > 0 && (ready || charge || rush) && !isFrozen && attackTime > 0;
     }
 
     @Override
@@ -343,6 +356,13 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public void endTurn() {
+        if (this.isFreeze() && attackTime > 0){
+            this.unfreeze();
+        }
+    }
+
+    @Override
     public void freeze() {
         isFrozen = true;
     }
@@ -367,6 +387,18 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         originHealthLimit = originalHealth;
         attackValue = originalAttack;
         isSilence = true;
+        charge = false;
+        attackTimeLimit = 1;
+        isTaunt = false;
+        isFrozen = false;
+        stealth = false;
+        divineShield = false;
+        poisonous = false;
+        windFury = false;
+        spellPower = 0;
+        aura = null;
+        minionListener = null;
+        lifeSteal = false;
     }
 
     @Override
@@ -548,6 +580,31 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     public void setWindFury(boolean windFury) {
         this.windFury = windFury;
+    }
+
+    @Override
+    public boolean hasLifeSteal() {
+        return this.lifeSteal;
+    }
+
+    @Override
+    public void addLifeSteal() {
+        this.lifeSteal = true;
+    }
+
+    @Override
+    public boolean hasRush() {
+        return this.rush;
+    }
+
+    @Override
+    public void addRush() {
+        this.rush = true;
+    }
+
+    @Override
+    public boolean hasReady() {
+        return this.ready;
     }
 
     @Override

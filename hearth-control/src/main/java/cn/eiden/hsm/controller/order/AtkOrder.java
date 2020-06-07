@@ -2,6 +2,7 @@ package cn.eiden.hsm.controller.order;
 
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.minion.Minion;
+import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.RegexUtil;
 import lombok.Setter;
@@ -25,6 +26,9 @@ public class AtkOrder extends AbstractOrder implements Order {
         Minion targetMinion = getTargetIndex();
         if (targetMinion == null) {
             return;
+        }
+        if (sourceMinion.hasRush() && !sourceMinion.hasReady() && targetMinion instanceof HeroMinion){
+            OutputInfo.info(gamer.getPrivateMessageQueue(), "突袭随从在当前回合无法攻击英雄");
         }
         sourceMinion.attack(targetMinion);
         sourceMinion.getOwner().checkMinion();
@@ -62,7 +66,7 @@ public class AtkOrder extends AbstractOrder implements Order {
         while (true) {
             List<Minion> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
             if (allCanBeAttackMinionsId.size() == 0) {
-                OutputInfo.info(gamer.getPrivateMessageQueue(),"当前没有能被攻击的随从/英雄，这是不可能的，看见这句话请反馈BUG");
+                OutputInfo.info(gamer.getPrivateMessageQueue(),"当前没有能被攻击的随从/英雄");
                 return null;
             }
             //打印提示信息

@@ -62,6 +62,12 @@ public class CardInfo {
     private int combo;
     /**风怒*/
     private int windFury;
+    /**
+     * 吸血
+     */
+    private int lifeSteal;
+    /**突袭*/
+    private int rush;
     /**过载*/
     private int overload = 0;
 

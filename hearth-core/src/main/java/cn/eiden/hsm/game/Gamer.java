@@ -166,7 +166,7 @@ public class Gamer extends AbstractGeneralItem {
         active = false;
         EndTurnEvent endTurnEvent = new EndTurnEvent(this);
         eventManager.call(endTurnEvent);
-        this.hero.endTurn();
+        this.getAllMinion().forEach(Minion::endTurn);
         printPublicQueue(String.format("%s的回合结束", userName));
     }
 
@@ -748,7 +748,7 @@ public class Gamer extends AbstractGeneralItem {
      *
      * @return 自身的全部随从 包括英雄
      */
-    public List<Minion> findAllMinion() {
+    public List<Minion> getAllMinion() {
         List<Minion> resultList = new ArrayList<>(minions);
         resultList.add(hero);
         return resultList;

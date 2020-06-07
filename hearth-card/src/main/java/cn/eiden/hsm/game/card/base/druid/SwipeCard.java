@@ -27,7 +27,7 @@ public class SwipeCard extends Swipe {
      */
     @Override
     public void magicEffect(Gamer gamer, Minion target) {
-        List<Minion> allMinion = gamer.getEnemy().findAllMinion();
+        List<Minion> allMinion = gamer.getEnemy().getAllMinion();
         int damage1 = gamer.getGamerSpellDamage() + DMG_1;
         int damage2 = gamer.getGamerSpellDamage() + DMG_2;
         target.beHurt(damage2);

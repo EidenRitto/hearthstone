@@ -205,6 +205,11 @@ public interface Minion extends GeneralItem {
     boolean isTaunt();
 
     /**
+     * 回合结束
+     */
+    void endTurn();
+
+    /**
      * 冻结
      */
     void freeze();
@@ -431,6 +436,36 @@ public interface Minion extends GeneralItem {
      */
     void removeWindFury();
 
+
+    /**
+     * 是否具有吸血
+     *
+     * @return 有吸血返回true
+     */
+    boolean hasLifeSteal();
+
+    /**
+     * 添加吸血
+     */
+    void addLifeSteal();
+
+    /**
+     * 是否具有突袭
+     *
+     * @return 有突袭返回true
+     */
+    boolean hasRush();
+
+    /**
+     * 添加突袭
+     */
+    void addRush();
+
+    /**
+     * 随从是否准备好了（随从进场时当前回合不能攻击）
+     * @return 准备好返回true
+     */
+    boolean hasReady();
 
     /**
      * 设置连击
