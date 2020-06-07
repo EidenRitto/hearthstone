@@ -4,6 +4,7 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.game.keyword.Combo;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;
@@ -88,6 +89,15 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
+        if (cardInfo.getCombo() == 1) {
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfCombo")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(Combo.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
     }
 
@@ -124,6 +134,14 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getAura() == 1){
             CodeBlock aura = CodeBlock.builder().addStatement("minionObject.setAura(this.selfAura())").build();
             core = core.toBuilder().add(aura).build();
+        }
+        if (cardInfo.getPoisonous() == 1) {
+            CodeBlock poisonous = CodeBlock.builder().addStatement("minionObject.addPoisonous()").build();
+            core = core.toBuilder().add(poisonous).build();
+        }
+        if (cardInfo.getCombo() == 1) {
+            CodeBlock combo = CodeBlock.builder().addStatement("minionObject.setCombo(this.selfCombo())").build();
+            core = core.toBuilder().add(combo).build();
         }
         return core;
     }

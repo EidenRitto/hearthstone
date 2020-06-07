@@ -2,7 +2,6 @@ package cn.eiden.hsm.game.card.classic.warrior;
 
 import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
-import cn.eiden.hsm.event.events.UseCardFromHandEvent;
 import cn.eiden.hsm.game.card.defs.expert1.warrior.FrothingBerserker;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;

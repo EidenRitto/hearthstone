@@ -39,7 +39,7 @@ public class HeroMinion extends AbstractMinion implements Hero {
      */
     private Weapon weapon;
 
-    public HeroMinion(CardClass cardClass,long health) {
+    public HeroMinion(CardClass cardClass, long health) {
         super(cardClass.name(), health, 0L, Race.INVALID, null);
     }
 
@@ -103,9 +103,9 @@ public class HeroMinion extends AbstractMinion implements Hero {
 
     @Override
     public long getAttackValue() {
-        if (hasWeapon()){
+        if (hasWeapon()) {
             return super.getAttackValue() + weapon.getWeaponAttack();
-        }else {
+        } else {
             return super.getAttackValue();
         }
     }
@@ -117,13 +117,13 @@ public class HeroMinion extends AbstractMinion implements Hero {
     }
 
     @Override
-    public void reduceHealth(long reduceHealth) {
+    public void reduceHealth(Minion source, long reduceHealth) {
         if (isImmune()) {
             return;
         }
         reduceHealth -= armor;
         armor = Math.max(armor - reduceHealth, 0L);
-        super.reduceHealth(Math.max(reduceHealth, 0L));
+        super.reduceHealth(source, Math.max(reduceHealth, 0L));
     }
 
     @Override

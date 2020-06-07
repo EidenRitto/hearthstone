@@ -73,6 +73,7 @@ public class CardGeneratorUtils {
                     Race race = Objects.requireNonNull(EnumUtils.getEnumObject(
                             Race.class, e -> e.getCode() == cardRaceValue)).orElse(null);
                     cardCache.setRace(race);
+                    break;
                 case DURABILITY:
                     final int durabilityValue = Integer.parseInt(tag.getValue());
                     cardCache.setDurability(durabilityValue);
@@ -114,6 +115,12 @@ public class CardGeneratorUtils {
                     break;
                 case HERO_POWER:
                     cardCache.setHeroPower(Integer.parseInt(tag.getValue()));
+                    break;
+                case POISONOUS:
+                    cardCache.setPoisonous(Integer.parseInt(tag.getValue()));
+                    break;
+                case COMBO:
+                    cardCache.setCombo(Integer.parseInt(tag.getValue()));
                     break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);

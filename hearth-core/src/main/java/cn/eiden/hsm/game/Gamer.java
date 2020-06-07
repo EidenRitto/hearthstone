@@ -105,8 +105,14 @@ public class Gamer extends AbstractGeneralItem {
     @Getter
     private History history = new HistoryImpl();
 
+    /**
+     * 奥秘
+     */
     private List<Secret> secretList = new ArrayList<>(5);
 
+    /**
+     * 规则
+     */
     private List<Rule> rules = new ArrayList<>();
 
     @Setter
@@ -116,6 +122,9 @@ public class Gamer extends AbstractGeneralItem {
     @Getter
     private BlockingQueue<String> inputMessageQueue;
 
+    /**
+     * 玩家name
+     */
     private String userName;
 
     /**
@@ -125,12 +134,18 @@ public class Gamer extends AbstractGeneralItem {
     private final EventManager eventManager = EventManager.getInstance();
 
     /**
+     * 回合数
+     */
+    private int turnNum = 0;
+
+    /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
      * 开始一个新的回合
      */
     public void newTurnStart() {
-        OutputInfo.info("%s的回合开始=====等待指令中====",userName);
+        turnNum++;
+        OutputInfo.info("%s的回合开始=====等待指令中====", userName);
         printPrivateQueue("=======你的回合======");
         active = true;
         //场中随从解除上场回合不能攻击
@@ -152,7 +167,7 @@ public class Gamer extends AbstractGeneralItem {
         EndTurnEvent endTurnEvent = new EndTurnEvent(this);
         eventManager.call(endTurnEvent);
         this.hero.endTurn();
-        printPublicQueue(String.format("%s的回合结束",userName));
+        printPublicQueue(String.format("%s的回合结束", userName));
     }
 
     /**
@@ -269,16 +284,16 @@ public class Gamer extends AbstractGeneralItem {
 
     public void useThisCard(Card card, Minion target) {
         String info;
-        if ((card instanceof AbstractSecretCard)){
-            info = String.format("%s打出了%s奥秘",userName,card.getCardClass().getCnName());
-        }else {
-            info = String.format("%s打出了%s",userName,card.getCardName());
-            if (target != null){
-                info += String.format(",目标%s",target.getMinionName());
+        if ((card instanceof AbstractSecretCard)) {
+            info = String.format("%s打出了%s奥秘", userName, card.getCardClass().getCnName());
+        } else {
+            info = String.format("%s打出了%s", userName, card.getCardName());
+            if (target != null) {
+                info += String.format(",目标%s", target.getMinionName());
             }
         }
         printPublicQueue(info);
-        eventManager.call(new UseCardFromHandEvent(this, card));
+        eventManager.call(new UseCardFromHandEvent(card, target));
         if (card instanceof AbstractMagicCard) {
             this.useThisMagicCard(card, target);
         } else if (card instanceof AbstractMinionCard) {
@@ -286,7 +301,7 @@ public class Gamer extends AbstractGeneralItem {
         } else if (card instanceof AbstractWeaponCard) {
             this.useThisWeaponCard(card, target);
         }
-        history.addUsedCard(card);
+        history.addUsedCard(card, turnNum);
     }
 
     /**
@@ -346,9 +361,9 @@ public class Gamer extends AbstractGeneralItem {
             printPrivateQueue("这不是一个有效的目标");
             return;
         }
-        String info = String.format("%s使用英雄技能%s",userName,heroPower.getCardName());
-        if (target != null){
-            info += String.format(",目标%s",target.getMinionName());
+        String info = String.format("%s使用英雄技能%s", userName, heroPower.getCardName());
+        if (target != null) {
+            info += String.format(",目标%s", target.getMinionName());
         }
         printPublicQueue(info);
         //消耗对应的法力值
@@ -492,7 +507,7 @@ public class Gamer extends AbstractGeneralItem {
         //随从进入战场
         AddMinionEvent addMinionEvent = new AddMinionEvent(minion);
         eventManager.call(addMinionEvent);
-        printPublicQueue(String.format("%s(atk: %s hp:%s)进入战场",minion.getMinionName(),minion.getAttackValue(),minion.getHealth()));
+        printPublicQueue(String.format("%s(atk: %s hp:%s)进入战场", minion.getMinionName(), minion.getAttackValue(), minion.getHealth()));
         checkMinion();
     }
 
@@ -665,7 +680,7 @@ public class Gamer extends AbstractGeneralItem {
     public void checkMinion() {
         List<Integer> deadIds = new ArrayList<>(14);
         for (int i = 0; i < minions.size(); i++) {
-            if (minions.get(i).getHealth() <= 0) {
+            if (minions.get(i).getHealth() <= 0 || minions.get(i).isDeadFlag()) {
                 deadIds.add(i);
             }
         }
@@ -730,9 +745,10 @@ public class Gamer extends AbstractGeneralItem {
 
     /**
      * 获取全部随从 包括英雄
+     *
      * @return 自身的全部随从 包括英雄
      */
-    public List<Minion> findAllMinion(){
+    public List<Minion> findAllMinion() {
         List<Minion> resultList = new ArrayList<>(minions);
         resultList.add(hero);
         return resultList;
@@ -750,7 +766,7 @@ public class Gamer extends AbstractGeneralItem {
             handInfo.append("[").append(i).append("]");
             handInfo.append(card.getCardName());
             handInfo.append("(cost:").append(card.getCost());
-            if (card instanceof AbstractMinionCard){
+            if (card instanceof AbstractMinionCard) {
                 handInfo.append(" atk:").append(((AbstractMinionCard) card).getAtk());
                 handInfo.append(" hp:").append(((AbstractMinionCard) card).getHealth());
             }
@@ -868,8 +884,23 @@ public class Gamer extends AbstractGeneralItem {
         return hand;
     }
 
+    /**
+     * 是否是当前玩家的活动回合
+     *
+     * @return 是活动回合返回true
+     */
     public boolean isActive() {
         return active;
+    }
+
+    /**
+     * 连击是否能触发
+     *
+     * @return 能触发连击返回true
+     */
+    public boolean isComboTrigger() {
+        int usedCardNumByTurnNum = history.getUsedCardNumByTurnNum(turnNum);
+        return usedCardNumByTurnNum > 0;
     }
 
     /**
@@ -882,11 +913,11 @@ public class Gamer extends AbstractGeneralItem {
         deckCards.add(index, card);
     }
 
-    public void printPrivateQueue(String msg){
-        OutputInfo.info(privateMessageQueue,msg);
+    public void printPrivateQueue(String msg) {
+        OutputInfo.info(privateMessageQueue, msg);
     }
 
-    public void printPublicQueue(String msg){
+    public void printPublicQueue(String msg) {
         printPrivateQueue(msg);
         OutputInfo.info(msg);
     }

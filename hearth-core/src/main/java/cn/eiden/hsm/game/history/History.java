@@ -12,10 +12,12 @@ import java.util.List;
 public interface History {
 
     /**
+     * 记录第几回合使用的卡牌 </br>
      * 添加使用过的卡牌
      * @param card 卡牌
+     * @param turnNum 回合数
      */
-    void addUsedCard(Card card);
+    void addUsedCard(Card card,int turnNum);
 
     /**
      * 根据卡牌类型获取使用过的卡牌
@@ -23,4 +25,11 @@ public interface History {
      * @return 使用过的卡牌集合
      */
     List<Card> getUsedCardWithType(Class<? extends Card> cardClass);
+
+    /**
+     * 获取某一回合使用过的卡牌数量
+     * @param turnNum 回合数
+     * @return 使用过的卡牌数量
+     */
+    int getUsedCardNumByTurnNum(int turnNum);
 }

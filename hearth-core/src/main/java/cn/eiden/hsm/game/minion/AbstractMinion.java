@@ -8,6 +8,7 @@ import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.game.keyword.Combo;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
@@ -93,6 +94,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private boolean divineShield = false;
 
+    /**
+     * 是否具有剧毒
+     */
+    private boolean poisonous = false;
+
     /**是否具有免疫*/
     private boolean immune = false;
     /**
@@ -130,9 +136,16 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     private Aura aura;
 
     /**
+     * 连击
+     */
+    private Combo combo;
+
+    /**
      * 自带监听
      */
     private MinionListener minionListener;
+
+    private boolean deadFlag = false;
 
     @Override
     public void attack(Minion beAttackMinion) {
@@ -158,18 +171,19 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             AfterHeroBeAttackEvent attackEvent = new AfterHeroBeAttackEvent(getOwner(), this);
             getOwner().getEventManager().call(attackEvent);
         }
+        //移除隐藏
+        this.removeStealth();
     }
 
     @Override
     public void beHurt(Minion source, long number) {
         if (number > 0) {
-            if (divineShield) {
+            if (this.isDivineShield()) {
                 OutputInfo.info(minionName + "圣盾抵消伤害");
                 removeDivineShield();
             } else {
-
-                OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + number + "点伤害");
-                reduceHealth(number);
+                //减少伤害
+                reduceHealth(source,number);
             }
         }
     }
@@ -187,14 +201,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
-    public void reduceHealth(long reduceHealth) {
+    public void reduceHealth(Minion source, long reduceHealth) {
         if (immune){
             OutputInfo.info(minionName + "免疫了本次伤害！");
             return;
         }
         MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this,reduceHealth);
         getOwner().getEventManager().call(minionBeHurtEvent);
-//        OutputInfo.info(minionName + "受到" + reduceHealth + "点伤害");
+        OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
         health -= reduceHealth;
     }
 
@@ -472,6 +486,50 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void setImmune(boolean immune) {
         this.immune = immune;
+    }
+
+    @Override
+    public boolean isDeadFlag() {
+        return deadFlag;
+    }
+
+    @Override
+    public void setDead() {
+        this.setDeadFlag(true);
+    }
+
+    public void setDeadFlag(boolean deadFlag) {
+        this.deadFlag = deadFlag;
+    }
+
+    @Override
+    public boolean hasPoisonous() {
+        return poisonous;
+    }
+
+    public void setPoisonous(boolean poisonous) {
+        this.poisonous = poisonous;
+    }
+
+
+    @Override
+    public void addPoisonous() {
+        this.setPoisonous(true);
+    }
+
+    @Override
+    public void removePoisonous() {
+        this.setPoisonous(false);
+    }
+
+    @Override
+    public void setCombo(Combo combo) {
+        this.combo = combo;
+    }
+
+    @Override
+    public Combo getCombo() {
+        return this.combo;
     }
 
     @Override

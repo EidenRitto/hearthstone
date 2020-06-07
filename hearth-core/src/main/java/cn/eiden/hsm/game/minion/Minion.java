@@ -5,6 +5,7 @@ import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.GeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
+import cn.eiden.hsm.game.keyword.Combo;
 import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
@@ -69,10 +70,10 @@ public interface Minion extends GeneralItem {
 
     /**
      * 减少生命值
-     *
+     * @param source 伤害来源
      * @param reduceHealth 数量
      */
-    void reduceHealth(long reduceHealth);
+    void reduceHealth(Minion source, long reduceHealth);
 
     /**
      * 减少生命值上限
@@ -328,24 +329,37 @@ public interface Minion extends GeneralItem {
      */
     void resetBuff();
 
+    /**
+     * 增加被buff的攻击力
+     *
+     * @param val 攻击力的值
+     */
     void addBuffAtk(long val);
 
+    /**
+     * 增加被buff的生命值
+     *
+     * @param val 生命值
+     */
     void addBuffHp(long val);
 
     /**
      * 获取随从对应的卡牌id
+     *
      * @return 卡牌id
      */
     String getCardId();
 
     /**
      * 是否具有免疫
+     *
      * @return 有免疫返回true
      */
     boolean isImmune();
 
     /**
      * 设置免疫
+     *
      * @param immune 是否免疫
      */
     void setImmune(boolean immune);
@@ -353,16 +367,82 @@ public interface Minion extends GeneralItem {
     /**
      * 获得免疫
      */
-    default void addImmune(){
+    default void addImmune() {
         setImmune(true);
     }
 
     /**
      * 移除免疫
      */
-    default void removeImmune(){
+    default void removeImmune() {
         setImmune(false);
     }
 
+    /**
+     * 复制随从
+     *
+     * @return 随从副本
+     */
     Minion clone();
+
+    /**
+     * 随从死亡标识
+     *
+     * @return 随从死亡标识
+     */
+    boolean isDeadFlag();
+
+    /**
+     * 设置随从死亡
+     */
+    void setDead();
+
+    /**
+     * 是否具有剧毒
+     *
+     * @return 有剧毒返回true
+     */
+    boolean hasPoisonous();
+
+    /**
+     * 添加剧毒
+     */
+    void addPoisonous();
+
+    /**
+     * 移除剧毒
+     */
+    void removePoisonous();
+
+    /**
+     * 设置连击
+     *
+     * @param combo 连击
+     */
+    void setCombo(Combo combo);
+
+    /**
+     * 获取连击
+     *
+     * @return 连击
+     */
+    Combo getCombo();
+
+    /**
+     * 执行连击
+     *
+     * @param target 指定的目标
+     */
+    default void doCombo(Minion target) {
+        this.getCombo().doCombo(this, target);
+    }
+
+    /**
+     * 是否有连击
+     *
+     * @return 有连击返回true
+     */
+    default boolean hasCombo() {
+        return this.getCombo() != null;
+    }
 }

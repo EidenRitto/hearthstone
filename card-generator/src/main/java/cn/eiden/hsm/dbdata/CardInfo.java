@@ -26,9 +26,11 @@ public class CardInfo {
     private Rarity rarity;
     /**文本描述*/
     private String cardText;
+    /**费用*/
     private int cost;
-
+    /**攻击力*/
     private int atk;
+    /**生命值*/
     private int health;
     /**冲锋*/
     private int charge;
@@ -54,6 +56,10 @@ public class CardInfo {
     private int secret;
     /**英雄技能*/
     private int heroPower;
+    /**剧毒*/
+    private int poisonous;
+    /**连击*/
+    private int combo;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;
