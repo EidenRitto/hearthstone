@@ -33,6 +33,7 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                 .addAnnotation(this.buildClassAnnotation())
                 .addAnnotation(this.buildTagAnnotation())
                 .addField(this.buildFieldCost())
+                .addField(this.buildFieldOverload())
                 .addField(this.buildFieldDesc())
                 .addField(this.buildFieldCardName())
                 .addField(this.buildFieldId())
@@ -45,9 +46,9 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldDurability())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
                                 , "CARD_NAME", "COST", "DESCRIPTION", "ID", "CARD_ID"
-                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY", "ATK", "DURABILITY")
+                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY", "ATK", "DURABILITY", "OVERLOAD")
                         .build())
                 .addMethod(MethodSpec.methodBuilder("createWeapon")
                         .addModifiers(Modifier.PUBLIC)

@@ -17,9 +17,13 @@ import lombok.Setter;
 @Setter
 @Getter
 public abstract class AbstractWeaponCard extends AbstractCard {
-    /**武器攻击力*/
+    /**
+     * 武器攻击力
+     */
     private long atk;
-    /**耐久度*/
+    /**
+     * 耐久度
+     */
     private long durability;
 
     public AbstractWeaponCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, long atk, long durability) {
@@ -28,10 +32,17 @@ public abstract class AbstractWeaponCard extends AbstractCard {
         this.durability = durability;
     }
 
+    public AbstractWeaponCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, long atk, long durability, int overload) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity, overload);
+        this.atk = atk;
+        this.durability = durability;
+    }
+
     /**
      * 组合优于继承
      * 创建卡牌对应的武器
+     *
      * @return 卡牌对应的武器
-     * */
+     */
     public abstract Weapon createWeapon();
 }

@@ -318,7 +318,7 @@ public class Gamer extends AbstractGeneralItem {
 
     public void useThisWeaponCard(Card card, Minion target) {
         AbstractWeaponCard weaponCard = (AbstractWeaponCard) card;
-        getManaCrystal().applyAvailable(weaponCard.getCost());
+        getManaCrystal().applyAvailable(weaponCard);
         Weapon weapon = weaponCard.createWeapon();
         hero.equipWeapons(weapon);
         //从手牌中移除卡牌
@@ -330,7 +330,7 @@ public class Gamer extends AbstractGeneralItem {
         //获得随从卡
         AbstractMinionCard minionCard = (AbstractMinionCard) card;
         //消耗对应的法力值
-        getManaCrystal().applyAvailable(minionCard.getCost());
+        getManaCrystal().applyAvailable(minionCard);
         //获得一张手牌指向的随从
         Minion minion = minionCard.createMinion();
         minion.setOwner(this);
@@ -367,7 +367,7 @@ public class Gamer extends AbstractGeneralItem {
         }
         printPublicQueue(info);
         //消耗对应的法力值
-        getManaCrystal().applyAvailable(heroPower.getCost());
+        getManaCrystal().applyAvailable(heroPower);
         //技能效果
         heroPower.powerEffect(this, target);
         //次数-1
@@ -398,7 +398,7 @@ public class Gamer extends AbstractGeneralItem {
         //获得法术卡
         AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值
-        getManaCrystal().applyAvailable(magicCard.getCost());
+        getManaCrystal().applyAvailable(magicCard);
         //发出事件
         eventManager.call(new UseSpellCardFromHandEvent(this, magicCard, target));
         if (magicCard instanceof AbstractSecretCard) {

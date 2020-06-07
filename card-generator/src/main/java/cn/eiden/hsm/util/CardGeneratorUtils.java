@@ -122,6 +122,13 @@ public class CardGeneratorUtils {
                 case COMBO:
                     cardCache.setCombo(Integer.parseInt(tag.getValue()));
                     break;
+                case WINDFURY:
+                    cardCache.setWindFury(Integer.parseInt(tag.getValue()));
+                    break;
+                case OVERLOAD:
+                    final int overload = Integer.parseInt(tag.getValue());
+                    cardCache.setOverload(overload);
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

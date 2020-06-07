@@ -112,6 +112,13 @@ public abstract class AbstractCardFileBuilder {
                 .build();
     }
 
+    protected FieldSpec buildFieldOverload() {
+        return FieldSpec.builder(int.class, "OVERLOAD")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getOverload())
+                .build();
+    }
+
     protected FieldSpec buildFieldDesc() {
         return FieldSpec.builder(String.class, "DESCRIPTION")
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)

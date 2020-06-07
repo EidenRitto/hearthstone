@@ -415,6 +415,24 @@ public interface Minion extends GeneralItem {
     void removePoisonous();
 
     /**
+     * 是否具有风怒
+     *
+     * @return 有风怒返回true
+     */
+    boolean hasWindFury();
+
+    /**
+     * 添加风怒
+     */
+    void addWindFury();
+
+    /**
+     * 移除风怒
+     */
+    void removeWindFury();
+
+
+    /**
      * 设置连击
      *
      * @param combo 连击

@@ -36,6 +36,7 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                 .addAnnotation(this.buildClassAnnotation())
                 .addAnnotation(this.buildTagAnnotation())
                 .addField(this.buildFieldCost())
+                .addField(this.buildFieldOverload())
                 .addField(this.buildFieldDesc())
                 .addField(this.buildFieldCardName())
                 .addField(this.buildFieldId())
@@ -46,9 +47,9 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldRarity())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
                                 , "CARD_NAME", "COST", "DESCRIPTION", "ID", "CARD_ID"
-                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY")
+                                , "CARD_SET", "CARD_CLASS", "CARD_TYPE", "RARITY", "OVERLOAD")
                         .build())
                 .build();
         if (cardInfo.getSecret() == 1){

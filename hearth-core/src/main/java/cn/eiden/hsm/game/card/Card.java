@@ -52,6 +52,13 @@ public interface Card extends GeneralItem {
      */
     CardType getCardType();
 
+
+    /**
+     * 获取过载水晶数量
+     * @return 过载水晶数量
+     */
+    int getOverload();
+
     /**
      * 是否不需要目标
      * @return 不需要目标返回true

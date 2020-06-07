@@ -41,6 +41,10 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
      * 稀有度
      */
     private Rarity rarity;
+    /**
+     * 过载
+     */
+    protected int overload;
 
     private Integer ruleForceCost;
 
@@ -64,6 +68,19 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
         this.cardClass = cardClass;
         this.cardType = cardType;
         this.rarity = rarity;
+    }
+
+    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity ,int overload) {
+        this.cardName = cardName;
+        this.cost = cost;
+        this.description = description;
+        this.id = id;
+        this.cardId = cardId;
+        this.cardSet = cardSet;
+        this.cardClass = cardClass;
+        this.cardType = cardType;
+        this.rarity = rarity;
+        this.overload = overload;
     }
 
     @Override
@@ -100,4 +117,10 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     public CardType getCardType() {
         return cardType;
     }
+
+    @Override
+    public int getOverload() {
+        return this.overload;
+    }
+
 }

@@ -25,8 +25,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @EqualsAndHashCode(callSuper = true)
 @Slf4j
-public abstract class AbstractMinion extends AbstractGeneralItem implements Minion,Cloneable {
-    /**随从对应的卡牌id*/
+public abstract class AbstractMinion extends AbstractGeneralItem implements Minion, Cloneable {
+    /**
+     * 随从对应的卡牌id
+     */
     private String cardId;
     /**
      * 随从名称
@@ -99,7 +101,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private boolean poisonous = false;
 
-    /**是否具有免疫*/
+    /**
+     * 是否具有风怒
+     */
+    private boolean windFury = false;
+
+    /**
+     * 是否具有免疫
+     */
     private boolean immune = false;
     /**
      * 法术强度
@@ -160,7 +169,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             getOwner().printPrivateQueue("这个随从无法进行攻击");
             return;
         }
-        OutputInfo.info(String.format("%s攻击%s",this.getMinionName(),beAttackMinion.getMinionName()));
+        OutputInfo.info(String.format("%s攻击%s", this.getMinionName(), beAttackMinion.getMinionName()));
         //攻击次数减少1
         attackTime--;
         //敌人掉血
@@ -183,7 +192,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
                 removeDivineShield();
             } else {
                 //减少伤害
-                reduceHealth(source,number);
+                reduceHealth(source, number);
             }
         }
     }
@@ -202,11 +211,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void reduceHealth(Minion source, long reduceHealth) {
-        if (immune){
+        if (immune) {
             OutputInfo.info(minionName + "免疫了本次伤害！");
             return;
         }
-        MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this,reduceHealth);
+        MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this, reduceHealth);
         getOwner().getEventManager().call(minionBeHurtEvent);
         OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
         health -= reduceHealth;
@@ -511,7 +520,6 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         this.poisonous = poisonous;
     }
 
-
     @Override
     public void addPoisonous() {
         this.setPoisonous(true);
@@ -520,6 +528,26 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void removePoisonous() {
         this.setPoisonous(false);
+    }
+
+    @Override
+    public boolean hasWindFury() {
+        return this.windFury;
+    }
+
+    @Override
+    public void addWindFury() {
+        this.setWindFury(true);
+        this.attackTimeLimit = 2;
+    }
+
+    @Override
+    public void removeWindFury() {
+        this.setWindFury(false);
+    }
+
+    public void setWindFury(boolean windFury) {
+        this.windFury = windFury;
     }
 
     @Override
@@ -537,7 +565,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         try {
             Minion minionClone = (Minion) super.clone();
             MinionListener minionListenerClone = null;
-            if (this.minionListener != null){
+            if (this.minionListener != null) {
                 minionListenerClone = this.minionListener.clone();
             }
             minionClone.setMinionListener(minionListenerClone);

@@ -14,8 +14,8 @@ import cn.eiden.hsm.game.minion.Secret;
  * @date 2020/5/28 10:21
  */
 public abstract class AbstractSecretCard extends AbstractMagicCard {
-    public AbstractSecretCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity) {
-        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
+    public AbstractSecretCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, CardClass cardClass, CardType cardType, Rarity rarity, int overload) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity, overload);
     }
 
     @Override

@@ -40,6 +40,13 @@ public abstract class AbstractMinionCard extends AbstractCard {
         this.race = race;
     }
 
+    public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race, int overload) {
+        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity, overload);
+        this.health = health;
+        this.atk = atk;
+        this.race = race;
+    }
+
     /**
      * 组合优于继承！
      * 创建卡牌对应的随从

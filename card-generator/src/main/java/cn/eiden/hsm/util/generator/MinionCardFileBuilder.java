@@ -35,6 +35,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .addAnnotation(this.buildClassAnnotation())
                 .addAnnotation(this.buildTagAnnotation())
                 .addField(this.buildFieldCost())
+                .addField(this.buildFieldOverload())
                 .addField(this.buildFieldDesc())
                 .addField(this.buildFieldCardName())
                 .addField(this.buildFieldId())
@@ -48,10 +49,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldRace())
                 .addMethod(MethodSpec.constructorBuilder()
                         .addModifiers(Modifier.PUBLIC)
-                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
                                 , "CARD_NAME", "COST", "DESCRIPTION", "ID",
                                 "CARD_ID", "CARD_SET", "CARD_CLASS", "CARD_TYPE",
-                                "RARITY", "HEALTH", "ATK", "RACE")
+                                "RARITY", "HEALTH", "ATK", "RACE", "OVERLOAD")
                         .build())
                 .addMethod(MethodSpec.methodBuilder("createMinion")
                         .addModifiers(Modifier.PUBLIC)
@@ -142,6 +143,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getCombo() == 1) {
             CodeBlock combo = CodeBlock.builder().addStatement("minionObject.setCombo(this.selfCombo())").build();
             core = core.toBuilder().add(combo).build();
+        }
+        if (cardInfo.getWindFury() == 1) {
+            CodeBlock windFury = CodeBlock.builder().addStatement("minionObject.addWindFury()").build();
+            core = core.toBuilder().add(windFury).build();
         }
         return core;
     }

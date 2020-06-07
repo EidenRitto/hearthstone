@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game;
 
+import cn.eiden.hsm.game.card.Card;
 import lombok.Getter;
 
 /**
@@ -71,11 +72,14 @@ public class ManaCrystal extends AbstractGeneralItem {
     /**
      * 使用
      *
-     * @param number 数量
+     * @param card 被使用的卡牌
      */
-    public void applyAvailable(int number) {
+    public void applyAvailable(Card card) {
+        int number = card.getCost();
         //低于下限无效
         alive = Math.max(alive - number, CRYSTAL_OFFLINE);
+        //过载
+        this.overload(card.getOverload());
     }
 
     /**

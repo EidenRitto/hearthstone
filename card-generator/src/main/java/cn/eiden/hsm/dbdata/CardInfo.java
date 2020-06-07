@@ -60,6 +60,10 @@ public class CardInfo {
     private int poisonous;
     /**连击*/
     private int combo;
+    /**风怒*/
+    private int windFury;
+    /**过载*/
+    private int overload = 0;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;
