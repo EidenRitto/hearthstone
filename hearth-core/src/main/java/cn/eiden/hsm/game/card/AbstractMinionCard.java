@@ -22,22 +22,10 @@ public abstract class AbstractMinionCard extends AbstractCard {
     /**种族*/
     private Race race;
 
-    public AbstractMinionCard(Long health, Long atk) {
-        this.health = health;
-        this.atk = atk;
-    }
-
     public AbstractMinionCard(int cost, String description, String cardName, CardClass cardClass, Long health, Long atk) {
         super(cost, description, cardName, cardClass);
         this.health = health;
         this.atk = atk;
-    }
-
-    public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race) {
-        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
-        this.health = health;
-        this.atk = atk;
-        this.race = race;
     }
 
     public AbstractMinionCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, Long health, Long atk, Race race, int overload) {

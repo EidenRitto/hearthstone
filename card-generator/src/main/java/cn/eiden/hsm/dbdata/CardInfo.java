@@ -68,6 +68,8 @@ public class CardInfo {
     private int lifeSteal;
     /**突袭*/
     private int rush;
+    /**抉择*/
+    private int chooseOne;
     /**过载*/
     private int overload = 0;
 

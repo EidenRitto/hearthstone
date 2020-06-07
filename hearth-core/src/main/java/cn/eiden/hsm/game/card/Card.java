@@ -5,6 +5,8 @@ import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.game.GeneralItem;
 
+import java.util.List;
+
 /**
  * 卡牌
  * @author Eiden J.P Zhou
@@ -58,6 +60,18 @@ public interface Card extends GeneralItem {
      * @return 过载水晶数量
      */
     int getOverload();
+
+    /**
+     * 是否是抉择卡牌
+     * @return 有抉择选项返回true
+     */
+    boolean hasChooseOne();
+
+    /**
+     * 添加抉择选项
+     * @param options  抉择选项列表
+     */
+    void addChooseOne(List<Card> options);
 
     /**
      * 是否不需要目标

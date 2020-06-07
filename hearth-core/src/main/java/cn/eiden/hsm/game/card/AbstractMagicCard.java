@@ -25,10 +25,6 @@ public abstract class AbstractMagicCard extends AbstractCard {
         super(cost, description, cardName ,cardClass);
     }
 
-    public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity) {
-        super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity);
-    }
-
     public AbstractMagicCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, int overload) {
         super(cardName, cost, description, id, cardId, cardSet, cardClass, cardType, rarity, overload);
     }

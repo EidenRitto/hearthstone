@@ -132,6 +132,9 @@ public class CardGeneratorUtils {
                 case LIFESTEAL:
                     cardCache.setLifeSteal(Integer.parseInt(tag.getValue()));
                     break;
+                case CHOOSE_ONE:
+                    cardCache.setChooseOne(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

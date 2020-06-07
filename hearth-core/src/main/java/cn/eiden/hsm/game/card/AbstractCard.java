@@ -7,14 +7,25 @@ import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 
+import java.util.List;
+
 /**
  * @author : Eiden J.P Zhou
  * @version : 2.0
  * @date : 2018/9/12
  */
 public abstract class AbstractCard extends AbstractGeneralItem implements Card {
+    /**
+     * 卡牌名称
+     */
     private String cardName;
+    /**
+     * 卡牌费用
+     */
     private int cost;
+    /**
+     * 卡牌描述
+     */
     private String description;
 
     /**
@@ -44,7 +55,12 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     /**
      * 过载
      */
-    protected int overload;
+    private int overload;
+
+    /**
+     * 抉择选项
+     */
+    private List<Card> chooseOneList;
 
     private Integer ruleForceCost;
 
@@ -70,7 +86,7 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
         this.rarity = rarity;
     }
 
-    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity ,int overload) {
+    public AbstractCard(String cardName, int cost, String description, String id, String cardId, CardSet cardSet, cn.eiden.hsm.enums.CardClass cardClass, CardType cardType, Rarity rarity, int overload) {
         this.cardName = cardName;
         this.cost = cost;
         this.description = description;
@@ -123,4 +139,13 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
         return this.overload;
     }
 
+    @Override
+    public boolean hasChooseOne() {
+        return this.chooseOneList != null;
+    }
+
+    @Override
+    public void addChooseOne(List<Card> options) {
+        this.chooseOneList = options;
+    }
 }
