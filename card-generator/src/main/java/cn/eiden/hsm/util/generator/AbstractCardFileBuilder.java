@@ -54,14 +54,25 @@ public abstract class AbstractCardFileBuilder {
     abstract public void buildFile();
 
     /**
-     * 把英文名称格式化为Java所允许的合法文件名
+     * 把英文名称格式化为Java所允许的合法文件名</br>
+     * 当且仅当同包下出现同名文件时，添加新的后缀 如： xx_1 xx_2
      *
      * @return 合法java类名
      */
     protected String formatFileName() {
         try {
-            return JavaBeansUtil.getCamelCaseString(cardInfo.getCardName(), true);
-        }catch (Exception e){
+            String className = JavaBeansUtil.getCamelCaseString(cardInfo.getCardName(), true);
+            String originName = className;
+            String packageClassName = getPackageName() + className;
+            int i = 1;
+            while (CardGeneratorUtils.classNameSet.contains(packageClassName)) {
+                className = String.format(originName + "_%s", i);
+                packageClassName = getPackageName() + className;
+                i++;
+            }
+            CardGeneratorUtils.classNameSet.add(packageClassName);
+            return className;
+        } catch (Exception e) {
             log.error(cardInfo.getCardCnName());
             return "unknow";
         }
@@ -69,7 +80,6 @@ public abstract class AbstractCardFileBuilder {
 
     /**
      * 生成类注释
-     *
      *
      * @return 注释代码块
      */
@@ -92,7 +102,7 @@ public abstract class AbstractCardFileBuilder {
         try {
             log.info("正在写入卡牌" + cardInfo.getCardCnName() + ".....");
             javaFile.writeToPath(path);
-            log.info(cardInfo.getCardCnName() +"写入完成，源文件包路径为：" + packageName);
+            log.info(cardInfo.getCardCnName() + "写入完成，源文件包路径为：" + packageName);
             successNum++;
         } catch (IOException e) {
             e.printStackTrace();
@@ -210,17 +220,17 @@ public abstract class AbstractCardFileBuilder {
                 .build();
     }
 
-    protected AnnotationSpec buildClassAnnotation(){
+    protected AnnotationSpec buildClassAnnotation() {
         return AnnotationSpec.builder(Id.class)
-                .addMember("value","$L",Integer.parseInt(cardInfo.getId()))
-                .addMember("name","$S",cardInfo.getCardCnName())
+                .addMember("value", "$L", Integer.parseInt(cardInfo.getId()))
+                .addMember("name", "$S", cardInfo.getCardCnName())
                 .build();
     }
 
-    protected AnnotationSpec buildTagAnnotation(){
+    protected AnnotationSpec buildTagAnnotation() {
         return AnnotationSpec.builder(Tags.class)
-                .addMember("cardClass","$L",cardInfo.getCardClass().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardClass())
-                .addMember("cardSet","$L",cardInfo.getCardSet().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardSet())
+                .addMember("cardClass", "$L", cardInfo.getCardClass().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardClass())
+                .addMember("cardSet", "$L", cardInfo.getCardSet().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardSet())
                 .build();
     }
 

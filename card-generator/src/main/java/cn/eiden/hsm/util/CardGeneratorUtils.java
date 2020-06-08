@@ -6,8 +6,10 @@ import cn.eiden.hsm.dbdata.Tag;
 import cn.eiden.hsm.enums.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Card生成器
@@ -17,6 +19,7 @@ import java.util.Objects;
 @Slf4j
 public class CardGeneratorUtils {
     public static final String PACKAGE_PATH = "\\src\\main\\java\\";
+    public static Set<String> classNameSet = new HashSet<>();
     public static CardInfo loadInCache(Entity entity){
         //缓存
         CardInfo cardCache = new CardInfo();
