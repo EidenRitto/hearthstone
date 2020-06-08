@@ -148,4 +148,9 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     public void addChooseOne(List<Card> options) {
         this.chooseOneList = options;
     }
+
+    @Override
+    public List<Card> getOptions() {
+        return this.chooseOneList;
+    }
 }

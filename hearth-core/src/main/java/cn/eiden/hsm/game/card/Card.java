@@ -74,6 +74,12 @@ public interface Card extends GeneralItem {
     void addChooseOne(List<Card> options);
 
     /**
+     * 获取选项
+     * @return 抉择选项
+     */
+    List<Card> getOptions();
+
+    /**
      * 是否不需要目标
      * @return 不需要目标返回true
      */

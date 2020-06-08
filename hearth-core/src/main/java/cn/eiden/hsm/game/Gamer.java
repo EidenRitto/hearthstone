@@ -321,8 +321,6 @@ public class Gamer extends AbstractGeneralItem {
         getManaCrystal().applyAvailable(weaponCard);
         Weapon weapon = weaponCard.createWeapon();
         hero.equipWeapons(weapon);
-        //从手牌中移除卡牌
-        getHand().loss(card);
     }
 
 
@@ -339,8 +337,6 @@ public class Gamer extends AbstractGeneralItem {
         eventManager.call(abstractEvent);
 
         addMinion(abstractEvent.getMinionObject());
-        //从手牌中移除随从卡牌
-        getHand().loss(card);
     }
 
     /**
@@ -409,8 +405,6 @@ public class Gamer extends AbstractGeneralItem {
         if (!magicCard.isCounter()) {
             magicCard.magicEffect(this, target);
         }
-        //从手牌中移除随从卡牌
-        getHand().loss(card);
     }
 
     /**
@@ -776,6 +770,7 @@ public class Gamer extends AbstractGeneralItem {
         }
         printPrivateQueue(handInfo.toString());
     }
+
 
     /**
      * 获取卡牌的合法目标

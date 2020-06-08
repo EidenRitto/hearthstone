@@ -474,7 +474,9 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void setMinionListener(MinionListener minionListener) {
         this.minionListener = minionListener;
-        minionListener.setMinion(this);
+        if (minionListener != null){
+            minionListener.setMinion(this);
+        }
     }
 
     @Override

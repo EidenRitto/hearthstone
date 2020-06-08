@@ -127,7 +127,9 @@ enable_backward_compatibility=false
   - [x] 沉默
   - [x] 冻结
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/mage/RayOfFrostCard.java">霜冻射线</a>
-  - [ ] 抉择
+  - [x] 抉择
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/druid/DruidOfTheClawCard.java">利爪德鲁伊</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/druid/WrathCard.java">愤怒</a>
   - [x] 连击
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/Si7AgentCard.java">军情七处特工</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/EviscerateCard.java">刺骨</a>

@@ -48,7 +48,13 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                 .addField(this.buildFieldHealth())
                 .addField(this.buildFieldAtk())
                 .addField(this.buildFieldRace())
-                .addMethod(this.getConstructorMethod())
+                .addMethod(MethodSpec.constructorBuilder()
+                        .addModifiers(Modifier.PUBLIC)
+                        .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
+                                , "CARD_NAME", "COST", "DESCRIPTION", "ID",
+                                "CARD_ID", "CARD_SET", "CARD_CLASS", "CARD_TYPE",
+                                "RARITY", "HEALTH", "ATK", "RACE", "OVERLOAD")
+                        .build())
                 .addMethod(MethodSpec.methodBuilder("createMinion")
                         .addModifiers(Modifier.PUBLIC)
                         .addAnnotation(Override.class)
@@ -94,39 +100,7 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
-        if (cardInfo.getChooseOne() == 1) {
-            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("options")
-                    .addModifiers(Modifier.PROTECTED)
-                    .returns(List.class)
-                    .addStatement("// 重写以补全效果")
-                    .addStatement("return null")
-                    .addJavadoc("$S\n", cardInfo.getCardText())
-                    .build()).build();
-        }
         writeToSourceFile(myClass);
-    }
-
-    private MethodSpec getConstructorMethod() {
-        MethodSpec constructor;
-        if (cardInfo.getChooseOne() == 1) {
-            constructor = MethodSpec.constructorBuilder()
-                    .addModifiers(Modifier.PUBLIC)
-                    .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
-                            , "CARD_NAME", "COST", "DESCRIPTION", "ID",
-                            "CARD_ID", "CARD_SET", "CARD_CLASS", "CARD_TYPE",
-                            "RARITY", "HEALTH", "ATK", "RACE", "OVERLOAD")
-                    .addStatement("addChooseOne(options())")
-                    .build();
-        }else {
-            constructor = MethodSpec.constructorBuilder()
-                    .addModifiers(Modifier.PUBLIC)
-                    .addStatement("super($N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N, $N)"
-                            , "CARD_NAME", "COST", "DESCRIPTION", "ID",
-                            "CARD_ID", "CARD_SET", "CARD_CLASS", "CARD_TYPE",
-                            "RARITY", "HEALTH", "ATK", "RACE", "OVERLOAD")
-                    .build();
-        }
-        return constructor;
     }
 
     private CodeBlock addAdditionalField() {

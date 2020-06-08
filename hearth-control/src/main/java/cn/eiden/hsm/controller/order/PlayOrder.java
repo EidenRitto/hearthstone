@@ -1,6 +1,7 @@
 package cn.eiden.hsm.controller.order;
 
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.AbstractMinionCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.output.OutputInfo;
@@ -22,8 +23,18 @@ public class PlayOrder extends AbstractOrder implements Order {
         if (cardNum == null){
             return;
         }
-        Card card = gamer.getHand().getCard(cardNum);
+        Card originCard = gamer.getHand().getCard(cardNum);
+        Card card = originCard;
         if (gamer.checkUse(card)){
+            if (card.hasChooseOne()){
+                List<Card> options = card.getOptions();
+                printOptions(options);
+                Integer optionNum = getOptionNum(options);
+                if (optionNum == null){
+                    return;
+                }
+                card = options.get(optionNum);
+            }
             if (card.isNoneTarget()){
                 gamer.useThisCard(card,null);
             }else {
@@ -32,6 +43,40 @@ public class PlayOrder extends AbstractOrder implements Order {
                 Minion targetMinion = legitimateTarget.get(targetNum);
                 gamer.useThisCard(card,targetMinion);
             }
+            //从手牌中移除卡牌
+            gamer.getHand().loss(originCard);
+        }
+    }
+
+    /**
+     * 打印选项
+     */
+    public void printOptions(List<Card> options) {
+        StringBuilder handInfo = new StringBuilder("选择以下选项:\n");
+        for (int i = 0; i < options.size(); i++) {
+            Card card = options.get(i);
+            handInfo.append("[").append(i).append("]");
+            handInfo.append(card.getCardName());
+            handInfo.append(" ").append(RegexUtil.removeHtmlTag(card.getDescription()));
+            handInfo.append(")");
+            handInfo.append("\n");
+        }
+        gamer.printPrivateQueue(handInfo.toString());
+    }
+
+    public Integer getOptionNum(List<Card> options) {
+        while (true) {
+            //等待输入信息
+            String input = getOrder();
+            if (RegexUtil.isNumberStr(input)) {
+                int index = Integer.parseInt(input);
+                if (index < options.size() && index >= 0) {
+                    return index;
+                }
+            } else {
+                return null;
+            }
+            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
         }
     }
 
