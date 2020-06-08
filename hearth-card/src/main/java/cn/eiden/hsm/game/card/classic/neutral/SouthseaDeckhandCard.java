@@ -1,4 +1,4 @@
-package cn.eiden.hsm.game.card.classic;
+package cn.eiden.hsm.game.card.classic.neutral;
 
 import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;

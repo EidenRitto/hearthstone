@@ -101,6 +101,64 @@ enable_backward_compatibility=false
 
 ## 如何扩展添加新的卡牌
 
+### 为什么要添加卡牌
+
+- 炉石传说运营了6年，19+1个卡牌扩展包，卡牌数量太多
+- 本项目从卡牌数据源能生成全部的牌面信息（费用，稀有度，职业，攻击力，生命值等静态信息）
+- 作者将会从底层实现全部的游戏功能，并且至少每一种效果的卡牌会写出至少一个示例卡牌，其他的卡牌效果需要被仿写
+- 希望喜欢炉石传说和Java的朋友和我一起为本项目贡献卡牌
+
+### 有哪些卡牌需要被添加
+
+- 大多数白板随从，武器（无描述的卡牌）无需手动添加
+- 只有关键字描述的随从（比如[圣盾] [嘲讽] [冲锋]等）无需手动添加
+- 关键字配合文字描述的卡牌（比如 <b>战吼：</b>从你的牌库中抽一张<b>奥秘</b>牌。）
+- 全部的法术牌
+- 其他牌面带有描述的卡牌
+
+### 如何添加卡牌
+
+> 在【hearth-card】模块中使用搜索功能找到你要实现的卡牌 （例如，我想实现卡牌【阿莱克丝塔萨】）  
+> 如果存在多个结果，则选择对应拓展包内的卡牌类（【阿莱克丝塔萨】在经典包，经典包的包名为【expert1】）  
+> 复制这个类，在cn/eiden/hsm/game/card目录中找到对应的扩展包和职业（【阿莱克丝塔萨】是经典包的中立随从对应的包名为【classic.neutral】）  
+> 在这个包中创建一个新类继承自上一步的类，新的类名一般在前面得类后面加Card  
+
+```java
+public class AlexstraszaCard extends Alexstrasza {
+}
+```
+
+> 如果这张卡牌在打出时需要选择目标（炉石传说中的卡牌只有选择一个目标和不需要选择目标两种）则需要在类头加入注解@TargetScope  
+>> 需要注意的是，有些卡牌可以选择全部目标(敌/我)(随从/英雄) 如[火球术][1]  
+>> 有些卡牌则只能选择敌方目标，如[横扫][2]  
+>> 示例中只能以双方英雄为目标则给注解添加以下属性  
+>> 灵活使用TargetScope注解  
+```java
+@TargetScope(classScope = HeroMinion.class)
+public class AlexstraszaCard extends Alexstrasza {
+}
+```
+
+> 战吼随从重写selfBattleCry方法，返回一个战吼接口的实现  
+
+```java
+@TargetScope(classScope = HeroMinion.class)
+public class AlexstraszaCard extends Alexstrasza {
+    /**
+     * "<b>战吼：</b>\n"
+     * + "将一方英雄的剩余生命值变为15。"
+     */
+    @Override
+    protected Battle selfBattleCry() {
+        return (e,t) -> t.setHealth(15);
+    }
+}
+```
+
+> 完成！一张新的卡牌特效成功实现  
+> 其他卡牌则参考项目中已经实现的其他卡牌  
+
+
 #### 附录
 
 <a name="otherCard"></a>
@@ -143,6 +201,8 @@ enable_backward_compatibility=false
   - [ ] 磁力
   - [ ] 超杀
   - [x] 免疫
+  - [ ] 休眠
+  - [ ] 流放
 
 <a name="otherClass"></a>
 - [ ] 卡牌包
@@ -169,3 +229,7 @@ enable_backward_compatibility=false
   - [ ] 迦拉克隆的觉醒 YOD
   - [ ] 外域的灰烬 BT
   
+  
+  
+[1]: hearth-card/src/main/java/cn/eiden/hsm/game/card/base/mage/FireballCard.java
+[2]: hearth-card/src/main/java/cn/eiden/hsm/game/card/base/druid/SwipeCard.java

@@ -1,4 +1,4 @@
-package cn.eiden.hsm.game.card.classic;
+package cn.eiden.hsm.game.card.classic.neutral;
 
 import cn.eiden.hsm.game.card.defs.expert1.neutral.BloodsailRaider;
 import cn.eiden.hsm.game.keyword.Battle;

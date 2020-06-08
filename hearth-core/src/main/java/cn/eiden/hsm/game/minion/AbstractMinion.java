@@ -311,6 +311,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public void setHealth(long health) {
+        this.health = health;
+    }
+
+    @Override
     public long getAttackValue() {
         return attackValue + buffedAttackValue;
     }

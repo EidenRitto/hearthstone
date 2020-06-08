@@ -156,6 +156,12 @@ public interface Minion extends GeneralItem {
     long getHealth();
 
     /**
+     * 改变生命值
+     * @param health 生命值
+     */
+    void setHealth(long health);
+
+    /**
      * 是否可以攻击
      *
      * @return 可以返回true
