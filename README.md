@@ -204,6 +204,8 @@ public class AlexstraszaCard extends Alexstrasza {
   - [ ] 磁力
   - [ ] 超杀
   - [x] 免疫
+  - [ ] 复生
+  - [ ] 双生法术
   - [ ] 休眠
   - [ ] 流放
 
