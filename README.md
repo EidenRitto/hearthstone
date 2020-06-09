@@ -232,6 +232,7 @@ public class AlexstraszaCard extends Alexstrasza {
   - [ ] 迦拉克隆的觉醒 YOD
   - [ ] 外域的灰烬 BT
   
+### 交流群 ：649207014
   
   
 [1]: hearth-card/src/main/java/cn/eiden/hsm/game/card/base/mage/FireballCard.java
