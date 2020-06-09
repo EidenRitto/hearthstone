@@ -3,9 +3,13 @@ package cn.eiden.hsm.game.card;
 import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.annotation.Tags;
 import cn.eiden.hsm.enums.CardClass;
+import cn.eiden.hsm.enums.CardSet;
+import cn.eiden.hsm.enums.CardType;
+import cn.eiden.hsm.enums.Race;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 /**
@@ -23,10 +27,12 @@ public class CardFactory {
      * 自身单例对象
      */
     private static CardFactory cardFactory;
-    /**
-     * 职业-反射缓存池
-     */
-    private Map<CardClass, Set<Class<? extends Card>>> professionCardPool;
+
+    private Map<Integer, Set<Integer>> cardCostPool = new HashMap<>(16);
+    private Map<CardSet, Set<Integer>> cardSetPool = new HashMap<>(32);
+    private Map<CardClass, Set<Integer>> cardClassPool = new HashMap<>(16);
+    private Map<CardType, Set<Integer>> cardTypePool = new HashMap<>(8);
+    private Map<Race, Set<Integer>> cardRacePool = new HashMap<>(32);
     /**
      * id卡牌池
      */
@@ -41,53 +47,18 @@ public class CardFactory {
 
     private CardFactory() {
         random = new Random();
-        professionCardPool = new HashMap<>(16);
         cardPool = new HashMap<>(7000);
         this.initCache();
     }
 
-    public Card getRandomCard(CardClass profession) {
-        Set<Class<? extends Card>> subTypesOfCard = this.findInCache(profession);
-        //从反射获取到的类中随机取一个类，由于set无序，使用迭代器，迭代随机的次数
-        Class<? extends Card> next = null;
-        int randomIndex = random.nextInt(subTypesOfCard.size());
-        Iterator<Class<? extends Card>> iterator = subTypesOfCard.iterator();
-        for (int i = 0; i < randomIndex + 1; i++) {
-            next = iterator.next();
-        }
-        //反射生成实例对象
-        Card card = null;
-        if (next != null) {
-            try {
-                card = next.newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-        return card;
-    }
-
-    private Set<Class<? extends Card>> findInCache(CardClass profession) {
-        //缓存中存在则直接返回
-        return professionCardPool.get(profession);
-    }
-
     private void initCache() {
-        //初始化职业卡牌缓存池
-        for (CardClass profession : CardClass.values()) {
-            Set<Class<? extends Card>> professionSet = new HashSet<>();
-            professionCardPool.put(profession, professionSet);
-        }
+
         //获取某个包中所有版本的卡牌类
         Reflections reflections = new Reflections(BASE_PACKAGE_PATH);
 
         Set<Class<? extends Card>> subTypesOfCard = reflections.getSubTypesOf(Card.class);
         for (Class<? extends Card> cardClass : subTypesOfCard) {
             Tags annotation = cardClass.getAnnotation(Tags.class);
-            if (annotation != null) {
-                //存入缓存池
-                professionCardPool.get(annotation.cardClass()).add(cardClass);
-            }
             Id id = cardClass.getAnnotation(Id.class);
             if (id != null) {
                 if (cardPool.containsKey(id.value())) {
@@ -99,25 +70,194 @@ public class CardFactory {
                 } else {
                     cardPool.put(id.value(), cardClass);
                 }
+                this.initDifferentKindsPool(id.value(), cardClass);
             }
+        }
+    }
+
+    private void initDifferentKindsPool(int id, Class<? extends Card> cardClass) {
+        try {
+            Field costField = cardClass.getDeclaredField("COST");
+            costField.setAccessible(true);
+            int cost = costField.getInt(cardClass);
+            this.addInPool(cardCostPool, cost, id);
+
+            Field setField = cardClass.getDeclaredField("CARD_SET");
+            setField.setAccessible(true);
+            CardSet cardSet = (CardSet) setField.get(cardClass);
+            this.addInPool(cardSetPool, cardSet, id);
+
+            Field classField = cardClass.getDeclaredField("CARD_CLASS");
+            classField.setAccessible(true);
+            CardClass cardClass1 = (CardClass) classField.get(cardClass);
+            this.addInPool(cardClassPool, cardClass1, id);
+
+            Field typeField = cardClass.getDeclaredField("CARD_TYPE");
+            typeField.setAccessible(true);
+            CardType cardType = (CardType) typeField.get(cardClass);
+            this.addInPool(cardTypePool, cardType, id);
+
+            if (cardType == CardType.MINION) {
+                Field raceField = cardClass.getDeclaredField("RACE");
+                raceField.setAccessible(true);
+                Race race = (Race) raceField.get(cardClass);
+                this.addInPool(cardRacePool, race, id);
+            }
+
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.warn(String.format("%s找不到属性", cardClass.getSimpleName()));
+        }
+    }
+
+    private <T> void addInPool(Map<T, Set<Integer>> pool, T val, Integer id) {
+        if (pool.containsKey(val)) {
+            pool.get(val).add(id);
+        } else {
+            pool.put(val, new HashSet<Integer>() {{
+                add(id);
+            }});
         }
     }
 
     public Card buildCardById(Integer id) throws Exception {
         Class<? extends Card> aClass = cardPool.get(id);
-        if (aClass == null){
+        if (aClass == null) {
             String format = String.format("找不到id为%s的卡牌", id);
             throw new NullPointerException(format);
         }
         return aClass.newInstance();
     }
 
-    public static Card getCardById(int id){
+    public static Card getCardById(int id) {
         try {
             return getInstance().buildCardById(id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static CardFactory.CardBuilder buildCard() {
+        return new CardFactory.CardBuilder();
+    }
+
+    /**
+     * 使用建造者对象进行条件查询
+     *
+     * @param builder 建造者对象
+     * @return 条件查询结果集合
+     */
+    private static Set<Integer> condition(CardBuilder builder) {
+        Set<Integer> result = new HashSet<>(getInstance().cardPool.keySet());
+        if (builder.cost.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (Integer cardCost : builder.cost) {
+                idSet.addAll(getInstance().cardCostPool.get(cardCost));
+            }
+            result.retainAll(idSet);
+        }
+        if (builder.cardSet.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (CardSet cardSet : builder.cardSet) {
+                idSet.addAll(getInstance().cardSetPool.get(cardSet));
+            }
+            result.retainAll(idSet);
+        }
+        if (builder.cardClass.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (CardClass cardClass : builder.cardClass) {
+                idSet.addAll(getInstance().cardClassPool.get(cardClass));
+            }
+            result.retainAll(idSet);
+        }
+        if (builder.cardType.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (CardType cardType : builder.cardType) {
+                idSet.addAll(getInstance().cardTypePool.get(cardType));
+            }
+            result.retainAll(idSet);
+        }
+        if (builder.race.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (Race race : builder.race) {
+                idSet.addAll(getInstance().cardRacePool.get(race));
+            }
+            result.retainAll(idSet);
+        }
+
+        return result;
+    }
+
+    public static class CardBuilder {
+        private Set<Integer> cost;
+        private Set<CardSet> cardSet;
+        private Set<CardClass> cardClass;
+        private Set<CardType> cardType;
+        private Set<Race> race;
+        private Random random;
+
+        public CardBuilder() {
+            random = new Random();
+            cost = new HashSet<>(16);
+            cardSet = new HashSet<>(16);
+            cardClass = new HashSet<>(16);
+            cardType = new HashSet<>(16);
+            race = new HashSet<>(16);
+        }
+
+        public CardFactory.CardBuilder cost(Integer cost) {
+            this.cost.add(cost);
+            return this;
+        }
+
+        public CardFactory.CardBuilder cardSet(CardSet cardSet) {
+            this.cardSet.add(cardSet);
+            return this;
+        }
+
+        public CardFactory.CardBuilder cardClass(CardClass cardClass) {
+            this.cardClass.add(cardClass);
+            return this;
+        }
+
+        public CardFactory.CardBuilder cardType(CardType cardType) {
+            this.cardType.add(cardType);
+            return this;
+        }
+
+        public CardFactory.CardBuilder race(Race race) {
+            this.race.add(race);
+            return this;
+        }
+
+        public Card randomBuild() {
+            Set<Integer> condition = condition(this);
+            Integer randomCardId = getRandomCardId(condition);
+            return getCardById(randomCardId);
+        }
+
+        private Integer getRandomCardId(Set<Integer> condition) {
+            Iterator<Integer> iterator = condition.iterator();
+            int target = random.nextInt(condition.size());
+            Integer index = null;
+            for (int i = 0; i < target; i++) {
+                index = iterator.next();
+            }
+            return index;
+        }
+
+        public List<Card> discover(){
+            List<Card> result = new ArrayList<>();
+            Set<Integer> condition = condition(this);
+            for (int i = 0; i < 3; i++) {
+                if (condition.size() == 0){
+                    break;
+                }
+                Integer randomCardId = getRandomCardId(condition);
+                condition.remove(randomCardId);
+                result.add(getCardById(randomCardId));
+            }
+            return result;
         }
     }
 }

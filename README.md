@@ -192,12 +192,15 @@ public class AlexstraszaCard extends Alexstrasza {
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/Si7AgentCard.java">军情七处特工</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/EviscerateCard.java">刺骨</a>
   - [x] 过载
+  - [x] 随机卡牌
+  - [x] 发现
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/uldum/neutral/GoldenScarabCard.java">金甲虫</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/priest/RenewCard.java">复苏</a>
   - [x] 吸血
   - [ ] 进化
   - [x] 突袭
   - [ ] 招募
   - [ ] 回响
-  - [ ] 发现
   - [ ] 磁力
   - [ ] 超杀
   - [x] 免疫
@@ -212,11 +215,11 @@ public class AlexstraszaCard extends Alexstrasza {
   - [ ] 纳克萨玛斯 NAXX
   - [ ] 地精大战侏儒 GVG 
   - [ ] 黑石山的火焰 BRM 
-  - [ ] 冠军的试炼 AT
+  - [ ] 冠军的试炼 TGT
   - [ ] 探险者协会 LOE
   - [ ] 上古之神的低语 OG
   - [ ] 卡拉赞之夜 KAR
-  - [ ] 龙争虎斗加基森 CFM
+  - [ ] 龙争虎斗加基森 CFM GANGS
   - [ ] 勇闯安戈洛 UNG 
   - [ ] 冰封王座的骑士 ICC
   - [ ] 狗头人与地下世界 LOOT

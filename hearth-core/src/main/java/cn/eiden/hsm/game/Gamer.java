@@ -11,6 +11,7 @@ import cn.eiden.hsm.exception.GameOverException;
 import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.history.History;
 import cn.eiden.hsm.game.history.HistoryImpl;
+import cn.eiden.hsm.game.keyword.Discover;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
@@ -928,6 +929,47 @@ public class Gamer extends AbstractGeneralItem {
         assert heroCard != null;
         Hero hero = heroCard.createHero();
         return new Gamer(hero, deck.getDeck());
+    }
+
+
+    public void discoverChooseOne(Discover discover){
+        List<Card> options = discover.discover();
+        while (true) {
+            //打印提示
+            printCard(options);
+            //等待输入信息
+            String input = waitOrder();
+            if (RegexUtil.isNumberStr(input)) {
+                int index = Integer.parseInt(input);
+                if (index < options.size() && index >= 0) {
+                    hand.addHandsCard(options.get(index));
+                    break;
+                }
+            }
+        }
+    }
+
+    private void printCard(List<Card> cardList){
+        StringBuilder handInfo = new StringBuilder("选择:\n");
+        for (int i = 0; i < cardList.size(); i++) {
+            Card card = cardList.get(i);
+            handInfo.append("[").append(i).append("]");
+            handInfo.append(card.getCardName());
+            handInfo.append(" ").append(RegexUtil.removeHtmlTag(card.getDescription()));
+            handInfo.append(")");
+            handInfo.append("\n");
+        }
+        printPrivateQueue(handInfo.toString());
+    }
+
+    private String waitOrder() {
+        String order = "";
+        try {
+            order = inputMessageQueue.take();
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
+        return order;
     }
 
 }
