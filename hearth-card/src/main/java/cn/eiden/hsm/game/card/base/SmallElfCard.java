@@ -9,10 +9,10 @@ import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 
 /**
+ * 小精灵卡牌
  * @author : Eiden J.P Zhou
  * @date : 2018/9/12
  * @version : 1.0
- *  小精灵卡牌
  * */
 @Tags(cardClass = CardClass.NEUTRAL, cardSet = CardSet.CORE)
 public class SmallElfCard extends AbstractMinionCard {
