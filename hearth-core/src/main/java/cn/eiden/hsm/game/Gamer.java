@@ -16,6 +16,7 @@ import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
+import cn.eiden.hsm.game.quest.Quest;
 import cn.eiden.hsm.game.rule.Rule;
 import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.RegexUtil;
@@ -110,6 +111,11 @@ public class Gamer extends AbstractGeneralItem {
      * 奥秘
      */
     private List<Secret> secretList = new ArrayList<>(5);
+
+    /**
+     * 任务
+     */
+    private List<Quest> questList = new ArrayList<>(5);
 
     /**
      * 规则
@@ -246,7 +252,6 @@ public class Gamer extends AbstractGeneralItem {
      * @param card 被抽的牌
      */
     public void drawCard(Card card) {
-        card.setOwner(this);
         //移除牌堆顶的牌
         lossLastCards();
         //添加到手牌中
@@ -473,6 +478,22 @@ public class Gamer extends AbstractGeneralItem {
         return false;
     }
 
+    public boolean hasQuest(){
+        return questList.size() > 0;
+    }
+
+    public void addQuest(Quest quest){
+        quest.setOwner(this);
+        eventManager.registerListener(quest.getListener());
+        questList.add(quest);
+    }
+
+    public void removeQuest(Quest quest){
+        eventManager.removeListener(quest.getListener());
+        questList.remove(quest);
+    }
+
+
     /**
      * 是否是友方单位
      *
@@ -627,6 +648,7 @@ public class Gamer extends AbstractGeneralItem {
         this.hero = heroObject;
         this.hero.setOwner(this);
         this.hand = new Hand();
+        this.hand.setOwner(this);
         this.deckCards = initRandomCards(cards);
         this.tomb = new ArrayList<>();
         this.manaCrystal = new ManaCrystal();

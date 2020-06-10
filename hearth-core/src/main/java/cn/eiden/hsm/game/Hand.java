@@ -30,6 +30,7 @@ public class Hand extends AbstractGeneralItem {
         if (!isHandsFull()) {
             //如果手牌没满，添加到手牌中
             cards.add(card);
+            card.setOwner(this.getOwner());
         } else {
             //手排满了，爆牌
             OutputInfo.info(card.getCardName() + "因手牌满消失");

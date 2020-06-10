@@ -1,4 +1,4 @@
-package cn.eiden.hsm.game.task;
+package cn.eiden.hsm.game.quest;
 
 /**
  * @author Eiden J.P Zhou
