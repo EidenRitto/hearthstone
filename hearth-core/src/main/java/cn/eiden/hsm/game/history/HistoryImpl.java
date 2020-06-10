@@ -1,11 +1,9 @@
 package cn.eiden.hsm.game.history;
 
 import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.minion.Minion;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Eiden J.P Zhou
@@ -13,6 +11,7 @@ import java.util.Map;
  */
 public class HistoryImpl implements History {
     private Map<Integer, List<Card>> usedCardsMap;
+    private List<Card> cardsHistory;
 
     @Override
     public void addUsedCard(Card card, int turnNum) {
@@ -23,6 +22,7 @@ public class HistoryImpl implements History {
             cardList.add(card);
             usedCardsMap.put(turnNum, cardList);
         }
+        cardsHistory.add(card);
     }
 
     @Override
@@ -47,7 +47,13 @@ public class HistoryImpl implements History {
         }
     }
 
+    @Override
+    public int getCountByMinionName(Minion minion) {
+        return Math.toIntExact(cardsHistory.stream().filter(e -> e.getCardName().equals(minion.getMinionName())).count());
+    }
+
     public HistoryImpl() {
         this.usedCardsMap = new HashMap<>(32);
+        this.cardsHistory = new ArrayList<>();
     }
 }

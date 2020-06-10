@@ -94,6 +94,12 @@ public abstract class AbstractCardFileBuilder {
 
     protected void writeToSourceFile(TypeSpec myClass) {
         String packageName = getPackageName();
+        if (cardInfo.getQuestProgressTotal() > 0){
+            myClass = myClass.toBuilder().addField(this.buildFieldQuestProgressTotal()).build();
+        }
+        if (cardInfo.getQuestRewardDatabaseId() > 0){
+            myClass = myClass.toBuilder().addField(this.buildFieldQuestRewardDatabaseId()).build();
+        }
         JavaFile javaFile = JavaFile.builder(packageName, myClass)
                 .indent("    ")
                 .build();
@@ -217,6 +223,20 @@ public abstract class AbstractCardFileBuilder {
         return FieldSpec.builder(int.class, "HERO_POWER_ID")
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
                 .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getHeroPower())))
+                .build();
+    }
+
+    private FieldSpec buildFieldQuestProgressTotal() {
+        return FieldSpec.builder(int.class, "QUEST_PROGRESS_TOTAL")
+                .addModifiers(Modifier.PROTECTED, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getQuestProgressTotal())))
+                .build();
+    }
+
+    private FieldSpec buildFieldQuestRewardDatabaseId() {
+        return FieldSpec.builder(int.class, "QUEST_REWARD_DATABASE_ID")
+                .addModifiers(Modifier.PROTECTED, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getQuestRewardDatabaseId())))
                 .build();
     }
 

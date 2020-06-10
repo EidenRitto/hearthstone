@@ -2,19 +2,19 @@
 ## 这是什么
 这是用Java语言实现的游戏--炉石传说
 - 实现了什么功能
-  - [ ] 炉石传说
-    - [ ] 主要组件
+  - [x] 炉石传说
+    - [x] 主要组件
       - [x] 随从
       - [x] 英雄
       - [x] 武器
       - [x] 奥秘
-      - [ ] 任务
-    - [ ] 卡牌关键效果
+      - [x] 任务
+    - [x] 卡牌关键效果
       - [x] 随从特效
       - [x] 战吼
       - [x] 亡语
       - [ ] <a href="#otherCard">其他卡牌效果</a>
-    - [ ] 卡牌
+    - [x] 卡牌
       - [ ] 基础包
       - [ ] 经典包
       - [ ] 荣誉室
@@ -197,6 +197,8 @@ public class AlexstraszaCard extends Alexstrasza {
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/uldum/neutral/GoldenScarabCard.java">金甲虫</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/priest/RenewCard.java">复苏</a>
   - [x] 吸血
+  - [x] 任务
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/ungoro/rogue/TheCavernsBelowCard.java">探索地下洞穴</a>
   - [ ] 进化
   - [x] 突袭
   - [ ] 招募

@@ -9,7 +9,7 @@ import cn.eiden.hsm.game.minion.Minion;
 
 /**
  * 复苏
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/9 17:13
  */
 @TargetScope

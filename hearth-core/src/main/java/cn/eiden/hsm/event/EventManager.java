@@ -133,6 +133,10 @@ public class EventManager {
         registeredListeners.remove(listener);
         //遍历当前监听中全部的方法
         for (Method method : listener.getClass().getMethods()) {
+            //判断当前方法是否加了EventHandler注解
+            if (!method.isAnnotationPresent(EventHandler.class)) {
+                continue;
+            }
             Class<?> event = method.getParameterTypes()[0];
             //判断传入的event是否是Event的子类
             if (!Event.class.isAssignableFrom(event)) {

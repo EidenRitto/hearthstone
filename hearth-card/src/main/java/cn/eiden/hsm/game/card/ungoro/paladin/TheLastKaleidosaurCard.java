@@ -31,8 +31,7 @@ public class TheLastKaleidosaurCard extends TheLastKaleidosaur {
         }
 
         public ThisQuest() {
-            this.setQuestListener(new QuestListener(this));
-            this.setQuestProgressTotal(6);
+            super(6, new QuestListener());
         }
     }
 
@@ -47,13 +46,9 @@ public class TheLastKaleidosaurCard extends TheLastKaleidosaur {
                 this.getQuest().addProgress(1);
                 if (this.getQuest().checkComplete()){
                     this.getQuest().getReward().earnRewards(owner);
+                    owner.removeQuest(getQuest());
                 }
-                owner.removeQuest(getQuest());
             }
-        }
-
-        public QuestListener(Quest quest) {
-            super(quest);
         }
     }
 }

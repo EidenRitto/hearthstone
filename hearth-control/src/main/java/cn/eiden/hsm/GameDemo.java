@@ -24,10 +24,8 @@ public class GameDemo {
     public void start(String deckStr) throws Exception {
         List<Card> mageCards = new ArrayList<>(30);
         for (int i = 0; i < 15; i++) {
-            //冰箱
-            mageCards.add(CardFactory.getInstance().buildCardById(192));
-            //肯瑞托法师
-            mageCards.add(CardFactory.getInstance().buildCardById(748));
+            mageCards.add(CardFactory.getInstance().buildCardById(41222));
+            mageCards.add(CardFactory.getInstance().buildCardById(724));
         }
         HeroMinion mageHero = new HeroMinion(CardClass.MAGE, 30, (AbstractHeroPowerCard) CardFactory.getCardById(807));
         mageHero.changeHealth(1);

@@ -138,6 +138,15 @@ public class CardGeneratorUtils {
                 case CHOOSE_ONE:
                     cardCache.setChooseOne(Integer.parseInt(tag.getValue()));
                     break;
+                case QUEST:
+                    cardCache.setQuest(Integer.parseInt(tag.getValue()));
+                    break;
+                case QUEST_PROGRESS_TOTAL:
+                    cardCache.setQuestProgressTotal(Integer.parseInt(tag.getValue()));
+                    break;
+                case QUEST_REWARD_DATABASE_ID:
+                    cardCache.setQuestRewardDatabaseId(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

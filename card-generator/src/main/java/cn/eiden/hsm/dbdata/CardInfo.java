@@ -72,6 +72,12 @@ public class CardInfo {
     private int chooseOne;
     /**过载*/
     private int overload = 0;
+    /**任务*/
+    private int quest;
+    /**任务量*/
+    private int questProgressTotal;
+    /**任务奖励id*/
+    private int questRewardDatabaseId;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

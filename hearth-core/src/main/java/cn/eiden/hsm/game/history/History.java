@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.history;
 
 import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.minion.Minion;
 
 import java.util.List;
 
@@ -32,4 +33,7 @@ public interface History {
      * @return 使用过的卡牌数量
      */
     int getUsedCardNumByTurnNum(int turnNum);
+
+
+    int getCountByMinionName(Minion minion);
 }
