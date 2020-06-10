@@ -9,7 +9,7 @@ import cn.eiden.hsm.game.card.AbstractMinionCard;
 
 
 /**
- * 小精灵卡牌
+ * 小精灵卡牌v2
  * @author : Eiden J.P Zhou
  * @date : 2018/9/12
  * @version : 1.0
