@@ -44,7 +44,7 @@ public class PlayOrder extends AbstractOrder implements Order {
                 gamer.useThisCard(card,targetMinion);
             }
             //从手牌中移除卡牌
-            gamer.getHand().loss(originCard);
+            gamer.getHand().used(originCard);
         }
     }
 

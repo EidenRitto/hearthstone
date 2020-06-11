@@ -1,6 +1,8 @@
 package cn.eiden.hsm.game;
 
 import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.card.CardFactory;
+import cn.eiden.hsm.game.keyword.TwinSpell;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,6 +50,16 @@ public class Hand extends AbstractGeneralItem {
     public void loss(Card card) {
         cards.remove(card);
     }
+
+    public void used(Card card) {
+        if (card instanceof TwinSpell){
+            int spellCopyId = ((TwinSpell) card).getSpellCopyId();
+            cards.set(cards.indexOf(card),CardFactory.getCardById(spellCopyId));
+        }else {
+            this.loss(card);
+        }
+    }
+
 
     /**
      * 手牌是否已满

@@ -4,8 +4,10 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.card.AbstractSecretCard;
+import cn.eiden.hsm.game.keyword.TwinSpell;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
+import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +82,27 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                             .build())
                     .build();
         }
-
+        if (cardInfo.getTwinSpell() ==1 ){
+            myClass = myClass.toBuilder()
+                    .addSuperinterface(TwinSpell.class)
+                    .addMethod(MethodSpec.methodBuilder("getSpellCopyId")
+                            .addModifiers(Modifier.PUBLIC)
+                            .addAnnotation(Override.class)
+                            .returns(int.class)
+                            .addStatement("return $N","TWINSPELL_COPY")
+                            .build())
+                    .build();
+        }
+        if (cardInfo.getTwinSpellCopy() > 0){
+            myClass = myClass.toBuilder().addField(this.buildFieldTwinSpellCopy()).build();
+        }
         writeToSourceFile(myClass);
+    }
+
+    private FieldSpec buildFieldTwinSpellCopy() {
+        return FieldSpec.builder(int.class, "TWINSPELL_COPY")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getTwinSpellCopy())))
+                .build();
     }
 }

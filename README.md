@@ -207,7 +207,8 @@ public class AlexstraszaCard extends Alexstrasza {
   - [ ] 超杀
   - [x] 免疫
   - [ ] 复生
-  - [ ] 双生法术
+  - [x] 双生法术
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/mage/RayOfFrostCard.java">霜冻射线</a>
   - [ ] 休眠
   - [ ] 流放
 

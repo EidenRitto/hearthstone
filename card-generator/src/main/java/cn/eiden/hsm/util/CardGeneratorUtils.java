@@ -147,6 +147,12 @@ public class CardGeneratorUtils {
                 case QUEST_REWARD_DATABASE_ID:
                     cardCache.setQuestRewardDatabaseId(Integer.parseInt(tag.getValue()));
                     break;
+                case TWINSPELL:
+                    cardCache.setTwinSpell(Integer.parseInt(tag.getValue()));
+                    break;
+                case TWINSPELL_COPY:
+                    cardCache.setTwinSpellCopy(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

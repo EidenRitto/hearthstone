@@ -78,6 +78,10 @@ public class CardInfo {
     private int questProgressTotal;
     /**任务奖励id*/
     private int questRewardDatabaseId;
+    /**双生法术*/
+    private int twinSpell;
+    /**双生法术 - 复制*/
+    private int twinSpellCopy;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;
