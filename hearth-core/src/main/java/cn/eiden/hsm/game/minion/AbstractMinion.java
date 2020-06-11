@@ -117,6 +117,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     private boolean rush = false;
 
     /**
+     * 复生
+     */
+    private boolean reborn = false;
+
+    /**
      * 是否具有免疫
      */
     private boolean immune = false;
@@ -607,6 +612,21 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void addRush() {
         this.rush = true;
+    }
+
+    @Override
+    public boolean hasReborn() {
+        return this.reborn;
+    }
+
+    @Override
+    public void addReborn() {
+        this.reborn = true;
+    }
+
+    @Override
+    public void removeReborn() {
+        this.reborn = false;
     }
 
     @Override

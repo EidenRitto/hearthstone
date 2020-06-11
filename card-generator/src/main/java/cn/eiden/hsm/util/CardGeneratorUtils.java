@@ -153,6 +153,9 @@ public class CardGeneratorUtils {
                 case TWINSPELL_COPY:
                     cardCache.setTwinSpellCopy(Integer.parseInt(tag.getValue()));
                     break;
+                case REBORN:
+                    cardCache.setReborn(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

@@ -468,6 +468,23 @@ public interface Minion extends GeneralItem {
     void addRush();
 
     /**
+     * 是否具有复生
+     *
+     * @return 有复生返回true
+     */
+    boolean hasReborn();
+
+    /**
+     * 添加复生
+     */
+    void addReborn();
+
+    /**
+     * 移除复生
+     */
+    void removeReborn();
+
+    /**
      * 随从是否准备好了（随从进场时当前回合不能攻击）
      * @return 准备好返回true
      */

@@ -157,6 +157,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
             CodeBlock rush = CodeBlock.builder().addStatement("minionObject.addRush()").build();
             core = core.toBuilder().add(rush).build();
         }
+        if (cardInfo.getReborn() == 1) {
+            CodeBlock reborn = CodeBlock.builder().addStatement("minionObject.addReborn()").build();
+            core = core.toBuilder().add(reborn).build();
+        }
         return core;
     }
 }

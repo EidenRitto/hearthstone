@@ -553,8 +553,14 @@ public class Gamer extends AbstractGeneralItem {
         printPublicQueue(minion.getMinionName() + "死亡");
         Event minionDeathEvent = new MinionDeathEvent(this, minion);
         eventManager.call(minionDeathEvent);
-        //移除随从
-        this.removeMinion(minion);
+        if (minion.hasReborn()){
+            printPublicQueue(minion.getMinionName() + "复生");
+            minion.setHealth(1);
+            minion.removeReborn();
+        }else {
+            //移除随从
+            this.removeMinion(minion);
+        }
         //随从进入墓地
         tomb.add(minion);
     }
