@@ -54,7 +54,10 @@ public class Hand extends AbstractGeneralItem {
     public void used(Card card) {
         if (card instanceof TwinSpell){
             int spellCopyId = ((TwinSpell) card).getSpellCopyId();
-            cards.set(cards.indexOf(card),CardFactory.getCardById(spellCopyId));
+            Card copy = CardFactory.getCardById(spellCopyId);
+            assert copy != null;
+            copy.setOwner(getOwner());
+            cards.set(cards.indexOf(card),copy);
         }else {
             this.loss(card);
         }
