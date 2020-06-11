@@ -4,6 +4,7 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.card.AbstractSecretCard;
+import cn.eiden.hsm.game.keyword.Outcast;
 import cn.eiden.hsm.game.keyword.TwinSpell;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Secret;
@@ -67,20 +68,7 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                     .superclass(AbstractSecretCard.class)
                     .build();
         }else {
-            myClass = myClass.toBuilder()
-                    .superclass(AbstractMagicCard.class)
-                    .addMethod(MethodSpec.methodBuilder("magicEffect")
-                            .addModifiers(Modifier.PUBLIC)
-                            .addAnnotation(Override.class)
-                            .returns(void.class)
-                            .addParameter(Gamer.class, "gamer")
-                            .addParameter(Minion.class, "target")
-                            .addStatement("// 重写以补全效果")
-                            .addJavadoc("$S\n", cardInfo.getCardText())
-                            .addJavadoc("@param gamer 当前卡牌所有者\n")
-                            .addJavadoc("@param target 所指定目标")
-                            .build())
-                    .build();
+            myClass = buildSpecial(myClass);
         }
         if (cardInfo.getTwinSpell() ==1 ){
             myClass = myClass.toBuilder()
@@ -104,5 +92,61 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
                 .initializer("$L", Integer.parseInt(String.valueOf(cardInfo.getTwinSpellCopy())))
                 .build();
+    }
+
+    private TypeSpec buildSpecial(TypeSpec myClass){
+        if (cardInfo.getOutcast() == 1){
+            return myClass.toBuilder()
+                    .superclass(AbstractMagicCard.class)
+                    .addSuperinterface(Outcast.class)
+                    .addMethod(MethodSpec.methodBuilder("magicEffect")
+                            .addModifiers(Modifier.PUBLIC)
+                            .addAnnotation(Override.class)
+                            .returns(void.class)
+                            .addParameter(Gamer.class, "gamer")
+                            .addParameter(Minion.class, "target")
+                            .addJavadoc("@param gamer 当前卡牌所有者\n")
+                            .addJavadoc("@param target 所指定目标")
+                            .beginControlFlow("if(gamer.isOutcastTrigger(this))")
+                            .addStatement("this.baseEffect(gamer,target)")
+                            .nextControlFlow("else")
+                            .addStatement("this.outcastEffect(gamer,target)")
+                            .endControlFlow()
+                            .build())
+                    .addMethod(MethodSpec.methodBuilder("baseEffect")
+                            .addModifiers(Modifier.PUBLIC)
+                            .returns(void.class)
+                            .addParameter(Gamer.class, "gamer")
+                            .addParameter(Minion.class, "target")
+                            .addStatement("// 重写以补全效果")
+                            .addJavadoc("非流放效果\n")
+                            .addJavadoc("@param gamer 当前卡牌所有者\n")
+                            .addJavadoc("@param target 所指定目标")
+                            .build())
+                    .addMethod(MethodSpec.methodBuilder("outcastEffect")
+                            .addModifiers(Modifier.PUBLIC)
+                            .returns(void.class)
+                            .addAnnotation(Override.class)
+                            .addParameter(Gamer.class, "gamer")
+                            .addParameter(Minion.class, "target")
+                            .addStatement("// 重写以补全效果")
+                            .build())
+                    .build();
+        }else {
+            return myClass.toBuilder()
+                    .superclass(AbstractMagicCard.class)
+                    .addMethod(MethodSpec.methodBuilder("magicEffect")
+                            .addModifiers(Modifier.PUBLIC)
+                            .addAnnotation(Override.class)
+                            .returns(void.class)
+                            .addParameter(Gamer.class, "gamer")
+                            .addParameter(Minion.class, "target")
+                            .addStatement("// 重写以补全效果")
+                            .addJavadoc("$S\n", cardInfo.getCardText())
+                            .addJavadoc("@param gamer 当前卡牌所有者\n")
+                            .addJavadoc("@param target 所指定目标")
+                            .build())
+                    .build();
+        }
     }
 }

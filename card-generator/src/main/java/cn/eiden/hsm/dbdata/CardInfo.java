@@ -84,6 +84,8 @@ public class CardInfo {
     private int twinSpellCopy;
     /**复生*/
     private int reborn;
+    /**流放*/
+    private int outcast;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

@@ -105,6 +105,11 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     }
 
     @Override
+    public void reduceCost(int val) {
+        this.cost = Math.max(0, cost - val);
+    }
+
+    @Override
     public String getDescription() {
         return description;
     }

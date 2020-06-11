@@ -1,11 +1,9 @@
 package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
+import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractMinionCard;
-import cn.eiden.hsm.game.keyword.Aura;
-import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.keyword.Combo;
-import cn.eiden.hsm.game.keyword.DeathRattle;
+import cn.eiden.hsm.game.keyword.*;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.MinionObject;
 import com.squareup.javapoet.CodeBlock;
@@ -99,6 +97,19 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                     .addStatement("return null")
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
+        }
+        if (cardInfo.getOutcast() == 1) {
+            myClass = myClass.toBuilder()
+                    .addSuperinterface(Outcast.class)
+                    .addMethod(MethodSpec.methodBuilder("outcastEffect")
+                            .addModifiers(Modifier.PUBLIC)
+                            .returns(void.class)
+                            .addAnnotation(Override.class)
+                            .addParameter(Gamer.class, "gamer")
+                            .addParameter(Minion.class, "target")
+                            .addStatement("// 重写以补全效果")
+                            .build())
+                    .build();
         }
         writeToSourceFile(myClass);
     }

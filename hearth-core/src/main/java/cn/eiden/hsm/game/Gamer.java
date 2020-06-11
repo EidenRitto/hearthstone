@@ -238,12 +238,15 @@ public class Gamer extends AbstractGeneralItem {
      * @date : 2018/9/13
      * 从牌堆中抽牌
      */
-    public void drawCard(int number) {
+    public List<Card> drawCard(int number) {
+        List<Card> cardList = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             //获取牌堆顶那一张牌
             Card lastCard = getLastCards();
             drawCard(lastCard);
+            cardList.add(lastCard);
         }
+        return cardList;
     }
 
     /**
@@ -339,7 +342,7 @@ public class Gamer extends AbstractGeneralItem {
         Minion minion = minionCard.createMinion();
         minion.setOwner(this);
         //发布事件[从手牌中打出随从卡牌事件]
-        UseMinionCardFromHandEvent abstractEvent = new UseMinionCardFromHandEvent(this, minion, target);
+        UseMinionCardFromHandEvent abstractEvent = new UseMinionCardFromHandEvent(card, minion, target);
         eventManager.call(abstractEvent);
 
         addMinion(abstractEvent.getMinionObject());
@@ -925,6 +928,15 @@ public class Gamer extends AbstractGeneralItem {
     public boolean isComboTrigger() {
         int usedCardNumByTurnNum = history.getUsedCardNumByTurnNum(turnNum);
         return usedCardNumByTurnNum > 0;
+    }
+
+    /**
+     * 流放是否能触发
+     * @param card 卡牌
+     * @return 能触发流放返回true
+     */
+    public boolean isOutcastTrigger(Card card) {
+        return hand.isFirstCard(card) || hand.isLastCard(card);
     }
 
     /**

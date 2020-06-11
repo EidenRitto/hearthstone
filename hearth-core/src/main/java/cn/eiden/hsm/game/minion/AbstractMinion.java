@@ -605,6 +605,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public void removeLifeSteal() {
+        this.lifeSteal = false;
+    }
+
+    @Override
     public boolean hasRush() {
         return this.rush;
     }

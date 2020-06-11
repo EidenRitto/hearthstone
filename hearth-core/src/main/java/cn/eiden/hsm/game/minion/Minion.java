@@ -456,6 +456,11 @@ public interface Minion extends GeneralItem {
     void addLifeSteal();
 
     /**
+     * 移除吸血
+     */
+    void removeLifeSteal();
+
+    /**
      * 是否具有突袭
      *
      * @return 有突袭返回true

@@ -26,6 +26,12 @@ public interface Card extends GeneralItem {
     int getCost();
 
     /**
+     *
+     * @param val
+     */
+    void reduceCost(int val);
+
+    /**
      * 获取描述
      * @return 描述
      */

@@ -210,7 +210,11 @@ public class AlexstraszaCard extends Alexstrasza {
   - [x] 双生法术
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/mage/RayOfFrostCard.java">霜冻射线</a>
   - [ ] 休眠
-  - [ ] 流放
+  - [x] 流放
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/demonhunter/SkullOfGulDanCard.java">古尔丹之颅</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/demon_hunter_initiate/demonhunter/EyeBeamCard.java">眼棱</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/demon_hunter_initiate/demonhunter/ConsumeMagicCard.java">吞噬魔法</a>
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/demonhunter/CrimsonSigilRunnerCard.java">火色魔印奔行者</a>
 
 <a name="otherClass"></a>
 - [ ] 卡牌包

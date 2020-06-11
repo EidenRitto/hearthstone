@@ -156,6 +156,9 @@ public class CardGeneratorUtils {
                 case REBORN:
                     cardCache.setReborn(Integer.parseInt(tag.getValue()));
                     break;
+                case OUTCAST:
+                    cardCache.setOutcast(Integer.parseInt(tag.getValue()));
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;
