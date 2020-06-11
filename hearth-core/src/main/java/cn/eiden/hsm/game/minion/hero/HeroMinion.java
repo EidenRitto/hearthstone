@@ -93,11 +93,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
         //减去武器耐久
         if (hasWeapon()) {
             weapon.durableConsumed();
-        }
-        //如果耐久度没了就摧毁武器
-        if (!weapon.hasDurable()) {
-            weapon.destroy();
-            weapon = null;
+            //如果耐久度没了就摧毁武器
+            if (!weapon.hasDurable()) {
+                weapon.destroy();
+                weapon = null;
+            }
         }
     }
 
