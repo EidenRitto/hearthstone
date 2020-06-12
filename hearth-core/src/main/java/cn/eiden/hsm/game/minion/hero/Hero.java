@@ -49,6 +49,12 @@ public interface Hero extends Minion {
     AbstractHeroPowerCard getHeroPower();
 
     /**
+     * 设置英雄技能卡牌
+     * @param card 英雄技能卡牌
+     */
+    void setHeroPower(AbstractHeroPowerCard card);
+
+    /**
      * 获取武器
      * @return 武器
      */

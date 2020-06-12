@@ -144,6 +144,11 @@ public class HeroMinion extends AbstractMinion implements Hero {
     }
 
     @Override
+    public void setHeroPower(AbstractHeroPowerCard heroPower) {
+        this.heroPower = heroPower;
+    }
+
+    @Override
     public Weapon getWeapon() {
         return weapon;
     }
