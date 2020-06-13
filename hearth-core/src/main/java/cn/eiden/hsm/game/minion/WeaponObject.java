@@ -4,6 +4,7 @@ import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.event.events.WeaponDestroyEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.WeaponListener;
 import cn.eiden.hsm.output.OutputInfo;
 import lombok.Getter;
@@ -19,6 +20,10 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon {
     private String weaponName;
     private long weaponAttack;
     private long weaponDurable;
+    /**
+     * 战吼
+     */
+    private Battle battle;
     /**
      * 自带监听
      */
@@ -87,5 +92,21 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon {
     @Override
     public void setWeaponListener(WeaponListener weaponListener) {
         this.weaponListener = weaponListener;
+        weaponListener.setWeapon(this);
+    }
+
+    @Override
+    public void setBattle(Battle battle) {
+        this.battle = battle;
+    }
+
+    @Override
+    public void doBattle(Minion target) {
+        this.battle.doBattle(getOwner().getHero(), target);
+    }
+
+    @Override
+    public boolean hasBattle() {
+        return this.battle != null;
     }
 }

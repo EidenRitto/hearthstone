@@ -35,11 +35,17 @@ public class ManaCrystal extends AbstractGeneralItem {
      */
     private int overload;
 
+    /**
+     * 影响下回合的水晶
+     */
+    private int save;
+
     public ManaCrystal() {
         this.manaCrystal = 0;
         this.alive = 0;
         this.locked = 0;
         this.overload = 0;
+        this.save = 0;
     }
 
     /**
@@ -67,6 +73,15 @@ public class ManaCrystal extends AbstractGeneralItem {
      */
     public void recover() {
         alive = manaCrystal;
+    }
+
+    public void loadSave(){
+        alive += save;
+        save = 0;
+    }
+
+    public void setSave(int save) {
+        this.save = save;
     }
 
     /**
@@ -134,6 +149,8 @@ public class ManaCrystal extends AbstractGeneralItem {
         addEmpty(1);
         //恢复已使用的法力水晶
         recover();
+        //还债
+        loadSave();
         //解锁
         unlock();
         //加锁

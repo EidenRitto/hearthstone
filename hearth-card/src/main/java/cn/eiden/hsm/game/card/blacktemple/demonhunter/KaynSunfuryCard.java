@@ -10,6 +10,7 @@ import cn.eiden.hsm.game.keyword.Aura;
 public class KaynSunfuryCard extends KaynSunfury {
     @Override
     protected Aura selfAura() {
+        // TODO: 2020/6/13 尚未实现方案
         return s->s.hasReady();
     }
 }

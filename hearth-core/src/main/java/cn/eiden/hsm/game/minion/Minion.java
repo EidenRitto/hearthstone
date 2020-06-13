@@ -137,6 +137,12 @@ public interface Minion extends GeneralItem {
     void newTurnStart();
 
     /**
+     * 本回合是否攻击过
+     * @return 攻击过返回true
+     */
+    boolean isAtkThisTurn();
+
+    /**
      * 恢复攻击状态
      */
     void recoverAttack();
@@ -221,6 +227,8 @@ public interface Minion extends GeneralItem {
     void freeze();
 
     boolean isFreeze();
+
+    void addAttackTime(int times);
 
     /**
      * 解冻

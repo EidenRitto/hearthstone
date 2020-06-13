@@ -1,6 +1,7 @@
 package cn.eiden.hsm.game.minion;
 
 import cn.eiden.hsm.game.GeneralItem;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.listener.WeaponListener;
 
 /**
@@ -70,4 +71,24 @@ public interface Weapon extends GeneralItem {
      */
     void setWeaponListener(WeaponListener weaponListener);
 
+    /**
+     * 设置战吼
+     *
+     * @param battle 战吼
+     */
+    void setBattle(Battle battle);
+
+    /**
+     * 战吼
+     *
+     * @param target 目标角色
+     */
+    void doBattle(Minion target);
+
+    /**
+     * 是否具有战吼
+     *
+     * @return 有返回true
+     */
+    boolean hasBattle();
 }

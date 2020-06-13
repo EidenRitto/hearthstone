@@ -4,6 +4,7 @@ package cn.eiden.hsm.game.minion;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.AfterHeroBeAttackEvent;
 import cn.eiden.hsm.event.events.HeroBeAttackEvent;
+import cn.eiden.hsm.event.events.MinionAttackEvent;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 import cn.eiden.hsm.game.keyword.Aura;
@@ -76,6 +77,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      * 本回合攻击次数
      */
     private int attackTime = 1;
+
+    /**
+     * 本回合是否攻击过
+     */
+    private boolean isAtkThisTurn = false;
 
     /**
      * 攻击次数上限
@@ -173,6 +179,8 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void attack(Minion beAttackMinion) {
+        MinionAttackEvent minionAttackEvent = new MinionAttackEvent(this, beAttackMinion);
+        getOwner().getEventManager().call(minionAttackEvent);
         if (beAttackMinion instanceof HeroMinion) {
             HeroBeAttackEvent heroBeAttackEvent = new HeroBeAttackEvent(getOwner(), this);
             getOwner().getEventManager().call(heroBeAttackEvent);
@@ -187,6 +195,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         OutputInfo.info(String.format("%s攻击%s", this.getMinionName(), beAttackMinion.getMinionName()));
         //攻击次数减少1
         attackTime--;
+        isAtkThisTurn = true;
         //敌人掉血
         beAttackMinion.beHurt(this, this.getAttackValue());
         //自己掉血
@@ -301,8 +310,14 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
+    public boolean isAtkThisTurn() {
+        return this.isAtkThisTurn;
+    }
+
+    @Override
     public void recoverAttack() {
         attackTime = attackTimeLimit;
+        isAtkThisTurn = false;
     }
 
     @Override
@@ -384,6 +399,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     public int getAttackTime() {
         return attackTime;
+    }
+
+    @Override
+    public void addAttackTime(int times){
+        this.attackTime += times;
     }
 
     @Override

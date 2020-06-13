@@ -2,6 +2,7 @@ package cn.eiden.hsm.util.generator;
 
 import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.game.card.AbstractWeaponCard;
+import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.DeathRattle;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.WeaponObject;
@@ -68,6 +69,15 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
+        if (cardInfo.getBattleCry() == 1) {
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfBattleCry")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(Battle.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
         writeToSourceFile(myClass);
     }
 
@@ -76,6 +86,10 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getDeathRattle() == 1) {
             CodeBlock deathRattle = CodeBlock.builder().addStatement("weaponObject.addDeathRattle(this.selfDeathRattle())").build();
             core = core.toBuilder().add(deathRattle).build();
+        }
+        if (cardInfo.getBattleCry() == 1) {
+            CodeBlock battleCry = CodeBlock.builder().addStatement("weaponObject.setBattle(this.selfBattleCry())").build();
+            core = core.toBuilder().add(battleCry).build();
         }
         return core;
     }

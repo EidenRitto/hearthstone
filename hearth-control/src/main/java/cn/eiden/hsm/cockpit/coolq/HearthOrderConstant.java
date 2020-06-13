@@ -13,7 +13,7 @@ public class HearthOrderConstant {
     public static final String DECK_DEMONHUNTER = "AAECAea5AwbMugPDvAPWvgPaxgP5yAP+yAMMlwb9pwP5rgOLugPXuwPEvAPgvAPHxgPZxgPVyAP3yAPyyQMA";
 
     public static final String HEARTH_MULTIPLE_STEP_1 = "%s发起了一局游戏，想要参与的成员扣0(请添加我为好友，或开启允许陌生人聊天)";
-    public static final String HEARTH_MULTIPLE_STEP_1_1 = "请选择你的套牌\n[0]海盗战\n[1]奥秘法";
+    public static final String HEARTH_MULTIPLE_STEP_1_1 = "请选择你的套牌\n[0]海盗战\n[1]奥秘法\n[2]恶魔猎手";
 
     public static final String HEARTH_MULTIPLE_STEP_2 = "%s已经加入，请等待双方选择套牌";
     public static final String HEARTH_MULTIPLE_STEP_3 = "双方已经选择完成套牌，游戏正在开始";
