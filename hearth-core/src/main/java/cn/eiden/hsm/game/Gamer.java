@@ -508,6 +508,13 @@ public class Gamer extends AbstractGeneralItem {
         return minions.contains(minion) || hero == minion;
     }
 
+    public void addMinion(int cardId){
+        AbstractMinionCard cardById = (AbstractMinionCard) CardFactory.getCardById(cardId);
+        assert cardById != null;
+        Minion minion = cardById.createMinion();
+        this.addMinion(minion);
+    }
+
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13

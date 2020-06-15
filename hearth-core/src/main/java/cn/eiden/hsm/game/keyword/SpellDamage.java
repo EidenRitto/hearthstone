@@ -5,5 +5,9 @@ package cn.eiden.hsm.game.keyword;
  * @date 2020/3/19 16:14
  */
 public interface SpellDamage {
-    int spellDamageAdd();
+    /**
+     *
+     * @return
+     */
+    int getDamage();
 }

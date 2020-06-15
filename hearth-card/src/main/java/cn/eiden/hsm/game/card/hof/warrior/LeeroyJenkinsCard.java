@@ -22,10 +22,8 @@ public class LeeroyJenkinsCard extends LeeroyJenkins {
     static public class BattleCry implements Battle {
         @Override
         public void doBattle(Minion self, Minion target) {
-            AbstractMinionCard whelpCard = (AbstractMinionCard) CardFactory.getCardById(WHELP_ID);
-            assert whelpCard != null;
-            self.getOwner().getEnemy().addMinion(whelpCard.createMinion());
-            self.getOwner().getEnemy().addMinion(whelpCard.createMinion());
+            self.getOwner().getEnemy().addMinion(WHELP_ID);
+            self.getOwner().getEnemy().addMinion(WHELP_ID);
         }
     }
 }

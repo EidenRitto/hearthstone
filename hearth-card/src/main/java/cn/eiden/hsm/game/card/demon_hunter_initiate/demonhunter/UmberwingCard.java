@@ -16,12 +16,8 @@ public class UmberwingCard extends Umberwing {
     @Override
     protected Battle selfBattleCry() {
         return (s,t) -> {
-            AbstractMinionCard cardById = (AbstractMinionCard) CardFactory.getCardById(56592);
-            assert cardById != null;
-            Minion minion = cardById.createMinion();
-            Minion minion2 = cardById.createMinion();
-            s.getOwner().addMinion(minion);
-            s.getOwner().addMinion(minion2);
+            s.getOwner().addMinion(56592);
+            s.getOwner().addMinion(56592);
         };
     }
 }

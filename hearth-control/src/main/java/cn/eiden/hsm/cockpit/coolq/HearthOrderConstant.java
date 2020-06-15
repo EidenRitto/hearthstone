@@ -11,6 +11,7 @@ public class HearthOrderConstant {
     public static final String DECK_MAGE = "AAEBAaXDAwhxwAHDAYkO2bsCotMC7vYCv6QDC7sC7AX3DboW17YC67oCh70CwcECj9MCvqQD3akDAA==";
     public static final String DECK_WARRIOR = "AAECAQcCrwSRvAIOHLACkQP/A44FqAXUBaQG7gbnB+8HgrACiLACub8CAA==";
     public static final String DECK_DEMONHUNTER = "AAECAea5AwbMugPDvAPWvgPaxgP5yAP+yAMMlwb9pwP5rgOLugPXuwPEvAPgvAPHxgPZxgPVyAP3yAPyyQMA";
+    public static final String DECK_DRUID = "AAECAdfXAwT9AsQG5Aj2rQMN/gHTA/cD5gW5lAPinwPbpQP5tQPlugPougPsugPuugPvugMA";
 
     public static final String HEARTH_MULTIPLE_STEP_1 = "%s发起了一局游戏，想要参与的成员扣0(请添加我为好友，或开启允许陌生人聊天)";
     public static final String HEARTH_MULTIPLE_STEP_1_1 = "请选择你的套牌\n[0]海盗战\n[1]奥秘法\n[2]恶魔猎手";

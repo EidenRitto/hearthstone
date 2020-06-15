@@ -15,9 +15,7 @@ public class TotemicCallCard extends TotemicCall {
     @Override
     public void powerEffect(Gamer gamer, Minion target) {
         TotemEnum totemEnum = EnumUtils.randomEnum(TotemEnum.class);
-        AbstractMinionCard totemCard = (AbstractMinionCard) CardFactory.getCardById(totemEnum.getCardId());
-        assert totemCard != null;
-        gamer.addMinion(totemCard.createMinion());
+        gamer.addMinion(totemEnum.getCardId());
     }
 
     enum TotemEnum{

@@ -2,9 +2,6 @@ package cn.eiden.hsm.game.card.base.demonhunter;
 
 import cn.eiden.hsm.annotation.EventHandler;
 import cn.eiden.hsm.event.events.MinionAttackEvent;
-import cn.eiden.hsm.game.card.AbstractMinionCard;
-import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.card.defs.core.demonhunter.SatyrOverseer;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
@@ -27,10 +24,7 @@ public class SatyrOverseerCard extends SatyrOverseer {
             Minion attackMinion = event.getAttackMinion();
             if (getMinion().getOwner() == attackMinion.getOwner() &&
                     attackMinion instanceof HeroMinion){
-                Card st = CardFactory.getCardById(58496);
-                if (st instanceof AbstractMinionCard){
-                    getMinion().getOwner().addMinion(((AbstractMinionCard) st).createMinion());
-                }
+                getMinion().getOwner().addMinion(58496);
             }
         }
     }
