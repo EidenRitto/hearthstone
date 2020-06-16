@@ -193,6 +193,7 @@ public class AlexstraszaCard extends Alexstrasza {
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/classic/rogue/EviscerateCard.java">刺骨</a>
   - [x] 过载
   - [x] 随机卡牌
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/dalaran/neutral/ExoticMountsellerCard.java">特殊坐骑商人</a>
   - [x] 发现
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/uldum/neutral/GoldenScarabCard.java">金甲虫</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/priest/RenewCard.java">复苏</a>

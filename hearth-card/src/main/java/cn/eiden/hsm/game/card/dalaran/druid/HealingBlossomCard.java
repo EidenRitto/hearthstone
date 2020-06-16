@@ -7,7 +7,7 @@ import cn.eiden.hsm.game.minion.Minion;
 
 /**
  * 愈合之花
- * @author 周晋平
+ * @author Eiden J.P Zhou
  * @date 2020/6/15 18:00
  */
 @TargetScope
