@@ -91,6 +91,8 @@ public class HearthMultiplayerListener extends IcqListener {
             user.setDeckStr(HearthOrderConstant.DECK_MAGE);
         } else if ("2".equals(message)) {
             user.setDeckStr(HearthOrderConstant.DECK_DEMONHUNTER);
+        } else if ("3".equals(message)) {
+            user.setDeckStr(HearthOrderConstant.DECK_DRUID);
         }
     }
 

@@ -41,6 +41,7 @@ public class Hand extends AbstractGeneralItem {
 
     /**
      * 失去一张手牌
+     *
      * @param cardIndex 手牌编号
      */
     public void loss(int cardIndex) {
@@ -51,14 +52,24 @@ public class Hand extends AbstractGeneralItem {
         cards.remove(card);
     }
 
+    /**
+     * 弃牌
+     *
+     * @param card 卡牌
+     */
+    public void drop(Card card) {
+        OutputInfo.info("%s弃置%s", getOwner().getUserName(), card.getCardName());
+        this.loss(card);
+    }
+
     public void used(Card card) {
-        if (card instanceof TwinSpell){
+        if (card instanceof TwinSpell) {
             int spellCopyId = ((TwinSpell) card).getSpellCopyId();
             Card copy = CardFactory.getCardById(spellCopyId);
             assert copy != null;
             copy.setOwner(getOwner());
-            cards.set(cards.indexOf(card),copy);
-        }else {
+            cards.set(cards.indexOf(card), copy);
+        } else {
             this.loss(card);
         }
     }
@@ -81,19 +92,21 @@ public class Hand extends AbstractGeneralItem {
 
     /**
      * 卡牌是否是右手第一张
+     *
      * @param card 卡牌
      * @return 右手第一张返回true
      */
-    public boolean isLastCard(Card card){
-        return cards.get(cards.size()-1) == card;
+    public boolean isLastCard(Card card) {
+        return cards.get(cards.size() - 1) == card;
     }
 
     /**
      * 卡牌是否是左手第一张
+     *
      * @param card 卡牌
      * @return 左手第一张返回true
      */
-    public boolean isFirstCard(Card card){
+    public boolean isFirstCard(Card card) {
         return cards.get(0) == card;
     }
 }

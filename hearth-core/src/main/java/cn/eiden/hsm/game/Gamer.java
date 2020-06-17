@@ -12,6 +12,7 @@ import cn.eiden.hsm.game.card.*;
 import cn.eiden.hsm.game.history.History;
 import cn.eiden.hsm.game.history.HistoryImpl;
 import cn.eiden.hsm.game.keyword.Discover;
+import cn.eiden.hsm.game.keyword.TopDeck;
 import cn.eiden.hsm.game.minion.Weapon;
 import cn.eiden.hsm.game.minion.hero.Hero;
 import cn.eiden.hsm.game.minion.Minion;
@@ -259,6 +260,12 @@ public class Gamer extends AbstractGeneralItem {
         lossLastCards();
         //添加到手牌中
         getHand().addHandsCard(card);
+        if (card instanceof TopDeck){
+            ((TopDeck) card).onDraw();
+            if (card instanceof AbstractMagicCard){
+                getHand().loss(card);
+            }
+        }
         printPrivateQueue("--你抽到了" + card.getCardName());
     }
 
