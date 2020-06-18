@@ -80,7 +80,7 @@ public class TemplateController {
                 order = HearthLinkContext.inputMessage.take();
             }
         } catch (InterruptedException e) {
-            OutputInfo.info(e.getMessage());
+            nowInvoker.getGamer().printPublicQueue(e.getMessage());
         }
         return order;
     }

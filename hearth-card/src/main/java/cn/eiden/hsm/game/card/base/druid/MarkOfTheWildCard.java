@@ -27,6 +27,5 @@ public class MarkOfTheWildCard extends MarkOfTheWild {
         target.addAttack(ADD_ATTACK);
         target.addHealthLimit(ADD_HEALTH);
         target.addTaunt();
-        OutputInfo.info(target.getMinionName()+"获得嘲讽.");
     }
 }

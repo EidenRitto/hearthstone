@@ -38,7 +38,7 @@ public abstract class AbstractQuest extends AbstractGeneralItem implements Quest
 
     @Override
     public void printProgress() {
-        OutputInfo.info("任务进度%s/%s", questProgressCurrent, questProgressTotal);
+        getOwner().printPublicQueue(String.format("任务进度%s/%s", questProgressCurrent, questProgressTotal));
     }
 
     public void setQuestListener(AbstractQuestListener questListener) {

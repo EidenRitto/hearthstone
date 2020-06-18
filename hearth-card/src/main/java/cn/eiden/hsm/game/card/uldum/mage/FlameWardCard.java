@@ -31,7 +31,7 @@ public class FlameWardCard extends FlameWard {
                 AfterHeroBeAttackEvent afterAttackEvent = (AfterHeroBeAttackEvent) event;
                 Minion attacker = afterAttackEvent.getAttacker();
                 if (attacker instanceof MinionObject){
-                    OutputInfo.info("法师奥秘触发:火焰结界");
+                    event.getOwner().printPublicQueue("法师奥秘触发:火焰结界");
                     Gamer attackEventOwner = afterAttackEvent.getOwner();
                     final int damage = DMG + attackEventOwner.getEnemy().getGamerSpellDamage();
                     attackEventOwner.getMinions().forEach(e->e.beHurt(damage));

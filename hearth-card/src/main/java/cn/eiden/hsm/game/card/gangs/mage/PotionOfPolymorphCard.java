@@ -31,7 +31,7 @@ public class PotionOfPolymorphCard extends PotionOfPolymorph {
         public boolean onSecret(Event event) {
             if (event.getClass() == triggerEvent()) {
                 UseMinionCardFromHandEvent useMinionCardFromHandEvent = (UseMinionCardFromHandEvent) event;
-                OutputInfo.info("法师奥秘触发：变形药水");
+                event.getOwner().printPublicQueue("法师奥秘触发：变形药水");
                 AbstractMinionCard sheepCard = (AbstractMinionCard) CardFactory.getCardById(SHEEP_ID);
                 assert sheepCard != null;
                 useMinionCardFromHandEvent.setMinionObject(sheepCard.createMinion());

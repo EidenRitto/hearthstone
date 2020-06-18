@@ -31,10 +31,10 @@ public class IceBlockCard extends IceBlock {
                 long dmg = minionBeHurtEvent.getDmg();
                 if (minion instanceof HeroMinion && ((HeroMinion) minion).isLethalDose(dmg)){
                     event.getOwner().addRule(new ImmuneUntilEndTurnRule());
-                    OutputInfo.info("法师奥秘触发:寒冰屏障");
-                    OutputInfo.info("%s获得免疫",event.getOwner().getHero().getMinionName());
-                    OutputInfo.info("打得不错");
-                    OutputInfo.info("我的魔法会把你撕成碎片");
+                    event.getOwner().printPublicQueue("法师奥秘触发:寒冰屏障");
+                    event.getOwner().printPublicQueue(String.format("%s获得免疫",event.getOwner().getHero().getMinionName()));
+                    event.getOwner().printPublicQueue("打得不错");
+                    event.getOwner().printPublicQueue("我的魔法会把你撕成碎片");
                     return true;
                 }
             }

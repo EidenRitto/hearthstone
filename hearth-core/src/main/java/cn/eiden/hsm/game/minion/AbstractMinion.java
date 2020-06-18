@@ -12,7 +12,6 @@ import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.Combo;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.MinionListener;
-import cn.eiden.hsm.output.OutputInfo;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
@@ -192,7 +191,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
             getOwner().printPrivateQueue("这个随从无法进行攻击");
             return;
         }
-        OutputInfo.info(String.format("%s攻击%s", this.getMinionName(), beAttackMinion.getMinionName()));
+        getOwner().printPublicQueue(String.format("%s攻击%s", this.getMinionName(), beAttackMinion.getMinionName()));
         //攻击次数减少1
         attackTime--;
         isAtkThisTurn = true;
@@ -212,7 +211,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public void beHurt(Minion source, long number) {
         if (number > 0) {
             if (this.isDivineShield()) {
-                OutputInfo.info(minionName + "圣盾抵消伤害");
+                getOwner().printPublicQueue(minionName + "圣盾抵消伤害");
                 removeDivineShield();
             } else {
                 //减少伤害
@@ -223,25 +222,25 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void addAttack(long addAttack) {
-        OutputInfo.info(minionName + "增加" + addAttack + "点攻击");
+        getOwner().printPublicQueue(minionName + "增加" + addAttack + "点攻击");
         attackValue += addAttack;
     }
 
     @Override
     public void reduceAttack(long reduceAttack) {
-        OutputInfo.info(minionName + "减少" + reduceAttack + "点攻击");
+        getOwner().printPublicQueue(minionName + "减少" + reduceAttack + "点攻击");
         attackValue -= reduceAttack;
     }
 
     @Override
     public void reduceHealth(Minion source, long reduceHealth) {
         if (immune) {
-            OutputInfo.info(minionName + "免疫了本次伤害！");
+            getOwner().printPublicQueue(minionName + "免疫了本次伤害！");
             return;
         }
         MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this, reduceHealth);
         getOwner().getEventManager().call(minionBeHurtEvent);
-        OutputInfo.info(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
+        getOwner().printPublicQueue(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
         if (source.hasLifeSteal()){
             source.getOwner().getHero().recoveryHp(reduceHealth);
         }
@@ -250,7 +249,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void reduceHealthLimit(long reduceHealthLimit) {
-        OutputInfo.info(minionName + "减少" + reduceHealthLimit + "点生命上限");
+        getOwner().printPublicQueue(minionName + "减少" + reduceHealthLimit + "点生命上限");
         originHealthLimit -= reduceHealthLimit;
         //如果当前生命值大于生命值上限，一并减少
         checkHealth();
@@ -271,7 +270,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void addHealthLimit(long addHealthLimit) {
-        OutputInfo.info(minionName + "增加" + addHealthLimit + "点生命值");
+        getOwner().printPublicQueue(minionName + "增加" + addHealthLimit + "点生命值");
         originHealthLimit += addHealthLimit;
         health += addHealthLimit;
     }
@@ -300,7 +299,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     public void recoveryHp(long number) {
         //防止上限溢出
         long newHealth = Math.min(health + number, this.getHealthLimit());
-        OutputInfo.info(minionName + "恢复" + (newHealth - health) + "点生命值");
+        getOwner().printPublicQueue(minionName + "恢复" + (newHealth - health) + "点生命值");
         health = newHealth;
     }
 

@@ -10,18 +10,22 @@ import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
+import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.util.DeckSerializer;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Eiden J.P Zhou
  * @date 2020/4/1 12:55
  */
 public class GameDemo {
-    public void start(String deckStr) throws Exception {
+    public void start(String deckStr,BlockingQueue<String> ouput) throws Exception {
         List<Card> mageCards = new ArrayList<>(30);
         for (int i = 0; i < 15; i++) {
             mageCards.add(CardFactory.getInstance().buildCardById(52639));
@@ -33,7 +37,9 @@ public class GameDemo {
         DeckSerializer deckSerializer = new DeckSerializer();
         List<Card> deck = deckSerializer.deserializeDeckString(deckStr).getDeck();
         Gamer gamer = new Gamer(new HeroMinion(CardClass.WARRIOR, 30, (AbstractHeroPowerCard) CardFactory.getCardById(58799)), deck);
+        gamer.setOutputInfo(new OutputInfo(ouput));
         Gamer enemy = new Gamer(mageHero, mageCards);
+        enemy.setOutputInfo(new OutputInfo(ouput));
         gameStart(gamer, enemy);
     }
 
@@ -55,6 +61,7 @@ public class GameDemo {
         gamer.setPrivateMessageQueue(multiConfig.getOrganizer().getMessageQueue());
         gamer.setInputMessageQueue(multiConfig.getOrganizer().getInputQueue());
         gamer.setUserName(multiConfig.getOrganizer().getName());
+        gamer.setOutputInfo(new OutputInfo(multiConfig.getGroupMessageQueue()));
 
         deckSerializer = new DeckSerializer();
         Deck deck2 = deckSerializer.deserializeDeckString(deckStr2);
@@ -62,6 +69,7 @@ public class GameDemo {
         gamer2.setPrivateMessageQueue(multiConfig.getResponder().getMessageQueue());
         gamer2.setInputMessageQueue(multiConfig.getResponder().getInputQueue());
         gamer2.setUserName(multiConfig.getResponder().getName());
+        gamer2.setOutputInfo(new OutputInfo(multiConfig.getGroupMessageQueue()));
 
         gameStart(gamer,gamer2);
     }

@@ -21,7 +21,7 @@ public class MinionObject extends AbstractMinion {
     public void reduceHealth(Minion source, long reduceHealth) {
         super.reduceHealth(source, reduceHealth);
         if (source.hasPoisonous()){
-            OutputInfo.info("%s具有剧毒,%s直接死亡",source.getMinionName(),this.getMinionName());
+            getOwner().printPublicQueue(String.format("%s具有剧毒,%s直接死亡",source.getMinionName(),this.getMinionName()));
             this.setDead();
         }
     }

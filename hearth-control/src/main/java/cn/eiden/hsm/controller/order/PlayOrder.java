@@ -76,7 +76,7 @@ public class PlayOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
+            gamer.printPrivateQueue("非法输入！");
         }
     }
 
@@ -94,7 +94,7 @@ public class PlayOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
+            gamer.printPrivateQueue("非法输入！");
         }
     }
 

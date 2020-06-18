@@ -35,7 +35,7 @@ public class Hand extends AbstractGeneralItem {
             card.setOwner(this.getOwner());
         } else {
             //手排满了，爆牌
-            OutputInfo.info(card.getCardName() + "因手牌满消失");
+            getOwner().printPublicQueue(card.getCardName() + "因手牌满消失");
         }
     }
 
@@ -58,7 +58,7 @@ public class Hand extends AbstractGeneralItem {
      * @param card 卡牌
      */
     public void drop(Card card) {
-        OutputInfo.info("%s弃置%s", getOwner().getUserName(), card.getCardName());
+        getOwner().printPublicQueue(String.format("%s弃置%s", getOwner().getUserName(), card.getCardName()));
         this.loss(card);
     }
 

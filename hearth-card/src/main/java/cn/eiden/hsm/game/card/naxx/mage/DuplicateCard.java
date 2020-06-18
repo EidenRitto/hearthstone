@@ -27,7 +27,7 @@ public class DuplicateCard extends Duplicate {
             if (event.getClass() == triggerEvent()){
                 MinionDeathEvent minionDeathEvent = (MinionDeathEvent) event;
                 if (getOwner() == minionDeathEvent.getOwner()){
-                    OutputInfo.info("法师奥秘触发:复制");
+                    event.getOwner().printPublicQueue("法师奥秘触发:复制");
                     String cardId = minionDeathEvent.getDeathMinion().getCardId();
                     Card card1 = CardFactory.getCardById(Integer.parseInt(cardId));
                     Card card2 = CardFactory.getCardById(Integer.parseInt(cardId));

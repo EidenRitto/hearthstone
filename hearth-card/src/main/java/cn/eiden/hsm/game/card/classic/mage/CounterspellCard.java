@@ -24,8 +24,8 @@ public class CounterspellCard extends Counterspell {
             if (event.getClass() == triggerEvent()){
                 UseSpellCardFromHandEvent spellEvent = (UseSpellCardFromHandEvent) event;
                 spellEvent.getMagicCard().setCounter(true);
-                OutputInfo.info("法师奥秘触发:法术反制");
-                OutputInfo.info("法术<%s>无效",spellEvent.getMagicCard().getCardName());
+                event.getOwner().printPublicQueue("法师奥秘触发:法术反制");
+                event.getOwner().printPublicQueue(String.format("法术<%s>无效",spellEvent.getMagicCard().getCardName()));
                 return true;
             }
             return false;

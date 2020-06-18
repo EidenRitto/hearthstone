@@ -64,13 +64,13 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon {
 
     @Override
     public void addAttackValue(long atkValue) {
-        OutputInfo.info("%s获得%s点攻击力", weaponName, atkValue);
+        getOwner().printPublicQueue(String.format("%s获得%s点攻击力", weaponName, atkValue));
         weaponAttack += atkValue;
     }
 
     @Override
     public void addDurable(long durableValue) {
-        OutputInfo.info("%s获得%s点耐久", weaponName, durableValue);
+        getOwner().printPublicQueue(String.format("%s获得%s点耐久", weaponName, durableValue));
         weaponDurable += durableValue;
     }
 

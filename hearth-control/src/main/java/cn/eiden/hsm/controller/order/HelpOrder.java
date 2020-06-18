@@ -23,7 +23,7 @@ public class HelpOrder extends AbstractOrder implements Order {
                     .append(orderType.getExplanation()).append("\n");
         }
         useInfo.delete(useInfo.length() - 1, useInfo.length());
-        OutputInfo.info(gamer.getPrivateMessageQueue(),useInfo.toString());
+        gamer.printPrivateQueue(useInfo.toString());
     }
 
     public HelpOrder(Gamer gamer) {

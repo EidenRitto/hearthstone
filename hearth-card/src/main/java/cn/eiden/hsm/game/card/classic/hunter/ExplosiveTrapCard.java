@@ -30,7 +30,7 @@ public class ExplosiveTrapCard extends ExplosiveTrap {
                 if (getOwner().isFriend(attacker)) {
                     return false;
                 }
-                OutputInfo.info("猎人奥秘触发：爆炸陷阱！");
+                event.getOwner().printPublicQueue("猎人奥秘触发：爆炸陷阱！");
                 int damage = dmg + getOwner().getGamerSpellDamage();
                 for (Minion minion : getOwner().getEnemy().getMinions()) {
                     minion.beHurt(damage);

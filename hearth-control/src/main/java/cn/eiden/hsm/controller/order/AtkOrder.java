@@ -28,7 +28,7 @@ public class AtkOrder extends AbstractOrder implements Order {
             return;
         }
         if (sourceMinion.hasRush() && !sourceMinion.hasReady() && targetMinion instanceof HeroMinion){
-            OutputInfo.info(gamer.getPrivateMessageQueue(), "突袭随从在当前回合无法攻击英雄");
+            gamer.getOutputInfo().info(gamer.getPrivateMessageQueue(), "突袭随从在当前回合无法攻击英雄");
         }
         sourceMinion.attack(targetMinion);
         sourceMinion.getOwner().checkMinion();
@@ -39,7 +39,7 @@ public class AtkOrder extends AbstractOrder implements Order {
         while (true) {
             List<Minion> allCanAttackMinionsId = gamer.findAllCanAttackMinionsId();
             if (allCanAttackMinionsId.size() == 0) {
-                OutputInfo.info(gamer.getPrivateMessageQueue(), "当前没有能攻击的随从");
+                gamer.printPrivateQueue( "当前没有能攻击的随从");
                 return null;
             }
             //打印提示信息
@@ -54,7 +54,7 @@ public class AtkOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
+            gamer.printPrivateQueue("非法输入！");
         }
     }
 
@@ -66,7 +66,7 @@ public class AtkOrder extends AbstractOrder implements Order {
         while (true) {
             List<Minion> allCanBeAttackMinionsId = gamer.findAllCanBeAttackMinionsId();
             if (allCanBeAttackMinionsId.size() == 0) {
-                OutputInfo.info(gamer.getPrivateMessageQueue(),"当前没有能被攻击的随从/英雄");
+                gamer.printPrivateQueue("当前没有能被攻击的随从/英雄");
                 return null;
             }
             //打印提示信息
@@ -81,7 +81,7 @@ public class AtkOrder extends AbstractOrder implements Order {
             } else {
                 return null;
             }
-            OutputInfo.info(gamer.getPrivateMessageQueue(),"非法输入！");
+            gamer.printPrivateQueue("非法输入！");
         }
     }
 

@@ -28,12 +28,12 @@ public class SouthseaDeckhandCard extends SouthseaDeckhand {
             if (getMinion().getOwner().getHero().hasWeapon()){
                 if (!getMinion().hasCharge()){
                     getMinion().addCharge();
-                    OutputInfo.info("%s获得冲锋",getMinion().getMinionName());
+                    event.getOwner().printPublicQueue(String.format("%s获得冲锋",getMinion().getMinionName()));
                 }
             }else {
                 if (getMinion().hasCharge()){
                     getMinion().removeCharge();
-                    OutputInfo.info("%s失去冲锋",getMinion().getMinionName());
+                    event.getOwner().printPublicQueue(String.format("%s失去冲锋",getMinion().getMinionName()));
                 }
             }
         }

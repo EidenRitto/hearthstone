@@ -9,8 +9,10 @@ import cn.eiden.hsm.output.OutputInfo;
 import cn.eiden.hsm.GameDemo;
 import lombok.SneakyThrows;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Eiden J.P Zhou
@@ -20,6 +22,8 @@ public class CoolHearthListener extends IcqListener {
     private static final String HEARTH = "炉石传说";
 
     private boolean isStart = false;
+
+    private static BlockingQueue<String> ouput = new LinkedBlockingQueue<>();
 
     public static ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
@@ -37,7 +41,7 @@ public class CoolHearthListener extends IcqListener {
             cachedThreadPool.execute(() ->{
                 GameDemo gameDemo = new GameDemo();
                 try {
-                    gameDemo.start(deckStr);
+                    gameDemo.start(deckStr,ouput);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -66,7 +70,7 @@ public class CoolHearthListener extends IcqListener {
         @Override
         public void run() {
             while (true){
-                String message = OutputInfo.messageQueue.take();
+                String message = ouput.take();
                 eventMessage.respond(message);
             }
         }

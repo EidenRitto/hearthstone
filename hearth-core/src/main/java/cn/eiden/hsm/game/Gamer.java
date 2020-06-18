@@ -40,6 +40,8 @@ import java.util.concurrent.BlockingQueue;
 @Data
 @Slf4j
 public class Gamer extends AbstractGeneralItem {
+    private OutputInfo outputInfo;
+
     /**
      * 手牌上限
      */
@@ -153,7 +155,7 @@ public class Gamer extends AbstractGeneralItem {
      */
     public void newTurnStart() {
         turnNum++;
-        OutputInfo.info("%s的回合开始=====等待指令中====", userName);
+        outputInfo.info("%s的回合开始=====等待指令中====", userName);
         printPrivateQueue("=======你的回合======");
         active = true;
         //场中随从解除上场回合不能攻击
@@ -594,7 +596,7 @@ public class Gamer extends AbstractGeneralItem {
      * 游戏结束
      */
     private void gameOver() {
-        printPublicQueue("游戏胜利---结束");
+        printPublicQueue(String.format("%s游戏胜利---结束",this.getEnemy().getUserName()));
         throw new GameOverException();
     }
 
@@ -964,12 +966,12 @@ public class Gamer extends AbstractGeneralItem {
     }
 
     public void printPrivateQueue(String msg) {
-        OutputInfo.info(privateMessageQueue, msg);
+        outputInfo.info(privateMessageQueue, msg);
     }
 
     public void printPublicQueue(String msg) {
         printPrivateQueue(msg);
-        OutputInfo.info(msg);
+        outputInfo.info(msg);
     }
 
     public Gamer(Hero heroObject, List<Card> deckCards) {
@@ -1026,4 +1028,11 @@ public class Gamer extends AbstractGeneralItem {
         return order;
     }
 
+    public OutputInfo getOutputInfo() {
+        return outputInfo;
+    }
+
+    public void setOutputInfo(OutputInfo outputInfo) {
+        this.outputInfo = outputInfo;
+    }
 }

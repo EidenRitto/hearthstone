@@ -55,13 +55,13 @@ public class HeroMinion extends AbstractMinion implements Hero {
 
     @Override
     public void addArmor(long armorNumber) {
-        OutputInfo.info(getMinionName() + "获得" + armorNumber + "点护甲.");
+        getOwner().printPublicQueue(getMinionName() + "获得" + armorNumber + "点护甲.");
         armor += armorNumber;
     }
 
     @Override
     public void equipWeapons(Weapon weapon) {
-        OutputInfo.info("装备%s", weapon.getName());
+        getOwner().printPublicQueue(String.format("装备%s", weapon.getName()));
         if (hasWeapon()) {
             this.unloadWeapon();
         }

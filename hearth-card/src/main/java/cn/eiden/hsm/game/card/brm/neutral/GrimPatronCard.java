@@ -30,7 +30,7 @@ public class GrimPatronCard extends GrimPatron {
         @EventHandler
         public void onEvent(MinionBeHurtEvent event) {
             if (getMinion() == event.getMinion() && getMinion().getHealth() > 0){
-                OutputInfo.info("要打架了，算我一个！");
+                event.getOwner().printPublicQueue("要打架了，算我一个！");
                 getMinion().getOwner().addMinion(REF_ID);
             }
         }

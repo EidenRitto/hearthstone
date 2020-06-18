@@ -11,6 +11,7 @@ import java.util.concurrent.BlockingQueue;
  */
 @Data
 public class MultiConfig {
+    /**qq群号*/
     private Long groupId;
     /**举办者*/
     private User organizer;
@@ -18,4 +19,6 @@ public class MultiConfig {
     private User responder;
     /**组群消息队列*/
     private BlockingQueue<String> groupMessageQueue;
+
+    private boolean isGameStart = false;
 }

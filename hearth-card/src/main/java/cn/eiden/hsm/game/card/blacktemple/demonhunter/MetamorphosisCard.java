@@ -35,7 +35,7 @@ public class MetamorphosisCard extends Metamorphosis {
             if (event.getHeroPowerCard() == newPower){
                 useTimes++;
                 if (useTimes>1){
-                    OutputInfo.info("%s使用完次数，技能变回%s",newPower.getCardName(),oldPower.getCardName());
+                    gamer.printPublicQueue(String.format("%s使用完次数，技能变回%s",newPower.getCardName(),oldPower.getCardName()));
                     gamer.getHero().setHeroPower(oldPower);
                     gamer.getEventManager().removeListener(this);
                 }

@@ -28,7 +28,7 @@ public class AltruisTheOutcastCard extends AltruisTheOutcast {
             Minion minion = getMinion();
             if (event.getOwner() == minion.getOwner()
                     &&event.getOwner().isOutcastTrigger(event.getCard())){
-                OutputInfo.info("%s特效触发",minion.getMinionName());
+                event.getOwner().printPublicQueue(String.format("%s特效触发",minion.getMinionName()));
                 Gamer enemy = minion.getOwner().getEnemy();
                 enemy.getHero().beHurt(minion,1);
                 enemy.getMinions().forEach(e->e.beHurt(minion,1));

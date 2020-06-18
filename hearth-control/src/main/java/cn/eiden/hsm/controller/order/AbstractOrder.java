@@ -24,7 +24,7 @@ public abstract class AbstractOrder implements Order{
                 order = HearthLinkContext.inputMessage.take();
             }
         } catch (InterruptedException e) {
-            OutputInfo.info(e.getMessage());
+            gamer.printPublicQueue(e.getMessage());
         }
         return order;
     }
@@ -43,7 +43,7 @@ public abstract class AbstractOrder implements Order{
             } else {
                 return null;
             }
-            OutputInfo.info("非法输入！");
+            gamer.printPrivateQueue("非法输入！");
         }
     }
 

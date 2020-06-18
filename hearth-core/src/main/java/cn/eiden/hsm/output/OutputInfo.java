@@ -11,9 +11,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 @Slf4j
 public class OutputInfo {
-    public static BlockingQueue<String> messageQueue = new LinkedBlockingQueue<>();
+    public BlockingQueue<String> messageQueue;
 
-    public static void info(BlockingQueue<String> blockingQueue, String info) {
+    public void info(BlockingQueue<String> blockingQueue, String info) {
         if (blockingQueue == null){
             info(info);
             return;
@@ -27,7 +27,7 @@ public class OutputInfo {
 
     }
 
-    public static void info(String info) {
+    public void info(String info) {
         log.info(info);
         try {
             messageQueue.put(info);
@@ -37,7 +37,7 @@ public class OutputInfo {
 
     }
 
-    public static void info(BlockingQueue<String> blockingQueue, String format, Object... args) {
+    public void info(BlockingQueue<String> blockingQueue, String format, Object... args) {
         if (blockingQueue == null){
             info(format,args);
             return;
@@ -46,8 +46,16 @@ public class OutputInfo {
         info(blockingQueue, str);
     }
 
-    public static void info(String format, Object... args) {
+    public void info(String format, Object... args) {
         String str = String.format(format, args);
         info(str);
+    }
+
+    public BlockingQueue<String> getMessageQueue() {
+        return messageQueue;
+    }
+
+    public OutputInfo(BlockingQueue<String> messageQueue) {
+        this.messageQueue = messageQueue;
     }
 }

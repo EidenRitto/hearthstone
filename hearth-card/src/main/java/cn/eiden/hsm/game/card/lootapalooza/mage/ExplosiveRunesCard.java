@@ -30,7 +30,7 @@ public class ExplosiveRunesCard extends ExplosiveRunes {
             Gamer secretOwner = useMinionEvent.getOwner().getEnemy();
             Minion minion = useMinionEvent.getMinionObject();
             long minionHealth = minion.getHealth();
-            OutputInfo.info("法师奥秘触发:爆炸符文");
+            event.getOwner().printPublicQueue("法师奥秘触发:爆炸符文");
             //计算总伤害（基本伤害加上法强加成）
             int damage = DMG + secretOwner.getGamerSpellDamage();
             //随从伤害最多为总伤害,最少为随从生命值

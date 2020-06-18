@@ -19,6 +19,6 @@ public class CoinCard extends TheCoin {
     @Override
     public void magicEffect(Gamer gamer, Minion target) {
         gamer.getManaCrystal().addAlive(MAGIC_CRYSTAL);
-        OutputInfo.info("获得一点法力值");
+        gamer.printPublicQueue("获得一点法力值");
     }
 }
