@@ -21,7 +21,7 @@ public class MetamorphosisCard extends Metamorphosis {
         AbstractHeroPowerCard oldPower = gamer.getHero().getHeroPower();
         AbstractHeroPowerCard newPower = (AbstractHeroPowerCard) CardFactory.getCardById(56877);
         gamer.getHero().setHeroPower(newPower);
-        gamer.getEventManager().removeListener(new UseTwoChangePower(oldPower, newPower, gamer));
+        gamer.getEventManager().registerListener(new UseTwoChangePower(oldPower, newPower, gamer));
     }
 
     private static class UseTwoChangePower implements HearthListener {

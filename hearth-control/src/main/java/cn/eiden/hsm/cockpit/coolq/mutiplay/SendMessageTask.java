@@ -5,6 +5,8 @@ import cn.eiden.hsm.cockpit.coolq.User;
 import lombok.Setter;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 发送消息线程
@@ -14,24 +16,27 @@ import java.util.concurrent.BlockingQueue;
 public class SendMessageTask implements Runnable {
     private User user;
     private IcqHttpApi icqHttpApi;
-    @Setter
-    private boolean start = true;
+    private AtomicBoolean start;
 
     @Override
     public void run() {
         BlockingQueue<String> messageQueue = user.getMessageQueue();
-        while (start){
+        while (start.get()){
             try {
-                String take = messageQueue.take();
-                icqHttpApi.sendPrivateMsg(user.getId(),take);
+                String poll = messageQueue.poll(30, TimeUnit.SECONDS);
+                if (poll == null){
+                    continue;
+                }
+                icqHttpApi.sendPrivateMsg(user.getId(),poll);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public SendMessageTask(User user, IcqHttpApi icqHttpApi) {
+    public SendMessageTask(User user, IcqHttpApi icqHttpApi, AtomicBoolean start) {
         this.user = user;
         this.icqHttpApi = icqHttpApi;
+        this.start = start;
     }
 }

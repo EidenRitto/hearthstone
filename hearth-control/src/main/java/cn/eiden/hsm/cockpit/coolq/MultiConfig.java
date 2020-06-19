@@ -3,6 +3,7 @@ package cn.eiden.hsm.cockpit.coolq;
 import lombok.Data;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 多人酷Q配置
@@ -20,5 +21,5 @@ public class MultiConfig {
     /**组群消息队列*/
     private BlockingQueue<String> groupMessageQueue;
 
-    private boolean isGameStart = false;
+    private AtomicBoolean isGameStart = new AtomicBoolean(false);
 }

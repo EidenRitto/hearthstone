@@ -59,7 +59,7 @@ public class HearthMultiplayerListener extends IcqListener {
         Long groupId = groupMessage.getGroupId();
         MultiConfig currConfig = groupDictionary.get(groupId);
         if (currConfig != null &&
-                !currConfig.isGameStart() &&
+                !currConfig.getIsGameStart().get() &&
                 currConfig.getOrganizer()!= null &&
                 currConfig.getResponder() == null &&
 //                !groupMessage.getSenderId().equals(organizerUser.getId()) &&
@@ -81,7 +81,7 @@ public class HearthMultiplayerListener extends IcqListener {
         String message = privateMessage.getMessage();
         if (multiConfig.getOrganizer() != null && multiConfig.getOrganizer().getId().equals(senderId)) {
             if (multiConfig.getOrganizer().getDeckStr() != null) {
-                if (multiConfig.isGameStart()) {
+                if (multiConfig.getIsGameStart().get()) {
                     try {
                         multiConfig.getOrganizer().getInputQueue().put(message);
                     } catch (InterruptedException e) {
@@ -114,7 +114,7 @@ public class HearthMultiplayerListener extends IcqListener {
         String message = privateMessage.getMessage();
         if (multiConfig.getResponder() != null && multiConfig.getResponder().getId().equals(privateMessage.getSenderId())) {
             if (multiConfig.getResponder().getDeckStr() != null) {
-                if (multiConfig.isGameStart()) {
+                if (multiConfig.getIsGameStart().get()) {
                     try {
                         multiConfig.getResponder().getInputQueue().put(message);
                     } catch (InterruptedException e) {
@@ -138,18 +138,26 @@ public class HearthMultiplayerListener extends IcqListener {
                 try {
                     gameDemo.multiStart(multiConfig.getOrganizer().getDeckStr(), multiConfig.getResponder().getDeckStr(), multiConfig);
                 } catch (GameOverException goe){
-
+                    gameOver(multiConfig);
                 }catch (Exception e) {
                     e.printStackTrace();
+                    gameOver(multiConfig);
                 }
             });
+            multiConfig.getIsGameStart().set(true);
             CoolHearthListener.cachedThreadPool.execute(
-                    new SendMessageTask(multiConfig.getOrganizer(), eventMessage.getHttpApi()));
+                    new SendMessageTask(multiConfig.getOrganizer(), eventMessage.getHttpApi(),multiConfig.getIsGameStart()));
             CoolHearthListener.cachedThreadPool.execute(
-                    new SendMessageTask(multiConfig.getResponder(), eventMessage.getHttpApi()));
+                    new SendMessageTask(multiConfig.getResponder(), eventMessage.getHttpApi(),multiConfig.getIsGameStart()));
             CoolHearthListener.cachedThreadPool.execute(
-                    new SendGroupMessageTask(multiConfig, eventMessage.getHttpApi()));
-            multiConfig.setGameStart(true);
+                    new SendGroupMessageTask(multiConfig, eventMessage.getHttpApi(),multiConfig.getIsGameStart()));
         }
+    }
+
+    private void gameOver(MultiConfig multiConfig) {
+        multiConfig.getIsGameStart().lazySet(false);
+        groupDictionary.remove(multiConfig.getGroupId());
+        userDictionary.remove(multiConfig.getOrganizer().getId());
+        userDictionary.remove(multiConfig.getResponder().getId());
     }
 }

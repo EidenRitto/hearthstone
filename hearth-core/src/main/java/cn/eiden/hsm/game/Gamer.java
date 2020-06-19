@@ -386,6 +386,9 @@ public class Gamer extends AbstractGeneralItem {
         heroPower.powerEffect(this, target);
         //次数-1
         heroPower.subTimes();
+
+        HeroPowerBeUsedEvent heroPowerBeUsedEvent = new HeroPowerBeUsedEvent(this, heroPower, target);
+        eventManager.call(heroPowerBeUsedEvent);
     }
 
     /**
