@@ -3,18 +3,18 @@ package cn.eiden.hsm.game;
 import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.card.CardFactory;
 import cn.eiden.hsm.game.keyword.TwinSpell;
-import cn.eiden.hsm.output.OutputInfo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Eiden J.P Zhou
  * @date 2020/3/27 17:29
  */
 @Slf4j
-public class Hand extends AbstractGeneralItem {
+public class Hand extends AbstractGeneralItem implements Cloneable {
 
     private int handsLimit = 10;
 
@@ -90,6 +90,10 @@ public class Hand extends AbstractGeneralItem {
         return cards;
     }
 
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
     /**
      * 卡牌是否是右手第一张
      *
@@ -108,5 +112,19 @@ public class Hand extends AbstractGeneralItem {
      */
     public boolean isFirstCard(Card card) {
         return cards.get(0) == card;
+    }
+
+    @Override
+    public Hand clone(){
+        try {
+            Hand clone = (Hand) super.clone();
+            List<Card> cloneCards = cards.stream()
+                    .map(Card::clone).collect(Collectors.toList());
+            clone.setCards(cloneCards);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

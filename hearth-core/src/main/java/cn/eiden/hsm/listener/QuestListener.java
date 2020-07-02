@@ -18,4 +18,10 @@ public interface QuestListener extends HearthListener {
      * @param quest 任务
      */
     void setQuest(Quest quest);
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改引用
+     */
+    QuestListener clone();
 }

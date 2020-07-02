@@ -91,4 +91,10 @@ public interface Weapon extends GeneralItem {
      * @return 有返回true
      */
     boolean hasBattle();
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改引用
+     */
+    Weapon clone();
 }

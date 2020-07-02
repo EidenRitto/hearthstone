@@ -29,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
+import java.util.stream.Collectors;
 
 /**
  * 玩家类
@@ -97,10 +98,6 @@ public class Gamer extends AbstractGeneralItem {
      * 随机种子
      */
     private Random randomSeed;
-    /**
-     * 抉择选项
-     */
-    private int chooseOne;
 
     /**
      * 是否活动（当前回合中）
@@ -684,14 +681,6 @@ public class Gamer extends AbstractGeneralItem {
         this.enemy = null;
         this.randomSeed = new Random();
         this.fatigueCounter = 0;
-        this.chooseOne = -1;
-    }
-
-    /**
-     * 是否是敌人
-     */
-    public boolean isEnemy() {
-        return this.getEnemy() == null;
     }
 
     /**
@@ -742,34 +731,6 @@ public class Gamer extends AbstractGeneralItem {
         if (hero.getHealth() <= 0) {
             gameOver();
         }
-    }
-
-    /**
-     * 友方全部随从增加攻击力
-     *
-     * @param addAttack 攻击力
-     */
-    public void addMinionsAttack(long addAttack) {
-        minions.forEach(minionObject -> minionObject.addAttack(addAttack));
-    }
-
-    /**
-     * 友方全部随从增加生命值
-     *
-     * @param addHealth 生命值
-     */
-    public void addMinionsHealth(long addHealth) {
-        minions.forEach(minionObject -> minionObject.addHealthLimit(addHealth));
-    }
-
-    /**
-     * @param addAttack 攻击力
-     * @param addHealth 生命值
-     *                  友方随从获得 +[addAttack]/+[addHealth]
-     */
-    public void buffYourAllMinions(long addAttack, long addHealth) {
-        addMinionsAttack(addAttack);
-        addMinionsHealth(addHealth);
     }
 
     /**
@@ -913,15 +874,6 @@ public class Gamer extends AbstractGeneralItem {
         rules.forEach(e -> e.effective(this));
     }
 
-    /**
-     * @param cardId 卡片序号
-     *               检查手牌费用是否足够打出
-     */
-    public boolean checkCardMagic(int cardId) {
-        Card card = getHand().getCard(cardId);
-        return this.checkCardMagic(card);
-    }
-
     public boolean checkCardMagic(Card cardId) {
         return getManaCrystal().checkCost(cardId.getCost());
     }
@@ -1037,5 +989,32 @@ public class Gamer extends AbstractGeneralItem {
 
     public void setOutputInfo(OutputInfo outputInfo) {
         this.outputInfo = outputInfo;
+    }
+
+    public Gamer() {
+    }
+
+    /**
+     * 创建备忘录
+     * @return 返回当前对象的副本
+     */
+    public Gamer saveStateToMemento(){
+        Gamer backup = new Gamer();
+        backup.setHero(this.hero.clone());
+        backup.setHandsLimit(this.handsLimit);
+        backup.setHand(this.hand.clone());
+        backup.setDeckCards(this.deckCards.stream().map(Card::clone).collect(Collectors.toList()));
+        backup.setMinions(this.minions.stream().map(Minion::clone).collect(Collectors.toList()));
+        backup.setTomb(this.tomb.stream().map(Minion::clone).collect(Collectors.toList()));
+        backup.setManaCrystal(this.manaCrystal.clone());
+        backup.setFatigueCounter(this.fatigueCounter);
+        backup.setRandomSeed(new Random());
+        backup.setActive(this.isActive());
+        backup.setHistory(this.history.clone());
+        backup.setSecretList(this.secretList.stream().map(Secret::clone).collect(Collectors.toList()));
+        backup.setQuestList(this.questList.stream().map(Quest::clone).collect(Collectors.toList()));
+        backup.setRules(this.rules.stream().map(Rule::clone).collect(Collectors.toList()));
+        backup.setTurnNum(this.turnNum);
+        return backup;
     }
 }

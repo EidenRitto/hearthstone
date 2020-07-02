@@ -1,8 +1,6 @@
 package cn.eiden.hsm.game.minion.hero;
 
 import cn.eiden.hsm.enums.CardClass;
-import cn.eiden.hsm.enums.CardSet;
-import cn.eiden.hsm.enums.Faction;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.event.events.BattlefieldChangeEvent;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
@@ -10,7 +8,6 @@ import cn.eiden.hsm.game.minion.AbstractMinion;
 
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Weapon;
-import cn.eiden.hsm.output.OutputInfo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -182,5 +179,15 @@ public class HeroMinion extends AbstractMinion implements Hero {
     @Override
     public boolean isAttack() {
         return getAttackValue() > 0 && !isFreeze() && getAttackTime() > 0;
+    }
+
+    @Override
+    public HeroMinion clone() {
+        HeroMinion clone = (HeroMinion) super.clone();
+        clone.setHeroPower(this.heroPower.clone());
+        if (hasWeapon()){
+            clone.setWeapon(this.weapon.clone());
+        }
+        return clone;
     }
 }

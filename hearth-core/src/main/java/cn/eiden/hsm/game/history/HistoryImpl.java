@@ -4,12 +4,13 @@ import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.minion.Minion;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Eiden J.P Zhou
  * @date 2020/6/4 12:10
  */
-public class HistoryImpl implements History {
+public class HistoryImpl implements History,Cloneable {
     private Map<Integer, List<Card>> usedCardsMap;
     private List<Card> cardsHistory;
 
@@ -55,5 +56,25 @@ public class HistoryImpl implements History {
     public HistoryImpl() {
         this.usedCardsMap = new HashMap<>(32);
         this.cardsHistory = new ArrayList<>();
+    }
+
+    public void setUsedCardsMap(Map<Integer, List<Card>> usedCardsMap) {
+        this.usedCardsMap = usedCardsMap;
+    }
+
+    public void setCardsHistory(List<Card> cardsHistory) {
+        this.cardsHistory = cardsHistory;
+    }
+
+    @Override
+    public History clone(){
+        HistoryImpl history = new HistoryImpl();
+        history.setCardsHistory(this.cardsHistory.stream().map(Card::clone).collect(Collectors.toList()));
+        Map<Integer, List<Card>> map = new HashMap<>(32);
+        for (Map.Entry<Integer, List<Card>> integerListEntry : usedCardsMap.entrySet()) {
+            map.put(integerListEntry.getKey(),integerListEntry.getValue().stream().map(Card::clone).collect(Collectors.toList()));
+        }
+        history.setUsedCardsMap(map);
+        return history;
     }
 }

@@ -18,4 +18,10 @@ public interface WeaponListener extends HearthListener {
      * @param weapon 武器
      */
     void setWeapon(Weapon weapon);
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改随从引用
+     */
+    WeaponListener clone();
 }

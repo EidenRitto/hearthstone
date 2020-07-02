@@ -6,6 +6,7 @@ import cn.eiden.hsm.event.events.UseSecretCardFromHandEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.AbstractSecretCard;
 import cn.eiden.hsm.game.card.Card;
+import cn.eiden.hsm.game.rule.AbstractRule;
 import cn.eiden.hsm.game.rule.Rule;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Eiden J.P ZHou
  * @date 2020/5/29 15:52
  */
-public class NextSecretCostZeroRule implements Rule {
+public class NextSecretCostZeroRule extends AbstractRule implements Rule {
 
 
     @Override

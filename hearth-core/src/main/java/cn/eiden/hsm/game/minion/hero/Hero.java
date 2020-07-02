@@ -3,6 +3,7 @@ package cn.eiden.hsm.game.minion.hero;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Weapon;
+import cn.eiden.hsm.listener.MinionListener;
 
 /**
  * 英雄
@@ -73,4 +74,10 @@ public interface Hero extends Minion {
      */
     boolean isLethalDose(long dmg);
 
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改随从引用
+     */
+    @Override
+    HeroMinion clone();
 }

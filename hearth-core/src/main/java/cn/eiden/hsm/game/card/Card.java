@@ -4,6 +4,7 @@ import cn.eiden.hsm.annotation.TargetScope;
 import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.enums.CardType;
 import cn.eiden.hsm.game.GeneralItem;
+import cn.eiden.hsm.listener.MinionListener;
 
 import java.util.List;
 
@@ -84,6 +85,12 @@ public interface Card extends GeneralItem {
      * @return 抉择选项
      */
     List<Card> getOptions();
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改引用
+     */
+    Card clone();
 
     /**
      * 是否不需要目标

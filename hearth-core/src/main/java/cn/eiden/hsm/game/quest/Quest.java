@@ -1,7 +1,7 @@
 package cn.eiden.hsm.game.quest;
 
 import cn.eiden.hsm.game.GeneralItem;
-import cn.eiden.hsm.listener.AbstractQuestListener;
+import cn.eiden.hsm.listener.QuestListener;
 
 /**
  * @author Eiden J.P Zhou
@@ -36,10 +36,16 @@ public interface Quest extends GeneralItem {
      * 获取监听
      * @return 任务监听
      */
-    AbstractQuestListener getListener();
+    QuestListener getListener();
 
     /**
      * 输出进度
      */
     void printProgress();
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改引用
+     */
+    Quest clone();
 }

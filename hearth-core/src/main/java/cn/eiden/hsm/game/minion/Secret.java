@@ -33,4 +33,10 @@ public interface Secret {
      * @param gamer 所有者
      */
     void setOwner(Gamer gamer);
+
+    /**
+     * 克隆
+     * @return 返回一个副本
+     */
+    Secret clone();
 }

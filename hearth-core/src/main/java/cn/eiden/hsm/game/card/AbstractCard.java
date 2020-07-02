@@ -8,13 +8,14 @@ import cn.eiden.hsm.enums.Rarity;
 import cn.eiden.hsm.game.AbstractGeneralItem;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : Eiden J.P Zhou
  * @version : 2.0
  * @date : 2018/9/12
  */
-public abstract class AbstractCard extends AbstractGeneralItem implements Card {
+public abstract class AbstractCard extends AbstractGeneralItem implements Card, Cloneable {
     /**
      * 卡牌名称
      */
@@ -157,5 +158,21 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card {
     @Override
     public List<Card> getOptions() {
         return this.chooseOneList;
+    }
+
+    @Override
+    public Card clone(){
+        try {
+            Card clone = (Card) super.clone();
+            if (this.hasChooseOne()){
+                List<Card> cloneList = this.chooseOneList.stream()
+                        .map(Card::clone).collect(Collectors.toList());
+                clone.addChooseOne(cloneList);
+            }
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

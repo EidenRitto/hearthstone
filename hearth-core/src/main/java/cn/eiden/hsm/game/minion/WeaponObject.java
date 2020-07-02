@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class WeaponObject extends AbstractGeneralItem implements Weapon {
+public class WeaponObject extends AbstractGeneralItem implements Weapon, Cloneable {
     private String weaponName;
     private long weaponAttack;
     private long weaponDurable;
@@ -108,5 +108,20 @@ public class WeaponObject extends AbstractGeneralItem implements Weapon {
     @Override
     public boolean hasBattle() {
         return this.battle != null;
+    }
+
+    @Override
+    public WeaponObject clone() {
+        try {
+            WeaponObject clone = (WeaponObject) super.clone();
+            if (this.weaponListener != null) {
+                WeaponListener listener = this.weaponListener.clone();
+                clone.setWeaponListener(listener);
+            }
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -13,6 +13,7 @@
         <module>hearth-core</module>
         <module>hearth-card</module>
         <module>hearth-control</module>
+        <module>hearth-ai</module>
     </modules>
     <dependencies>
         <dependency>

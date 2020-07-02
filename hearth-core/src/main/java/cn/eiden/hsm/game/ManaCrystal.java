@@ -8,7 +8,7 @@ import lombok.Getter;
  * @date 2020/3/17 19:09
  */
 @Getter
-public class ManaCrystal extends AbstractGeneralItem {
+public class ManaCrystal extends AbstractGeneralItem implements Cloneable{
     /**
      * 上限
      */
@@ -155,5 +155,15 @@ public class ManaCrystal extends AbstractGeneralItem {
         unlock();
         //加锁
         locked();
+    }
+
+    @Override
+    public ManaCrystal clone(){
+        try {
+            return (ManaCrystal) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

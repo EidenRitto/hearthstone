@@ -6,8 +6,10 @@ import cn.eiden.hsm.game.minion.Weapon;
  * @author Eiden J.P Zhou
  * @date 2020/6/4 10:50
  */
-public abstract class AbstractWeaponListener implements WeaponListener{
-    /**监听所绑定的武器*/
+public abstract class AbstractWeaponListener implements WeaponListener, Cloneable {
+    /**
+     * 监听所绑定的武器
+     */
     private Weapon weapon;
 
     @Override
@@ -25,5 +27,15 @@ public abstract class AbstractWeaponListener implements WeaponListener{
     }
 
     public AbstractWeaponListener() {
+    }
+
+    @Override
+    public AbstractWeaponListener clone(){
+        try {
+            return (AbstractWeaponListener) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

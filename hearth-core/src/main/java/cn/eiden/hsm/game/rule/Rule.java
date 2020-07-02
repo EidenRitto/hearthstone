@@ -12,9 +12,23 @@ import java.util.List;
  */
 public interface Rule {
 
+    /**
+     * 效果
+     * @param gamer 玩家
+     */
     void effective(Gamer gamer);
 
+    /**
+     * 规则移除事件
+     * @return 触发事件
+     */
     List<Class<? extends Event>> leaveEvents();
+
+    /**
+     * 克隆
+     * @return 新rule
+     */
+    Rule clone();
 
     default boolean leave(Class<? extends Event> eventType){
         return leaveEvents().contains(eventType);

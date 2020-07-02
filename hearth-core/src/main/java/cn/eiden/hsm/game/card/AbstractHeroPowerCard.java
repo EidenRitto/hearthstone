@@ -50,4 +50,9 @@ public abstract class AbstractHeroPowerCard extends AbstractCard {
     public void recoveryTimes(){
         this.timesOfUse = TIMES;
     }
+
+    @Override
+    public AbstractHeroPowerCard clone() {
+        return (AbstractHeroPowerCard) super.clone();
+    }
 }

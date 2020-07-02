@@ -36,4 +36,10 @@ public interface History {
 
 
     int getCountByMinionName(Minion minion);
+
+    /**
+     * 克隆
+     * @return 返回一个副本,需要手动修改引用
+     */
+    History clone();
 }
