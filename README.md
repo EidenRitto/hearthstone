@@ -54,22 +54,24 @@
   - java控制台运行
     - 运行cn/eiden/hsm/cockpit/console/ConsoleCockpit.java
   - QQ运行
-    - qq模块使用http插件，系统中使用的是酷Q
-    - <a href="#coolq">安装配置酷Q</a>
-    - 运行cn/eiden/hsm/cockpit/coolq/HearthApplication.java
+    - ~~qq模块使用http插件，系统中使用的是酷Q~~
+    - <a href="#coolq">~~安装配置酷Q~~</a>
+    - ~~运行cn/eiden/hsm/cockpit/coolq/HearthApplication.java~~
+    - 配置cn.eiden.hsm.cockpit.mirai.MiraiApplication中的机器人账号和密码
+    - 运行MiraiApplication的main方法
   - 微信运行（未实装）
   
 <a name="coolq"></a>
 
 
-#### 安装和配置酷Q
+#### ~~安装和配置酷Q~~
 
-#### 1. 下载 [酷Q](https://cqp.cc/)... (如果有 酷Q Pro 的话效果更好哦!)
+#### 1. ~~下载 [酷Q](https://cqp.cc/)... (如果有 酷Q Pro 的话效果更好哦!)~~
 下载完后解压到你想安装的目录下<br>
 首次启动请运行 `cqa.exe` 或 `cqp.exe`, 并登陆机器人的 QQ 号<br>
 然后退出 酷Q (右键悬浮窗点退出)<br>
 
-#### 2. 添加 [酷Q HTTP 插件](https://cqp.cc/t/30748):
+#### 2. ~~添加 [酷Q HTTP 插件](https://cqp.cc/t/30748):~~
 把 `.cpk` 文件下载下来, 放进 `酷Q安装目录\app` 文件夹里<br>
 启动 酷Q<br>
 右键悬浮窗, 然后点击 `应用 -> 应用管理`<br>
@@ -78,7 +80,7 @@
 启用之后在 `酷Q安装目录\app` 文件夹里会出现 `io.github.richardchien.coolqhttpapi` 文件夹<br>
 退出 酷Q<br>
 
-#### 3. 配置 酷Q HTTP 插件:
+#### 3. ~~配置 酷Q HTTP 插件:~~
 在 `io.github.richardchien.coolqhttpapi` 文件夹里创建一个文件名为 `config.cfg` 的配置文件<br>
 并在其中写入以下代码<br>
 
@@ -96,7 +98,7 @@ enable_backward_compatibility=false
 如果 酷Q 要和你的机器人程序分开运行的话, 请把`127.0.0.1`改成你的机器人部署的服务器的地址<br>
 保存配置文件<br>
 
-#### 4. 配置完成! 启动 酷Q!
+#### 4. ~~配置完成! 启动 酷Q!~~
 
 
 ## 如何扩展添加新的卡牌
