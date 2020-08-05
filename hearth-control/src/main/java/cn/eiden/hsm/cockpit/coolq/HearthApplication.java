@@ -4,6 +4,7 @@ import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import cn.eiden.hsm.cockpit.coolq.listeners.CoolHearthListener;
 import cn.eiden.hsm.cockpit.coolq.listeners.HearthMultiplayerListener;
+import cn.eiden.hsm.game.card.CardFactory;
 
 /**
  * @author Eiden J.P Zhou
@@ -21,5 +22,10 @@ public class HearthApplication {
         // 注册事件监听器, 可以注册多个监听器
         bot.getEventManager().registerListeners(new CoolHearthListener(),new HearthMultiplayerListener());
         bot.startBot();
+        
+        //初始化炉石卡牌缓存池
+        CardFactory.getInstance();
+        System.out.println();
+        System.out.println("启动完成");
     }
 }
