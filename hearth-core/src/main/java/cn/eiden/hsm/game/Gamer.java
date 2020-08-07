@@ -183,6 +183,8 @@ public class Gamer extends AbstractGeneralItem {
      * 开始一局新游戏
      */
     public boolean newGameStart() {
+        StartTurnEvent startTurnEvent = new StartTurnEvent(this);
+        eventManager.call(startTurnEvent);
         //分配先后手
         boolean isFirstTurn = randomSeed.nextBoolean();
         if (isFirstTurn) {
@@ -309,6 +311,8 @@ public class Gamer extends AbstractGeneralItem {
         }
         printPublicQueue(info);
         eventManager.call(new UseCardFromHandEvent(card, target));
+        //从手牌中移除卡牌
+        hand.used(card);
         if (card instanceof AbstractMagicCard) {
             this.useThisMagicCard(card, target);
         } else if (card instanceof AbstractMinionCard) {
@@ -405,10 +409,6 @@ public class Gamer extends AbstractGeneralItem {
      * @param target 目标
      */
     public void useThisMagicCard(Card card, Minion target) {
-        if (!isRightTarget(card, target)) {
-            printPrivateQueue("这不是一个有效的目标");
-            return;
-        }
         //获得法术卡
         AbstractMagicCard magicCard = (AbstractMagicCard) card;
         //消耗对应的法力值
@@ -600,11 +600,22 @@ public class Gamer extends AbstractGeneralItem {
         throw new GameOverException();
     }
 
+    /**
+     * 将手牌洗入牌库
+     * @return 洗入数量
+     */
+    public int shuffleHandToDeck(){
+        List<Card> handCards = hand.getCards();
+        deckCards.addAll(handCards);
+        shuffleCards(deckCards);
+        return handCards.size();
+    }
+
 
     /**
      * 洗牌
      */
-    public List<Card> initRandomCards(List<Card> oldCards) {
+    public List<Card> shuffleCards(List<Card> oldCards) {
         Collections.shuffle(oldCards);
         return oldCards;
     }
@@ -674,7 +685,7 @@ public class Gamer extends AbstractGeneralItem {
         this.hero.setOwner(this);
         this.hand = new Hand();
         this.hand.setOwner(this);
-        this.deckCards = initRandomCards(cards);
+        this.deckCards = shuffleCards(cards);
         this.tomb = new ArrayList<>();
         this.manaCrystal = new ManaCrystal();
         this.minions = new ArrayList<>(7);

@@ -9,7 +9,7 @@
       - [x] 武器
       - [x] 奥秘
       - [x] 任务
-    - [x] 卡牌关键效果
+    - [x] 卡牌机制
       - [x] 随从特效
       - [x] 战吼
       - [x] 亡语
@@ -218,6 +218,13 @@ public class AlexstraszaCard extends Alexstrasza {
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/demon_hunter_initiate/demonhunter/EyeBeamCard.java">眼棱</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/demon_hunter_initiate/demonhunter/ConsumeMagicCard.java">吞噬魔法</a>
   <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/blacktemple/demonhunter/CrimsonSigilRunnerCard.java">火色魔印奔行者</a>
+  - [x] 法术迸发 
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/sch/priest/CabalAcolyteCard.java">秘教侍僧</a>
+  - [x] 交换手牌和牌库
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/sch/priest/MindrenderIlluciaCard.java">裂心者伊露希亚</a>
+  - [x] 手牌洗入牌库
+  <a href="hearth-card/src/main/java/cn/eiden/hsm/game/card/sch/demonhunter/GlideCard.java">滑翔</a>
+  - [ ] 双职业卡牌
 
 <a name="otherClass"></a>
 - [ ] 卡牌包

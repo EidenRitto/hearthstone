@@ -78,6 +78,9 @@ public class WeaponCardFileBuilder extends AbstractCardFileBuilder {
                     .addJavadoc("$S\n", cardInfo.getCardText())
                     .build()).build();
         }
+        if (cardInfo.getMultiClassGroup() != null){
+            myClass = myClass.toBuilder().addField(buildFieldMultiClassGroup()).build();
+        }
         writeToSourceFile(myClass);
     }
 

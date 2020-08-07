@@ -240,6 +240,13 @@ public abstract class AbstractCardFileBuilder {
                 .build();
     }
 
+    protected FieldSpec buildFieldMultiClassGroup() {
+        return FieldSpec.builder(MultiClassGroup.class, "MULTI_CLASS_GROUP")
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
+                .initializer("$L", cardInfo.getMultiClassGroup().getClass().getSimpleName() + "." + cardInfo.getMultiClassGroup())
+                .build();
+    }
+
     protected AnnotationSpec buildClassAnnotation() {
         return AnnotationSpec.builder(Id.class)
                 .addMember("value", "$L", Integer.parseInt(cardInfo.getId()))

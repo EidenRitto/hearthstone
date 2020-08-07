@@ -1,9 +1,7 @@
 package cn.eiden.hsm.game.card.gangs.mage;
 
-import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.defs.gangs.mage.KabalLackey;
 import cn.eiden.hsm.game.keyword.Battle;
-import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.rule.rules.NextSecretCostZeroRule;
 
 /**

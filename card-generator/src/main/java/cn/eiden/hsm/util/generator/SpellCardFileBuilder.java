@@ -84,6 +84,9 @@ public class SpellCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getTwinSpellCopy() > 0){
             myClass = myClass.toBuilder().addField(this.buildFieldTwinSpellCopy()).build();
         }
+        if (cardInfo.getMultiClassGroup() != null){
+            myClass = myClass.toBuilder().addField(buildFieldMultiClassGroup()).build();
+        }
         writeToSourceFile(myClass);
     }
 

@@ -86,6 +86,10 @@ public class CardInfo {
     private int reborn;
     /**流放*/
     private int outcast;
+    /**法术迸发*/
+    private int spellBurst;
+    /**复数职业组合*/
+    private MultiClassGroup multiClassGroup;
 
     public CardInfo() {
         this.rarity = Rarity.INVALID;

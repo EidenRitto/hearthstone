@@ -111,6 +111,18 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
                             .build())
                     .build();
         }
+        if (cardInfo.getSpellBurst() == 1){
+            myClass = myClass.toBuilder().addMethod(MethodSpec.methodBuilder("selfSpellBurst")
+                    .addModifiers(Modifier.PROTECTED)
+                    .returns(SpellBurst.class)
+                    .addStatement("// 重写以补全效果")
+                    .addStatement("return null")
+                    .addJavadoc("$S\n", cardInfo.getCardText())
+                    .build()).build();
+        }
+        if (cardInfo.getMultiClassGroup() != null){
+            myClass = myClass.toBuilder().addField(buildFieldMultiClassGroup()).build();
+        }
         writeToSourceFile(myClass);
     }
 
@@ -171,6 +183,10 @@ public class MinionCardFileBuilder extends AbstractCardFileBuilder {
         if (cardInfo.getReborn() == 1) {
             CodeBlock reborn = CodeBlock.builder().addStatement("minionObject.addReborn()").build();
             core = core.toBuilder().add(reborn).build();
+        }
+        if (cardInfo.getSpellBurst() == 1) {
+            CodeBlock spellBurst = CodeBlock.builder().addStatement("minionObject.setSpellBurst(this.selfSpellBurst())").build();
+            core = core.toBuilder().add(spellBurst).build();
         }
         return core;
     }

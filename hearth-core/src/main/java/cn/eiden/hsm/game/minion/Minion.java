@@ -3,9 +3,11 @@ package cn.eiden.hsm.game.minion;
 import cn.eiden.hsm.enums.Race;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.GeneralItem;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.Combo;
+import cn.eiden.hsm.game.keyword.SpellBurst;
 import cn.eiden.hsm.listener.HearthListener;
 import cn.eiden.hsm.listener.MinionListener;
 import cn.eiden.hsm.output.OutputInfo;
@@ -534,4 +536,22 @@ public interface Minion extends GeneralItem {
     default boolean hasCombo() {
         return this.getCombo() != null;
     }
+
+    /**
+     * 设置法术迸发
+     * @param spellBurst 法术迸发
+     */
+    void setSpellBurst(SpellBurst spellBurst);
+
+    /**
+     * 执行法术迸发，执行完毕移出法术迸发
+     * @param magicCard 触发的法术
+     */
+    void doSpellBurst(AbstractMagicCard magicCard);
+
+    /**
+     * 是否具有法术迸发
+     * @return 有返回true
+     */
+    boolean hasSpellBurst();
 }

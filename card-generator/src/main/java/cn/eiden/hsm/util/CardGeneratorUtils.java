@@ -159,6 +159,15 @@ public class CardGeneratorUtils {
                 case OUTCAST:
                     cardCache.setOutcast(Integer.parseInt(tag.getValue()));
                     break;
+                case SPELLBURST:
+                    cardCache.setSpellBurst(Integer.parseInt(tag.getValue()));
+                    break;
+                case MULTI_CLASS_GROUP:
+                    final int intVal = Integer.parseInt(tag.getValue());
+                    MultiClassGroup multiClassGroup = Objects.requireNonNull(EnumUtils.getEnumObject(
+                            MultiClassGroup.class, e -> e.getCode() == intVal)).orElse(null);
+                    cardCache.setMultiClassGroup(multiClassGroup);
+                    break;
                 default:
                     log.debug(gameTag.name()+" 标签无法识别，enumId="+enumId);
                     break;

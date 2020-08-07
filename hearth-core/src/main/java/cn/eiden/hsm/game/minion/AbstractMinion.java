@@ -7,9 +7,11 @@ import cn.eiden.hsm.event.events.HeroBeAttackEvent;
 import cn.eiden.hsm.event.events.MinionAttackEvent;
 import cn.eiden.hsm.event.events.MinionBeHurtEvent;
 import cn.eiden.hsm.game.AbstractGeneralItem;
+import cn.eiden.hsm.game.card.AbstractMagicCard;
 import cn.eiden.hsm.game.keyword.Aura;
 import cn.eiden.hsm.game.keyword.Battle;
 import cn.eiden.hsm.game.keyword.Combo;
+import cn.eiden.hsm.game.keyword.SpellBurst;
 import cn.eiden.hsm.game.minion.hero.HeroMinion;
 import cn.eiden.hsm.listener.MinionListener;
 import lombok.EqualsAndHashCode;
@@ -174,6 +176,11 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
      */
     private MinionListener minionListener;
 
+    /**
+     * 法术迸发
+     */
+    private SpellBurst spellBurst;
+
     private boolean deadFlag = false;
 
     @Override
@@ -241,7 +248,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
         MinionBeHurtEvent minionBeHurtEvent = new MinionBeHurtEvent(this, reduceHealth);
         getOwner().getEventManager().call(minionBeHurtEvent);
         getOwner().printPublicQueue(source.getMinionName() + "对" + this.getMinionName() + "造成" + reduceHealth + "点伤害");
-        if (source.hasLifeSteal()){
+        if (source.hasLifeSteal()) {
             source.getOwner().getHero().recoveryHp(reduceHealth);
         }
         health -= reduceHealth;
@@ -381,7 +388,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
 
     @Override
     public void endTurn() {
-        if (this.isFreeze() && attackTime > 0){
+        if (this.isFreeze() && attackTime > 0) {
             this.unfreeze();
         }
     }
@@ -401,7 +408,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     }
 
     @Override
-    public void addAttackTime(int times){
+    public void addAttackTime(int times) {
         this.attackTime += times;
     }
 
@@ -503,7 +510,7 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public void setMinionListener(MinionListener minionListener) {
         this.minionListener = minionListener;
-        if (minionListener != null){
+        if (minionListener != null) {
             minionListener.setMinion(this);
         }
     }
@@ -666,6 +673,22 @@ public abstract class AbstractMinion extends AbstractGeneralItem implements Mini
     @Override
     public Combo getCombo() {
         return this.combo;
+    }
+
+    @Override
+    public void setSpellBurst(SpellBurst spellBurst) {
+        this.spellBurst = spellBurst;
+    }
+
+    @Override
+    public void doSpellBurst(AbstractMagicCard magicCard) {
+        this.spellBurst.burst(this, magicCard);
+        this.spellBurst = null;
+    }
+
+    @Override
+    public boolean hasSpellBurst() {
+        return this.spellBurst != null;
     }
 
     @Override

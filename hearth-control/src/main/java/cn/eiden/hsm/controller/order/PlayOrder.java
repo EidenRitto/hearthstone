@@ -39,12 +39,13 @@ public class PlayOrder extends AbstractOrder implements Order {
                 gamer.useThisCard(card,null);
             }else {
                 List<Minion> legitimateTarget = gamer.getLegitimateTarget(card);
+                if (legitimateTarget.size() == 0 && card instanceof AbstractMinionCard){
+                    gamer.useThisCard(card,null);
+                }
                 Integer targetNum = getTargetNum(legitimateTarget,gamer);
                 Minion targetMinion = legitimateTarget.get(targetNum);
                 gamer.useThisCard(card,targetMinion);
             }
-            //从手牌中移除卡牌
-            gamer.getHand().used(originCard);
         }
     }
 
