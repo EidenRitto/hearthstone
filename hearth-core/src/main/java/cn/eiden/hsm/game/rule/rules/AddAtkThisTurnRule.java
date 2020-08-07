@@ -8,6 +8,7 @@ import cn.eiden.hsm.game.rule.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Eiden J.P Zhou
@@ -23,10 +24,8 @@ public class AddAtkThisTurnRule extends AbstractRule implements Rule {
     }
 
     @Override
-    public List<Class<? extends Event>> leaveEvents() {
-        List<Class<? extends Event>> list = new ArrayList<>();
-        list.add(EndTurnEvent.class);
-        return list;
+    public Predicate<Event> leaveEvents() {
+        return event -> event instanceof EndTurnEvent;
     }
 
     public AddAtkThisTurnRule(long addAtk) {

@@ -4,6 +4,7 @@ import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.game.Gamer;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 规则
@@ -22,7 +23,7 @@ public interface Rule {
      * 规则移除事件
      * @return 触发事件
      */
-    List<Class<? extends Event>> leaveEvents();
+    Predicate<Event> leaveEvents();
 
     /**
      * 克隆
@@ -30,7 +31,12 @@ public interface Rule {
      */
     Rule clone();
 
-    default boolean leave(Class<? extends Event> eventType){
-        return leaveEvents().contains(eventType);
+    /**
+     * 注销事件的条件
+     * @param event 当前事件
+     * @return 满足谓语返回true
+     */
+    default boolean leave(Event event){
+        return leaveEvents().test(event);
     }
 }

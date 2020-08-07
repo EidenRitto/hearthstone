@@ -1,5 +1,6 @@
 package cn.eiden.hsm.game.minion.hero;
 
+import cn.eiden.hsm.enums.CardClass;
 import cn.eiden.hsm.game.card.AbstractHeroPowerCard;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.minion.Weapon;
@@ -73,6 +74,12 @@ public interface Hero extends Minion {
      * @return 致命返回true
      */
     boolean isLethalDose(long dmg);
+
+    /**
+     * 获取职业
+     * @return 卡牌职业
+     */
+    CardClass getCardClass();
 
     /**
      * 克隆

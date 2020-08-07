@@ -27,8 +27,14 @@ public interface Card extends GeneralItem {
     int getCost();
 
     /**
-     *
-     * @param val
+     * 设置费用
+     * @param cost 设置费用
+     */
+    void setCost(int cost);
+
+    /**
+     * 减少法力消耗
+     * @param val 减少的费用
      */
     void reduceCost(int val);
 
@@ -49,6 +55,18 @@ public interface Card extends GeneralItem {
      * @param ruleForceCost 规则强制花费
      */
     void setRuleForceCost(Integer ruleForceCost);
+
+    /**
+     * 设置规则强制减少费用
+     * @param ruleReduceCost 减少费用
+     */
+    void setRuleReduceCost(int ruleReduceCost);
+
+    /**
+     * 添加规则强制减少费用
+     * @param ruleReduceCost 减少费用
+     */
+    void addRuleReduceCost(int ruleReduceCost);
 
     /**
      * 重设强制花费

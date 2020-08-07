@@ -65,6 +65,9 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card, 
 
     private Integer ruleForceCost;
 
+    private int ruleReduceCost = 0;
+
+
     public AbstractCard() {
     }
 
@@ -102,7 +105,12 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card, 
 
     @Override
     public int getCost() {
-        return ruleForceCost == null ? cost : ruleForceCost;
+        return ruleForceCost == null ? Math.max(0, cost - ruleReduceCost) : ruleForceCost;
+    }
+
+    @Override
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     @Override
@@ -128,6 +136,16 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card, 
     @Override
     public void setRuleForceCost(Integer ruleForceCost) {
         this.ruleForceCost = ruleForceCost;
+    }
+
+    @Override
+    public void setRuleReduceCost(int ruleReduceCost) {
+        this.ruleReduceCost = ruleReduceCost;
+    }
+
+    @Override
+    public void addRuleReduceCost(int ruleReduceCost) {
+        this.ruleReduceCost += ruleReduceCost;
     }
 
     @Override
@@ -161,10 +179,10 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card, 
     }
 
     @Override
-    public Card clone(){
+    public Card clone() {
         try {
             Card clone = (Card) super.clone();
-            if (this.hasChooseOne()){
+            if (this.hasChooseOne()) {
                 List<Card> cloneList = this.chooseOneList.stream()
                         .map(Card::clone).collect(Collectors.toList());
                 clone.addChooseOne(cloneList);

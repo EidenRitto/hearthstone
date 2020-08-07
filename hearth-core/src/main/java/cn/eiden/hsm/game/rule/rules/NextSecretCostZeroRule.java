@@ -11,6 +11,7 @@ import cn.eiden.hsm.game.rule.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Eiden J.P ZHou
@@ -28,10 +29,7 @@ public class NextSecretCostZeroRule extends AbstractRule implements Rule {
     }
 
     @Override
-    public List<Class<? extends Event>> leaveEvents() {
-        List<Class<? extends Event>> list = new ArrayList<>();
-        list.add(UseSecretCardFromHandEvent.class);
-        list.add(EndTurnEvent.class);
-        return list;
+    public Predicate<Event> leaveEvents() {
+        return event -> event instanceof UseSecretCardFromHandEvent || event instanceof EndTurnEvent;
     }
 }

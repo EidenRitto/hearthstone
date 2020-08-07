@@ -22,7 +22,7 @@ public class HealingTotemCard extends HealingTotem {
         return minion;
     }
 
-    static class AfterTurnListener extends AbstractMinionListener implements MinionListener {
+    public static class AfterTurnListener extends AbstractMinionListener implements MinionListener {
         @EventHandler
         public void onEvent(EndTurnEvent endTurnEvent){
             Gamer eventOwner = endTurnEvent.getOwner();

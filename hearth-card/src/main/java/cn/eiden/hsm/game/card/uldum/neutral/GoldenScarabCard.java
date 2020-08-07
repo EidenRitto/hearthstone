@@ -15,8 +15,6 @@ public class GoldenScarabCard extends GoldenScarab {
      */
     @Override
     protected Battle selfBattleCry() {
-        return (s, t) -> {
-            s.getOwner().discoverChooseOne(() -> CardFactory.buildCard().cost(4).discover());
-        };
+        return (s, t) -> s.getOwner().discoverChooseOne(() -> CardFactory.buildCard().cost(4).discover());
     }
 }

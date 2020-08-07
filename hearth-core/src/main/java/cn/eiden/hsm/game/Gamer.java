@@ -41,6 +41,8 @@ import java.util.stream.Collectors;
 @Data
 @Slf4j
 public class Gamer extends AbstractGeneralItem {
+    /**最大随从数量*/
+    public static final int MAX_MINION_SIZE = 7;
     private OutputInfo outputInfo;
 
     /**
@@ -529,7 +531,10 @@ public class Gamer extends AbstractGeneralItem {
      * @date : 2018/9/13
      * 添加一个随从
      */
-    public void addMinion(Minion minion) {
+    public boolean addMinion(Minion minion) {
+        if (minions.size() == MAX_MINION_SIZE){
+            return false;
+        }
         //添加随从前注册特效监听
         if (minion.getMinionListener() != null) {
             eventManager.registerListener(minion.getMinionListener());
@@ -544,6 +549,7 @@ public class Gamer extends AbstractGeneralItem {
         eventManager.call(addMinionEvent);
         printPublicQueue(String.format("%s(atk: %s hp:%s)进入战场", minion.getMinionName(), minion.getAttackValue(), minion.getHealth()));
         checkMinion();
+        return true;
     }
 
     /**
@@ -688,7 +694,7 @@ public class Gamer extends AbstractGeneralItem {
         this.deckCards = shuffleCards(cards);
         this.tomb = new ArrayList<>();
         this.manaCrystal = new ManaCrystal();
-        this.minions = new ArrayList<>(7);
+        this.minions = new ArrayList<>(MAX_MINION_SIZE);
         this.enemy = null;
         this.randomSeed = new Random();
         this.fatigueCounter = 0;
@@ -698,12 +704,8 @@ public class Gamer extends AbstractGeneralItem {
      * 检查场上是否拥有指定种族的随从
      */
     public boolean checkHaveEthnicity(Race race) {
-        for (Minion minion : minions) {
-            if (minion.getRace() == race) {
-                return true;
-            }
-        }
-        return false;
+        Optional<Minion> any = minions.stream().filter(e -> e.getRace() == race).findAny();
+        return any.isPresent();
     }
 
     /**

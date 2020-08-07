@@ -6,6 +6,7 @@ import cn.eiden.hsm.game.rule.AbstractRule;
 import cn.eiden.hsm.game.rule.Rule;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * @author Eiden J.P Zhou
@@ -18,12 +19,7 @@ public class CrystalCoreRule extends AbstractRule implements Rule {
     }
 
     @Override
-    public List<Class<? extends Event>> leaveEvents() {
+    public Predicate<Event> leaveEvents() {
         return null;
-    }
-
-    @Override
-    public boolean leave(Class<? extends Event> eventType) {
-        return false;
     }
 }
