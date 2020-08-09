@@ -2,10 +2,8 @@ package cn.eiden.hsm.game.card;
 
 import cn.eiden.hsm.annotation.Id;
 import cn.eiden.hsm.annotation.Tags;
-import cn.eiden.hsm.enums.CardClass;
-import cn.eiden.hsm.enums.CardSet;
-import cn.eiden.hsm.enums.CardType;
-import cn.eiden.hsm.enums.Race;
+import cn.eiden.hsm.enums.*;
+import cn.eiden.hsm.util.EnumUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
@@ -33,6 +31,7 @@ public class CardFactory {
     private Map<CardClass, Set<Integer>> cardClassPool = new HashMap<>(16);
     private Map<CardType, Set<Integer>> cardTypePool = new HashMap<>(8);
     private Map<Race, Set<Integer>> cardRacePool = new HashMap<>(32);
+    private Map<GameTag, Set<Integer>> cardGameTagPool = new HashMap<>(32);
     /**
      * id卡牌池
      */
@@ -58,7 +57,6 @@ public class CardFactory {
 
         Set<Class<? extends Card>> subTypesOfCard = reflections.getSubTypesOf(Card.class);
         for (Class<? extends Card> cardClass : subTypesOfCard) {
-            Tags annotation = cardClass.getAnnotation(Tags.class);
             Id id = cardClass.getAnnotation(Id.class);
             if (id != null) {
                 if (cardPool.containsKey(id.value())) {
@@ -104,6 +102,15 @@ public class CardFactory {
                 this.addInPool(cardRacePool, race, id);
             }
 
+            //创建对应的标签缓存池
+            Tags tags = cardClass.getAnnotation(Tags.class);
+            int[] value = tags.value();
+            Arrays.stream(value)
+                    .boxed()
+                    .map(e -> EnumUtils.getEnumObject(GameTag.class, f -> f.getCode() == e))
+                    .filter(Objects::nonNull)
+                    .map(Optional::get)
+                    .forEach(e->addInPool(cardGameTagPool, e, id));
         } catch (NoSuchFieldException | IllegalAccessException e) {
             log.warn(String.format("%s找不到属性", cardClass.getSimpleName()));
         }
@@ -142,7 +149,8 @@ public class CardFactory {
     }
 
     /**
-     * 使用建造者对象进行条件查询
+     * 使用建造者对象进行条件查询<br/>
+     * retainAll set集合取交集
      *
      * @param builder 建造者对象
      * @return 条件查询结果集合
@@ -184,6 +192,13 @@ public class CardFactory {
             }
             result.retainAll(idSet);
         }
+        if (builder.gameTags.size() > 0) {
+            Set<Integer> idSet = new HashSet<>();
+            for (GameTag gameTag : builder.gameTags) {
+                idSet.addAll(getInstance().cardGameTagPool.get(gameTag));
+            }
+            result.retainAll(idSet);
+        }
 
         return result;
     }
@@ -194,6 +209,7 @@ public class CardFactory {
         private Set<CardClass> cardClass;
         private Set<CardType> cardType;
         private Set<Race> race;
+        private Set<GameTag> gameTags;
         private Random random;
 
         public CardBuilder() {
@@ -203,6 +219,7 @@ public class CardFactory {
             cardClass = new HashSet<>(16);
             cardType = new HashSet<>(16);
             race = new HashSet<>(16);
+            gameTags = new HashSet<>(16);
         }
 
         public CardFactory.CardBuilder cost(Integer cost) {
@@ -227,6 +244,11 @@ public class CardFactory {
 
         public CardFactory.CardBuilder race(Race race) {
             this.race.add(race);
+            return this;
+        }
+
+        public CardFactory.CardBuilder gameTags(GameTag gameTag){
+            this.gameTags.add(gameTag);
             return this;
         }
 

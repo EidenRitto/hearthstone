@@ -6,6 +6,7 @@ import cn.eiden.hsm.dbdata.CardInfo;
 import cn.eiden.hsm.enums.*;
 import cn.eiden.hsm.util.CardGeneratorUtils;
 import cn.eiden.hsm.util.JavaBeansUtil;
+import com.google.common.base.Joiner;
 import com.squareup.javapoet.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -94,10 +95,10 @@ public abstract class AbstractCardFileBuilder {
 
     protected void writeToSourceFile(TypeSpec myClass) {
         String packageName = getPackageName();
-        if (cardInfo.getQuestProgressTotal() > 0){
+        if (cardInfo.getQuestProgressTotal() > 0) {
             myClass = myClass.toBuilder().addField(this.buildFieldQuestProgressTotal()).build();
         }
-        if (cardInfo.getQuestRewardDatabaseId() > 0){
+        if (cardInfo.getQuestRewardDatabaseId() > 0) {
             myClass = myClass.toBuilder().addField(this.buildFieldQuestRewardDatabaseId()).build();
         }
         JavaFile javaFile = JavaFile.builder(packageName, myClass)
@@ -258,6 +259,7 @@ public abstract class AbstractCardFileBuilder {
         return AnnotationSpec.builder(Tags.class)
                 .addMember("cardClass", "$L", cardInfo.getCardClass().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardClass())
                 .addMember("cardSet", "$L", cardInfo.getCardSet().getDeclaringClass().getSimpleName() + "." + cardInfo.getCardSet())
+                .addMember("value", "$L", "{" + Joiner.on(",").join(cardInfo.getTagList()) + "}")
                 .build();
     }
 

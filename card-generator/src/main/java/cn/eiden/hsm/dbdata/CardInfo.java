@@ -3,12 +3,16 @@ package cn.eiden.hsm.dbdata;
 import cn.eiden.hsm.enums.*;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author Eiden J.P Zhou
  * @date 2020/4/14 10:09
  */
 @Data
 public class CardInfo {
+    /**卡牌包含的标签*/
+    private List<Integer> tagList;
     /**名称*/
     private String cardName;
     /**id*/

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Card生成器
@@ -27,6 +28,8 @@ public class CardGeneratorUtils {
         cardCache.setId(entity.getId());
         cardCache.setCardId(entity.getCardId());
         List<Tag> tags = entity.getTag();
+        List<Integer> collect = tags.stream().map(Tag::getEnumId).filter(Objects::nonNull).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        cardCache.setTagList(collect);
         for (Tag tag : tags) {
             final int enumId = Integer.parseInt(tag.getEnumId());
             GameTag gameTag = Objects.requireNonNull(

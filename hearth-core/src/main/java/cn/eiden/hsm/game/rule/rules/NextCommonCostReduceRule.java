@@ -5,6 +5,7 @@ import cn.eiden.hsm.event.Event;
 import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.event.events.UseSpellCardFromHandEvent;
 import cn.eiden.hsm.game.Gamer;
+import cn.eiden.hsm.game.card.Card;
 import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.rule.AbstractRule;
 import cn.eiden.hsm.game.rule.Rule;
@@ -19,28 +20,35 @@ public class NextCommonCostReduceRule extends AbstractRule implements Rule {
 
     private int reduceCost;
     private CardType cardType;
-    private Predicate<Minion> minionPredicate;
+    private Predicate<Card> minionPredicate;
 
     @Override
     public void effective(Gamer gamer) {
-        gamer.getHand().getCards().stream()
-                .filter(e -> e.getCardType() == CardType.SPELL)
-                .forEach(e->e.addRuleReduceCost(reduceCost));
+        if (cardType == CardType.SPELL){
+            gamer.getHand().getCards().stream()
+                    .filter(e -> e.getCardType() == cardType)
+                    .forEach(e -> e.addRuleReduceCost(reduceCost));
+        }else if (cardType == CardType.MINION){
+            gamer.getHand().getCards().stream()
+                    .filter(e -> e.getCardType() == cardType)
+                    .filter(e -> minionPredicate.test(e))
+                    .forEach(e -> e.addRuleReduceCost(reduceCost));
+        }
     }
 
 
     @Override
     public Predicate<Event> leaveEvents() {
         return event -> {
-            if (cardType == CardType.MINION){
-                if (event instanceof UseMinionCardFromHandEvent){
+            if (cardType == CardType.MINION) {
+                if (event instanceof UseMinionCardFromHandEvent) {
                     UseMinionCardFromHandEvent useMinionEvent = (UseMinionCardFromHandEvent) event;
-                    Minion minionObject = useMinionEvent.getMinionObject();
-                    return minionPredicate.test(minionObject);
-                }else {
+                    Card minionCard = useMinionEvent.getMinionCard();
+                    return minionPredicate.test(minionCard);
+                } else {
                     return false;
                 }
-            }else {
+            } else {
                 return event instanceof UseSpellCardFromHandEvent;
             }
         };
@@ -51,7 +59,7 @@ public class NextCommonCostReduceRule extends AbstractRule implements Rule {
         this.cardType = cardType;
     }
 
-    public NextCommonCostReduceRule(int reduceCost, CardType cardType, Predicate<Minion> minionPredicate) {
+    public NextCommonCostReduceRule(int reduceCost, CardType cardType, Predicate<Card> minionPredicate) {
         this.reduceCost = reduceCost;
         this.cardType = cardType;
         this.minionPredicate = minionPredicate;

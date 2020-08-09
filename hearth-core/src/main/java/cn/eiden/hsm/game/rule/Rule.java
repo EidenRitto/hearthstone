@@ -34,7 +34,7 @@ public interface Rule {
     /**
      * 注销事件的条件
      * @param event 当前事件
-     * @return 满足谓语返回true
+     * @return 返回true则注销事件
      */
     default boolean leave(Event event){
         return leaveEvents().test(event);
