@@ -261,15 +261,17 @@ public class Gamer extends AbstractGeneralItem {
     public void drawCard(Card card) {
         //移除牌堆顶的牌
         lossLastCards();
-        //添加到手牌中
-        getHand().addHandsCard(card);
-        if (card instanceof TopDeck){
-            ((TopDeck) card).onDraw();
-            if (card instanceof AbstractMagicCard){
-                getHand().loss(card);
+        //添加到手牌中，如果没爆牌
+        if (getHand().addHandsCard(card)){
+            eventManager.call(new DrawCardEvent(this,card));
+            //如果是抽到时施法的卡牌
+            if (card instanceof TopDeck){
+                ((TopDeck) card).onDraw();
+                if (card instanceof AbstractMagicCard){
+                    getHand().loss(card);
+                }
             }
         }
-        printPrivateQueue("--你抽到了" + card.getCardName());
     }
 
     /**

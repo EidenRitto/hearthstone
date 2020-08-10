@@ -26,16 +26,20 @@ public class Hand extends AbstractGeneralItem implements Cloneable {
     /**
      * @author : Eiden J.P Zhou
      * @date : 2018/9/13
+     * @return 成功添加返回true
      * 得到一张手牌
      */
-    public void addHandsCard(Card card) {
+    public boolean addHandsCard(Card card) {
         if (!isHandsFull()) {
             //如果手牌没满，添加到手牌中
             cards.add(card);
             card.setOwner(this.getOwner());
+            getOwner().printPrivateQueue("--你抽到了" + card.getCardName());
+            return true;
         } else {
             //手排满了，爆牌
             getOwner().printPublicQueue(card.getCardName() + "因手牌满消失");
+            return false;
         }
     }
 
