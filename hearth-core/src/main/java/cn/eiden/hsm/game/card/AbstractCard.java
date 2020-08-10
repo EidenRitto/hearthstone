@@ -179,6 +179,11 @@ public abstract class AbstractCard extends AbstractGeneralItem implements Card, 
     }
 
     @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
     public Card clone() {
         try {
             Card clone = (Card) super.clone();

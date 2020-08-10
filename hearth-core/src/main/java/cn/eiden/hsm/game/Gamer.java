@@ -145,6 +145,7 @@ public class Gamer extends AbstractGeneralItem {
     /**
      * 回合数
      */
+    @Getter
     private int turnNum = 0;
 
     /**

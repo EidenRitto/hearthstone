@@ -28,13 +28,24 @@ public interface History {
     List<Card> getUsedCardWithType(Class<? extends Card> cardClass);
 
     /**
+     * 根据回合数获取历史卡牌
+     * @param turnNum 回合数
+     * @return 使用过的卡牌
+     */
+    List<Card> getUsedCardByTurnNum(int turnNum);
+
+    /**
      * 获取某一回合使用过的卡牌数量
      * @param turnNum 回合数
      * @return 使用过的卡牌数量
      */
     int getUsedCardNumByTurnNum(int turnNum);
 
-
+    /**
+     * 通过随从名称检索卡牌被使用的次数
+     * @param minion 随从
+     * @return 次数
+     */
     int getCountByMinionName(Minion minion);
 
     /**

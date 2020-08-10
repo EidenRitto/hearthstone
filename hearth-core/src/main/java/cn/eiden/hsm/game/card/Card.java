@@ -105,6 +105,12 @@ public interface Card extends GeneralItem {
     List<Card> getOptions();
 
     /**
+     * 获取卡牌id
+     * @return 卡牌id
+     */
+    String getId();
+
+    /**
      * 克隆
      * @return 返回一个副本,需要手动修改引用
      */

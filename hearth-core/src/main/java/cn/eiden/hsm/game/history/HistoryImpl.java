@@ -40,6 +40,11 @@ public class HistoryImpl implements History,Cloneable {
     }
 
     @Override
+    public List<Card> getUsedCardByTurnNum(int turnNum) {
+        return usedCardsMap.get(turnNum);
+    }
+
+    @Override
     public int getUsedCardNumByTurnNum(int turnNum) {
         if (usedCardsMap.containsKey(turnNum)) {
             return usedCardsMap.get(turnNum).size();

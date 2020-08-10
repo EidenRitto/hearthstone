@@ -6,7 +6,6 @@ import cn.eiden.hsm.event.events.UseMinionCardFromHandEvent;
 import cn.eiden.hsm.event.events.UseSpellCardFromHandEvent;
 import cn.eiden.hsm.game.Gamer;
 import cn.eiden.hsm.game.card.Card;
-import cn.eiden.hsm.game.minion.Minion;
 import cn.eiden.hsm.game.rule.AbstractRule;
 import cn.eiden.hsm.game.rule.Rule;
 
