@@ -116,6 +116,131 @@ public class AlexstraszaCard extends Alexstrasza {
 ```
 
 > 完成！一张新的卡牌特效成功实现  
+> 一些其他卡牌示例：
+
+```java
+/**
+ * 幻觉药水
+ * @author Eiden J.P Zhou
+ * @date 2020/8/7 14:58
+ */
+public class PotionOfIllusionCard extends PotionOfIllusion {
+    /**
+     * "将你的所有随从的1/1的复制置入你的手牌，并使其法力值消耗变为（1）点。"
+     * @param gamer 当前卡牌所有者
+     * @param target 所指定目标
+     */
+    @Override
+    public void magicEffect(Gamer gamer, Minion target) {
+        //拿到己方场上所有的随从
+        List<Minion> minions = gamer.getMinions();
+        minions.stream()
+                //转化成他们对应的随从卡牌ID
+                .map(Minion::getCardId)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                //从卡牌工厂拿到卡牌ID对应的卡牌
+                .map(CardFactory::getCardById)
+                //我们能断定生成的卡牌一定是随从，强转为随从卡
+                .map(e -> (AbstractMinionCard) e)
+                //过滤掉空（理论上不存在空）
+                .filter(Objects::nonNull)
+                //把每一张随从卡的牌面设置1/1，费用为(1)
+                .peek(e -> {
+                    e.setCost(1);
+                    e.setAtk(1L);
+                    e.setHealth(1L);
+                })
+                //添加进手牌
+                .forEach(e -> gamer.getHand().addHandsCard(e));
+    }
+}
+```
+
+```java
+/**
+ * 秘教侍僧
+ * @author Eiden J.P Zhou
+ * @date 2020/8/6 15:55
+ */
+public class CabalAcolyteCard extends CabalAcolyte {
+    @Override
+    protected SpellBurst selfSpellBurst() {
+        //随机获得一个攻击力小于或等于2的敌方随从的控制权。
+        return (s,c) -> {
+            //拿到所有的敌方随从列表
+            List<Minion> minions = s.getOwner().getEnemy().getMinions();
+            //过滤其中攻击力小于或等于2的,并生成一个副本
+            List<Minion> collect = minions.stream()
+                    .filter(e -> e.getAttackValue() <= 2).collect(Collectors.toList());
+            //取一个随机的随从
+            Optional<Minion> randomOne = Optional.ofNullable(RandomUtils.getRandomOne(collect));
+            //如果存在则
+            if (randomOne.isPresent()){
+                //敌方移除它
+                s.getOwner().getEnemy().removeMinion(randomOne.get());
+                //我方添加它
+                s.getOwner().addMinion(randomOne.get());
+            }
+        };
+    }
+}
+```
+
+```java
+/**
+ * 魔杖窃贼
+ * @author Eiden J.P Zhou
+ * @date 2020/8/7 15:35
+ */
+public class WandThiefCard extends WandThief {
+    /**
+     * "<b>连击：</b><b>发现</b>一张法师法术牌。"
+     */
+    @Override
+    protected Combo selfCombo() {
+        return (s,t)->s.getOwner()
+                //发现一张
+                .discoverChooseOne(() -> CardFactory.buildCard()
+                        //法师的
+                        .cardClass(CardClass.MAGE)
+                        //法术牌
+                        .cardType(CardType.SPELL)
+                        .discover());
+    }
+}
+```
+```java
+/**
+ * 体能研习
+ * @author Eiden J.P Zhou
+ * @date 2020/8/8 0:39
+ */
+public class AthleticStudiesCard extends AthleticStudies {
+    /**
+     * "<b>发现</b>一张<b>突袭</b>随从牌。你的下一张<b>突袭</b>随从牌法力值消耗减少（1）点。"
+     *
+     * @param gamer  当前卡牌所有者
+     * @param target 所指定目标
+     */
+    @Override
+    public void magicEffect(Gamer gamer, Minion target) {
+        //发现
+        gamer.discoverChooseOne(() -> CardFactory.buildCard()
+                //随从牌
+                .cardType(CardType.MINION)
+                //具有突袭标签
+                .gameTags(GameTag.RUSH)
+                .discover());
+        //添加一个规则，这个规则会使具有突袭的随从卡牌费用减少1点，满足条件（打出随从）后移除这个规则
+        gamer.addRule(new NextCommonCostReduceRule(1,CardType.MINION,
+                card -> Arrays.stream(card.getClass().getAnnotation(Tags.class).value())
+                        .boxed()
+                        .collect(Collectors.toSet())
+                        .contains(GameTag.RUSH.getCode())));
+    }
+}
+```
 > 其他卡牌则参考项目中已经实现的其他卡牌  
 
 

@@ -35,6 +35,7 @@ public class AthleticStudiesCard extends AthleticStudies {
                 //具有突袭标签
                 .gameTags(GameTag.RUSH)
                 .discover());
+        //添加一个规则，这个规则会使具有突袭的随从卡牌费用减少1点，满足条件（打出随从）后移除这个规则
         gamer.addRule(new NextCommonCostReduceRule(1,CardType.MINION,
                 card -> Arrays.stream(card.getClass().getAnnotation(Tags.class).value())
                         .boxed()
