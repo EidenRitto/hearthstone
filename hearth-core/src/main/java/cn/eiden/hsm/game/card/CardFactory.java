@@ -105,10 +105,14 @@ public class CardFactory {
             //创建对应的标签缓存池
             Tags tags = cardClass.getAnnotation(Tags.class);
             int[] value = tags.value();
+            if (value.length ==0 ){
+                return;
+            }
             Arrays.stream(value)
                     .boxed()
                     .map(e -> EnumUtils.getEnumObject(GameTag.class, f -> f.getCode() == e))
                     .filter(Objects::nonNull)
+                    .filter(Optional::isPresent)
                     .map(Optional::get)
                     .forEach(e->addInPool(cardGameTagPool, e, id));
         } catch (NoSuchFieldException | IllegalAccessException e) {
