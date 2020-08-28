@@ -18,5 +18,5 @@ import java.lang.annotation.*;
 public @interface Tags {
     CardClass cardClass();
     CardSet cardSet();
-    int[] value();
+    int[] value() default {};
 }
