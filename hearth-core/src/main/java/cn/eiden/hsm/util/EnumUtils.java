@@ -44,7 +44,7 @@ public class EnumUtils {
      */
     public static <T> Optional<T> getEnumObject(Class<T> className, Predicate<T> predicate) {
         if (!className.isEnum()) {
-            return null;
+            return Optional.empty();
         }
         Object obj = map.get(className);
         T[] ts = null;

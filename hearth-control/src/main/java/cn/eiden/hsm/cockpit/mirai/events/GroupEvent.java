@@ -86,6 +86,9 @@ public class GroupEvent extends SimpleListenerHost {
     private void handlerPrivate(FriendMessageEvent event){
         Long senderId = event.getSender().getId();
         MultiConfig multiConfig = this.userDictionary.get(senderId);
+        if (multiConfig == null){
+            return;
+        }
         String message = event.getMessage().contentToString();
         //发起
         if (multiConfig.getOrganizer() != null && multiConfig.getOrganizer().getId().equals(senderId)) {
