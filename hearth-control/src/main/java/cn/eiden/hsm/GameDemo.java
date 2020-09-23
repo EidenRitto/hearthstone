@@ -73,4 +73,31 @@ public class GameDemo {
 
         gameStart(gamer,gamer2);
     }
+
+
+    public void multiStart(String deckStr, String deckStr2,
+                           BlockingQueue<String> out1,
+                           BlockingQueue<String> input1,
+                           String name1,
+                           BlockingQueue<String> out2,
+                           BlockingQueue<String> input2,
+                           String name2) throws Exception {
+        DeckSerializer deckSerializer = new DeckSerializer();
+        Deck deck = deckSerializer.deserializeDeckString(deckStr);
+        Gamer gamer = Gamer.createGamer(deck);
+        gamer.setPrivateMessageQueue(out1);
+        gamer.setInputMessageQueue(input1);
+        gamer.setUserName(name1);
+        gamer.setOutputInfo(new OutputInfo(new LinkedBlockingQueue<>()));
+
+        deckSerializer = new DeckSerializer();
+        Deck deck2 = deckSerializer.deserializeDeckString(deckStr2);
+        Gamer gamer2 = Gamer.createGamer(deck2);
+        gamer2.setPrivateMessageQueue(out2);
+        gamer2.setInputMessageQueue(input2);
+        gamer2.setUserName(name2);
+        gamer2.setOutputInfo(new OutputInfo(new LinkedBlockingQueue<>()));
+
+        gameStart(gamer,gamer2);
+    }
 }
