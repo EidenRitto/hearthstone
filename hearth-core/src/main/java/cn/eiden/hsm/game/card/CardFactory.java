@@ -116,7 +116,7 @@ public class CardFactory {
                     .map(Optional::get)
                     .forEach(e->addInPool(cardGameTagPool, e, id));
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.warn(String.format("%s找不到属性", cardClass.getSimpleName()));
+            log.warn(String.format("%s已实现卡牌跳过属性", cardClass.getSimpleName()));
         }
     }
 

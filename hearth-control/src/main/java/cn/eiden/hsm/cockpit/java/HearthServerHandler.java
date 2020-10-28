@@ -3,6 +3,7 @@ package cn.eiden.hsm.cockpit.java;
 import cn.eiden.hsm.net.api.PlayRequest;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import lombok.extern.slf4j.Slf4j;
 import org.msgpack.MessagePack;
 import org.msgpack.type.Value;
 
@@ -10,6 +11,7 @@ import org.msgpack.type.Value;
  * @author Eiden J.P Zhou
  * @date 2020/9/22 15:15
  */
+@Slf4j
 public class HearthServerHandler extends ChannelInboundHandlerAdapter {
     private UserPipeline userPipeline;
 
@@ -42,7 +44,7 @@ public class HearthServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        log.warn(cause.getMessage());
         ctx.close();
     }
 }

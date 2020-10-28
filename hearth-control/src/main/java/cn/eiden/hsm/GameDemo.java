@@ -88,7 +88,7 @@ public class GameDemo {
         gamer.setPrivateMessageQueue(out1);
         gamer.setInputMessageQueue(input1);
         gamer.setUserName(name1);
-        gamer.setOutputInfo(new OutputInfo(new LinkedBlockingQueue<>()));
+        gamer.setOutputInfo(new OutputInfo(out1));
 
         deckSerializer = new DeckSerializer();
         Deck deck2 = deckSerializer.deserializeDeckString(deckStr2);
@@ -96,7 +96,7 @@ public class GameDemo {
         gamer2.setPrivateMessageQueue(out2);
         gamer2.setInputMessageQueue(input2);
         gamer2.setUserName(name2);
-        gamer2.setOutputInfo(new OutputInfo(new LinkedBlockingQueue<>()));
+        gamer2.setOutputInfo(new OutputInfo(out2));
 
         gameStart(gamer,gamer2);
     }

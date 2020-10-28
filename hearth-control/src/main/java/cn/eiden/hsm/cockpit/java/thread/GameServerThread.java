@@ -14,16 +14,18 @@ import cn.eiden.hsm.threadpool.HearthThreadPoolExecutor;
 public class GameServerThread implements Runnable{
     private UserPipeline user1;
     private UserPipeline user2;
+    private HearthThreadPoolExecutor executor;
 
     public GameServerThread(UserPipeline user1, UserPipeline user2) {
         this.user1 = user1;
         this.user2 = user2;
+        this.executor = HearthThreadPoolExecutor.getInstance();
     }
+
 
     @Override
     public void run() {
         try {
-            HearthThreadPoolExecutor executor = HearthThreadPoolExecutor.getInstance();
             executor.execute(user1);
             executor.execute(user2);
             new GameDemo().multiStart(HearthOrderConstant.DECK_MAGE,HearthOrderConstant.DECK_WARRIOR,
@@ -31,6 +33,8 @@ public class GameServerThread implements Runnable{
                     user2.getOutputQueue(),user2.getInputQueue(),user2.getName());
         } catch (Exception e) {
             throw new GameOverException(e);
+        }finally {
+            executor.shutdown();
         }
     }
 }

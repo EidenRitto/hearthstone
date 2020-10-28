@@ -1,9 +1,8 @@
 package cn.eiden.hsm.threadpool;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.concurrent.*;
 
 /**
  * 自定义连接池
@@ -15,6 +14,10 @@ public class HearthThreadPoolExecutor extends ThreadPoolExecutor {
 
     private HearthThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
+    }
+
+    public HearthThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory) {
+        super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory);
     }
 
     public static HearthThreadPoolExecutor getInstance() {
@@ -37,6 +40,14 @@ public class HearthThreadPoolExecutor extends ThreadPoolExecutor {
     protected void afterExecute(Runnable r, Throwable t) {
         if (t != null){
             //异常处理
+        }
+    }
+
+
+    static class HearthThreadFactory implements ThreadFactory{
+        @Override
+        public Thread newThread(@NotNull Runnable r) {
+            return null;
         }
     }
 }
