@@ -63,6 +63,7 @@ public enum CardSet {
     SCHOLOMANCE(1443),
     BATTLEGROUNDS (1453),
     DEMON_HUNTER_INITIATE (1463),
+    DARKMOON_FAIRE (1466),
     ;
     private int code;
 

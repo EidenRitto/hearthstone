@@ -10,7 +10,7 @@ import java.util.concurrent.*;
  * @date 2020/9/23 14:36
  */
 public class HearthThreadPoolExecutor extends ThreadPoolExecutor {
-    public static HearthThreadPoolExecutor hearthThreadPool;
+    public static volatile HearthThreadPoolExecutor hearthThreadPool;
 
     private HearthThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue) {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);

@@ -13,6 +13,8 @@ public enum DeckType {
     PRECON_DECK (5),
     TAVERN_BRAWL_DECK (6),
     FSG_BRAWL_DECK (7),
+    PVPDR_DECK (8),
+    PVPDR_DISPLAY_DECK (9),
     HIDDEN_DECK (1000),
     ;
     private int code;

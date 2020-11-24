@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
  * @date 2020/9/23 11:25
  */
 public class Register {
-    private static Register instance;
+    private static volatile Register instance;
     /**排队等待队列*/
     private BlockingQueue<UserPipeline> waitingQueue = new ArrayBlockingQueue<>(100);
     private Register(){

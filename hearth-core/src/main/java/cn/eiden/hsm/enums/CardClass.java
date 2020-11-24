@@ -21,7 +21,7 @@ public enum CardClass {
     DREAM(11, "无效"),
     NEUTRAL(12, "中立"),
     WHIZBANG(13, "无效"),
-    DEMONHUNTER(14, "无效");
+    DEMONHUNTER(14, "恶魔猎手");
     private int code;
     private String cnName;
 
